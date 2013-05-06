@@ -1,0 +1,56 @@
+/* --------------------------------------------
+	Clearfix
+----------------------------------------------- */
+
+selector {
+	@include clearfix;
+}
+
+/* --------------------------------------------
+	Consistent Margins
+----------------------------------------------- */
+
+selector {
+	@include rem(margin-bottom, $std-margin);
+}
+
+/* --------------------------------------------
+	Specific Sections
+----------------------------------------------- */
+
+#site {
+	font-size: $std-fontsize;
+}
+
+#header {
+}
+
+#nav_main {
+}
+
+#content {
+}
+
+#col_1 {
+}
+
+#col_2 {
+}
+
+#col_3 {
+}
+
+.no_col_1 #col_2 {
+}
+
+.no_col_3 #col_2 {
+}
+
+#nav_sub {
+}
+
+#footer {
+}
+
+#nav_seo {
+}

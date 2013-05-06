@@ -1,0 +1,64 @@
+/* --------------------------------------------
+	Viewport
+----------------------------------------------- */
+
+@-moz-viewport {
+	width: device-width;
+}
+
+@-ms-viewport {
+	width: device-width;
+}
+
+@-o-viewport {
+	width: device-width;
+}
+
+@-webkit-viewport {
+	width: device-width;
+}
+
+@viewport {
+	width: device-width;
+}
+
+/* --------------------------------------------
+	Reset
+----------------------------------------------- */
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+
+input.text, select, textarea {
+	margin: 0;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+	display: block;
+}
+
+audio, canvas, video {
+	display: inline-block;
+}
+
+audio:not([controls]) {
+	display: none;
+	height: 0;
+}
+
+.reset, .reset:not(.lazy) ul, .lazy > ul, .reset:not(.lazy) ol, .lazy > ol, .reset:not(.lazy) li, .lazy > li, .rc ul, .filter h3 {
+	list-style: none !important;
+	margin: 0;
+	padding: 0;
+}
+
+/* --------------------------------------------
+	List Bullet Removal & Display None
+----------------------------------------------- */
+
+input[type="hidden"], .js .js_none, .no_col_1 #col_1, .no_col_3 #col_3, .list_style_none > li:before, .rc li:before, .reset:not(.lazy) li:before, .lazy > li:before {
+	display: none;
+}

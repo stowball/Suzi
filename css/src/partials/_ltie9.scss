@@ -1,0 +1,46 @@
+/* --------------------------------------------
+	List Bullet Removal & Display None
+----------------------------------------------- */
+
+.rc li:before {
+	display: none;
+}
+
+/* --------------------------------------------
+	Constants
+----------------------------------------------- */
+
+@import "partials/bp-grid";
+
+.ltie8 .grid {
+	display: block;
+}
+
+.ltie8 .cell {
+	float: left;
+	margin-bottom: $grid-cell-padding;
+}
+
+.ltie8 .cell img {
+	max-width: none;
+}
+
+/* --------------------------------------------
+	Simple Customisations
+----------------------------------------------- */
+
+@import "partials/bp-img-float";
+
+/* --------------------------------------------
+	Forms
+----------------------------------------------- */
+
+@import "partials/bp-form-fields";
+
+.ltie8 .f_row label, .ltie8 .f_row .label, .ltie8 p.legend {
+	width: $form-label-width - $form-ltie8-difference;
+}
+
+.ltie8 .btns, .ltie8 .f_comment, .ltie8 .rc ul, .ltie8 .required {
+	margin-left: ($form-label-margin + $form-label-width) - $form-ltie8-difference;
+}

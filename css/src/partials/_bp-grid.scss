@@ -1,0 +1,28 @@
+.grid {
+	display: table;
+	table-layout: fixed;
+	width: 100%;
+}
+
+.cell {
+	display: table-cell;
+	margin-bottom: 0;
+	padding-right: $grid-cell-padding;
+	vertical-align: top;
+}
+
+.cell:not(.text) {
+	text-align: center;
+}
+
+.cell:last-child {
+	padding-right: 0;
+}
+
+.cell:first-child:not(.text) {
+	text-align: left;
+}
+
+.cell:last-child:not(.text) {
+	text-align: right;
+}

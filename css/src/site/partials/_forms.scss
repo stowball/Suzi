@@ -1,0 +1,78 @@
+/* --------------------------------------------
+	Forms
+----------------------------------------------- */
+
+label em {
+}
+
+label, .label, p.legend {
+}
+
+fieldset .description {
+	color: $form-description-color;
+	@include rem(font-size, 12px);
+	font-weight: normal;
+	@include rem(margin-top, 3px);
+}
+
+input.text, textarea {
+	@include border-radius(3px);
+	@include rem(padding, $form-input-padding);
+	.vendor-mozilla & {
+		@include rem(padding-top, $form-input-padding - 1, false);
+	}
+}
+
+select {
+	@include rem(padding, $form-input-padding - 1 $form-input-padding - 1 $form-input-padding - 1 $form-input-padding - 3);
+	.vendor-mozilla & {
+		@include rem(padding-top, $form-input-padding - 2, false);
+	}
+	.ie &, .vendor-ie & {
+		@include rem(padding-bottom, $form-input-padding - 2);
+		@include rem(padding-top, $form-input-padding);
+	}
+	.ua-desktop-macintosh.vendor-webkit & {
+		// height of normal inputs in rems
+	}
+}
+
+.ltie8 .rc ul label {
+	margin-top: -18px;
+}
+
+.rc input {
+	@include rem(margin, 1px 0 0 2px);
+	.ie &, .vendor-ie & {
+		@include rem(margin, -3px 0 0 -2px);
+	}
+	.ua-android-browser & {
+		@include rem(margin-top, -2px, false);
+	}
+	.ua-android-browser.ua-android-2 & {
+		@include rem(margin-top, -5px, false);
+	}
+}
+
+a.btn, input.submit {
+	@include gradient('to bottom', $btn-background-color);
+	border: 1px solid $btn-border-color;
+	color: $btn-text-color;
+	@include rem(padding, $form-btn-padding-vertical $form-btn-padding-horizontal);
+}
+
+.vendor-mozilla a.btn {
+	@include rem(padding-top, $form-btn-padding-vertical - 1, false);
+}
+
+.vendor-mozilla input.submit {
+	@include rem(padding, $form-btn-padding-vertical - 2 $form-btn-padding-horizontal - 3 $form-btn-padding-vertical - 1, false);
+}
+
+a.btn, input.submit {
+	&:hover, &:focus {
+		background: $btn-hover-background-color;
+		border-color: $btn-hover-border-color;
+		color: $btn-hover-text-color;
+	}
+}

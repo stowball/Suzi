@@ -1,0 +1,93 @@
+/* --------------------------------------------
+	Simple Customisations
+----------------------------------------------- */
+
+a {
+	&:link {
+		color: $std-link-color;
+		text-decoration: underline;
+	}
+	&:visited {
+		color: $std-visited-color;
+		text-decoration: underline;
+	}
+}
+
+a {
+	&:link, &:visited {
+		&:hover, &:focus {
+			color: $std-hover-color;
+			text-decoration: none;
+		}
+	}
+}
+
+a.feature {
+}
+
+a.feature {
+	&:hover, &:focus {
+	}
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+	color: $std-color;
+	font-family: $heading-fontfamily;
+	font-weight: bold;
+	line-height: normal;
+	@include rem(margin, $std-margin * 2 0 $std-margin / 2);
+	.no-fontface & {
+		//font-family: $heading-nofontface-fontfamily;
+	}
+}
+
+sub, sup {
+	font-size: em(12px);
+	.ie &, .vendor-ie & {
+		font-size: em(14px);
+	}
+}
+
+sub {
+	bottom: em(-3px);
+}
+
+sup {
+	top: em(-5px);
+}
+
+/* --------------------------------------------
+	Lists
+----------------------------------------------- */
+
+ul > li:before {
+	background: $text-color;
+	@include border-radius(50%);
+	height: 5px;
+	left: -18px;
+	@include rem(top, $list-bullet-top);
+	width: 5px;
+	.ua-desktop-macintosh.vendor-mozilla &, ua-desktop-macintosh.vendor-opera & {
+		// Usually @include rem(top, $list-bullet-top - 1, false);
+	}
+}
+
+/* --------------------------------------------
+	Tables
+----------------------------------------------- */
+
+td, th {
+	border: 1px solid darken($subdued-color, 20%);
+	@include rem(padding, 5px 10px);
+}
+
+thead th {
+	color: $std-color;
+}
+
+tr:nth-child(even) {
+	& td, & th {
+		background: $subdued-color;
+	}
+}

@@ -1,0 +1,32 @@
+/* --------------------------------------------
+	Feature Slider
+----------------------------------------------- */
+
+.slider {
+	// min-height
+}
+
+.slider li {
+	// #col_2 width
+	.no_col_1 &, .no_col_3 &  {
+		// #col_2 width
+	}
+	.no_col_1.no_col_3 & {
+		// #col_2 width
+	}
+}
+
+.nav {
+	background: #666;
+	&:hover {
+		background: #000;
+	}
+}
+
+.ltie8 .nav span {
+	// image replacement
+}
+
+.ltie8 .nav.next span {
+	// image replacement
+}

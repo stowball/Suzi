@@ -1,0 +1,41 @@
+label em, .label em {
+	@include rem(right, -10px);
+	position: absolute;
+}
+
+.f_row label, .f_row .label {
+	@include rem(margin-top, $form-margin / 2);
+	.vendor-mozilla & {
+		@include rem(margin-top, ($form-margin / 2) - 1, false);
+	}
+	.ie &, .vendor-ie & {
+		@include rem(margin-top, ($form-margin / 2) + 1);
+	}
+}
+
+.f_row label, .f_row .label, p.legend {
+	display: inline-block;
+	margin-right: $form-label-margin;
+	position: relative;
+	text-align: right;
+	width: $form-label-width;
+}
+
+.f_row input.text, .f_row textarea, .f_row select, .rc.legend ul {
+	display: inline-block;
+	@include rem(margin-left, $std-whitespace-margin);
+	width: (100% - ($form-label-margin + $form-label-width));
+}
+
+.rc.legend ul {
+	@include rem(margin-left, $std-whitespace-margin * 2);
+}
+
+.btns, .f_comment, .rc:not(.legend) ul, .required {
+	padding-left: $form-label-margin + $form-label-width;
+	@include rem(margin-left, $std-whitespace-margin);
+}
+
+input.submit {
+	width: auto;
+}

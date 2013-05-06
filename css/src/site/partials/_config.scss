@@ -1,0 +1,112 @@
+// --------------------------------------------
+//	Colours
+// --------------------------------------------
+
+$text-color: #111;
+$std-color: #006;
+$sub-color: #555;
+$alt-color: $text-color;
+$subdued-color: #edece6;
+
+$std-link-color: #00e;
+$std-hover-color: #e00;
+$std-visited-color: #551a8b;
+
+$alt-link-color: #ff1;
+$alt-hover-color: #1ff;
+$alt-visited-color: #aae574;
+
+$form-input-background-color: #fff;
+$form-input-border-color: #5d5d5d;
+$form-input-hover-color: #ffffe5;
+$form-input-focus-color: #ffc;
+$form-input-boxshadow-color: rgba(82,168,236,.5);
+$form-input-error-color: #c00;
+$form-placeholder-color: #999;
+$form-description-color: #888;
+
+$btn-background-color: #f6f8f9, 0%, #e5ebee, 50%, #d7dee3, 50%, #f2f5f7, 100%;
+$btn-border-color: #5d5d5d;
+$btn-text-color: #120c08;
+$btn-hover-background-color: #333;
+$btn-hover-border-color: #333;
+$btn-hover-text-color: #fff;
+
+$error-border-color: #ddd;
+
+// --------------------------------------------
+//	Font Families
+// --------------------------------------------
+
+$std-fontfamily: sans-serif;
+$heading-fontfamily: sans-serif;
+//$heading-nofontface-fontfamily: ;
+$quote-fontfamily: Georgia, serif;
+
+// --------------------------------------------
+//	Font Sizes
+// --------------------------------------------
+
+$std-fontsize: 14px;
+$heading1-fontsize: 24px;
+$heading2-fontsize: 22px;
+$heading3-fontsize: 20px;
+$heading4-fontsize: 18px;
+$heading5-fontsize: 16px;
+$heading6-fontsize: 14px;
+
+// --------------------------------------------
+//	Line Heights
+// --------------------------------------------
+
+$std-lineheight: 20px;
+
+// --------------------------------------------
+//	Margins
+// --------------------------------------------
+
+$std-margin: 14px;
+$lineheight-margin: 3px;
+$std-whitespace-margin: -4px;
+
+$form-margin: 10px;
+$form-label-margin: 3%;
+$form-label-width: 30%;
+$form-ltie8-difference: 3%;
+
+$list-margin: 40px;
+
+// --------------------------------------------
+//	Paddings
+// --------------------------------------------
+
+$grid-cell-padding: 20px;
+
+$form-input-padding: 4px;
+$form-btn-padding-vertical: 4px;
+$form-btn-padding-horizontal: 10px;
+
+// --------------------------------------------
+//	Positions
+// --------------------------------------------
+
+$list-bullet-top: 7px;
+
+// --------------------------------------------
+//	Sizes
+// --------------------------------------------
+
+$small-input-width: 100px;
+$medium-input-width: 200px;
+$large-input-width: 300px;
+$text-area-minheight: 120px;
+
+// --------------------------------------------
+//	Breakpoints
+// --------------------------------------------
+
+$float-bp: 464px;
+$grid-bp: 481px;
+$form-bp: 534px;
+
+$feature-bp: 464px;

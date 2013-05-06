@@ -1,0 +1,45 @@
+/* --------------------------------------------
+	Hiddens
+----------------------------------------------- */
+
+#logo, body #header form, #nav_main, #col_1, #nav_seo {
+	display: none !important;
+}
+
+/* --------------------------------------------
+	Constants
+----------------------------------------------- */
+
+*, *:before, *:after {
+	background: none !important;
+	behavior: none !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+}
+
+#print_logo {
+	position: static;
+	width: auto;
+}
+
+ul {
+	list-style-type: disc;
+}
+
+li ul {
+	list-style-type: circle;
+}
+
+#col_2 {
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+	width: 100% !important;
+}
+
+.error h3, .ok h3 {
+	padding-left: 0;
+}
+
+.rwd-swap {
+	opacity: 1 !important;
+}

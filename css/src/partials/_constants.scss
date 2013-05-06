@@ -1,0 +1,810 @@
+/* --------------------------------------------
+	Clearfix
+----------------------------------------------- */
+
+.clearfix, .cols, .content_area, #content, #footer, .grid {
+	@include clearfix;
+}
+
+/* --------------------------------------------
+	Consistent Margins
+----------------------------------------------- */
+
+blockquote, .cell, .centre_object, cite, .cols, .content_area, dl, .error, .flash, fieldset, .fieldset, .grid, hr, iframe, .ok, ol, p, .std_margin, table, ul {
+	@include rem(margin-bottom, $std-margin);
+}
+
+.dbl_m {
+	@include rem(margin-bottom, $std-margin * 2);
+	@include rem(margin-top, $std-margin * 2);
+}
+
+.dbl_mb {
+	@include rem(margin-bottom, $std-margin * 2);
+}
+
+.dbl_mt {
+	@include rem(margin-top, $std-margin * 2);
+}
+
+.sm_mb {
+	@include rem(margin-bottom, $std-margin - 10);
+}
+
+/* --------------------------------------------
+	Hiddens
+----------------------------------------------- */
+
+.hidden {
+	@include hidden;
+}
+
+/* --------------------------------------------
+	Constants
+----------------------------------------------- */
+
+acronym, abbr[title], dfn[title] {
+	border-bottom: 1px dotted;
+	cursor: help;
+}
+
+a span {
+	cursor: pointer;
+}
+
+address {
+	font-style: normal;
+}
+
+.align_left {
+	text-align: left !important;
+}
+
+.align_centre {
+	text-align: center !important;
+}
+
+.align_right {
+	text-align: right !important;
+}
+
+.align_justify {
+	text-align: justify !important;
+}
+
+b, strong {
+	font-weight: bold;
+}
+
+.block {
+	display: block !important;
+}
+
+blockquote, q {
+	font-family: $quote-fontfamily;
+	quotes: none;
+	&:before, &:after {
+		content: '';
+		content: none;
+	}
+}
+
+blockquote {
+	background: $subdued-color;
+	border-left: 3px solid $std-color;
+	@include rem(padding, $std-margin $std-margin 1px $std-margin);
+}
+
+.centre_object {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+table.centre_object {
+	display: table;
+}
+
+cite {
+	display: block;
+	font-style: italic;
+	@include rem(margin-top, -$std-margin);
+	text-align: right;
+}
+
+.clear {
+	clear: both;
+}
+
+div.clear:not(.no_zero) {
+	font-size: 0;
+	line-height: 0px;
+	width: 100%;
+}
+
+.col {
+	float: right;
+	width: 50%;
+	&:first-child {
+		float: left;
+	}
+}
+
+.float_left {
+	float: left;
+}
+
+.float_left + .content_area {
+	overflow: hidden;
+}
+
+.float_right {
+	float: right;
+}
+
+hr {
+	background: $subdued-color;
+	border: 0;
+	color: $subdued-color;
+	height: 1px;
+	@include rem(margin, $std-margin * 2 0);
+}
+
+.ltie8 hr {
+	@include rem(margin-bottom, ($std-margin * 2) - 7);
+	@include rem(margin-top, ($std-margin * 2) - ($std-margin - 10 + 17));
+}
+
+@media ($min em($grid-bp)) {
+	@import "partials/bp-grid";
+}
+
+i, em {
+	font-style: italic;
+}
+
+iframe:not([width]) {
+	width: 100%;
+}
+
+img {
+	-moz-force-broken-image-icon: 1;
+	height: auto;
+	-ms-interpolation-mode: bicubic;
+	max-width: 100%;
+	vertical-align: bottom;
+}
+
+a img, img[usemap] {
+	border: 0;
+}
+
+img.fixed, .ltie9 img {
+	max-width: none;
+}
+
+img {
+	&.float_left, &.float_right {
+		display: block;
+		float: none;
+		@include rem(margin, 0 auto $std-margin / 2);
+	}
+}
+
+@media ($min em($float-bp)) {
+	@import "partials/bp-img-float";
+}
+
+img.border {
+	border: 1px solid $std-color;
+}
+
+.inline {
+	display: inline !important;
+}
+
+.inline_block {
+	display: inline-block !important;
+}
+
+.invisible {
+	visibility: hidden !important;
+}
+
+.lowercase {
+	text-transform: lowercase;
+}
+
+.managed {
+	display: inline-block;
+	&.alt {
+		padding-left: 21px;
+	}
+	.ltie8 &.alt {
+		padding-left: 0;
+	}
+}
+
+.managed {
+	&:after, &.alt:before {
+		background: url(/images/site/std_icons.png);
+		content: '';
+		display: inline-block;
+		@include rem(margin-left, 5px);
+		height: 16px;
+		vertical-align: middle;
+		width: 16px;
+	}
+	&.alt:before {
+		margin-left: -21px;
+		@include rem(margin-right, 5px);
+	}
+	&.alt:after {
+		display: none;
+	}
+}
+
+.managed.link:after, .managed.alt.link:before {
+	background-position: 0 -16px;
+}
+
+.managed.pdf:after, .managed.alt.pdf:before {
+	background-position: 0 -32px;
+}
+
+.managed.zip:after, .managed.alt.zip:before {
+	background-position: 0 -48px;
+}
+
+.managed.audio:after, .managed.alt.audio:before {
+	background-position: 0 -64px;
+}
+
+.managed.video:after, .managed.alt.video:before {
+	background-position: 0 -80px;
+}
+
+.managed.doc:after, .managed.alt.doc:before {
+	background-position: 0 -96px;
+}
+
+.managed.image:after, .managed.alt.image:before {
+	background-position: 0 -112px;
+}
+
+.managed.excel:after, .managed.alt.excel:before {
+	background-position: 0 -128px;
+}
+
+.managed.file:after, .managed.alt.file:before {
+	background-position: 0 -144px;
+}
+
+.managed.page:after, .managed.alt.page:before {
+	background-position: 0 -160px;
+}
+
+.managed.rss:after, .managed.alt.rss:before {
+	background-position: 0 -176px;
+}
+
+@include media-query-retina {
+	.managed:after, .managed.alt:before {
+		background-image: url(/images/site/std_icons@2x.png);
+		background-size: 16px auto;
+	}
+}
+
+.menu li {
+	& > a, & > a span {
+		display: inline-block; // Fixes IE7's whitespace bug
+	}
+	& > a, & > a span {
+		display: block;
+	}
+	& > a:link, & > a:visited {
+		text-decoration: none;
+	}
+	& > a:hover, & > a:focus {
+		text-decoration: underline;
+	}
+}
+
+.no_mb, .overflow_x.std_margin table {
+	margin-bottom: 0 !important;
+}
+
+.no_wrap {
+	white-space: nowrap;
+}
+
+.normalcase {
+	text-transform: none;
+}
+
+object:focus {
+	outline: none;
+}
+
+.overflow_x {
+	overflow-x: auto;
+}
+
+pre {
+	white-space: pre-wrap;
+}
+
+.rwd {
+	background-repeat: no-repeat;
+	background-size: contain;
+	height: 0;
+	width: 100%;
+}
+
+.slider li {
+	display: none;
+	&:first-child {
+		display: block;
+	}
+}
+
+sub, sup {
+	position: relative;
+	vertical-align: baseline;
+}
+
+.titlecase {
+	text-transform: capitalize;
+}
+
+.uppercase {
+	text-transform: uppercase;
+}
+
+.video {
+	position: relative;
+	& iframe {
+		bottom: 0;
+		left: 0;
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+}
+
+.visible {
+	visibility: visible !important;
+}
+
+/* --------------------------------------------
+	Root Defaults
+----------------------------------------------- */
+
+html {
+	border: 0;
+	min-height: 100%;
+	overflow-y: scroll;
+	-ms-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
+}
+
+body {
+	color: $text-color;
+	font-family: $std-fontfamily;
+	@include rem(font-size, $std-fontsize);
+	line-height: em($std-lineheight, $std-fontsize, true);
+	min-height: 100%;
+	.ie9 &, .vendor-ie-10 & {
+		line-height: em($std-lineheight + 1, $std-fontsize, true);
+	}
+}
+
+body * {
+	font-size: 1em;
+}
+
+/* --------------------------------------------
+	Headings
+----------------------------------------------- */
+
+h1, .h1 {
+	@include rem(font-size, $heading1-fontsize);
+}
+
+h2, .h2 {
+	@include rem(font-size, $heading2-fontsize);
+}
+
+h3, .h3 {
+	@include rem(font-size, $heading3-fontsize);
+}
+
+h4, .h4 {
+	@include rem(font-size, $heading4-fontsize);
+}
+
+h5, .h5 {
+	@include rem(font-size, $heading5-fontsize);
+}
+
+h6, .h6 {
+	@include rem(font-size, $heading6-fontsize);
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+	&:first-child,
+	& + h1, & + h2, & + h3, & + h4, & + h5, & + h6,
+	& + .h1, & + .h2, & + .h3, & + .h4, & + .h5, & + .h6 {
+		margin-top: 0;
+	}
+	&.sub,
+	& + h1, & + h2, & + h3, & + h4, & + h5, & + h6,
+	& + .h1, & + .h2, & + .h3, & + .h4, & + .h5, & + .h6 {
+		color: $sub-color;
+	}
+	&.alt {
+		color: $alt-color;
+	}
+}
+
+/* --------------------------------------------
+	Lists
+----------------------------------------------- */
+
+ol, ul {
+	list-style: none;
+	@include rem(margin-left, $list-margin);
+}
+
+ol {
+	list-style-type: decimal;
+	&.lower_alpha {
+		list-style-type: lower-alpha;
+	}
+	&.upper_alpha {
+		list-style-type: upper-alpha;
+	}
+	&.lower_roman {
+		list-style-type: lower-roman;
+	}
+	&.upper_roman {
+		list-style-type: upper-roman;
+	}
+}
+
+.ltie8 ul {
+	list-style-type: disc;
+}
+
+ol, ul {
+	&.list_style_none {
+		list-style: none !important;
+		margin-left: 0 !important;
+		padding-left: 0 !important;
+	}
+}
+
+li {
+	@include rem(margin-bottom, $std-margin / 2);
+	position: relative;
+	.ltie8 & {
+		position: static;
+	}
+	& > ol, & > ul {
+		@include rem(margin-top, $std-margin);
+	}
+}
+
+ul > li:before {
+	content: '';
+	display: inline-block;
+	position: absolute;
+}
+
+.list_next_to_float, .float_left + ul, .float_right + ul, .float_left + ol, .float_right + ol {
+	overflow: hidden;
+	@include rem(padding-left, $list-margin);
+}
+
+@include media-query($float-bp - 1, $max) {
+	.list_next_to_float, .float_left + ul, .float_right + ul, .float_left + ol, .float_right + ol {
+		clear: both;
+		overflow: visible;
+		padding-left: 0;
+	}
+}
+
+dt, dd {
+	display: inline;
+}
+
+dd:after {
+	content: '\A';
+	white-space: pre;
+}
+
+/* --------------------------------------------
+	Tables
+----------------------------------------------- */
+
+caption {
+	@include rem(margin-bottom, $std-margin);
+	text-align: left;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	width: 100%;
+}
+
+td, th {
+	vertical-align: top;
+}
+
+.unstyled {
+	@include box-shadow(none);
+	width: auto;
+	& td, & th {
+		background: none !important;
+		border: 0 !important;
+		color: $text-color !important;
+		padding: 0 !important;
+		text-align: left;
+		vertical-align: top !important;
+	}
+}
+
+/* --------------------------------------------
+	Forms
+----------------------------------------------- */
+
+fieldset {
+	border: 0;
+	min-height: 0;
+}
+
+legend {
+	left: -999em;
+	position: absolute;
+}
+
+[data-legend]:before {
+	content: attr(data-legend);
+	display: block;
+}
+
+::-webkit-search-decoration, ::-webkit-search-cancel-button, input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+input[type="search"] {
+	-webkit-appearance: none;
+}
+
+@include placeholder;
+
+input.text:not([disabled]), textarea:not([disabled]), html:not([disabled]):not(.ltie9) select:not([disabled]) {
+	&:hover {
+		background-color: $form-input-hover-color;
+	}
+	&:focus {
+		background-color: $form-input-focus-color;
+		@include box-shadow(0 0 6px $form-input-boxshadow-color);
+	}
+}
+
+input.text, textarea, select {
+	&.form_error {
+		border-color: $form-input-error-color !important;
+	}
+}
+
+input[type="radio"], input[type="checkbox"] {
+	&.form_error {
+		@include box-shadow(0 0 1.5px 1.5px lighten($form-input-error-color, 10%));
+	}
+	&.form_error + label {
+		color: $form-input-error-color;
+	}
+}
+
+.touch label {
+	cursor: pointer;
+}
+
+a.btn, input.submit, input.text, label, .label, p.legend, select, textarea {
+	@include box-sizing;
+	display: block;
+	font-family: $std-fontfamily;
+	line-height: normal;
+	width: 100%;
+}
+
+input.text, label, .label, p.legend, select, textarea {
+	vertical-align: top;
+}
+
+input.date_time {
+	display: -webkit-inline-flex;
+}
+
+.required em, label em, .legend em {
+	color: $form-input-error-color;
+	font-style: normal;
+}
+f_comment, .f_margin, .f_row, .required, .rc {
+	@include rem(margin-bottom, $form-margin);
+}
+
+.f_row > div {
+	@include rem(margin-top, $form-margin);
+}
+
+label, .label, p.legend {
+	@include rem(margin-bottom, $form-margin / 2);
+}
+
+fieldset .description {
+	display: block;
+}
+
+input.text, textarea, select {
+	margin: 0;
+}
+
+input.text, textarea, html:not(.ua-android-browser) select {
+	background: $form-input-background-color;
+	border: 1px solid $form-input-border-color;
+}
+
+input.submit, input.text, textarea, select {
+	@include rem(font-size, $base-font-size);
+	.no-touch & {
+		@include rem(font-size, $std-fontsize);
+	}
+}
+
+select {
+	-webkit-appearance: menulist;
+}
+
+select.auto {
+	width: auto !important;
+}
+
+textarea {
+	@include rem(min-height, $text-area-minheight);
+	overflow: auto;
+}
+
+.rc li {
+	@include rem(margin-bottom, $form-margin / 2);
+}
+
+.rc input {
+	position: absolute;
+}
+
+.rc label {
+	font-weight: normal;
+	padding-left: 23px;
+	width: auto;
+}
+
+@media ($min em($form-bp)) {
+	@import "partials/bp-form-fields";
+}
+
+.f_row input.text, .f_row textarea, .f_row select {
+	&.small {
+		@include rem(width, $small-input-width);
+	}
+	&.medium {
+		@include rem(width, $medium-input-width);
+	}
+	&.large {
+		@include rem(width, $large-input-width);
+	}
+}
+
+a.btn {
+	width: auto;
+}
+
+a.btn, input.submit {
+	-webkit-appearance: none;
+	@include border-radius(3px);
+	cursor: pointer;
+	display: inline-block;
+	margin: 0;
+	overflow: visible;
+	text-decoration: none !important;
+}
+
+/* --------------------------------------------
+	Error & .ok Styling
+-----------------------------------------------*/
+
+.error, .ok {
+	border: 1px solid $error-border-color;
+	@include border-radius(8px);
+	@include rem(padding, 15px);
+}
+
+.error, .ok {
+	& h3 {
+		@include rem(font-size, 16px);
+		margin-bottom: 0;
+		padding-left: 24px;
+		position: relative;
+	}
+	.ltie8 & h3 {
+		padding-left: 0;
+	}
+}
+
+.ltie8 .error h3 {
+	color: #b00;
+}
+
+.ltie8 .ok h3 {
+	color: #060;
+}
+
+.error, .ok {
+	& h3:before {
+		background: url(/images/site/std_icons.png) 0 -192px;
+		content: '';
+		height: 16px;
+		margin-left: -24px;
+		margin-top: -8px;
+		position: absolute;
+		top: 50%;
+		width: 15px;
+	}
+}
+
+.ok h3:before {
+	background-position: 0 -208px;
+	color: #417b2a;
+}
+
+@include media-query-retina {
+	.error, .ok {
+		& h3:before {
+			background-image: url(/images/site/std_icons@2x.png);
+			background-size: 16px auto;
+			background-position: 0 -192px;
+			width: 16px;
+		}
+	}
+	
+	.ok h3:before {
+		background-position: 0 -208px;
+	}
+}
+
+.error, .ok {
+	& ul {
+		margin: 14px 0 0 23px;
+		@include rem(margin-top, 14px, false);
+	}
+	& li:last-child {
+		margin-bottom: 0;
+	}
+}
+
+/* --------------------------------------------
+	Site
+----------------------------------------------- */
+
+.no_col_1.no_col_3 #col_2 {
+	width: 100%;
+}
+
+#breadcrumbs li {
+	display: inline-block;
+}

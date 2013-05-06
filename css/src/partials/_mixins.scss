@@ -1,0 +1,500 @@
+// --------------------------------------------
+//	Default Variables
+// --------------------------------------------
+
+$min: 'min-width:';
+$min: unquote($min);
+$max: 'max-width:';
+$max: unquote($max);
+
+$use-background-property: true;
+$use-background-fallback: true;
+$use-pie-background: true;
+
+$browser-default-font-size: 16px;
+$base-font-size: 16px !default;
+$rem-with-px-fallback: true !default;
+
+// --------------------------------------------
+//	Helper Functions
+// --------------------------------------------
+
+@function strip-units($number) {
+	@return $number / ($number * 0 + 1);
+}
+
+@function em($pixels, $context: 16, $unitless: false) {
+	@if ($unitless == false) {
+		@return #{strip-units($pixels) / strip-units($context)}em;
+	}
+	@else {
+		@return #{strip-units($pixels) / strip-units($context)};
+	}
+}
+
+// @private Default font-size for all browsers
+// Convert any CSS <length> or <percentage> value to any other.
+@function convert-length($length, $to-unit, $from-context: $base-font-size, $to-context: $from-context) {
+	$from-unit: unit($length);
+
+	// Optimize for cases where from and to may accidentally be the same.
+	@if $from-unit == $to-unit { @return $length; }
+	@if unit($from-context) != 'px' { @warn "Paremeter $from-context must resolve to a value in pixel units."; }
+	@if unit($to-context) != 'px' { @warn "Parameter $to-context must resolve to a value in pixel units."; }
+
+	// Fixed ratios
+	// https://developer.mozilla.org/en/CSS/length
+	// http://dev.w3.org/csswg/css3-values/#absolute-lengths
+	$px-per-in: 96px / 1in;
+	$px-per-mm: 96px / 25.4mm;
+	$px-per-cm: 96px / 2.54cm;
+	$px-per-pt: 4px / 3pt;
+	$px-per-pc: 16px / 1pc;
+
+	// Variables to store actual convesion ratios
+	$px-per-from-unit: 1;
+	$px-per-to-unit: 1;
+
+	@if $from-unit != 'px' {
+		@if	  $from-unit == 'em'  { $px-per-from-unit: $from-context / 1em }
+		@else if $from-unit == 'rem' { $px-per-from-unit: $base-font-size / 1rem }
+		@else if $from-unit == '%'   { $px-per-from-unit: $from-context / 100% }
+		@else if $from-unit == 'ex'  { $px-per-from-unit: $from-context / 2ex }
+		@else if $from-unit == 'in'  { $px-per-from-unit: $px-per-in }
+		@else if $from-unit == 'mm'  { $px-per-from-unit: $px-per-mm }
+		@else if $from-unit == 'cm'  { $px-per-from-unit: $px-per-cm }
+		@else if $from-unit == 'pt'  { $px-per-from-unit: $px-per-pt }
+		@else if $from-unit == 'pc'  { $px-per-from-unit: $px-per-pc }
+		@else if $to-unit == 'ch' or $to-unit == 'vw' or $to-unit == 'vh' or $to-unit == 'vmin' {
+			@warn "#{$from-unit} units can't be reliably converted; Returning original value.";
+			@return $length;
+		}
+		@else {
+			@warn "#{$from-unit} is an unknown length unit. Returning original value.";
+			@return $length;
+		}
+	}
+
+	@if $to-unit != 'px' {
+		@if	  $to-unit == 'em'  { $px-per-to-unit: $to-context / 1em }
+		@else if $to-unit == 'rem' { $px-per-to-unit: $base-font-size / 1rem }
+		@else if $to-unit == '%'   { $px-per-to-unit: $to-context / 100% }
+		@else if $to-unit == 'ex'  { $px-per-to-unit: $to-context / 2ex }
+		@else if $to-unit == 'in'  { $px-per-to-unit: $px-per-in }
+		@else if $to-unit == 'mm'  { $px-per-to-unit: $px-per-mm }
+		@else if $to-unit == 'cm'  { $px-per-to-unit: $px-per-cm }
+		@else if $to-unit == 'pt'  { $px-per-to-unit: $px-per-pt }
+		@else if $to-unit == 'pc'  { $px-per-to-unit: $px-per-px }
+		@else if $to-unit == 'ch' or $to-unit == 'vw' or $to-unit == 'vh' or $to-unit == 'vmin' {
+			@warn "#{$to-unit} units can't be reliably converted; Returning original value.";
+			@return $length;
+		}
+		@else {
+			@warn "#{$to-unit} is an unknown length unit. Returning original value.";
+			@return $length;
+		}
+	}
+	@return $length * $px-per-from-unit / $px-per-to-unit;
+}
+
+// --------------------------------------------
+//	Class Mixins
+// --------------------------------------------
+
+@mixin clearfix {
+	min-height: 0;
+		&:after {
+			clear: both;
+			content: '.';
+			display: block;
+			height: 0;
+			visibility: hidden;
+		}
+}
+
+@mixin hidden {
+	height: 1px;
+	left: -999em;
+	overflow: hidden;
+	position: absolute;
+	width: 1px;
+}
+
+@mixin hide-text($display: false, $width: false) {
+	@if ($display != false) {
+		display: $display;
+	}
+	overflow: hidden;
+	text-indent: -999em;
+	@if ($width != false) {
+		width: $width
+	}
+}
+
+// --------------------------------------------
+//	Media Query Mixins
+// --------------------------------------------
+
+@mixin media-query($value, $operator: $min, $px: false) {
+	@if ($px == false) {
+		@media (#{$operator} #{em($value)}) {
+			@content;
+		}
+	}
+	@else {
+		@media (#{$operator} #{strip-units($value)}px) {
+			@content;
+		}
+	}
+}
+
+@mixin media-query-and($first-value, $second-value, $first-operator: $min, $second-operator: $max, $px: false) {
+	@if ($px == false) {
+		@media (#{$first-operator} #{em($first-value)}) and (#{$second-operator} #{em($second-value)}) {
+			@content;
+		}
+	}
+	@else {
+		@media (#{$first-operator} #{strip-units($first-value)}) and (#{$second-operator} #{strip-units($second-value)}) {
+			@content;
+		}
+	}
+}
+
+@mixin media-query-retina {
+	@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+		@content;
+	}
+}
+
+// --------------------------------------------
+//	Functional Mixins
+// --------------------------------------------
+
+@mixin gradient($direction: 'to bottom', $nodes: (#f6f8f9, 0%, #e5ebee, 50%, #d7dee3, 50%, #f2f5f7, 100%)) {
+	$fallback: '';
+	$background: background;
+	$lgy-direction: '';
+	$std-direction: '';
+	$x1: '';
+	$x2: '';
+	$y1: '';
+	$y2: '';
+	$css: '';
+	$svg-nodes: '';
+	$x: 0;
+	
+	@if ($direction == 'to bottom' or $direction == 'top' or $direction == '180deg' or $direction == 180deg) {
+		$std-direction: to bottom;
+		$lgy-direction: top;
+		$x1: 0%;
+		$y1: 0%;
+		$x2: 0%;
+		$y2: 100%;
+	}
+	@else if ($direction == 'to top' or $direction == 'bottom' or $direction == '0deg' or $direction == 0deg) {
+		$std-direction: to top;
+		$lgy-direction: bottom;
+		$x1: 100%;
+		$y1: 100%;
+		$x2: 100%;
+		$y2: 0%;
+	}
+	@else if ($direction == 'to left' or $direction == 'right' or $direction == '270deg' or $direction == 270deg) {
+		$std-direction: to left;
+		$lgy-direction: right;
+		$x1: 100%;
+		$y1: 100%;
+		$x2: 0%;
+		$y2: 100%;
+	}
+	@else if ($direction == 'to right' or $direction == 'left' or $direction == '90deg' or $direction == 90deg) {
+		$std-direction: to right;
+		$lgy-direction: left;
+		$x1: 0%;
+		$y1: 0%;
+		$x2: 100%;
+		$y2: 0%;
+	}
+	@else {
+		$std-direction: $direction;
+		$lgy-direction: 90 - $direction;
+		
+		@if ($direction == 10deg) {
+			$x1: 0%;
+			$y1: 100%;
+			$x2: 100%;
+			$y2: 0%;
+		}
+		@else if ($direction == 45deg) {
+			$x1: 0%;
+			$y1: 45%;
+			$x2: 100%;
+			$y2: 0%;
+		}
+		@else if ($direction == 135deg) {
+			$x1: 0%;
+			$y1: 0%;
+			$x2: 100%;
+			$y2: 45%;
+		}
+		@else if ($direction == 170deg) {
+			$x1: 0%;
+			$y1: 0%;
+			$x2: 100%;
+			$y2: 100%;
+		}
+		@else if ($direction == 190deg) {
+			$x1: 100%;
+			$y1: 0%;
+			$x2: 0%;
+			$y2: 100%;
+		}
+		@else if ($direction == 225deg) {
+			$x1: 100%;
+			$y1: 0%;
+			$x2: 0%;
+			$y2: 45%;
+		}
+		@else if ($direction == 315deg) {
+			$x1: 100%;
+			$y1: 45%;
+			$x2: 0%;
+			$y2: 0%;
+		}
+		@else if ($direction == 350deg) {
+			$x1: 100%;
+			$y1: 100%;
+			$x2: 0%;
+			$y2: 0%;
+		}
+		@else {
+			$x1: 0%;
+			$y1: 0%;
+			$x2: 0%;
+			$y2: 100%;
+		}
+	}
+	
+	@for $i from 0 to length($nodes) {
+		@if ($i % 2 == 0) {
+			$css: $css + ", " + nth($nodes, ($i + 1));
+			$svg-nodes: $svg-nodes + '<stop stop-color="' + nth($nodes, ($i + 1)) + '"';
+		}
+		@else {
+			$css: $css + " " + nth($nodes, ($i + 1));
+			$svg-nodes: $svg-nodes + ' offset="' + strip-units(nth($nodes, ($i + 1)))/100 + '" />';
+		}
+		$x: $i;
+	}
+
+	$fallback: nth($nodes, $x);
+	$css: unquote($css);
+	$svg: '<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 1 1" preserveAspectRatio="none"><linearGradient id="g522" gradientUnits="userSpaceOnUse" x1="' + $x1 + '" y1="' + $y1 + '" x2="' + $x2 + '" y2="' + $y2 + '">' + $svg-nodes + '</linearGradient><rect x="0" y="0" width="1" height="1" fill="url(#g522)" /></svg>';
+
+	@if ($use-background-property == false) {
+		$background: background-image;
+	}
+
+	@if ($use-background-fallback == true) {
+		@if ($use-background-property == false) {
+			background-color: $fallback;
+		}
+		@else {
+			background: $fallback;
+		}
+	}
+
+	background-image: url('data:image/svg+xml;base64,' + base64Encode($svg));
+	#{$background}: -moz-linear-gradient($lgy-direction $css);
+	#{$background}: -webkit-linear-gradient($lgy-direction $css);
+	#{$background}: linear-gradient($std-direction $css);
+	@if ($use-pie-background == true) {
+		-pie-background: linear-gradient($lgy-direction $css);
+	}
+}
+
+@mixin placeholder($color: $form-placeholder-color) {
+	:-moz-placeholder {
+		color: $color;
+	}
+	
+	::-moz-placeholder {
+		color: $color;
+	}
+	
+	:-ms-input-placeholder {
+		color: $color;
+	}
+	
+	::-webkit-input-placeholder {
+		color: $color;
+	}
+	
+	input.placeholder, textarea.placeholder {
+		color: $color;
+	}
+	
+	label + [placeholder]:focus:-moz-placeholder {
+		color: transparent;
+	}
+	
+	label + [placeholder]:focus::-moz-placeholder {
+		color: transparent;
+	}
+	
+	label + [placeholder]:focus::-webkit-input-placeholder {
+		color: transparent;
+	}
+}
+
+@mixin rem($property, $values, $use-px-fallback: $rem-with-px-fallback) {
+	// Create a couple of empty lists as output buffers.
+	$px-values: ();
+	$rem-values: ();
+
+	// Ensure $values is a list.
+	@if type-of($values) != 'list' {
+		$values: join((), $values);
+	}
+
+	// Loop through the $values list
+	@each $value in $values {
+		// For each property value, if it's in rem or px, derive both rem and
+		// px values for it and add those to the end of the appropriate buffer.
+		// Ensure all pixel values are rounded to the nearest pixel.
+		@if type-of($value) == number and not unitless($value) and (unit($value) == px or unit($value) == rem) {
+			@if unit($value) == px {
+				$px-values: join($px-values, round($value));
+				$rem-values: join($rem-values, convert-length($value, rem));
+			}
+			@else {
+				$px-values: join($px-values, round(convert-length($value, px)));
+				$rem-values: join($rem-values, $value);
+			}
+		}
+		@else {
+			$px-values: join($px-values, $value);
+			$rem-values: join($rem-values, $value);
+		}
+	}
+
+	// Use pixel fallback for browsers that don't understand rem units.
+	@if $use-px-fallback {
+		#{$property}: $px-values;
+	}
+
+	// Use rem values for everyone else (overrides pixel values).
+	#{$property}: $rem-values;
+}
+
+@mixin triangle($direction: right, $width: 5px, $height: 10px, $color: $std-link-color, $layout: true, $border-style: true, $webkit-rotate: true) {
+	$hex-color: unquote($color);
+	$rgba-color: rgba($hex-color, 0);
+	$bare-width: strip-units($width);
+	$bare-height: strip-units($height);
+	
+	@if ($hex-color == #000 or $hex-color == #000000) {
+		$rgba-color: false;
+	}
+	
+	@if ($direction == down) {
+		border-color: $hex-color transparent transparent transparent;
+		@if ($rgba-color != false) {
+			border-color: $hex-color $rgba-color $rgba-color $rgba-color;
+		}
+	}
+	@else if ($direction == left) {
+		border-color: transparent $hex-color transparent transparent;
+		@if ($rgba-color != false) {
+			border-color: $rgba-color $hex-color $rgba-color $rgba-color;
+		}
+	}
+	@else if ($direction == right) {
+		border-color: transparent transparent transparent $hex-color;
+		@if ($rgba-color != false) {
+			border-color: $rgba-color $rgba-color $rgba-color $hex-color;
+		}
+	}
+	@else if ($direction == up) {
+		border-color: transparent transparent $hex-color transparent;
+		@if ($rgba-color != false) {
+			border-color: $rgba-color $rgba-color $hex-color $rgba-color;
+		}
+	}
+	
+	@if ($border-style) {
+		border-style: solid;
+	}
+	
+	@if ($direction == down) {
+		border-width: $bare-height + px + " " + ($bare-width / 2) + px + " 0 " + ($bare-width / 2) + px;
+	}
+	@else if ($direction == left) {
+		border-width: ($bare-height / 2) + px + " " + $bare-width + px + " " + ($bare-height / 2) + px + " 0" ;
+	}
+	@else if ($direction == right) {
+		border-width: ($bare-height / 2) + px + " 0 " + ($bare-height / 2) + px + " " + $bare-width + px ;
+	}
+	@else if ($direction == up) {
+		border-width: unquote(0 + " " + ($bare-width / 2) + px + " " + $bare-height + px + " " + ($bare-width / 2) + px);
+	}
+	
+	@if ($layout == true) {
+		content: '';
+		display: inline-block;
+		height: 0;
+	}
+	
+	@if ($webkit-rotate == true) {
+		-webkit-transform: rotate(360deg);
+	}
+	
+	@if ($layout == true) {
+		width: 0;
+	}
+}
+
+// --------------------------------------------
+//	CSS Property Mixins
+// --------------------------------------------
+
+@mixin border-radius($radius: 5px) {
+	-webkit-border-radius: $radius;
+	border-radius: $radius;
+}
+
+@mixin box-shadow($shadow: 0 1px 3px rgba(0,0,0,.25)) {
+	-moz-box-shadow: $shadow;
+	-webkit-box-shadow: $shadow;
+	box-shadow: $shadow;
+}
+
+@mixin box-sizing($boxsize: border-box) {
+	-moz-box-sizing: $boxsize;
+	-webkit-box-sizing: $boxsize;
+	box-sizing: $boxsize;
+}
+
+@mixin pie($path: '/css/PIE.htc') {
+	behavior: url($path);
+	position: relative;
+}
+
+@mixin rgba-background($color, $opacity: 0.5, $use-fallback: true, $use-background-color: false) {
+	$property: background;
+	@if ($use-background-color == true) {
+		$property: background-color;
+	}
+	@if ($use-fallback) {
+		#{$property}: $color;
+	}
+	#{$property}: rgba($color, $opacity);
+}
+
+@mixin transition($property: all, $timing: ease, $duration: 0.5s) {
+	-moz-transition: $property $timing $duration;
+	-o-transition: $property $timing $duration;
+	-webkit-transition: $property $timing $duration;
+	transition: $property $timing $duration;
+}
