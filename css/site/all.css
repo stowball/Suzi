@@ -52,7 +52,7 @@ audio:not([controls]) {
   height: 0;
 }
 
-.reset, .reset:not(.lazy) ul, .lazy > ul, .reset:not(.lazy) ol, .lazy > ol, .reset:not(.lazy) li, .lazy > li, .rc ul, .filter h3 {
+.reset, .reset:not(.lazy) ul, .lazy > ul, .reset:not(.lazy) ol, .lazy > ol, .reset:not(.lazy) li, .lazy > li, .rc ul {
   list-style: none !important;
   margin: 0;
   padding: 0;
