@@ -182,7 +182,7 @@ var slider = {
 					$this.addClass('multiple')
 					
 					if (Modernizr.csstransforms && !(layoutEngine.vendor === 'ie' && layoutEngine.version === 9)) {
-						if (pager) {							
+						if (pager) {
 							for (var i = 1; i <= slidesCount; i++) {
 								li += '<li><a href="#slide-' + i + '">Slide ' + i + '</a></li>';
 							}
