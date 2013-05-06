@@ -70,7 +70,7 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 
 	Outputs the complete CSS3 gradient syntax for Chrome, Safari, Firefox, Opera, IE10, other capable browsers and SVG for IE9
 
-	* `$direction` takes either the legacy syntax or the unprefixed W3C syntax
+	* `$direction` takes either the legacy syntax or the unprefixed W3C syntax, including angles. The following angles are supported for SVGs: 0, 10, 45, 90, 135, 170, 180, 190, 225, 270, 315, 350
 	* `$nodes` takes a list of comma separated #color, position% pairs
 	* Uses the background property (and background-image for IE9) unless the global `$use-background-property` is `false`  
 	* Outputs a fallback background of the last color in the list unless the global `$use-background-fallback` is `false`
@@ -78,12 +78,12 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 
 * `triangle($direction: right, $width: 5px, $height: 10px, $color: $std-link-color, $layout: true, $border-style: true, $webkit-rotate: true)`
 
-	Outputs a CSS triangle for use in :before/:after pseudo-elements. Use rgba for transparency to prevent 'black fringes'
+	Outputs a CSS triangle for use in :before/:after pseudo-elements. It duplicates the rule, using rgba for transparency to prevent 'black fringes'
 
 	* `direction`: up, down, left, right (default: right)
 	* `$width`: width in pixels (default: 5px)
 	* `$height`: height in pixels (default: 10px)
-	* `$color`: triangle's color (default: $std-link-color)
+	* `$color`: triangle's hex color (default: $std-link-color)
 	* `$layout`: whether to output CSS `content`, `display`, `height` & `width` properties (default: true)
 	* `$border-style`: whether to output the CSS `border-style` property (default: true)
 	* `$webkit-rotate`: whether to rotate the triangle by 360deg in WebKit for smoother appearance (default: true)
