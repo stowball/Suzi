@@ -68,7 +68,7 @@ ul > li:before {
 	left: -18px;
 	@include rem(top, $list-bullet-top);
 	width: 5px;
-	.ua-desktop-macintosh.vendor-mozilla &, ua-desktop-macintosh.vendor-opera & {
+	.ua-desktop-macintosh.vendor-mozilla &, .ua-desktop-macintosh.vendor-opera & {
 		// Usually @include rem(top, $list-bullet-top - 1, false);
 	}
 }

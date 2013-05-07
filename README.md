@@ -1,6 +1,6 @@
 # Suzi
 
-## A responsive, Sass UI Framework by [Izilla](http://izilla.com.au) - v1.0.0 (2013-05-06)
+## A responsive, Sass UI Framework by [Izilla](http://izilla.com.au) - v1.0.1 (2013-05-07)
 
 Suzi is the starting point for all of our web projects and a culmination of 6+ years' experience in maintaining a front-end framework.
 
