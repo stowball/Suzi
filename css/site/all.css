@@ -1,5 +1,5 @@
 /* 
- * Suzi v1.0.1 (2013-05-07)
+ * Suzi v1.0.2 (2013-05-08)
  * Sass UI framework by Izilla
  * http://izilla.com.au
  */
@@ -427,7 +427,8 @@ img.border {
 .menu li > a:link, .menu li > a:visited {
   text-decoration: none;
 }
-.menu li > a:hover, .menu li > a:focus {
+
+.menu.hover li > a:hover, .menu.hover li > a:focus {
   text-decoration: underline;
 }
 
