@@ -305,6 +305,9 @@ img.border {
 	& > a:link, & > a:visited {
 		text-decoration: none;
 	}
+}
+
+.menu.hover li {
 	& > a:hover, & > a:focus {
 		text-decoration: underline;
 	}
