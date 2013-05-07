@@ -1273,27 +1273,8 @@ a.btn:hover, a.btn:focus, input.submit:hover, input.submit:focus {
 }
 
 /* --------------------------------------------
-	Clearfix
------------------------------------------------ */
-selector {
-  min-height: 0;
-}
-selector:after {
-  clear: both;
-  content: '.';
-  display: block;
-  height: 0;
-  visibility: hidden;
-}
-
-/* --------------------------------------------
 	Consistent Margins
 ----------------------------------------------- */
-selector {
-  margin-bottom: 14px;
-  margin-bottom: 0.875rem;
-}
-
 /* --------------------------------------------
 	Specific Sections
 ----------------------------------------------- */
