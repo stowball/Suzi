@@ -1,6 +1,6 @@
 # Suzi
 
-## A responsive, Sass UI Framework by [Izilla](http://izilla.com.au) - v1.0.2 (2013-05-08)
+## A responsive, Sass UI Framework by [Izilla](http://izilla.com.au) - v1.0.3 (2013-05-08)
 
 Suzi is the starting point for all of our web projects and a culmination of 6+ years' experience in maintaining a front-end framework.
 
@@ -107,6 +107,10 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 	
 #### CSS Property mixins
 
+* `background($color, $duplicate-as-pie: false)`
+
+	Outputs a background rule with the $color specified. If $duplicate-as-pie is true, it will also output a -pie-background property (useful for overriding a gradient on hover, for example)
+
 * `border-radius($radius: 5px)`
 
 	Outputs -webkit and unprefixed `border-radius` with the value passed in (default: 5px)
@@ -117,7 +121,7 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 
 * `box-sizing($boxsize: border-box)`
 
-	Outputs -moz, -webkit and unprefixed `box-sizing` with the value passed in (defauly: border-box)
+	Outputs -moz, -webkit and unprefixed `box-sizing` with the value passed in (default: border-box)
 
 * `pie($path: '/css/PIE.htc')`
 
