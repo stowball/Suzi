@@ -459,6 +459,13 @@ $rem-with-px-fallback: true !default;
 //	CSS Property Mixins
 // --------------------------------------------
 
+@mixin background($color, $duplicate-as-pie: false) {
+	background: $color;
+	@if ($duplicate-as-pie == true) {
+		-pie-background: $color;
+	}
+}
+
 @mixin border-radius($radius: 5px) {
 	-webkit-border-radius: $radius;
 	border-radius: $radius;

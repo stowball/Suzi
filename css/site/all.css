@@ -1,5 +1,5 @@
 /* 
- * Suzi v1.0.2 (2013-05-08)
+ * Suzi v1.0.3 (2013-05-08)
  * Sass UI framework by Izilla
  * http://izilla.com.au
  */
@@ -1185,6 +1185,7 @@ a.btn, input.submit {
 
 a.btn:hover, a.btn:focus, input.submit:hover, input.submit:focus {
   background: #333333;
+  -pie-background: #333333;
   border-color: #333333;
   color: white;
 }

@@ -71,7 +71,7 @@ a.btn, input.submit {
 
 a.btn, input.submit {
 	&:hover, &:focus {
-		background: $btn-hover-background-color;
+		@include background($btn-hover-background-color, true);
 		border-color: $btn-hover-border-color;
 		color: $btn-hover-text-color;
 	}
