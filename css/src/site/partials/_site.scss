@@ -27,15 +27,13 @@ selector {
 }
 
 #col_2 {
+	.no_col_1 & {
+	}
+	.no_col_3 & {
+	}
 }
 
 #col_3 {
-}
-
-.no_col_1 #col_2 {
-}
-
-.no_col_3 #col_2 {
 }
 
 #nav_sub {

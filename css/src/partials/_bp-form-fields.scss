@@ -1,15 +1,17 @@
-label em, .label em {
-	@include rem(right, -10px);
-	position: absolute;
-}
-
-.f_row label, .f_row .label {
-	@include rem(margin-top, $form-margin / 2);
-	.vendor-mozilla & {
-		@include rem(margin-top, ($form-margin / 2) - 1, false);
-	}
-	.ie &, .vendor-ie & {
-		@include rem(margin-top, ($form-margin / 2) + 1);
+label, .label {
+	.f_row & {
+		@include rem(margin-top, $form-margin / 2);
+		
+		.vendor-mozilla & {
+			@include rem(margin-top, ($form-margin / 2) - 1, false);
+		}
+		.ie &, .vendor-ie & {
+			@include rem(margin-top, ($form-margin / 2) + 1);
+		}
+		em {
+			position: absolute;
+			@include rem(right, -10px);
+		}
 	}
 }
 

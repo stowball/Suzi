@@ -32,6 +32,30 @@ blockquote, .cell, .centre_object, cite, .cols, .content_area, dl, .error, .flas
 }
 
 /* --------------------------------------------
+	Reset
+----------------------------------------------- */
+
+.reset, .reset:not(.lazy) ul, .lazy > ul, .reset:not(.lazy) ol, .lazy > ol, .reset:not(.lazy) li, .lazy > li, .rc ul, .filter h3 {
+	list-style: none !important;
+	margin: 0;
+	padding: 0;
+}
+
+.reset.content_area > {
+	& *:last-child, & ul > li, & ol > li {
+		margin-bottom: 0;
+	}
+}
+
+/* --------------------------------------------
+	List Bullet Removal & Display None
+----------------------------------------------- */
+
+input[type="hidden"], .js .js_none, .no_col_1 #col_1, .no_col_3 #col_3, .list_style_none > li:before, .rc li:before, .reset:not(.lazy) li:before, .lazy > li:before {
+	display: none;
+}
+
+/* --------------------------------------------
 	Hiddens
 ----------------------------------------------- */
 
@@ -132,10 +156,9 @@ div.clear:not(.no_zero) {
 
 .float_left {
 	float: left;
-}
-
-.float_left + .content_area {
-	overflow: hidden;
+	+ .content_area {
+		overflow: hidden;
+	}
 }
 
 .float_right {
@@ -148,11 +171,10 @@ hr {
 	color: $subdued-color;
 	height: 1px;
 	@include rem(margin, $std-margin * 2 0);
-}
-
-.ltie8 hr {
-	@include rem(margin-bottom, ($std-margin * 2) - 7);
-	@include rem(margin-top, ($std-margin * 2) - ($std-margin - 10 + 17));
+	.ltie8 & {
+		@include rem(margin-bottom, ($std-margin * 2) - 7);
+		@include rem(margin-top, ($std-margin * 2) - ($std-margin - 10 + 17));
+	}
 }
 
 @media ($min em($grid-bp)) {
@@ -167,23 +189,22 @@ iframe:not([width]) {
 	width: 100%;
 }
 
+a img, img[usemap] {
+	border: 0;
+}
+
 img {
 	-moz-force-broken-image-icon: 1;
 	height: auto;
 	-ms-interpolation-mode: bicubic;
 	max-width: 100%;
-	vertical-align: bottom;
-}
-
-a img, img[usemap] {
-	border: 0;
-}
-
-img.fixed, .ltie9 img {
-	max-width: none;
-}
-
-img {
+	vertical-align: bottom;	
+	&.fixed, .ltie9 & {
+		max-width: none;
+	}
+	&.border {
+		border: 1px solid $std-color;
+	}
 	&.float_left, &.float_right {
 		display: block;
 		float: none;
@@ -193,10 +214,6 @@ img {
 
 @media ($min em($float-bp)) {
 	@import "partials/bp-img-float";
-}
-
-img.border {
-	border: 1px solid $std-color;
 }
 
 .inline {
@@ -217,15 +234,13 @@ img.border {
 
 .managed {
 	display: inline-block;
+	
 	&.alt {
 		padding-left: 21px;
 	}
 	.ltie8 &.alt {
 		padding-left: 0;
 	}
-}
-
-.managed {
 	&:after, &.alt:before {
 		background: url(/images/site/std_icons.png);
 		content: '';
@@ -234,6 +249,10 @@ img.border {
 		height: 16px;
 		vertical-align: middle;
 		width: 16px;
+		@include media-query-retina {
+			background-image: url(/images/site/std_icons@2x.png);
+			background-size: 16px auto;
+		}
 	}
 	&.alt:before {
 		margin-left: -21px;
@@ -242,74 +261,59 @@ img.border {
 	&.alt:after {
 		display: none;
 	}
-}
-
-.managed.link:after, .managed.alt.link:before {
-	background-position: 0 -16px;
-}
-
-.managed.pdf:after, .managed.alt.pdf:before {
-	background-position: 0 -32px;
-}
-
-.managed.zip:after, .managed.alt.zip:before {
-	background-position: 0 -48px;
-}
-
-.managed.audio:after, .managed.alt.audio:before {
-	background-position: 0 -64px;
-}
-
-.managed.video:after, .managed.alt.video:before {
-	background-position: 0 -80px;
-}
-
-.managed.doc:after, .managed.alt.doc:before {
-	background-position: 0 -96px;
-}
-
-.managed.image:after, .managed.alt.image:before {
-	background-position: 0 -112px;
-}
-
-.managed.excel:after, .managed.alt.excel:before {
-	background-position: 0 -128px;
-}
-
-.managed.file:after, .managed.alt.file:before {
-	background-position: 0 -144px;
-}
-
-.managed.page:after, .managed.alt.page:before {
-	background-position: 0 -160px;
-}
-
-.managed.rss:after, .managed.alt.rss:before {
-	background-position: 0 -176px;
-}
-
-@include media-query-retina {
-	.managed:after, .managed.alt:before {
-		background-image: url(/images/site/std_icons@2x.png);
-		background-size: 16px auto;
+	&.link:after, &.alt.link:before {
+		background-position: 0 -16px;
+	}
+	&.pdf:after, &.alt.pdf:before {
+		background-position: 0 -32px;
+	}
+	&.zip:after, &.alt.zip:before {
+		background-position: 0 -48px;
+	}
+	&.audio:after, &.alt.audio:before {
+		background-position: 0 -64px;
+	}
+	&.video:after, &.alt.video:before {
+		background-position: 0 -80px;
+	}
+	&.doc:after, &.alt.doc:before {
+		background-position: 0 -96px;
+	}
+	&.image:after, &.alt.image:before {
+		background-position: 0 -112px;
+	}
+	&.excel:after, &.alt.excel:before {
+		background-position: 0 -128px;
+	}
+	&.file:after, &.alt.file:before {
+		background-position: 0 -144px;
+	}
+	&.page:after, &.alt.page:before {
+		background-position: 0 -160px;
+	}
+	&.rss:after, &.alt.rss:before {
+		background-position: 0 -176px;
 	}
 }
 
-.menu li {
-	& > a, & > a span {
-		display: inline-block; // Fixes IE7's whitespace bug
+.menu {
+	li {
+		& > a, & > a span {
+			display: inline-block; // Fixes IE7's whitespace bug
+		}
+		& > a, & > a span {
+			display: block;
+		}
+		& > a:link, & > a:visited {
+			text-decoration: none;
+		}
 	}
-	& > a, & > a span {
-		display: block;
-	}
-	& > a:link, & > a:visited {
-		text-decoration: none;
-	}
-}
-
-.menu.hover li {
-	& > a:hover, & > a:focus {
-		text-decoration: underline;
+	&.hover {
+		li {
+			& > a:hover, & > a:focus {
+				text-decoration: underline;
+			}
+		}
 	}
 }
 
@@ -458,6 +462,11 @@ h1, h2, h3, h4, h5, h6,
 ol, ul {
 	list-style: none;
 	@include rem(margin-left, $list-margin);
+	&.list_style_none {
+		list-style: none !important;
+		margin-left: 0 !important;
+		padding-left: 0 !important;
+	}
 }
 
 ol {
@@ -480,14 +489,6 @@ ol {
 	list-style-type: disc;
 }
 
-ol, ul {
-	&.list_style_none {
-		list-style: none !important;
-		margin-left: 0 !important;
-		padding-left: 0 !important;
-	}
-}
-
 li {
 	@include rem(margin-bottom, $std-margin / 2);
 	position: relative;
@@ -497,21 +498,17 @@ li {
 	& > ol, & > ul {
 		@include rem(margin-top, $std-margin);
 	}
-}
-
-ul > li:before {
-	content: '';
-	display: inline-block;
-	position: absolute;
+	ul > &:before {
+		content: '';
+		display: inline-block;
+		position: absolute;
+	}
 }
 
 .list_next_to_float, .float_left + ul, .float_right + ul, .float_left + ol, .float_right + ol {
 	overflow: hidden;
 	@include rem(padding-left, $list-margin);
-}
-
-@include media-query($float-bp - 1, $max) {
-	.list_next_to_float, .float_left + ul, .float_right + ul, .float_left + ol, .float_right + ol {
+	@include media-query($float-bp - 1, $max) {
 		clear: both;
 		overflow: visible;
 		padding-left: 0;
@@ -589,28 +586,30 @@ input[type="search"] {
 
 @include placeholder;
 
-input.text:not([disabled]), textarea:not([disabled]), html:not([disabled]):not(.ltie9) select:not([disabled]) {
-	&:hover {
-		background-color: $form-input-hover-color;
-	}
-	&:focus {
-		background-color: $form-input-focus-color;
-		@include box-shadow(0 0 6px $form-input-boxshadow-color);
-	}
-}
-
 input.text, textarea, select {
+	margin: 0;
+	html:not(.ltie9) &:not([disabled]) {
+		&:hover {
+		background-color: $form-input-hover-color;
+		}
+		&:focus {
+			background-color: $form-input-focus-color;
+			@include box-shadow(0 0 6px $form-input-boxshadow-color);
+		}
+	}
 	&.form_error {
 		border-color: $form-input-error-color !important;
 	}
 }
 
-input[type="radio"], input[type="checkbox"] {
-	&.form_error {
-		@include box-shadow(0 0 1.5px 1.5px lighten($form-input-error-color, 10%));
-	}
-	&.form_error + label {
-		color: $form-input-error-color;
+input {
+	&[type="radio"], &[type="checkbox"] {
+		&.form_error {
+			@include box-shadow(0 0 1.5px 1.5px lighten($form-input-error-color, 10%));
+		}
+		&.form_error + label {
+			color: $form-input-error-color;
+		}
 	}
 }
 
@@ -634,10 +633,13 @@ input.date_time {
 	display: -webkit-inline-flex;
 }
 
-.required em, label em, .legend em {
-	color: $form-input-error-color;
-	font-style: normal;
+em {
+	.required &, label & , .label &, p.legend & {
+		color: $form-input-error-color;
+		font-style: normal;
+	}
 }
+
 f_comment, .f_margin, .f_row, .required, .rc {
 	@include rem(margin-bottom, $form-margin);
 }
@@ -654,10 +656,6 @@ fieldset .description {
 	display: block;
 }
 
-input.text, textarea, select {
-	margin: 0;
-}
-
 input.text, textarea, html:not(.ua-android-browser) select {
 	background: $form-input-background-color;
 	border: 1px solid $form-input-border-color;
@@ -672,10 +670,9 @@ input.submit, input.text, textarea, select {
 
 select {
 	-webkit-appearance: menulist;
-}
-
-select.auto {
-	width: auto !important;
+	&.auto {
+		width: auto !important;
+	}
 }
 
 textarea {
@@ -701,23 +698,35 @@ textarea {
 	@import "partials/bp-form-fields";
 }
 
-.f_row input.text, .f_row textarea, .f_row select {
-	&.small {
-		@include rem(width, $small-input-width);
-	}
-	&.medium {
-		@include rem(width, $medium-input-width);
-	}
-	&.large {
-		@include rem(width, $large-input-width);
+input.text, textarea, select {
+	.f_row & {
+		&.small {
+			@include rem(width, $small-input-width);
+		}
+		&.medium {
+			@include rem(width, $medium-input-width);
+		}
+		&.large {
+			@include rem(width, $large-input-width);
+		}
 	}
 }
 
-a.btn {
+a.btn, .btn_wrap {
 	width: auto;
 }
 
-a.btn, input.submit {
+.btn_wrap {
+	padding: 0 !important;
+	position: relative;
+	input {
+		opacity: 0;
+		position: relative;
+		z-index: 2;
+	}
+}
+
+a.btn, .btn_wrap, input.submit {
 	-webkit-appearance: none;
 	@include border-radius(3px);
 	cursor: pointer;
@@ -731,33 +740,20 @@ a.btn, input.submit {
 	Error & .ok Styling
 -----------------------------------------------*/
 
-.error, .ok {
+.error {
 	border: 1px solid $error-border-color;
 	@include border-radius(8px);
 	@include rem(padding, 15px);
-}
-
-.error, .ok {
-	& h3 {
+	h3 {
 		@include rem(font-size, 16px);
 		margin-bottom: 0;
 		padding-left: 24px;
 		position: relative;
 	}
 	.ltie8 & h3 {
+		color: #b00;
 		padding-left: 0;
 	}
-}
-
-.ltie8 .error h3 {
-	color: #b00;
-}
-
-.ltie8 .ok h3 {
-	color: #060;
-}
-
-.error, .ok {
 	& h3:before {
 		background: url(/images/site/std_icons.png) 0 -192px;
 		content: '';
@@ -767,36 +763,33 @@ a.btn, input.submit {
 		position: absolute;
 		top: 50%;
 		width: 15px;
-	}
-}
-
-.ok h3:before {
-	background-position: 0 -208px;
-	color: #417b2a;
-}
-
-@include media-query-retina {
-	.error, .ok {
-		& h3:before {
+		@include media-query-retina {
 			background-image: url(/images/site/std_icons@2x.png);
 			background-size: 16px auto;
 			background-position: 0 -192px;
 			width: 16px;
 		}
 	}
-	
-	.ok h3:before {
-		background-position: 0 -208px;
-	}
-}
-
-.error, .ok {
 	& ul {
 		margin: 14px 0 0 23px;
 		@include rem(margin-top, 14px, false);
 	}
 	& li:last-child {
 		margin-bottom: 0;
+	}
+}
+
+.ok {
+	@extend .error;
+	.ltie8 & h3 {
+		color: #060;
+	}
+	h3:before {
+		background-position: 0 -208px;
+		color: #417b2a;
+		@include media-query-retina {
+			background-position: 0 -208px;
+		}
 	}
 }
 

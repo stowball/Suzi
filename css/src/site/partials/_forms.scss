@@ -2,12 +2,6 @@
 	Forms
 ----------------------------------------------- */
 
-label em {
-}
-
-label, .label, p.legend {
-}
-
 fieldset .description {
 	color: $form-description-color;
 	@include rem(font-size, 12px);
@@ -59,20 +53,29 @@ a.btn, input.submit {
 	border: 1px solid $btn-border-color;
 	color: $btn-text-color;
 	@include rem(padding, $form-btn-padding-vertical $form-btn-padding-horizontal);
-}
-
-.vendor-mozilla a.btn {
-	@include rem(padding-top, $form-btn-padding-vertical - 1, false);
-}
-
-.vendor-mozilla input.submit {
-	@include rem(padding, $form-btn-padding-vertical - 2 $form-btn-padding-horizontal - 3 $form-btn-padding-vertical - 1, false);
-}
-
-a.btn, input.submit {
 	&:hover, &:focus {
 		@include background($btn-hover-background-color, true);
 		border-color: $btn-hover-border-color;
 		color: $btn-hover-text-color;
+	}
+}
+
+a.btn {
+	.ie &, .vendor-ie & {
+	}
+	.vendor-mozilla & {
+		@include rem(padding-top, $form-btn-padding-vertical - 1, false);
+	}
+	.vendor-webkit & {
+	}
+}
+
+input.submit {
+	.ie &, .vendor-ie & {
+	}
+	.vendor-mozilla & {
+		@include rem(padding, $form-btn-padding-vertical - 2 $form-btn-padding-horizontal - 3 $form-btn-padding-vertical - 1, false);
+	}
+	.vendor-webkit & {
 	}
 }
