@@ -9,20 +9,16 @@
 	margin-bottom: 0;
 	padding-right: $grid-cell-padding;
 	vertical-align: top;
-}
-
-.cell:not(.text) {
-	text-align: center;
-}
-
-.cell:last-child {
-	padding-right: 0;
-}
-
-.cell:first-child:not(.text) {
-	text-align: left;
-}
-
-.cell:last-child:not(.text) {
-	text-align: right;
+	&:not(.text) {
+		text-align: center;
+	}
+	&:last-child {
+		padding-right: 0;
+	}
+	&:first-child:not(.text) {
+		text-align: left;
+	}
+	&:last-child:not(.text) {
+		text-align: right;
+	}
 }

@@ -11,9 +11,6 @@ a {
 		color: $std-visited-color;
 		text-decoration: underline;
 	}
-}
-
-a {
 	&:link, &:visited {
 		&:hover, &:focus {
 			color: $std-hover-color;
@@ -22,10 +19,14 @@ a {
 	}
 }
 
-a.feature {
-}
-
-a.feature {
+.feature {
+	&:after {
+		@include triangle;
+		margin-left: em(10px);
+	}
+	&.smaller:after {
+		@include triangle(right, 4px, 8px);
+	}
 	&:hover, &:focus {
 	}
 }

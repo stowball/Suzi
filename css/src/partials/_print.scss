@@ -24,10 +24,9 @@
 
 ul {
 	list-style-type: disc;
-}
-
-li ul {
-	list-style-type: circle;
+	li & {
+		list-style-type: circle;
+	}
 }
 
 #col_2 {
@@ -36,7 +35,8 @@ li ul {
 	width: 100% !important;
 }
 
-.error h3, .ok h3 {
+.error h3 {
+	// .ok extends
 	padding-left: 0;
 }
 

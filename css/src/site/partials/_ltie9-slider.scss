@@ -4,15 +4,14 @@
 
 .slider {
 	// min-height
-}
-
-.slider li {
-	// #col_2 width
-	.no_col_1 &, .no_col_3 &  {
+	li {
 		// #col_2 width
-	}
-	.no_col_1.no_col_3 & {
-		// #col_2 width
+		.no_col_1 &, .no_col_3 &  {
+			// #col_2 width
+		}
+		.no_col_1.no_col_3 & {
+			// #col_2 width
+		}
 	}
 }
 
