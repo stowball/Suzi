@@ -19,10 +19,9 @@
 .ltie8 .cell {
 	float: left;
 	margin-bottom: $grid-cell-padding;
-}
-
-.ltie8 .cell img {
-	max-width: none;
+	img {
+		max-width: none;
+	}
 }
 
 /* --------------------------------------------
@@ -37,10 +36,14 @@
 
 @import "partials/bp-form-fields";
 
-.ltie8 .f_row label, .ltie8 .f_row .label, .ltie8 p.legend {
-	width: $form-label-width - $form-ltie8-difference;
+.f_row label, .f_row .label, p.legend {
+	.ltie8 & {
+		width: $form-label-width - $form-ltie8-difference;
+	}
 }
 
-.ltie8 .btns, .ltie8 .f_comment, .ltie8 .rc ul, .ltie8 .required {
-	margin-left: ($form-label-margin + $form-label-width) - $form-ltie8-difference;
+.btns, .f_comment, .rc ul, .required {
+	.ltie8 & {
+		margin-left: ($form-label-margin + $form-label-width) - $form-ltie8-difference;
+	}
 }
