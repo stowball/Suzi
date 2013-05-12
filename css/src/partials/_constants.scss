@@ -198,7 +198,7 @@ img {
 	height: auto;
 	-ms-interpolation-mode: bicubic;
 	max-width: 100%;
-	vertical-align: bottom;	
+	vertical-align: bottom;
 	&.fixed, .ltie9 & {
 		max-width: none;
 	}
@@ -404,10 +404,9 @@ body {
 	.ie9 &, .vendor-ie-10 & {
 		line-height: em($std-lineheight + 1, $std-fontsize, true);
 	}
-}
-
-body * {
-	font-size: 1em;
+	* {
+		font-size: 1em;
+	}
 }
 
 /* --------------------------------------------
@@ -617,7 +616,7 @@ input {
 	cursor: pointer;
 }
 
-a.btn, input.submit, input.text, label, .label, p.legend, select, textarea {
+a.btn, .btn_wrap, input.submit, input.text, label, .label, p.legend, select, textarea {
 	@include box-sizing;
 	display: block;
 	font-family: $std-fontfamily;

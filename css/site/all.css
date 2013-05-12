@@ -1,5 +1,5 @@
 /* 
- * Suzi v1.0.4 (2013-05-11)
+ * Suzi v1.0.5 (2013-05-13)
  * Sass UI framework by Izilla
  * http://izilla.com.au
  */
@@ -501,7 +501,6 @@ body {
 .ie9 body, .vendor-ie-10 body {
   line-height: 1.5;
 }
-
 body * {
   font-size: 1em;
 }
@@ -772,7 +771,7 @@ input[type="radio"].form_error + label, input[type="checkbox"].form_error + labe
   cursor: pointer;
 }
 
-a.btn, input.submit, input.text, label, .label, p.legend, select, textarea {
+a.btn, .btn_wrap, input.submit, input.text, label, .label, p.legend, select, textarea {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -1164,7 +1163,7 @@ select {
   margin-top: -0.3125rem;
 }
 
-a.btn, input.submit {
+a.btn, .btn_wrap, input.submit {
   background: #f2f5f7;
   background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRo PSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxIDEiIHByZXNl cnZlQXNwZWN0UmF0aW89Im5vbmUiPjxsaW5lYXJHcmFkaWVudCBpZD0iZzUy MiIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIHgxPSIwJSIgeTE9 IjAlIiB4Mj0iMCUiIHkyPSIxMDAlIj48c3RvcCBzdG9wLWNvbG9yPSIjZjZm OGY5IiBvZmZzZXQ9IjAiIC8+PHN0b3Agc3RvcC1jb2xvcj0iI2U1ZWJlZSIg b2Zmc2V0PSIwLjUiIC8+PHN0b3Agc3RvcC1jb2xvcj0iI2Q3ZGVlMyIgb2Zm c2V0PSIwLjUiIC8+PHN0b3Agc3RvcC1jb2xvcj0iI2YyZjVmNyIgb2Zmc2V0 PSIxIiAvPjwvbGluZWFyR3JhZGllbnQ+PHJlY3QgeD0iMCIgeT0iMCIgd2lk dGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNnNTIyKSIgLz48L3N2Zz4= ");
   background: -moz-linear-gradient(top , #f6f8f9 0%, #e5ebee 50%, #d7dee3 50%, #f2f5f7 100%);
@@ -1176,7 +1175,7 @@ a.btn, input.submit {
   padding: 4px 10px;
   padding: 0.25rem 0.625rem;
 }
-a.btn:hover, a.btn:focus, input.submit:hover, input.submit:focus {
+a.btn:hover, a.btn:focus, .btn_wrap:hover, .btn_wrap:focus, input.submit:hover, input.submit:focus {
   background: #333333;
   -pie-background: #333333;
   border-color: #333333;
