@@ -12,15 +12,26 @@
 
 @import "partials/bp-grid";
 
-.ltie8 .grid {
-	display: block;
+.ltie8 {
+	.grid {
+		display: block;
+	}
+	.cell {
+		float: left;
+		margin-bottom: $grid-cell-padding;
+		img {
+			max-width: none;
+		}
+	}
 }
 
-.ltie8 .cell {
-	float: left;
-	margin-bottom: $grid-cell-padding;
-	img {
-		max-width: none;
+.ltie8 {
+	ul.horizontal, .horizontal ul:first-of-type, ul.horizontal_always, .horizontal_always ul:first-of-type {
+		@include clearfix;
+		display: block;
+		> li {
+			float: left;
+		}
 	}
 }
 

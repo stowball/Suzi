@@ -1,5 +1,5 @@
 /* 
- * Suzi v1.0.5 (2013-05-13)
+ * Suzi v1.0.6 (2013-05-17)
  * Sass UI framework by Izilla
  * http://izilla.com.au
  */
@@ -101,7 +101,7 @@ blockquote, .cell, .centre_object, cite, .cols, .content_area, dl, .error, .ok, 
 /* --------------------------------------------
 	Reset
 ----------------------------------------------- */
-.reset, .reset:not(.lazy) ul, .lazy > ul, .reset:not(.lazy) ol, .lazy > ol, .reset:not(.lazy) li, .lazy > li, .rc ul, .filter h3 {
+.reset, .reset ul, .reset_lazy > ul, .reset ol, .reset_lazy > ol, .reset li, .reset_lazy > li, .rc ul {
   list-style: none !important;
   margin: 0;
   padding: 0;
@@ -114,7 +114,7 @@ blockquote, .cell, .centre_object, cite, .cols, .content_area, dl, .error, .ok, 
 /* --------------------------------------------
 	List Bullet Removal & Display None
 ----------------------------------------------- */
-input[type="hidden"], .js .js_none, .no_col_1 #col_1, .no_col_3 #col_3, .list_style_none > li:before, .rc li:before, .reset:not(.lazy) li:before, .lazy > li:before {
+input[type="hidden"], .js .js_none, .no_col_1 #col_1, .no_col_3 #col_3, .list_style_none > li:before, .rc li:before, .reset li:before, .reset_lazy > li:before {
   display: none;
 }
 
@@ -400,6 +400,9 @@ img.float_left, img.float_right {
   background-position: 0 -176px;
 }
 
+.menu li {
+  position: static;
+}
 .menu li > a, .menu li > a span {
   display: inline-block;
 }
@@ -411,6 +414,25 @@ img.float_left, img.float_right {
 }
 .menu.hover li > a:hover, .menu.hover li > a:focus {
   text-decoration: underline;
+}
+
+@media (min-width: 700px) {
+  ul.horizontal, .horizontal ul:first-of-type {
+    display: table;
+    width: 100%;
+  }
+  ul.horizontal > li, .horizontal ul:first-of-type > li {
+    display: table-cell;
+    text-align: center;
+  }
+}
+ul.horizontal_always, .horizontal_always ul:first-of-type {
+  display: table;
+  width: 100%;
+}
+ul.horizontal_always > li, .horizontal_always ul:first-of-type > li {
+  display: table-cell;
+  text-align: center;
 }
 
 .no_mb, .overflow_x.std_margin table {
@@ -1039,6 +1061,9 @@ a:link:hover, a:link:focus, a:visited:hover, a:visited:focus {
   -webkit-transform: rotate(360deg);
   width: 0;
   margin-left: 0.625em;
+}
+.feature:hover:after, .feature:focus:after {
+  border-left-color: #ee0000;
 }
 .feature.smaller:after {
   border-color: transparent transparent transparent #0000ee;
