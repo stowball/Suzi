@@ -131,6 +131,15 @@ $rem-with-px-fallback: true !default;
 	}
 }
 
+@mixin horizontal {
+	display: table;
+	width: 100%;
+	> li {
+		display: table-cell;
+		text-align: center;
+	}
+}
+
 // --------------------------------------------
 //	Media Query Mixins
 // --------------------------------------------

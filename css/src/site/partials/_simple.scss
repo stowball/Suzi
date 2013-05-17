@@ -24,10 +24,11 @@ a {
 		@include triangle;
 		margin-left: em(10px);
 	}
+	&:hover:after, &:focus:after {
+		border-left-color: $std-hover-color;
+	}
 	&.smaller:after {
 		@include triangle(right, 4px, 8px);
-	}
-	&:hover, &:focus {
 	}
 }
 

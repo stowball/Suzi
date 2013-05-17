@@ -35,7 +35,7 @@ blockquote, .cell, .centre_object, cite, .cols, .content_area, dl, .error, .flas
 	Reset
 ----------------------------------------------- */
 
-.reset, .reset:not(.lazy) ul, .lazy > ul, .reset:not(.lazy) ol, .lazy > ol, .reset:not(.lazy) li, .lazy > li, .rc ul, .filter h3 {
+.reset, .reset ul, .reset_lazy > ul, .reset ol, .reset_lazy > ol, .reset li, .reset_lazy > li, .rc ul {
 	list-style: none !important;
 	margin: 0;
 	padding: 0;
@@ -51,7 +51,7 @@ blockquote, .cell, .centre_object, cite, .cols, .content_area, dl, .error, .flas
 	List Bullet Removal & Display None
 ----------------------------------------------- */
 
-input[type="hidden"], .js .js_none, .no_col_1 #col_1, .no_col_3 #col_3, .list_style_none > li:before, .rc li:before, .reset:not(.lazy) li:before, .lazy > li:before {
+input[type="hidden"], .js .js_none, .no_col_1 #col_1, .no_col_3 #col_3, .list_style_none > li:before, .rc li:before, .reset li:before, .reset_lazy > li:before {
 	display: none;
 }
 
@@ -298,6 +298,7 @@ img {
 
 .menu {
 	li {
+		position: static;
 		& > a, & > a span {
 			display: inline-block; // Fixes IE7's whitespace bug
 		}
@@ -315,6 +316,16 @@ img {
 			}
 		}
 	}
+}
+
+@media ($min $main-nav-horizontal) {
+	ul.horizontal, .horizontal ul:first-of-type {
+		@include horizontal;
+	}
+}
+
+ul.horizontal_always, .horizontal_always ul:first-of-type {
+	@include horizontal;
 }
 
 .no_mb, .overflow_x.std_margin table {
