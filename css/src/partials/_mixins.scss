@@ -138,6 +138,13 @@ $rem-with-px-fallback: true !default;
 		display: table-cell;
 		text-align: center;
 	}
+	.ltie8 & {
+		@include clearfix;
+		display: block;
+		> li {
+			float: left;
+		}
+	}
 }
 
 // --------------------------------------------
