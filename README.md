@@ -174,4 +174,4 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 
 ---
 
-A Dreamweaver extension is available which adds code hint support for all of the above mixins and functions.
+A Dreamweaver extension is available which adds code hint support for all of the above mixins and functions. Download it here: https://github.com/stowball/Suzi-Code-Hints
