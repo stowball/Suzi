@@ -104,6 +104,10 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 
 	* `$display`: sets the `display` property to a value of your choice (default: false)
 	* `$width`: sets the width of the element (default: false)
+
+* `horizontal`
+
+	Sets the `UL` specified (or first `UL` of a parent element) and its immediate `LI`s to use `display: table` to create an evenly space, horizontal list. Used in the `.horizontal` and `.horizontal_always` classes
 	
 #### CSS Property mixins
 
