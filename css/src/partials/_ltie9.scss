@@ -25,14 +25,8 @@
 	}
 }
 
-.ltie8 {
-	ul.horizontal, .horizontal ul:first-of-type, ul.horizontal_always, .horizontal_always ul:first-of-type {
-		@include clearfix;
-		display: block;
-		> li {
-			float: left;
-		}
-	}
+ul.horizontal, .horizontal ul:first-of-type {
+	@include horizontal;
 }
 
 /* --------------------------------------------

@@ -1,5 +1,5 @@
 /* 
- * Suzi v1.0.6 (2013-05-17)
+ * Suzi v1.0.7 (2013-05-18)
  * Sass UI framework by Izilla
  * http://izilla.com.au
  */
@@ -416,7 +416,7 @@ img.float_left, img.float_right {
   text-decoration: underline;
 }
 
-@media (min-width: 700px) {
+@media (min-width: 43.75em) {
   ul.horizontal, .horizontal ul:first-of-type {
     display: table;
     width: 100%;
@@ -424,6 +424,20 @@ img.float_left, img.float_right {
   ul.horizontal > li, .horizontal ul:first-of-type > li {
     display: table-cell;
     text-align: center;
+  }
+  .ltie8 ul.horizontal, .ltie8 .horizontal ul:first-of-type {
+    min-height: 0;
+    display: block;
+  }
+  .ltie8 ul.horizontal:after, .ltie8 .horizontal ul:first-of-type:after {
+    clear: both;
+    content: '.';
+    display: block;
+    height: 0;
+    visibility: hidden;
+  }
+  .ltie8 ul.horizontal > li, .ltie8 .horizontal ul:first-of-type > li {
+    float: left;
   }
 }
 ul.horizontal_always, .horizontal_always ul:first-of-type {
@@ -433,6 +447,20 @@ ul.horizontal_always, .horizontal_always ul:first-of-type {
 ul.horizontal_always > li, .horizontal_always ul:first-of-type > li {
   display: table-cell;
   text-align: center;
+}
+.ltie8 ul.horizontal_always, .ltie8 .horizontal_always ul:first-of-type {
+  min-height: 0;
+  display: block;
+}
+.ltie8 ul.horizontal_always:after, .ltie8 .horizontal_always ul:first-of-type:after {
+  clear: both;
+  content: '.';
+  display: block;
+  height: 0;
+  visibility: hidden;
+}
+.ltie8 ul.horizontal_always > li, .ltie8 .horizontal_always ul:first-of-type > li {
+  float: left;
 }
 
 .no_mb, .overflow_x.std_margin table {
