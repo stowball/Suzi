@@ -318,7 +318,7 @@ img {
 	}
 }
 
-@media ($min $main-nav-horizontal) {
+@media ($min em($main-nav-horizontal)) {
 	ul.horizontal, .horizontal ul:first-of-type {
 		@include horizontal;
 	}

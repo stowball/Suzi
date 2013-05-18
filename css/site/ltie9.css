@@ -44,18 +44,26 @@
   max-width: none;
 }
 
-.ltie8 ul.horizontal, .ltie8 .horizontal ul:first-of-type, .ltie8 ul.horizontal_always, .ltie8 .horizontal_always ul:first-of-type {
+ul.horizontal, .horizontal ul:first-of-type {
+  display: table;
+  width: 100%;
+}
+ul.horizontal > li, .horizontal ul:first-of-type > li {
+  display: table-cell;
+  text-align: center;
+}
+.ltie8 ul.horizontal, .ltie8 .horizontal ul:first-of-type {
   min-height: 0;
   display: block;
 }
-.ltie8 ul.horizontal:after, .ltie8 .horizontal ul:first-of-type:after, .ltie8 ul.horizontal_always:after, .ltie8 .horizontal_always ul:first-of-type:after {
+.ltie8 ul.horizontal:after, .ltie8 .horizontal ul:first-of-type:after {
   clear: both;
   content: '.';
   display: block;
   height: 0;
   visibility: hidden;
 }
-.ltie8 ul.horizontal > li, .ltie8 .horizontal ul:first-of-type > li, .ltie8 ul.horizontal_always > li, .ltie8 .horizontal_always ul:first-of-type > li {
+.ltie8 ul.horizontal > li, .ltie8 .horizontal ul:first-of-type > li {
   float: left;
 }
 
