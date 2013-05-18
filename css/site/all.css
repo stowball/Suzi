@@ -416,7 +416,7 @@ img.float_left, img.float_right {
   text-decoration: underline;
 }
 
-@media (min-width: 700px) {
+@media (min-width: 43.75em) {
   ul.horizontal, .horizontal ul:first-of-type {
     display: table;
     width: 100%;

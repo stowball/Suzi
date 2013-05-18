@@ -1,6 +1,6 @@
 # Suzi
 
-## A responsive, Sass UI Framework by [Izilla](http://izilla.com.au) - v1.0.6 (2013-05-17)
+## A responsive, Sass UI Framework by [Izilla](http://izilla.com.au) - v1.0.6 (2013-05-18)
 
 Suzi is the starting point for all of our web projects and a culmination of 6+ years' experience in maintaining a front-end framework.
 
@@ -107,7 +107,7 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 
 * `horizontal`
 
-	Sets the `UL` specified (or first `UL` of a parent element) and its immediate `LI`s to use `display: table` to create an evenly space, horizontal list. Used in the `.horizontal` and `.horizontal_always` classes
+	Sets the `UL` specified (or first `UL` of a parent element) and its immediate `LI`s to use `display: table` to create an evenly spaced, horizontal list. Used in the `.horizontal` and `.horizontal_always` classes
 	
 #### CSS Property mixins
 
