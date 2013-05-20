@@ -31,6 +31,14 @@ blockquote, .cell, .centre_object, cite, .cols, .content_area, dl, .error, .flas
 	@include rem(margin-bottom, $std-margin - 10);
 }
 
+.no_mb {
+	margin-bottom: 0 !important;
+}
+
+.no_mt {
+	margin-top: 0 !important;
+}
+
 /* --------------------------------------------
 	Reset
 ----------------------------------------------- */
@@ -326,10 +334,6 @@ img {
 
 ul.horizontal_always, .horizontal_always ul:first-of-type {
 	@include horizontal;
-}
-
-.no_mb, .overflow_x.std_margin table {
-	margin-bottom: 0 !important;
 }
 
 .no_wrap {
