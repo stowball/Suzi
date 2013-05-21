@@ -324,8 +324,10 @@ img {
 	}
 	&.hover {
 		li {
-			& > a:hover, & > a:focus {
-				text-decoration: underline;
+			& > a {
+				@include hover {
+					text-decoration: underline;
+				}
 			}
 		}
 	}
@@ -609,7 +611,7 @@ input.text, textarea, select {
 	margin: 0;
 	html:not(.ltie9) &:not([disabled]) {
 		&:hover {
-		background-color: $form-input-hover-color;
+			background-color: $form-input-hover-color;
 		}
 		&:focus {
 			background-color: $form-input-focus-color;

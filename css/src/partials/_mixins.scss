@@ -332,6 +332,28 @@ $rem-with-px-fallback: true !default;
 	}
 }
 
+@mixin hover($pseudo: false) {
+	@if ($pseudo) {
+		@if type-of($pseudo) == 'list' {
+			@for $i from 0 to length($pseudo) {
+				 &:hover:#{nth($pseudo, ($i + 1))}, &:focus:#{nth($pseudo, ($i + 1))} {
+					@content;
+				}
+			}
+		}
+		@else {
+			&:hover:#{$pseudo}, &:focus:#{$pseudo} {
+				@content;
+			}
+		}
+	}
+	@else {
+		&:hover, &:focus {
+			@content;
+		}
+	}
+}
+
 @mixin placeholder($color: $form-placeholder-color) {
 	:-moz-placeholder {
 		color: $color;

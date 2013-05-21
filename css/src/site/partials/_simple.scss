@@ -3,15 +3,13 @@
 ----------------------------------------------- */
 
 a {
-	& {
-		color: $std-link-color;
-		text-decoration: underline;
-	}
+	color: $std-link-color;
+	text-decoration: underline;
 	&:visited {
 		color: $std-visited-color;
 		text-decoration: underline;
 	}
-	&:hover, &:focus {
+	@include hover {
 		color: $std-hover-color;
 		text-decoration: none;
 	}
@@ -22,7 +20,7 @@ a {
 		@include triangle;
 		margin-left: em(10px);
 	}
-	&:hover:after, &:focus:after {
+	@include hover(after) {
 		border-left-color: $std-hover-color;
 	}
 	&.smaller:after {

@@ -55,7 +55,7 @@ a.btn, .btn_wrap, input.submit {
 	border: 1px solid $btn-border-color;
 	color: $btn-text-color;
 	@include rem(padding, $form-btn-padding-vertical $form-btn-padding-horizontal);
-	&:hover, &:focus {
+	@include hover {
 		@include background($btn-hover-background-color, true);
 		border-color: $btn-hover-border-color;
 		color: $btn-hover-text-color;
