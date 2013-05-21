@@ -50,6 +50,8 @@ ul.horizontal, .horizontal ul:first-of-type {
 }
 ul.horizontal > li, .horizontal ul:first-of-type > li {
   display: table-cell;
+}
+ul.horizontal > li > a, .horizontal ul:first-of-type > li > a {
   text-align: center;
 }
 .ltie8 ul.horizontal, .ltie8 .horizontal ul:first-of-type {
