@@ -75,6 +75,11 @@ input[type="hidden"], .js .js_none, .no_col_1 #col_1, .no_col_3 #col_3, .list_st
 	Constants
 ----------------------------------------------- */
 
+a[name], a[name]:hover {
+	color: inherit !important;
+	text-decoration: none !important;
+}
+
 acronym, abbr[title], dfn[title] {
 	border-bottom: 1px dotted;
 	cursor: help;
@@ -313,7 +318,7 @@ img {
 		& > a, & > a span {
 			display: block;
 		}
-		& > a:link, & > a:visited {
+		& > a {
 			text-decoration: none;
 		}
 	}

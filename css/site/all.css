@@ -140,6 +140,11 @@ input[type="hidden"], .js .js_none, .no_col_1 #col_1, .no_col_3 #col_3, .list_st
 /* --------------------------------------------
 	Constants
 ----------------------------------------------- */
+a[name], a[name]:hover {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
 acronym, abbr[title], dfn[title] {
   border-bottom: 1px dotted;
   cursor: help;
@@ -417,7 +422,7 @@ img.float_left, img.float_right {
 .menu li > a, .menu li > a span {
   display: block;
 }
-.menu li > a:link, .menu li > a:visited {
+.menu li > a {
   text-decoration: none;
 }
 .menu.hover li > a:hover, .menu.hover li > a:focus {
@@ -1069,7 +1074,7 @@ a.btn, .btn_wrap, input.submit {
 /* --------------------------------------------
 	Simple Customisations
 ----------------------------------------------- */
-a:link {
+a {
   color: #0000ee;
   text-decoration: underline;
 }
@@ -1077,7 +1082,7 @@ a:visited {
   color: #551a8b;
   text-decoration: underline;
 }
-a:link:hover, a:link:focus, a:visited:hover, a:visited:focus {
+a:hover, a:focus {
   color: #ee0000;
   text-decoration: none;
 }
