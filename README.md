@@ -76,6 +76,12 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 	* Outputs a fallback background of the last color in the list unless the global `$use-background-fallback` is `false`
 	* Outputs CSS3PIE syntax for LT IE9 unless the global `$use-pie-background` is `false`
 
+* `hover($pseudo: false)`
+
+	Outputs `:hover` & `:focus` rules for the current element
+	
+	* `$pseudo`: the name of a single pseudo-element (after, before) or a list of multiple to create `:hover` & `:focus` rules for
+
 * `triangle($direction: right, $width: 5px, $height: 10px, $color: $std-link-color, $layout: true, $border-style: true, $webkit-rotate: true)`
 
 	Outputs a CSS triangle for use in :before/:after pseudo-elements. It duplicates the rule, using rgba for transparency to prevent 'black fringes'
