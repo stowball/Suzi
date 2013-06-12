@@ -7,7 +7,6 @@ $(document).ready(function(e) {
 		Modernizr.load('/js/jquery.firefox.hwa.min.js');
 	
 	placeholder.init();
-	tables.init();
 	forms.init();
 	slider.init();
 	tabs.init();
@@ -115,15 +114,6 @@ var placeholder = {
 			});
 		}
 		$html.addClass(pl);
-	}
-};
-
-var tables = {
-	init: function() {
-		$('table').each(function() {
-			var $this = $(this);
-			$this.wrap('<div class="overflow_x std_margin ' + $this.attr('class') + '" />');
-		});
 	}
 };
 
