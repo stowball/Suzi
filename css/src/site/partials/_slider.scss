@@ -30,7 +30,7 @@
 	z-index: 30;
 	
 	@include media-query($feature-bp) {
-		@include rgba-background(#000, .57, false);
+		@include rgba-background((#000, #666), .57);
 		&:hover {
 			@include rgba-background(#000, .77);
 		}
@@ -53,7 +53,7 @@
 		}
 	}
 	
-	.nav span {
+	span {
 		@include hide-text(block, 0)
 	}
 }

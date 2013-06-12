@@ -1306,6 +1306,7 @@ a.btn:hover, a.btn:focus, .btn_wrap:hover, .btn_wrap:focus, input.submit:hover, 
   z-index: 30;
 }
 .ltie9 .nav {
+  background: #666666;
   background: rgba(0, 0, 0, 0.57);
 }
 .ltie9 .nav:hover {
@@ -1314,6 +1315,7 @@ a.btn:hover, a.btn:focus, .btn_wrap:hover, .btn_wrap:focus, input.submit:hover, 
 }
 @media (min-width: 29em) {
   .nav {
+    background: #666666;
     background: rgba(0, 0, 0, 0.57);
   }
   .nav:hover {
@@ -1346,7 +1348,7 @@ a.btn:hover, a.btn:focus, .btn_wrap:hover, .btn_wrap:focus, input.submit:hover, 
   border-style: solid;
   border-width: 8px 0 8px 8px;
 }
-.nav .nav span {
+.nav span {
   display: block;
   overflow: hidden;
   text-indent: -999em;
