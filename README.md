@@ -117,7 +117,7 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 
 	Accessibly hide (and un-hide) an element off-screen
 	
-	* `$hide: whether to hide or unhide the (default: true)
+	* `$hide`: whether to hide or unhide the (default: true)
 
 * `hide-text($display: false, $width: false)`
 
