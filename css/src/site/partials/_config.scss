@@ -73,7 +73,6 @@ $std-whitespace-margin: -4px;
 $form-margin: 10px;
 $form-label-margin: 3%;
 $form-label-width: 30%;
-$form-ltie8-difference: 3%;
 
 $list-margin: 40px;
 
@@ -97,10 +96,18 @@ $list-bullet-top: 7px;
 //	Sizes
 // --------------------------------------------
 
+$site-width: 960px;
+
 $small-input-width: 100px;
 $medium-input-width: 200px;
 $large-input-width: 300px;
 $text-area-minheight: 120px;
+
+// --------------------------------------------
+//	Other
+// --------------------------------------------
+
+$btn-border-radius: 3px;
 
 // --------------------------------------------
 //	Breakpoints
@@ -113,3 +120,5 @@ $grid-bp: 481px;
 $form-bp: 534px;
 
 $feature-bp: 464px;
+
+$desktop-bp: $site-width;

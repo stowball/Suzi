@@ -2,7 +2,7 @@
 	Hiddens
 ----------------------------------------------- */
 
-#logo, body #header form, #nav_main, #col_1, #nav_seo {
+#logo, #nav_main {
 	display: none !important;
 }
 
@@ -17,8 +17,7 @@
 }
 
 #print_logo {
-	position: static;
-	width: auto;
+	@include hidden(false);
 }
 
 ul {
@@ -40,5 +39,6 @@ ul {
 }
 
 .rwd-swap {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
 	opacity: 1 !important;
 }

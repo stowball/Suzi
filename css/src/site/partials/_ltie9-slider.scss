@@ -16,16 +16,10 @@
 }
 
 .nav {
-	background: #666;
-	&:hover {
-		background: #000;
+	.ltie8 & span {
+		// image replacement
 	}
-}
-
-.ltie8 .nav span {
-	// image replacement
-}
-
-.ltie8 .nav.next span {
-	// image replacement
+	.ltie8 &.next span {
+		// image replacement
+	}
 }

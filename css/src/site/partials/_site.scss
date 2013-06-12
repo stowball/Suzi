@@ -10,6 +10,11 @@ selector {
 	Specific Sections
 ----------------------------------------------- */
 
+.std_width {
+	margin: auto;
+	@include rem(max-width, $site-width);
+}
+
 #site {
 	font-size: $std-fontsize;
 }

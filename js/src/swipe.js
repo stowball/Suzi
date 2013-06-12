@@ -1,5 +1,5 @@
 /*
- * Swipe 1.0
+ * Swipe 1.0.1
  *
  * Brad Birdsall, Prime
  * Copyright 2011, Licensed GPL & MIT
@@ -17,6 +17,7 @@
   this.options = options || {};
   this.index = this.options.startSlide || 0;
   this.speed = this.options.speed || 300;
+  this.complete = this.options.complete || function() {};
   this.callback = this.options.callback || function() {};
   this.delay = this.options.auto || 0;
 
@@ -78,13 +79,12 @@ Swipe.prototype = {
       el.style.width = this.width + 'px';
       el.style.display = 'table-cell';
       el.style.verticalAlign = 'top';
-    }
-
-    // set start position and force translate to remove initial flickering
-    this.slide(this.index, 0); 
+	}
 
     // show slider element
     this.container.style.visibility = 'visible';
+	
+	this.complete(this.index, this.slides[this.index]);
 
   },
 

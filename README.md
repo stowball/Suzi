@@ -2,7 +2,7 @@
 
 ## A responsive, Sass UI Framework by [Izilla](http://izilla.com.au)
 
-### v1.0.9 (2013-05-21)
+### v1.1.0 (2013-06-12)
 
 Suzi is the starting point for all of our web projects and a culmination of 6+ years' experience in maintaining a front-end framework.
 
@@ -15,7 +15,9 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 * Starter content styles, including clean typography, lists, tables, etc
 * Starter form element styles: stacked on small-screen to 2-column at the breakpoint of your choice
 * Simple form validation
-* Responsive, touch-friendly carousels with optional navigation, pagination & analytics tracking
+* Responsive, touch-friendly carousels with optional navigation & pagination, analytics tracking & cookie-based remembering of last visible slide
+* Simple, accessible JavaScript tabs with cookie-based remembering of the open pane
+* Simple, accessible JavaScript accordions with cookie-based remembering of the open pane
 * Tabs instead of spaces :)
 
 ---
@@ -83,6 +85,15 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 	Outputs `:hover` & `:focus` rules for the current element
 	
 	* `$pseudo`: the name of a single pseudo-element (after, before) or a list of multiple to create `:hover` & `:focus` rules for
+	
+* `nth-child($an: 2n, $sibling: '*', $count: 15)`
+
+	Allows nth-child functionality for .ltie9 (if you can't/don't want to use Selectivzr) by outputting crazy sibling selectors
+	
+	* `$an`: the counting method, eg: 2n, 3n, odd (default: 2n)
+	* `$an` can also be a list, with the 2nd parameter being the modifier, eg: 2 for ($an+2) or -3 for ($an-3)
+	* `$sibling`: the sibling element selector, eg: 'li', 'div' (default: '*')
+	* `$count` how many sibling selectors to support, eg: 10, 20 (default: 15)
 
 * `triangle($direction: right, $width: 5px, $height: 10px, $color: $std-link-color, $layout: true, $border-style: true, $webkit-rotate: true)`
 
@@ -102,9 +113,11 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 
 	Float clearing without hacks for IE7+ and every other browser
 
-* `hidden`
+* `hidden($hide: true)`
 
-	Accessibly hide an element off-screen
+	Accessibly hide (and un-hide) an element off-screen
+	
+	* `$hide: whether to hide or unhide the (default: true)
 
 * `hide-text($display: false, $width: false)`
 
@@ -118,6 +131,18 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 	Sets the `UL` specified (or first `UL` of a parent element) and its immediate `LI`s to use `display: table` to create an evenly spaced, horizontal list for modern browsers and uses floats for `.ltie8`. Used in the `.horizontal` and `.horizontal_always` classes
 	
 #### CSS Property mixins
+
+* `animation($property: default 1s ease)`
+
+	Outputs -moz, -o-, -webkit and unprefixed `animation` with the value passed in (default: default 1s ease)
+	
+* `animation-delay($value: 1s)`
+
+	Outputs -moz, -o-, -webkit and unprefixed `animation-delay` with the value passed in (default: 1s)
+	
+* `animation-duration($value: 1s)`
+
+	Outputs -moz, -o-, -webkit and unprefixed `animation-duration` with the value passed in (default: 1s)
 
 * `background($color, $duplicate-as-pie: false)`
 
@@ -134,6 +159,10 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 * `box-sizing($boxsize: border-box)`
 
 	Outputs -moz, -webkit and unprefixed `box-sizing` with the value passed in (default: border-box)
+	
+* `keyframes($name)`
+
+	Outputs -moz, -o-, -webkit and unprefixed animation `@keyframes` named with the value passed in
 
 * `pie($path: '/css/PIE.htc')`
 
@@ -141,37 +170,44 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 
 * `rgba-background($color, $opacity: 0.5, $use-fallback: true, $use-background-color: false)`
 
-	Converts a background color and opacity to `rgba`, with the option to output the fallback color
+	Converts a background color and opacity to `rgba`, with the option to output a default fallback color or a composite fallback color of your choice
 	
-	* `$color`: color to be converted
+	* `$color`: color to be converted - either a single value or a list
+	* if `$color` is a list, the second parameter is used as the fallback colour - useful for composite fallbacks
 	* `$opacity`: alpha opacity of the color (default: 0.5)
 	* `$use-fallback`: whether to output the fallback color (default: true)
 	* `$use-background-color`: whether to use `background-color` property instead of `background` (default: false)
 
-* `transition($property: all, $timing: ease, $duration: 0.5s)`
+* `transform($transform-function: none)`
 
-	Outputs, -moz, -o, -webkit and unprefixed `transition` with the values passed in
+	Outputs, -moz, -o, -webkit and unprefixed `transform` with the value passed in (default: none)
 
-	* `$property`: which property to transition (default: all)
-	* `$timing`: which timing function to use (default: ease)
-	* `$duration`: duration of the transition (default: 0.5s)
+* `transition($property: all ease 0.2s)`
+
+	Outputs, -moz, -o, -webkit and unprefixed `transition` with the value passed in (default: all ease 0.2s)
+	
+* `viewport($width: device-width)`
+
+	Outputs, -moz, -ms, -o, -webkit and unprefixed `@viewport` with the value passed in (default: device-width)
 
 #### Media Query mixins
 
-* `media-query($value, $operator: $min, $px: false)`
+* `media-query($value, $ltie9: $use-ltie9-mq-fallbacks, $operator: $min, $px: false)`
 
-	Outputs a standard media query using ems
+	Outputs a standard media query using ems and an optional .ltie9 fallback
 	
 	* `$value`: pixel value for the breakpoint
+	* `$ltie9`: whether to output .ltie9 fallback (default: $use-ltie9-mq-fallbacks [true])
 	* `$operator`: operator for the breakpoint, e.g. min-width, max-width, min-height, max-height (default: $min [min-width])
 	* `$px`: use px instead of ems
 
 * `media-query-and($first-value, $second-value, $first-operator: $min, $second-operator: $max, $px: false)`
 
-	Outputs an media query with an 'and' condition
+	Outputs a media query with an 'and' condition and an optional .ltie9 fallback (unless max-width is less than $site-width)
 	
 	* `$first-value`: pixel value for the first breakpoint
 	* `$second-value`: pixel value for the second breakpoint
+	* `$ltie9`: whether to output .ltie9 fallback (default: $use-ltie9-mq-fallbacks [true])
 	* `$first-operator`: operator for the first breakpoint, e.g. min-width, max-width, min-height, max-height (default: $min [min-width])
 	* `$second-operator`: operator for the second breakpoint
 	* `$px`: use px instead of ems

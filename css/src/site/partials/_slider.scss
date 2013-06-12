@@ -2,14 +2,23 @@
 	Feature Slider
 ----------------------------------------------- */
 
+.slider {
+	li {
+		.js &:first-child {
+			visibility: hidden;
+		}
+		
+		.swipejs & {
+		}
+	}
+	
+	.tile {
+		position: relative;
+	}
+}
+
 .feature_slider {
 	position: relative;
-}
-
-.slider li {
-}
-
-.swipejs .slider li {
 }
 
 .nav {
@@ -19,60 +28,56 @@
 	top: 0;
 	width: 30px;
 	z-index: 30;
-	&.next {
-		left: auto;
-		right: 0;
-	}
-}
-
-@include media-query($feature-bp) {
-	.nav {
+	
+	@include media-query($feature-bp) {
 		@include rgba-background(#000, .57, false);
 		&:hover {
 			@include rgba-background(#000, .77);
 		}
 	}
-}
-
-.nav:after {
-	@include triangle(left, 8px, 16px, #fff);
-	left: 50%;
-	margin: -8px 0 0 -4px;
-	position: absolute;
-	top: 50%;
-}
-
-.nav.next:after {
-	@include triangle(right, 8px, 16px, #fff, false, true, false);
-}
-
-.nav span {
-	@include hide-text(block, 0)
+	
+	&:after {
+		@include triangle(left, 8px, 16px, #fff);
+		left: 50%;
+		margin: -8px 0 0 -4px;
+		position: absolute;
+		top: 50%;
+	}
+	
+	&.next {
+		left: auto;
+		right: 0;
+		
+		&.next:after {
+			@include triangle(right, 8px, 16px, #fff, false, true, false);
+		}
+	}
+	
+	.nav span {
+		@include hide-text(block, 0)
+	}
 }
 
 .nav_pager {
 	bottom: -16px;
 	position: absolute;
 	right: 0;
-}
+	
+	li {
+		float: left;
+	}
 
-.nav_pager li {
-	float: left;
-}
+	a {
+		background: #f2f5f7;
+		border: 1px solid #adb9c2;
+		height: 8px;
+		margin-left: 8px;
+		width: 10px;
+		@include hide-text();
+	}
 
-.nav_pager a {
-	background: #f2f5f7;
-	border: 1px solid #adb9c2;
-	height: 8px;
-	margin-left: 8px;
-	width: 10px;
-	@include hide-text();
-}
-
-.nav_pager .current a {
-	background: #000;
-	border-color: #000;
-}
-
-#feature .tile {
+	.current a {
+		background: #000;
+		border-color: #000;
+	}
 }

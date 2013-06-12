@@ -1,13 +1,11 @@
 label, .label {
 	.f_row & {
 		@include rem(margin-top, $form-margin / 2);
-		
-		.vendor-mozilla & {
-			@include rem(margin-top, ($form-margin / 2) - 1, false);
-		}
+				
 		.ie &, .vendor-ie & {
 			@include rem(margin-top, ($form-margin / 2) + 1);
 		}
+		
 		em {
 			position: absolute;
 			@include rem(right, -10px);
@@ -36,6 +34,10 @@ label, .label {
 .btns, .f_comment, .rc:not(.legend) ul, .required {
 	padding-left: $form-label-margin + $form-label-width;
 	@include rem(margin-left, $std-whitespace-margin);
+}
+
+.btns {
+	margin-left: 0 !important;
 }
 
 input.submit {

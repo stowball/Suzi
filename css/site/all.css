@@ -1,5 +1,5 @@
 /* 
- * Suzi v1.0.9 (2013-05-21)
+ * Suzi v1.1.0 (2013-06-12)
  * Sass UI framework by Izilla
  * http://izilla.com.au
  */
@@ -69,9 +69,30 @@ font-family: font-stack;
 }
 
 /* --------------------------------------------
+	Standard Margin
+----------------------------------------------- */
+blockquote, .cell, .centre_object, cite, .cols, .content_area, dl, .error, .ok, .flash, fieldset, .fieldset, .grid, hr, iframe, .ok, ol, p, table, ul {
+  margin-bottom: 14px;
+  margin-bottom: 0.875rem;
+}
+
+/* --------------------------------------------
+	Reset
+----------------------------------------------- */
+.reset, .reset ul, .reset_lazy > ul, .reset ol, .reset_lazy > ol, .reset li, .reset_lazy > li, .rc ul {
+  list-style: none !important;
+  margin: 0;
+  padding: 0;
+}
+
+.content_area > *:last-child, .content_area > ul > li, .content_area > ol > li {
+  margin-bottom: 0;
+}
+
+/* --------------------------------------------
 	Consistent Margins
 ----------------------------------------------- */
-blockquote, .cell, .centre_object, cite, .cols, .content_area, dl, .error, .ok, .flash, fieldset, .fieldset, .grid, hr, iframe, .ok, ol, p, .std_margin, table, ul {
+.std_margin {
   margin-bottom: 14px;
   margin-bottom: 0.875rem;
 }
@@ -99,24 +120,11 @@ blockquote, .cell, .centre_object, cite, .cols, .content_area, dl, .error, .ok, 
 }
 
 .no_mb {
-  margin-bottom: 0 !important;
+  margin-bottom: 0;
 }
 
 .no_mt {
-  margin-top: 0 !important;
-}
-
-/* --------------------------------------------
-	Reset
------------------------------------------------ */
-.reset, .reset ul, .reset_lazy > ul, .reset ol, .reset_lazy > ol, .reset li, .reset_lazy > li, .rc ul {
-  list-style: none !important;
-  margin: 0;
-  padding: 0;
-}
-
-.reset.content_area > *:last-child, .reset.content_area > ul > li, .reset.content_area > ol > li {
-  margin-bottom: 0;
+  margin-top: 0;
 }
 
 /* --------------------------------------------
@@ -365,7 +373,7 @@ img.float_left, img.float_right {
   vertical-align: middle;
   width: 16px;
 }
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+@media (min--moz-device-pixel-ratio: 1.3), (-o-min-device-pixel-ratio: 2.6 / 2), (-webkit-min-device-pixel-ratio: 1.3), (min-device-pixel-ratio: 1.3), (min-resolution: 1.3dppx) {
   .managed:after, .managed.alt:before {
     background-image: url(/images/site/std_icons@2x.png);
     background-size: 16px auto;
@@ -496,6 +504,13 @@ object:focus {
   overflow-x: auto;
 }
 
+.js .pane {
+  display: none;
+}
+.js .pane:first-child {
+  display: block;
+}
+
 pre {
   white-space: pre-wrap;
 }
@@ -505,6 +520,10 @@ pre {
   background-size: contain;
   height: 0;
   width: 100%;
+}
+
+.ltie8 .rwd-swap {
+  display: none;
 }
 
 .slider li {
@@ -551,6 +570,14 @@ html {
   overflow-y: scroll;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
+}
+@media (min-width: 0.0625em) {
+  html {
+    overflow-x: hidden;
+  }
+}
+html.no-touch {
+  -ms-overflow-style: scrollbar;
 }
 
 body {
@@ -695,7 +722,7 @@ ul > li:before {
   padding-left: 40px;
   padding-left: 2.5rem;
 }
-@media (max-width: 28.9375em) {
+@media (min-width: 28.9375em) {
   .list_next_to_float, .float_left + ul, .float_right + ul, .float_left + ol, .float_right + ol {
     clear: both;
     overflow: visible;
@@ -757,6 +784,7 @@ fieldset {
 legend {
   left: -999em;
   position: absolute;
+  top: -999em;
 }
 
 [data-legend]:before {
@@ -867,11 +895,6 @@ f_comment, .f_margin, .f_row, .required, .rc {
   margin-top: 0.625rem;
 }
 
-label, .label, p.legend {
-  margin-bottom: 5px;
-  margin-bottom: 0.3125rem;
-}
-
 fieldset .description {
   display: block;
 }
@@ -879,6 +902,10 @@ fieldset .description {
 input.text, textarea, html:not(.ua-android-browser) select {
   background: white;
   border: 1px solid #5d5d5d;
+}
+
+input.text, textarea {
+  -webkit-appearance: none;
 }
 
 input.submit, input.text, textarea, select {
@@ -907,11 +934,9 @@ textarea {
   margin-bottom: 5px;
   margin-bottom: 0.3125rem;
 }
-
 .rc input {
   position: absolute;
 }
-
 .rc label {
   font-weight: normal;
   padding-left: 23px;
@@ -922,9 +947,6 @@ textarea {
   .f_row label, .f_row .label {
     margin-top: 5px;
     margin-top: 0.3125rem;
-  }
-  .vendor-mozilla .f_row label, .vendor-mozilla .f_row .label {
-    margin-top: 0.25rem;
   }
   .ie .f_row label, .vendor-ie .f_row label, .ie .f_row .label, .vendor-ie .f_row .label {
     margin-top: 6px;
@@ -960,6 +982,10 @@ textarea {
     padding-left: 33%;
     margin-left: -4px;
     margin-left: -0.25rem;
+  }
+
+  .btns {
+    margin-left: 0 !important;
   }
 
   input.submit {
@@ -1003,6 +1029,10 @@ a.btn, .btn_wrap, input.submit {
   overflow: visible;
   text-decoration: none !important;
 }
+a.btn::-moz-focus-inner, .btn_wrap::-moz-focus-inner, input.submit::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
 
 /* --------------------------------------------
 	Error & .ok Styling
@@ -1035,7 +1065,7 @@ a.btn, .btn_wrap, input.submit {
   top: 50%;
   width: 15px;
 }
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+@media (min--moz-device-pixel-ratio: 1.3), (-o-min-device-pixel-ratio: 2.6 / 2), (-webkit-min-device-pixel-ratio: 1.3), (min-device-pixel-ratio: 1.3), (min-resolution: 1.3dppx) {
   .error h3:before, .ok h3:before {
     background-image: url(/images/site/std_icons@2x.png);
     background-size: 16px auto;
@@ -1058,7 +1088,7 @@ a.btn, .btn_wrap, input.submit {
   background-position: 0 -208px;
   color: #417b2a;
 }
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+@media (min--moz-device-pixel-ratio: 1.3), (-o-min-device-pixel-ratio: 2.6 / 2), (-webkit-min-device-pixel-ratio: 1.3), (min-device-pixel-ratio: 1.3), (min-resolution: 1.3dppx) {
   .ok h3:before {
     background-position: 0 -208px;
   }
@@ -1186,14 +1216,16 @@ fieldset .description {
   margin-top: 0.1875rem;
 }
 
+label, .label, p.legend {
+  margin-bottom: 5px;
+  margin-bottom: 0.3125rem;
+}
+
 input.text, textarea {
   -webkit-border-radius: 3px;
   border-radius: 3px;
   padding: 4px;
   padding: 0.25rem;
-}
-.vendor-mozilla input.text, .vendor-mozilla textarea {
-  padding-top: 0.1875rem;
 }
 
 select {
@@ -1241,6 +1273,9 @@ a.btn, .btn_wrap, input.submit {
   padding: 4px 10px;
   padding: 0.25rem 0.625rem;
 }
+.vendor-mozilla a.btn, .vendor-mozilla .btn_wrap, .vendor-mozilla input.submit {
+  padding-top: 0.1875rem;
+}
 a.btn:hover, a.btn:focus, .btn_wrap:hover, .btn_wrap:focus, input.submit:hover, input.submit:focus {
   background: #333333;
   -pie-background: #333333;
@@ -1248,17 +1283,16 @@ a.btn:hover, a.btn:focus, .btn_wrap:hover, .btn_wrap:focus, input.submit:hover, 
   color: white;
 }
 
-.vendor-mozilla a.btn {
-  padding-top: 0.1875rem;
-}
-
-.vendor-mozilla input.submit {
-  padding: 0.125rem 0.4375rem 0.1875rem;
-}
-
 /* --------------------------------------------
 	Feature Slider
 ----------------------------------------------- */
+.js .slider li:first-child {
+  visibility: hidden;
+}
+.slider .tile {
+  position: relative;
+}
+
 .feature_slider {
   position: relative;
 }
@@ -1271,11 +1305,13 @@ a.btn:hover, a.btn:focus, .btn_wrap:hover, .btn_wrap:focus, input.submit:hover, 
   width: 30px;
   z-index: 30;
 }
-.nav.next {
-  left: auto;
-  right: 0;
+.ltie9 .nav {
+  background: rgba(0, 0, 0, 0.57);
 }
-
+.ltie9 .nav:hover {
+  background: black;
+  background: rgba(0, 0, 0, 0.77);
+}
 @media (min-width: 29em) {
   .nav {
     background: rgba(0, 0, 0, 0.57);
@@ -1300,15 +1336,17 @@ a.btn:hover, a.btn:focus, .btn_wrap:hover, .btn_wrap:focus, input.submit:hover, 
   position: absolute;
   top: 50%;
 }
-
-.nav.next:after {
+.nav.next {
+  left: auto;
+  right: 0;
+}
+.nav.next.next:after {
   border-color: transparent transparent transparent white;
   border-color: rgba(255, 255, 255, 0) rgba(255, 255, 255, 0) rgba(255, 255, 255, 0) white;
   border-style: solid;
   border-width: 8px 0 8px 8px;
 }
-
-.nav span {
+.nav .nav span {
   display: block;
   overflow: hidden;
   text-indent: -999em;
@@ -1320,11 +1358,9 @@ a.btn:hover, a.btn:focus, .btn_wrap:hover, .btn_wrap:focus, input.submit:hover, 
   position: absolute;
   right: 0;
 }
-
 .nav_pager li {
   float: left;
 }
-
 .nav_pager a {
   background: #f2f5f7;
   border: 1px solid #adb9c2;
@@ -1334,7 +1370,6 @@ a.btn:hover, a.btn:focus, .btn_wrap:hover, .btn_wrap:focus, input.submit:hover, 
   overflow: hidden;
   text-indent: -999em;
 }
-
 .nav_pager .current a {
   background: #000;
   border-color: #000;
@@ -1346,6 +1381,12 @@ a.btn:hover, a.btn:focus, .btn_wrap:hover, .btn_wrap:focus, input.submit:hover, 
 /* --------------------------------------------
 	Specific Sections
 ----------------------------------------------- */
+.std_width {
+  margin: auto;
+  max-width: 960px;
+  max-width: 60rem;
+}
+
 #site {
   font-size: 14px;
 }
@@ -1354,7 +1395,7 @@ a.btn:hover, a.btn:focus, .btn_wrap:hover, .btn_wrap:focus, input.submit:hover, 
   /* --------------------------------------------
   	Hiddens
   ----------------------------------------------- */
-  #logo, body #header form, #nav_main, #col_1, #nav_seo {
+  #logo, #nav_main {
     display: none !important;
   }
 
@@ -1370,6 +1411,7 @@ a.btn:hover, a.btn:focus, .btn_wrap:hover, .btn_wrap:focus, input.submit:hover, 
   }
 
   #print_logo {
+    height: auto;
     position: static;
     width: auto;
   }
@@ -1392,7 +1434,15 @@ a.btn:hover, a.btn:focus, .btn_wrap:hover, .btn_wrap:focus, input.submit:hover, 
   }
 
   .rwd-swap {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
     opacity: 1 !important;
+  }
+
+  /* --------------------------------------------
+  	Hiddens
+  ----------------------------------------------- */
+  #header form, #col_1, #nav_seo {
+    display: none !important;
   }
 
   /* --------------------------------------------

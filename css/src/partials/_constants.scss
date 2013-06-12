@@ -7,10 +7,34 @@
 }
 
 /* --------------------------------------------
+	Standard Margin
+----------------------------------------------- */
+
+blockquote, .cell, .centre_object, cite, .cols, .content_area, dl, .error, .flash, fieldset, .fieldset, .grid, hr, iframe, .ok, ol, p, table, ul {
+	@include rem(margin-bottom, $std-margin);
+}
+
+/* --------------------------------------------
+	Reset
+----------------------------------------------- */
+
+.reset, .reset ul, .reset_lazy > ul, .reset ol, .reset_lazy > ol, .reset li, .reset_lazy > li, .rc ul {
+	list-style: none !important;
+	margin: 0;
+	padding: 0;
+}
+
+.content_area > {
+	& *:last-child, & ul > li, & ol > li {
+		margin-bottom: 0;
+	}
+}
+
+/* --------------------------------------------
 	Consistent Margins
 ----------------------------------------------- */
 
-blockquote, .cell, .centre_object, cite, .cols, .content_area, dl, .error, .flash, fieldset, .fieldset, .grid, hr, iframe, .ok, ol, p, .std_margin, table, ul {
+.std_margin {
 	@include rem(margin-bottom, $std-margin);
 }
 
@@ -32,27 +56,11 @@ blockquote, .cell, .centre_object, cite, .cols, .content_area, dl, .error, .flas
 }
 
 .no_mb {
-	margin-bottom: 0 !important;
+	margin-bottom: 0;
 }
 
 .no_mt {
-	margin-top: 0 !important;
-}
-
-/* --------------------------------------------
-	Reset
------------------------------------------------ */
-
-.reset, .reset ul, .reset_lazy > ul, .reset ol, .reset_lazy > ol, .reset li, .reset_lazy > li, .rc ul {
-	list-style: none !important;
-	margin: 0;
-	padding: 0;
-}
-
-.reset.content_area > {
-	& *:last-child, & ul > li, & ol > li {
-		margin-bottom: 0;
-	}
+	margin-top: 0;
 }
 
 /* --------------------------------------------
@@ -359,6 +367,15 @@ object:focus {
 	overflow-x: auto;
 }
 
+.pane {
+	.js & {
+		display: none;
+	}
+	.js &:first-child {
+		display: block;
+	}
+}
+
 pre {
 	white-space: pre-wrap;
 }
@@ -368,6 +385,12 @@ pre {
 	background-size: contain;
 	height: 0;
 	width: 100%;
+}
+
+.ltie8 {
+	.rwd-swap {
+		display: none;
+	}
 }
 
 .slider li {
@@ -384,6 +407,10 @@ sub, sup {
 
 .titlecase {
 	text-transform: capitalize;
+}
+
+.ua-windows_phone-7 {
+	@extend .no-fontface !optional;
 }
 
 .uppercase {
@@ -415,6 +442,14 @@ html {
 	overflow-y: scroll;
 	-ms-text-size-adjust: 100%;
 	-webkit-text-size-adjust: 100%;
+	
+	@include media-query(1px, false) {
+		overflow-x: hidden;
+	}
+	
+	&.no-touch {
+		-ms-overflow-style: scrollbar;
+	}
 }
 
 body {
@@ -589,6 +624,7 @@ fieldset {
 legend {
 	left: -999em;
 	position: absolute;
+	top: -999em;	
 }
 
 [data-legend]:before {
@@ -669,10 +705,6 @@ f_comment, .f_margin, .f_row, .required, .rc {
 	@include rem(margin-top, $form-margin);
 }
 
-label, .label, p.legend {
-	@include rem(margin-bottom, $form-margin / 2);
-}
-
 fieldset .description {
 	display: block;
 }
@@ -680,6 +712,10 @@ fieldset .description {
 input.text, textarea, html:not(.ua-android-browser) select {
 	background: $form-input-background-color;
 	border: 1px solid $form-input-border-color;
+}
+
+input.text, textarea {
+	-webkit-appearance: none;
 }
 
 input.submit, input.text, textarea, select {
@@ -701,18 +737,20 @@ textarea {
 	overflow: auto;
 }
 
-.rc li {
-	@include rem(margin-bottom, $form-margin / 2);
-}
-
-.rc input {
-	position: absolute;
-}
-
-.rc label {
-	font-weight: normal;
-	padding-left: 23px;
-	width: auto;
+.rc {
+	li {
+		@include rem(margin-bottom, $form-margin / 2);
+	}
+	
+	input {
+		position: absolute;
+	}
+	
+	label {
+		font-weight: normal;
+		padding-left: 23px;
+		width: auto;
+	}
 }
 
 @media ($min em($form-bp)) {
@@ -749,12 +787,17 @@ a.btn, .btn_wrap {
 
 a.btn, .btn_wrap, input.submit {
 	-webkit-appearance: none;
-	@include border-radius(3px);
+	@include border-radius($btn-border-radius);
 	cursor: pointer;
 	display: inline-block;
 	margin: 0;
 	overflow: visible;
 	text-decoration: none !important;
+	
+	&::-moz-focus-inner { 
+		border: 0; 
+		padding: 0; 
+	}
 }
 
 /* --------------------------------------------

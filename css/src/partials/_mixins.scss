@@ -10,6 +10,7 @@ $max: unquote($max);
 $use-background-property: true;
 $use-background-fallback: true;
 $use-pie-background: true;
+$use-ltie9-mq-fallbacks: true;
 
 $browser-default-font-size: 16px;
 $base-font-size: 16px !default;
@@ -112,12 +113,19 @@ $rem-with-px-fallback: true !default;
 		}
 }
 
-@mixin hidden {
-	height: 1px;
-	left: -999em;
-	overflow: hidden;
-	position: absolute;
-	width: 1px;
+@mixin hidden($hide: true) {
+	@if ($hide == false) {
+		height: auto;
+		position: static;
+		width: auto;
+	}
+	@else {
+		height: 1px;
+		left: -999em;
+		overflow: hidden;
+		position: absolute;
+		width: 1px;
+	}
 }
 
 @mixin hide-text($display: false, $width: false) {
@@ -153,7 +161,18 @@ $rem-with-px-fallback: true !default;
 //	Media Query Mixins
 // --------------------------------------------
 
-@mixin media-query($value, $operator: $min, $px: false) {
+@mixin media-query($value, $ltie9: $use-ltie9-mq-fallbacks, $operator: $min, $px: false) {
+	@if ($operator == $max and $value < $site-width) {
+		// Do nothing
+	}
+	@else {
+		@if ($ltie9 == true) {
+			.ltie9 & {
+				@content;
+			}
+		}
+	}
+	
 	@if ($px == false) {
 		@media (#{$operator} #{em($value)}) {
 			@content;
@@ -166,7 +185,13 @@ $rem-with-px-fallback: true !default;
 	}
 }
 
-@mixin media-query-and($first-value, $second-value, $first-operator: $min, $second-operator: $max, $px: false) {
+@mixin media-query-and($first-value, $second-value, $ltie9: $use-ltie9-mq-fallbacks, $first-operator: $min, $second-operator: $max, $px: false) {
+	@if ($ltie9 == true and ($second-value >= $site-width)) {
+		.ltie9 & {
+			@content;
+		}
+	}
+	
 	@if ($px == false) {
 		@media (#{$first-operator} #{em($first-value)}) and (#{$second-operator} #{em($second-value)}) {
 			@content;
@@ -180,7 +205,7 @@ $rem-with-px-fallback: true !default;
 }
 
 @mixin media-query-retina {
-	@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+	@media (min--moz-device-pixel-ratio: 1.3), (-o-min-device-pixel-ratio: 2.6/2), (-webkit-min-device-pixel-ratio: 1.3), (min-device-pixel-ratio: 1.3), (min-resolution: 1.3dppx) {
 		@content;
 	}
 }
@@ -354,6 +379,78 @@ $rem-with-px-fallback: true !default;
 	}
 }
 
+@mixin nth-child($an: 2n, $sibling: '*', $count: 15) {
+	$index: '';
+	$n: false;
+	$selector: '';
+	$modifier: 0;
+	
+	@if (type-of($an) == list) {
+		$index: nth($an, 1);
+		$modifier: nth($an, 2);
+	}
+	@else {
+		$index: $an;
+	}
+	
+	@if ($index == 'even' or $index == even) {
+		$index: 2n;
+	}
+	
+	@if ($index == 'odd' or $index == odd) {
+		$index: 2n;
+		$modifier: 1;
+	}
+	
+	@if (unit($index) == 'n') {
+		$index: strip-units($index);
+		$n: true;
+	}
+	
+	@if ($modifier < 0) {
+		@if (abs($modifier) > $index){
+			$modifier: -(abs($modifier) % floor($index));
+		}
+		$modifier: $modifier + floor($index);
+	}
+	
+	@if ($index > 0) {	
+		@if ($n == false) {
+			$count: 1;
+		}
+		
+		@if ($index == 1) {
+			$selector: '&:first-child';
+		}
+		
+		@if ($modifier > 1) {
+			@for $j from 0 to $modifier - 1 {
+				$selector: $selector + '+ ' + $sibling;
+			}
+			$selector: $selector + ',';
+		}
+		
+		@for $i from 1 to $count + 1 {
+			@if ($i > 1) {
+				$selector: $selector + ', ';
+			}
+			@for $x from (1 - $modifier) to $index * $i {
+				$selector: $selector + '+ ' + $sibling;
+			}
+		}
+	}
+	
+	@if ($index > 0) {
+		@if ($modifier == 1) {
+			@content;
+		}
+		
+		#{$selector} {
+			@content;
+		}
+	}
+}
+
 @mixin placeholder($color: $form-placeholder-color) {
 	:-moz-placeholder {
 		color: $color;
@@ -499,6 +596,28 @@ $rem-with-px-fallback: true !default;
 //	CSS Property Mixins
 // --------------------------------------------
 
+@mixin animation($property: default 1s ease) {
+	// name duration timing-function delay direction iteration-count fill-mode
+	-moz-animation: $property;
+	-o-animation: $property;
+	-webkit-animation: $property;
+	animation: $property;
+}
+
+@mixin animation-delay($value: 1s) {
+	-moz-animation-delay: $value;
+	-o-animation-delay: $value;
+	-webkit-animation-delay: $value;
+	animation-delay: $value;
+}
+
+@mixin animation-duration($value: 1s) {
+	-moz-animation-duration: $value;
+	-o-animation-duration: $value;
+	-webkit-animation-duration: $value;
+	animation-duration: $value;
+}
+
 @mixin background($color, $duplicate-as-pie: false) {
 	background: $color;
 	@if ($duplicate-as-pie == true) {
@@ -523,25 +642,79 @@ $rem-with-px-fallback: true !default;
 	box-sizing: $boxsize;
 }
 
+@mixin keyframes($name) {
+	@-moz-keyframes #{$name} {
+		@content;
+	}
+	@-o-keyframes #{$name} {
+		@content;
+	}
+	@-webkit-keyframes #{$name} {
+		@content;
+	}
+	@keyframes #{$name} {
+		@content;
+	}
+}
+
 @mixin pie($path: '/css/PIE.htc') {
 	behavior: url($path);
 	position: relative;
 }
 
 @mixin rgba-background($color, $opacity: 0.5, $use-fallback: true, $use-background-color: false) {
+	$rgba: '';
+	$composite: '';
 	$property: background;
+	
+	@if (type-of($color) == list) {
+		$rgba: nth($color, 1);
+		$composite: nth($color, 2);
+	}
+	@else {
+		$rgba: $color;
+		$composite: $color;
+	}
+	
 	@if ($use-background-color == true) {
 		$property: background-color;
 	}
+	
 	@if ($use-fallback) {
-		#{$property}: $color;
+		#{$property}: $composite;
 	}
-	#{$property}: rgba($color, $opacity);
+	
+	#{$property}: rgba($rgba, $opacity);
 }
 
-@mixin transition($property: all, $timing: ease, $duration: 0.5s) {
-	-moz-transition: $property $timing $duration;
-	-o-transition: $property $timing $duration;
-	-webkit-transition: $property $timing $duration;
-	transition: $property $timing $duration;
+@mixin transform($transform-function: none) {
+	-moz-transform: $transform-function;
+	-o-transform: $transform-function;
+	-webkit-transform: $transform-function;
+	transform: $transform-function;
+}
+
+@mixin transition($property: all ease 0.2s) {
+	-moz-transition: $property;
+	-o-transition: $property;
+	-webkit-transition: $property;
+	transition: $property;
+}
+
+@mixin viewport($width: device-width) {
+	@-moz-viewport {
+		width: $width;
+	}	
+	@-ms-viewport {
+		width: $width;
+	}
+	@-o-viewport {
+		width: $width;
+	}
+	@-webkit-viewport {
+		width: $width;
+	}
+	@viewport {
+		width: $width;
+	}
 }

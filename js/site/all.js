@@ -6,14 +6,16 @@ $(document).ready(function(e) {
 	if (layoutEngine.vendor === 'mozilla' && cssua.ua.desktop === 'windows')
 		Modernizr.load('/js/jquery.firefox.hwa.min.js');
 	
-	$('img.rwd').rwdImages({
-		display: 'block'
-	});
-	
 	placeholder.init();
 	tables.init();
 	forms.init();
 	slider.init();
+	tabs.init();
+	accordion.init();
+	
+	$('img.rwd').rwdImages({
+		display: 'block'
+	});
 	
 	$('a').isdAnalyticsTracker();
 });
@@ -61,6 +63,35 @@ var viewportSize = {
 	}
 };
 
+var cookie = {
+	set: function(name, value, days) {
+		var expires = '';
+		if (days) {
+			var date = new Date();
+			date.setTime(date.getTime() + (days*24*60*60*1000));
+			expires = '; expires=' + date.toGMTString();
+		}
+		document.cookie = name + '=' + value + expires + '; path=/';
+	},
+	read: function(name) {
+		var nameEQ = name + "=",
+			ca = document.cookie.split(';');
+		
+		for (var i=0; i < ca.length; i++) {
+			var c = ca[i];
+			while (c.charAt(0) === ' ')
+				c = c.substring(1, c.length);
+			
+			if (c.indexOf(nameEQ) === 0)
+				return c.substring(nameEQ.length, c.length);
+		}
+		return null;
+	},
+	erase: function(name) {
+		cookie.set(name, '', -1);
+	}
+};
+
 var placeholder = {
 	init: function() {
 		var pl = 'placeholder';
@@ -96,21 +127,22 @@ var tables = {
 	}
 };
 
-var requiredFields = [];
-
 var forms = {
+	requiredFields: [],
+	
 	init: function() {
 		var $forms = $('form');
-		$forms.each(function(idx) {
+		
+		$forms.each(function(index) {
 			var $this = $(this);
-			requiredFields[idx] = $this.find('[required]');
+			forms.requiredFields[index] = $this.find('[required]');
 			$this.on('submit', function() {
-				return forms.validate($this, idx);
+				return forms.validate($this, index);
 			});
 		});
 	},
-	validate: function(form, idx) {
-		var $requireds = $(requiredFields[idx]),
+	validate: function(form, index) {
+		var $requireds = $(forms.requiredFields[index]),
 			errors = false,
 			tested = 'tested';
 		
@@ -149,16 +181,22 @@ var slider = {
 			$sliderParent.each(function(index) {
 				var $this = $(this),
 					$slides = $this.find('li'),
-					slidesCount = $slides.length;
+					slidesCount = $slides.length,
+					globalPos = 0,
+					carouselID = 'carouselid-' + window.location.pathname + '-' + index,
+					carouselCookie = cookie.read(carouselID);
+								
+				if (carouselCookie)
+					globalPos = parseInt(carouselCookie);
 				
 				if (slidesCount > 1) {
 					var li = '',
 						interval = false,
 						nav = true;
 						pager = true;
-						
+					
 					if (!supports.touch && parseInt($this.data('interval')))
-						interval = parseInt($this.data('interval')*1000);
+						interval = parseInt($this.data('interval') * 1000);
 					
 					if ($this.data('nav') === false) {
 						nav = false;
@@ -178,7 +216,7 @@ var slider = {
 					
 					if (pager)
 						$this.append($navPager);
-						
+					
 					$this.addClass('multiple')
 					
 					if (Modernizr.csstransforms && !(layoutEngine.vendor === 'ie' && layoutEngine.version === 9)) {
@@ -193,45 +231,51 @@ var slider = {
 						}
 						
 						var $feature = $this.find('.inner');
-						var slider = new Swipe($feature[0], {
+						
+						var carousel = new Swipe($feature[0], {
+							complete: function() {
+								this.slide(globalPos);
+							},
 							callback: function(e, pos) {
+								$slides.eq(0).css('visibility', 'visible');
 								$slides.attr(ariaHidden, true);
-								$slides.filter(':eq(' + pos + ')').attr(ariaHidden, false);
+								$slides.eq(pos).attr(ariaHidden, false);
 								
 								if (pager) {
 									$navPagerLi.removeClass(current);
-									$navPagerLi.filter(':eq(' + pos + ')').addClass(current);
+									$navPagerLi.eq(pos).addClass(current);
 								}
 								
 								if (!interval)
-									trackEvent('Website', 'Carousel', 'Slide ' + (pos+1));
+									trackEvent('Website', 'Carousel', 'Slide ' + (pos + 1));
+								
+								globalPos = pos;
+								cookie.set(carouselID, globalPos);
 							}
 						});
 						
-						$slides.filter(':not(:first-child)').attr(ariaHidden, true);
-						
-						if (pager)
-							$navPagerLi.filter(':first-child').addClass(current);
-						
 						$this.addClass('swipejs');
-	
+						
+						var stopCarousel = function() {
+							if (interval) {
+								window.clearTimeout(timer);
+								interval = false;
+							}
+						};
+												
 						if (nav) {
 							$navPrev.on('click', function(e) {
 								e.preventDefault();
-								slider.prev();
-								if (interval) {
-									window.clearTimeout(timer);
-									interval = false;
-								}
+								
+								carousel.prev();
+								stopCarousel();
 							});
 							
 							$navNext.on('click', function(e) {
 								e.preventDefault();
-								slider.next();
-								if (interval) {
-									window.clearTimeout(timer);
-									interval = false;
-								}
+								
+								carousel.next();
+								stopCarousel();
 							});
 						}
 						
@@ -240,26 +284,26 @@ var slider = {
 								var i = idx;
 								$(this).on('click', function(e) {
 									e.preventDefault();
-									slider.slide(i);
+									
+									carousel.slide(i);
+									
 									$navPagerLi.removeClass(current);
 									$(this).parent().addClass(current);
-									if (interval) {
-										window.clearTimeout(timer);
-										interval = false;
-									}
+									
+									stopCarousel();
 								});
 							});
 						}
 						
-						var carousel = function() {
-							slider.next();
+						var autoCarousel = function() {
+							carousel.next();
 						};
 						
 						if (interval) {
-							timer = window.setInterval(carousel, interval);
-							var $tileA = $this.find('.tile a');
+							timer = window.setInterval(autoCarousel, interval);
+							var $tile = $this.find('.tile');
 							
-							$this.find($tileA).hover(
+							$tile.hover(
 								function(e) {
 									e.stopPropagation();
 									if (interval)
@@ -268,7 +312,7 @@ var slider = {
 								function(e) {
 									e.stopPropagation();
 									if (interval)
-										timer = window.setInterval(carousel, interval);
+										timer = window.setInterval(autoCarousel, interval);
 								}
 							);
 						}
@@ -281,11 +325,16 @@ var slider = {
 								cleartypeNoBg: true,
 								fx: 'scrollHorz',
 								speed: 'fast',
+								startingSlide: globalPos,
 								timeout: interval,
 								after: function(curr, next, opts) {
-									var idx = opts.currSlide
+									var pos = opts.currSlide;
+									
 									$slides.attr(ariaHidden, true);
-									$slides.filter(':eq(' + idx + ')').attr(ariaHidden, false);
+									$slides.eq(pos).attr(ariaHidden, false);
+									
+									globalPos = pos;
+									cookie.set(carouselID, globalPos);
 								}
 							};
 						
@@ -300,7 +349,7 @@ var slider = {
 							$navPager.attr('id', 'nav_pager-' + index);
 							cycleOpts.pager = '#nav_pager-' + index;
 							cycleOpts.pagerAnchorBuilder = function(idx, slide) {
-								return '<li><a href="#slide-' + (idx+1) + '">Slide ' + (idx+1) + '</a></li>';
+								return '<li><a href="#slide-' + (idx + 1) + '">Slide ' + (idx + 1) + '</a></li>';
 							}
 						}
 						
@@ -311,10 +360,116 @@ var slider = {
 							load: '/js/jquery.cycle.all.min.js',
 							complete: function() {
 								$feature.cycle(cycleOpts);
+								$slides.eq(0).css('visibility', 'visible');
+								
+								$navPrev.on('click', function(e) {
+									e.preventDefault();
+									$feature.cycle('pause');
+								});
+								
+								$navNext.on('click', function(e) {
+									e.preventDefault();
+									$feature.cycle('pause');
+								});
+								
+								$navPager.find('a').each(function(i) {
+									$(this).on('click', function(e) {
+										$feature.cycle('pause');
+									});
+								});
 							}
 						});
 					}
 				}
+			});
+		}
+	}
+};
+
+var tabs = {
+	init: function() {
+		var $tabs = $('.tabs');
+		
+		$tabs.each(function(index) {
+			var $this = $(this),
+				$links = $this.find('> li a'),
+				$panes = $this.nextAll('.panes:first').find('> .pane'),
+				tabID = 'tabid-' + window.location.pathname + '-' + index,
+				tabCookie = cookie.read(tabID);
+			
+			if (tabCookie) {
+				$links.eq(tabCookie).addClass(current);
+				$panes.hide().attr(ariaHidden, true);
+				$panes.eq(tabCookie).show().attr(ariaHidden, false);
+			}
+			else {
+				$links.eq(0).addClass(current);
+				$panes.not(':first').attr(ariaHidden, true);
+			}
+			
+			$links.on('click', function(e) {
+				e.preventDefault();
+				
+				var $this = $(this),
+					idx = $this.parent().index();
+				
+				if (!$this.hasClass(current)) {
+					$links.removeClass(current);
+					$this.addClass(current);
+				}
+				
+				$panes.hide().attr(ariaHidden, true);
+				$panes.eq(idx).show().attr(ariaHidden, false);
+				
+				cookie.set(tabID, idx);
+			});
+		});
+	}
+};
+
+var accordion = {
+	init: function() {
+		var $accordion = $('.accordion');
+		if ($accordion.length) {
+			$accordion.each(function(index) {
+				var $this = $(this),
+					$accordionLinks = $this.find('> ul > li > a'),
+					$accordionContent = $this.find($('.accordion_content')),
+					accordionID = 'accordionid-' + window.location.pathname + '-' + index,
+					accordionCookie = cookie.read(accordionID);
+				
+				$accordionContent.attr(ariaHidden, true);
+				
+				$accordionLinks.each(function(idx) {
+					var $this = $(this);
+					
+					if (accordionCookie) {
+						if (parseInt(accordionCookie) === idx) {
+							$accordionLinks.removeClass(open);
+							$this.addClass(open);
+							$accordionContent.eq(idx).attr(ariaHidden, false);
+						}
+					}
+					else {
+						if ($this.hasClass(open)) {
+							$accordionContent.eq(idx).attr(ariaHidden, false);
+							cookie.set(accordionID, idx);
+						}
+					}						
+					
+					$this.on('click', function(e) {
+						e.preventDefault();
+						$accordionContent.attr(ariaHidden, true);
+						$accordionLinks.removeClass(open);
+						
+						var $this = $(this);
+						
+						$this.addClass(open);
+						$this.next().attr(ariaHidden, false);
+												
+						cookie.set(accordionID, idx);
+					});
+				});				
 			});
 		}
 	}

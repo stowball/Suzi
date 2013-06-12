@@ -9,11 +9,15 @@ fieldset .description {
 	@include rem(margin-top, 3px);
 }
 
+label, .label, p.legend {
+	@include rem(margin-bottom, $form-margin / 2);
+}
+
 input.text, textarea {
 	@include border-radius(3px);
 	@include rem(padding, $form-input-padding);
+	
 	.vendor-mozilla & {
-		@include rem(padding-top, $form-input-padding - 1, false);
 	}
 	.ie9 &, .vendor-ie-10 & {
 	}
@@ -21,6 +25,7 @@ input.text, textarea {
 
 select {
 	@include rem(padding, $form-input-padding - 1 $form-input-padding - 1 $form-input-padding - 1 $form-input-padding - 3);
+	
 	.vendor-mozilla & {
 		@include rem(padding-top, $form-input-padding - 2, false);
 	}
@@ -55,6 +60,11 @@ a.btn, .btn_wrap, input.submit {
 	border: 1px solid $btn-border-color;
 	color: $btn-text-color;
 	@include rem(padding, $form-btn-padding-vertical $form-btn-padding-horizontal);
+	
+	.vendor-mozilla & {
+		@include rem(padding-top, $form-btn-padding-vertical - 1, false);
+	}
+	
 	@include hover {
 		@include background($btn-hover-background-color, true);
 		border-color: $btn-hover-border-color;
@@ -66,7 +76,6 @@ a.btn {
 	.ie &, .vendor-ie & {
 	}
 	.vendor-mozilla & {
-		@include rem(padding-top, $form-btn-padding-vertical - 1, false);
 	}
 	.vendor-webkit & {
 	}
@@ -76,7 +85,6 @@ input.submit {
 	.ie &, .vendor-ie & {
 	}
 	.vendor-mozilla & {
-		@include rem(padding, $form-btn-padding-vertical - 2 $form-btn-padding-horizontal - 3 $form-btn-padding-vertical - 1, false);
 	}
 	.vendor-webkit & {
 	}
