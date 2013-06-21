@@ -6,6 +6,10 @@ $min: 'min-width:';
 $min: unquote($min);
 $max: 'max-width:';
 $max: unquote($max);
+$min-h: 'min-height:';
+$min-h: unquote($min-h);
+$max-h: 'max-height:';
+$max-h: unquote($max-h);
 
 $use-background-property: true;
 $use-background-fallback: true;
@@ -214,7 +218,7 @@ $rem-with-px-fallback: true !default;
 //	Functional Mixins
 // --------------------------------------------
 
-@mixin gradient($direction: 'to bottom', $nodes: (#f6f8f9, 0%, #e5ebee, 50%, #d7dee3, 50%, #f2f5f7, 100%)) {
+@mixin gradient($direction: 'to bottom', $nodes: (#f6f8f9, 0%, #e5ebee, 50%, #d7dee3, 50%, #f2f5f7, 100%), $repeating: false) {
 	$fallback: '';
 	$background: background;
 	$lgy-direction: '';
@@ -330,7 +334,7 @@ $rem-with-px-fallback: true !default;
 		}
 		$x: $i;
 	}
-
+		
 	$fallback: nth($nodes, $x);
 	$css: unquote($css);
 	$svg: '<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 1 1" preserveAspectRatio="none"><linearGradient id="g522" gradientUnits="userSpaceOnUse" x1="' + $x1 + '" y1="' + $y1 + '" x2="' + $x2 + '" y2="' + $y2 + '">' + $svg-nodes + '</linearGradient><rect x="0" y="0" width="1" height="1" fill="url(#g522)" /></svg>';
@@ -348,12 +352,19 @@ $rem-with-px-fallback: true !default;
 		}
 	}
 
-	background-image: url('data:image/svg+xml;base64,' + base64Encode($svg));
-	#{$background}: -moz-linear-gradient($lgy-direction $css);
-	#{$background}: -webkit-linear-gradient($lgy-direction $css);
-	#{$background}: linear-gradient($std-direction $css);
-	@if ($use-pie-background == true) {
-		-pie-background: linear-gradient($lgy-direction $css);
+	@if ($repeating == false) {
+		background-image: url('data:image/svg+xml;base64,' + base64Encode($svg));
+		#{$background}: -moz-linear-gradient($lgy-direction $css);
+		#{$background}: -webkit-linear-gradient($lgy-direction $css);
+		#{$background}: linear-gradient($std-direction $css);
+		@if ($use-pie-background == true) {
+			-pie-background: linear-gradient($lgy-direction $css);
+		}
+	}
+	@else {
+		#{$background}: -moz-linear-gradient($lgy-direction $css);
+		#{$background}: -webkit-repeating-linear-gradient($lgy-direction $css);
+		#{$background}: repeating-linear-gradient($std-direction $css);
 	}
 }
 

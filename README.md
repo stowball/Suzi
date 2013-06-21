@@ -2,7 +2,7 @@
 
 ## A responsive, Sass UI Framework by [Izilla](http://izilla.com.au)
 
-### v1.1.0 (2013-06-12)
+### v1.1.1 (2013-06-21)
 
 Suzi is the starting point for all of our web projects and a culmination of 6+ years' experience in maintaining a front-end framework.
 
@@ -70,15 +70,17 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 	* `$values`: valid CSS value in pixels
 	* `$use-px-fallback`: whether to output a pixel fallback as well (default: $rem-with-px-fallback [true])
 
-* `gradient($direction: 'to bottom', $nodes: (#f6f8f9, 0%, #e5ebee, 50%, #d7dee3, 50%, #f2f5f7, 100%))`
+* `gradient($direction: 'to bottom', $nodes: (#f6f8f9, 0%, #e5ebee, 50%, #d7dee3, 50%, #f2f5f7, 100%), repeating: false)`
 
 	Outputs the complete CSS3 gradient syntax for Chrome, Safari, Firefox, Opera, IE10, other capable browsers and SVG for IE9
 
 	* `$direction` takes either the legacy syntax or the unprefixed W3C syntax, including angles. The following angles are supported for SVGs: 0, 10, 45, 90, 135, 170, 180, 190, 225, 270, 315, 350
 	* `$nodes` takes a list of comma separated #color, position% pairs
+	* `$repeating`: whether to create repeating linear gradients (default: false)
 	* Uses the background property (and background-image for IE9) unless the global `$use-background-property` is `false`  
 	* Outputs a fallback background of the last color in the list unless the global `$use-background-fallback` is `false`
-	* Outputs CSS3PIE syntax for LT IE9 unless the global `$use-pie-background` is `false`
+	* Outputs base 64 SVG syntax for IE9 unless `$repeating` is true
+	* Outputs CSS3PIE syntax for LT IE9 unless the global `$use-pie-background` is `false` or `$repeating` is true
 
 * `hover($pseudo: false)`
 
@@ -191,6 +193,8 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 	Outputs, -moz, -ms, -o, -webkit and unprefixed `@viewport` with the value passed in (default: device-width)
 
 #### Media Query mixins
+
+Four variables are provided for media query operators: `$min`, `$max`, `$min-h` & `$max-h` for `min-width`, `max-width`, `min-height` and `max-height`, respectively
 
 * `media-query($value, $ltie9: $use-ltie9-mq-fallbacks, $operator: $min, $px: false)`
 
