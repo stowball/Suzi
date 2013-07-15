@@ -15,8 +15,6 @@ $(document).ready(function(e) {
 	$('img.rwd').rwdImages({
 		display: 'block'
 	});
-	
-	$('a').isdAnalyticsTracker();
 });
 
 var html = document.documentElement,
@@ -164,8 +162,10 @@ var forms = {
 };
 
 var slider = {
+	$imagesLazy: [],
+	
 	init: function() {
-		var $sliderParent = $('.feature_slider');
+		var $sliderParent = $('.carousel');
 		
 		if ($sliderParent.length) {
 			$sliderParent.each(function(index) {
@@ -173,19 +173,34 @@ var slider = {
 					$slides = $this.find('li'),
 					slidesCount = $slides.length,
 					globalPos = 0,
+					isComplete = false,
+					isVisible = false,
 					carouselID = 'carouselid-' + window.location.pathname + '-' + index,
 					carouselCookie = cookie.read(carouselID);
 								
 				if (carouselCookie)
 					globalPos = parseInt(carouselCookie);
 				
-				if (slidesCount > 1) {
+				slider.$imagesLazy[index] = $slides.find('[data-src]');
+				
+				if (slidesCount === 1) {
+					slider.lazyLoad(slider.$imagesLazy[index].eq(globalPos), index, globalPos, slidesCount);
+					
+					var $feature = $this.find('.inner');
+						
+					$slides.css('visibility', 'visible');
+					$feature.css('visibility', 'visible');
+				}
+				else {
 					var li = '',
 						interval = false,
 						nav = true;
-						pager = true;
+						pager = true,
+						speed = 300;
 					
-					if (!supports.touch && parseInt($this.data('interval')))
+					slider.lazyLoad(slider.$imagesLazy[index].eq(globalPos), index, globalPos, slidesCount);
+					
+					if (parseInt($this.data('interval')))
 						interval = parseInt($this.data('interval') * 1000);
 					
 					if ($this.data('nav') === false) {
@@ -207,7 +222,10 @@ var slider = {
 					if (pager)
 						$this.append($navPager);
 					
-					$this.addClass('multiple')
+					if (parseInt($this.data('speed')))
+						speed = parseInt($this.data('speed'));
+					
+					$this.addClass('multiple');
 					
 					if (Modernizr.csstransforms && !(layoutEngine.vendor === 'ie' && layoutEngine.version === 9)) {
 						if (pager) {
@@ -223,14 +241,43 @@ var slider = {
 						var $feature = $this.find('.inner');
 						
 						var carousel = new Swipe($feature[0], {
+							speed: speed,
 							complete: function() {
 								this.slide(globalPos);
+								isComplete = true;
+							},
+							touchCallback: function() {
+								stopCarousel();
 							},
 							callback: function(e, pos) {
-								$slides.eq(0).css('visibility', 'visible');
+								if (isComplete && !isVisible) {
+									isVisible = true;
+									$slides.css('visibility', 'visible');
+									$feature.css('visibility', 'visible');
+								}
+								
 								$slides.attr(ariaHidden, true);
 								$slides.eq(pos).attr(ariaHidden, false);
+								slider.lazyLoad(slider.$imagesLazy[index].eq(pos));
 								
+								if (pos > globalPos) {
+									if (pos < slidesCount - 1)
+										slider.lazyLoad(slider.$imagesLazy[index].eq(pos + 1));
+									else if (pos === slidesCount - 1 && globalPos === 0)
+										slider.lazyLoad(slider.$imagesLazy[index].eq(pos - 1));
+								}
+								else if (pos < globalPos) {
+									if (pos === 0) {
+										if (globalPos > 1)
+											slider.lazyLoad(slider.$imagesLazy[index].eq(pos + 1));
+										else
+											slider.lazyLoad(slider.$imagesLazy[index].eq(pos - 1));
+									}
+									else if (pos > 1) {
+										slider.lazyLoad(slider.$imagesLazy[index].eq(pos - 1));
+									}
+								}
+							
 								if (pager) {
 									$navPagerLi.removeClass(current);
 									$navPagerLi.eq(pos).addClass(current);
@@ -275,6 +322,7 @@ var slider = {
 								$(this).on('click', function(e) {
 									e.preventDefault();
 									
+									slider.lazyLoad(slider.$imagesLazy[index].eq(i));
 									carousel.slide(i);
 									
 									$navPagerLi.removeClass(current);
@@ -314,11 +362,31 @@ var slider = {
 								activePagerClass: current,
 								cleartypeNoBg: true,
 								fx: 'scrollHorz',
-								speed: 'fast',
+								speed: speed,
 								startingSlide: globalPos,
 								timeout: interval,
 								after: function(curr, next, opts) {
 									var pos = opts.currSlide;
+									
+									slider.lazyLoad(slider.$imagesLazy[index].eq(pos));
+								
+									if (pos > globalPos) {
+										if (pos < slidesCount - 1)
+											slider.lazyLoad(slider.$imagesLazy[index].eq(pos + 1));
+										else if (pos === slidesCount - 1 && globalPos === 0)
+											slider.lazyLoad(slider.$imagesLazy[index].eq(pos - 1));
+									}
+									else if (pos < globalPos) {
+										if (pos === 0) {
+											if (globalPos > 1)
+												slider.lazyLoad(slider.$imagesLazy[index].eq(pos + 1));
+											else
+												slider.lazyLoad(slider.$imagesLazy[index].eq(pos - 1));
+										}
+										else if (pos > 1) {
+											slider.lazyLoad(slider.$imagesLazy[index].eq(pos - 1));
+										}
+									}
 									
 									$slides.attr(ariaHidden, true);
 									$slides.eq(pos).attr(ariaHidden, false);
@@ -350,7 +418,8 @@ var slider = {
 							load: '/js/jquery.cycle.all.min.js',
 							complete: function() {
 								$feature.cycle(cycleOpts);
-								$slides.eq(0).css('visibility', 'visible');
+								$slides.css('visibility', 'visible');
+								$feature.css('visibility', 'visible');
 								
 								$navPrev.on('click', function(e) {
 									e.preventDefault();
@@ -364,6 +433,7 @@ var slider = {
 								
 								$navPager.find('a').each(function(i) {
 									$(this).on('click', function(e) {
+										slider.lazyLoad(slider.$imagesLazy[index].eq(i));
 										$feature.cycle('pause');
 									});
 								});
@@ -372,6 +442,41 @@ var slider = {
 					}
 				}
 			});
+		}
+	},
+	lazyLoad: function(el, index, globalPos, slidesCount) {
+		var $this = $(el),
+			idx = index,
+			pos = globalPos,
+			count = slidesCount,
+			src = $this.data('src'),
+			$swap = $this.next('.rwd-swap'),
+			img = new Image();
+		
+		if (src) {
+			img.onload = function() {
+				$this[0].style.backgroundImage = 'url(' + src + ')';
+				
+				if (count) {
+					if (pos === 0) {
+						slider.lazyLoad(slider.$imagesLazy[idx].eq(pos + 1));
+						slider.lazyLoad(slider.$imagesLazy[idx].eq(count - 1));
+					}
+					else if (pos === count - 1) {
+						slider.lazyLoad(slider.$imagesLazy[idx].eq(0));
+						slider.lazyLoad(slider.$imagesLazy[idx].eq(pos - 1));
+					}
+					else {
+						slider.lazyLoad(slider.$imagesLazy[idx].eq(pos + 1));
+						slider.lazyLoad(slider.$imagesLazy[idx].eq(pos - 1));
+					}
+				}
+				
+				if ($swap.length === 1)
+					$swap[0].src = src;
+			};
+			
+			img.src = src;
 		}
 	}
 };
@@ -412,6 +517,7 @@ var tabs = {
 				$panes.eq(idx).show().attr(ariaHidden, false);
 				
 				cookie.set(tabID, idx);
+				trackEvent('Website', 'Tabs', tabID + '-' + idx);
 			});
 		});
 	}
@@ -445,7 +551,7 @@ var accordion = {
 							$accordionContent.eq(idx).attr(ariaHidden, false);
 							cookie.set(accordionID, idx);
 						}
-					}						
+					}
 					
 					$this.on('click', function(e) {
 						e.preventDefault();
@@ -458,8 +564,9 @@ var accordion = {
 						$this.next().attr(ariaHidden, false);
 												
 						cookie.set(accordionID, idx);
+						trackEvent('Website', 'Accordions', accordionID + '-' + idx);
 					});
-				});				
+				});
 			});
 		}
 	}

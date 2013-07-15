@@ -2,7 +2,7 @@
 
 ## A responsive, Sass UI Framework by [Izilla](http://izilla.com.au)
 
-### v1.1.1 (2013-06-21)
+### v1.1.2 (2013-07-15)
 
 Suzi is the starting point for all of our web projects and a culmination of 6+ years' experience in maintaining a front-end framework.
 
@@ -15,7 +15,7 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 * Starter content styles, including clean typography, lists, tables, etc
 * Starter form element styles: stacked on small-screen to 2-column at the breakpoint of your choice
 * Simple form validation
-* Responsive, touch-friendly carousels with optional navigation & pagination, analytics tracking & cookie-based remembering of last visible slide
+* Responsive, lazy-load, touch-friendly carousels with optional navigation & pagination, analytics tracking & cookie-based remembering of last visible slide
 * Simple, accessible JavaScript tabs with cookie-based remembering of the open pane
 * Simple, accessible JavaScript accordions with cookie-based remembering of the open pane
 * Tabs instead of spaces :)
@@ -187,7 +187,21 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 * `transition($property: all ease 0.2s)`
 
 	Outputs, -moz, -o, -webkit and unprefixed `transition` with the value passed in (default: all ease 0.2s)
-	
+
+* `transition-duration($duration: 0.2s)`
+
+	Outputs, -moz, -o, -webkit and unprefixed `transition-duration` with the value passed in (default: 0.2s)
+
+* `transition-property($property: all)`
+
+	Outputs, -moz, -o, -webkit and unprefixed `transition-property` with the value passed in (default: all)
+
+* `transition-timing-function($timing: ease)`
+
+	Outputs, -moz, -o, -webkit and unprefixed `transition-timing-function` with the value passed in (default: ease)
+
+31 transition-timing-function variables are defined in src/partials/_easing-functions.scss
+
 * `viewport($width: device-width)`
 
 	Outputs, -moz, -ms, -o, -webkit and unprefixed `@viewport` with the value passed in (default: device-width)

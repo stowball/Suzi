@@ -8,6 +8,8 @@ $sub-color: #555;
 $alt-color: $text-color;
 $subdued-color: #edece6;
 
+$body-bg: null;
+
 $std-link-color: #00e;
 $std-hover-color: #e00;
 $std-visited-color: #551a8b;
@@ -40,7 +42,7 @@ $error-border-color: #ddd;
 
 $std-fontfamily: sans-serif;
 $heading-fontfamily: sans-serif;
-//$heading-nofontface-fontfamily: ;
+$heading-nofontface-fontfamily: null;
 $quote-fontfamily: Georgia, serif;
 
 // --------------------------------------------

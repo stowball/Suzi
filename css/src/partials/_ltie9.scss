@@ -16,9 +16,11 @@
 	.grid {
 		display: block;
 	}
+	
 	.cell {
 		float: left;
 		margin-bottom: $grid-cell-padding;
+		
 		img {
 			max-width: none;
 		}

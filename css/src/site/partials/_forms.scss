@@ -19,8 +19,13 @@ input.text, textarea {
 	
 	.vendor-mozilla & {
 	}
+	
 	.ie9 &, .vendor-ie-10 & {
 	}
+}
+
+textarea {
+	resize: vertical;
 }
 
 select {
@@ -29,10 +34,12 @@ select {
 	.vendor-mozilla & {
 		@include rem(padding-top, $form-input-padding - 2, false);
 	}
+	
 	.ie &, .vendor-ie & {
 		@include rem(padding-bottom, $form-input-padding - 2);
 		@include rem(padding-top, $form-input-padding);
 	}
+	
 	.ua-desktop-macintosh.vendor-webkit & {
 		// height of normal inputs in rems
 	}
@@ -44,13 +51,16 @@ select {
 
 .rc input {
 	@include rem(margin, 1px 0 0 2px);
+	
 	.ie &, .vendor-ie & {
 		@include rem(margin, -3px 0 0 -2px);
 	}
-	.ua-android-browser & {
+	
+	.browser-android & {
 		@include rem(margin-top, -2px, false);
 	}
-	.ua-android-browser.ua-android-2 & {
+	
+	.browser-android.ua-android-2 & {
 		@include rem(margin-top, -5px, false);
 	}
 }
@@ -75,8 +85,10 @@ a.btn, .btn_wrap, input.submit {
 a.btn {
 	.ie &, .vendor-ie & {
 	}
+	
 	.vendor-mozilla & {
 	}
+	
 	.vendor-webkit & {
 	}
 }
@@ -84,8 +96,10 @@ a.btn {
 input.submit {
 	.ie &, .vendor-ie & {
 	}
+	
 	.vendor-mozilla & {
 	}
+	
 	.vendor-webkit & {
 	}
 }

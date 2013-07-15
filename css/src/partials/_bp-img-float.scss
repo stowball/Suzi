@@ -3,6 +3,7 @@ img {
 		float: left;
 		@include rem(margin, $lineheight-margin $std-margin $std-margin 0);
 	}
+	
 	&.float_right {
 		float: right;
 		@include rem(margin, $lineheight-margin 0 $std-margin $std-margin);

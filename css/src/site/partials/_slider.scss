@@ -3,8 +3,8 @@
 ----------------------------------------------- */
 
 .slider {
-	li {
-		.js &:first-child {
+	> li {
+		.js & {
 			visibility: hidden;
 		}
 		
@@ -13,11 +13,12 @@
 	}
 	
 	.tile {
+		height: 100%;
 		position: relative;
 	}
 }
 
-.feature_slider {
+.carousel {
 	position: relative;
 }
 
@@ -31,6 +32,7 @@
 	
 	@include media-query($feature-bp) {
 		@include rgba-background((#000, #666), .57);
+		
 		&:hover {
 			@include rgba-background(#000, .77);
 		}

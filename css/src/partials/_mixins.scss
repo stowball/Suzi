@@ -108,13 +108,14 @@ $rem-with-px-fallback: true !default;
 
 @mixin clearfix {
 	min-height: 0;
-		&:after {
-			clear: both;
-			content: '.';
-			display: block;
-			height: 0;
-			visibility: hidden;
-		}
+
+	&:after {
+		clear: both;
+		content: '.';
+		display: block;
+		height: 0;
+		visibility: hidden;
+	}
 }
 
 @mixin hidden($hide: true) {
@@ -128,6 +129,7 @@ $rem-with-px-fallback: true !default;
 		left: -999em;
 		overflow: hidden;
 		position: absolute;
+		top: -999em;
 		width: 1px;
 	}
 }
@@ -136,8 +138,10 @@ $rem-with-px-fallback: true !default;
 	@if ($display != false) {
 		display: $display;
 	}
+	
 	overflow: hidden;
 	text-indent: -999em;
+	
 	@if ($width != false) {
 		width: $width
 	}
@@ -146,15 +150,19 @@ $rem-with-px-fallback: true !default;
 @mixin horizontal {
 	display: table;
 	width: 100%;
+	
 	> li {
 		display: table-cell;
+		
 		> a {
 			text-align: center;
 		}
 	}
+	
 	.ltie8 & {
 		@include clearfix;
 		display: block;
+		
 		> li {
 			float: left;
 		}
@@ -425,7 +433,7 @@ $rem-with-px-fallback: true !default;
 		$modifier: $modifier + floor($index);
 	}
 	
-	@if ($index > 0) {	
+	@if ($index > 0) {
 		@if ($n == false) {
 			$count: 1;
 		}
@@ -657,12 +665,15 @@ $rem-with-px-fallback: true !default;
 	@-moz-keyframes #{$name} {
 		@content;
 	}
+	
 	@-o-keyframes #{$name} {
 		@content;
 	}
+	
 	@-webkit-keyframes #{$name} {
 		@content;
 	}
+	
 	@keyframes #{$name} {
 		@content;
 	}
@@ -712,19 +723,44 @@ $rem-with-px-fallback: true !default;
 	transition: $property;
 }
 
+@mixin transition-duration($duration: 0.2s) {
+	-moz-transition-duration: $duration;
+	-o-transition-duration: $duration;
+	-webkit-transition-duration: $duration;
+	transition-duration: $duration;
+}
+
+@mixin transition-property($property: all) {
+	-moz-transition-property: $property;
+	-o-transition-property: $property;
+	-webkit-transition-property: $property;
+	transition-property: $property;
+}
+
+@mixin transition-timing-function($timing: ease) {
+	-moz-transition-timing-function: $timing;
+	-o-transition-timing-function: $timing;
+	-webkit-transition-timing-function: $timing;
+	transition-timing-function: $timing;
+}
+
 @mixin viewport($width: device-width) {
 	@-moz-viewport {
 		width: $width;
-	}	
+	}
+	
 	@-ms-viewport {
 		width: $width;
 	}
+	
 	@-o-viewport {
 		width: $width;
 	}
+	
 	@-webkit-viewport {
 		width: $width;
 	}
+	
 	@viewport {
 		width: $width;
 	}

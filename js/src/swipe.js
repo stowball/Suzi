@@ -1,5 +1,5 @@
 /*
- * Swipe 1.0.1
+ * Swipe 1.0.4
  *
  * Brad Birdsall, Prime
  * Copyright 2011, Licensed GPL & MIT
@@ -19,6 +19,7 @@
   this.speed = this.options.speed || 300;
   this.complete = this.options.complete || function() {};
   this.callback = this.options.callback || function() {};
+  this.touchCallback = this.options.touchCallback || function() {};
   this.delay = this.options.auto || 0;
 
   // reference dom elements
@@ -79,12 +80,9 @@ Swipe.prototype = {
       el.style.width = this.width + 'px';
       el.style.display = 'table-cell';
       el.style.verticalAlign = 'top';
-	}
-
-    // show slider element
-    this.container.style.visibility = 'visible';
-	
-	this.complete(this.index, this.slides[this.index]);
+    }
+  
+    this.complete(this.index, this.slides[this.index]);
 
   },
 
@@ -103,7 +101,6 @@ Swipe.prototype = {
     // translate to given index position
     style.MozTransform = style.webkitTransform = 'translate3d(' + -(index * this.width) + 'px,0,0)';
     style.msTransform = style.OTransform = 'translateX(' + -(index * this.width) + 'px)';
-
     // set new index to allow for expression arguments
     this.index = index;
 
@@ -175,6 +172,8 @@ Swipe.prototype = {
   },
 
   transitionEnd: function(e) {
+    if (e.target.className.indexOf('slider') < 0)
+        return;
     
     if (this.delay) this.begin();
 
@@ -264,7 +263,7 @@ Swipe.prototype = {
 
       // call slide function with slide end value based on isValidSlide and isPastBounds tests
       this.slide( this.index + ( isValidSlide && !isPastBounds ? (this.deltaX < 0 ? 1 : -1) : 0 ), this.speed );
-
+      this.touchCallback();
     }
     
     e.stopPropagation();

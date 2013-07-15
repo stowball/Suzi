@@ -1,11 +1,13 @@
 /*
-* Layout Engine v0.5.1
+* Layout Engine v0.6.2
 *
-* Adds the rendering engine name as a class on the html tag and returns a JavaScript object containing the vendor and version (where appropriate)
+* Adds the rendering engine and browser names as a class on the html tag and returns a JavaScript object containing the vendor, version and browser name (where appropriate)
 *
 * Possible vendors: '.vendor-' + 'ie', 'khtml', 'mozilla', 'opera', 'webkit'
 * '.vendor-ie' also adds the version: 'vendor-' + 'ie-7', 'ie-8', 'ie-9', 'ie-10'
 * '.vendor-opera-mini' is also detected
+*
+* Possible browsers: '.browser-' + 'android', 'chrome', 'wiiu'
 *
 * Copyright (c) 2013 Matt Stow
 *
@@ -21,20 +23,44 @@
 		khtml = 'khtml',
 		mozilla = 'mozilla',
 		opera = 'opera',
-		webkit = 'webkit';
+		webkit = 'webkit',
+		browser = ' browser-',
+		android = 'android',
+		chrome = 'chrome',
+		wiiu = 'wiiu';
 		
 		html.className += vendor;
 		
 		// WebKit
 		if ('WebkitAppearance' in style) {
 			html.className += webkit;
-			if (typeof cssua !== 'undefined') {
-				if (cssua.ua.android && !cssua.ua.chrome)
-					html.className += ' ua-android-browser';
-			}
+			var ua = navigator.userAgent;
 			
-			return {
-				vendor: webkit
+			if (ua.indexOf('Android') >= 0 && ua.indexOf('Chrome') === -1) {
+				html.className += browser + android;
+				return {
+					vendor: webkit,
+					browser: android
+				}
+			}
+			else if (!!window.chrome || ua.indexOf('OPR') >= 0) {
+				html.className += browser + chrome;
+				return {
+					vendor: webkit,
+					browser: chrome
+				}
+			}
+			else if (window.wiiu) {
+				html.className += browser + wiiu;
+				return {
+					vendor: webkit,
+					browser: wiiu
+				}
+			}
+			else {
+				return {
+					vendor: webkit
+				}
 			}
 		}
 		// Mozilla

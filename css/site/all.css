@@ -1,5 +1,5 @@
 /* 
- * Suzi v1.1.1 (2013-06-21)
+ * Suzi v1.1.2 (2013-07-15)
  * Sass UI framework by Izilla
  * http://izilla.com.au
 */
@@ -130,19 +130,8 @@ blockquote, .cell, .centre_object, cite, .cols, .content_area, dl, .error, .ok, 
 /* --------------------------------------------
 	List Bullet Removal & Display None
 ----------------------------------------------- */
-input[type="hidden"], .js .js_none, .no_col_1 #col_1, .no_col_3 #col_3, .list_style_none > li:before, .rc li:before, .reset li:before, .reset_lazy > li:before {
+input[type="hidden"], .display_none, .js .js_display_none, .no_col_1 #col_1, .no_col_3 #col_3, .list_style_none > li:before, .rc li:before, .reset li:before, .reset_lazy > li:before {
   display: none;
-}
-
-/* --------------------------------------------
-	Hiddens
------------------------------------------------ */
-.hidden {
-  height: 1px;
-  left: -999em;
-  overflow: hidden;
-  position: absolute;
-  width: 1px;
 }
 
 /* --------------------------------------------
@@ -251,6 +240,15 @@ div.clear:not(.no_zero) {
 
 .float_right {
   float: right;
+}
+
+.hidden {
+  height: 1px;
+  left: -999em;
+  overflow: hidden;
+  position: absolute;
+  top: -999em;
+  width: 1px;
 }
 
 hr {
@@ -526,11 +524,17 @@ pre {
   display: none;
 }
 
-.slider li {
+.slider > li {
   display: none;
 }
-.slider li:first-child {
+.slider > li:first-child {
   display: block;
+}
+
+.std_width {
+  margin: auto;
+  max-width: 960px;
+  max-width: 60rem;
 }
 
 sub, sup {
@@ -838,12 +842,14 @@ input.text, textarea, select {
 }
 html:not(.ltie9) input.text:not([disabled]):hover, html:not(.ltie9) textarea:not([disabled]):hover, html:not(.ltie9) select:not([disabled]):hover {
   background-color: #ffffe5;
+  outline: none;
 }
 html:not(.ltie9) input.text:not([disabled]):focus, html:not(.ltie9) textarea:not([disabled]):focus, html:not(.ltie9) select:not([disabled]):focus {
   background-color: #ffffcc;
   -moz-box-shadow: 0 0 6px rgba(82, 168, 236, 0.5);
   -webkit-box-shadow: 0 0 6px rgba(82, 168, 236, 0.5);
   box-shadow: 0 0 6px rgba(82, 168, 236, 0.5);
+  outline: none;
 }
 input.text.form_error, textarea.form_error, select.form_error {
   border-color: #cc0000 !important;
@@ -899,7 +905,7 @@ fieldset .description {
   display: block;
 }
 
-input.text, textarea, html:not(.ua-android-browser) select {
+input.text, textarea, html:not(.browser-android) select {
   background: white;
   border: 1px solid #5d5d5d;
 }
@@ -1228,6 +1234,10 @@ input.text, textarea {
   padding: 0.25rem;
 }
 
+textarea {
+  resize: vertical;
+}
+
 select {
   padding: 3px 3px 3px 1px;
   padding: 0.1875rem 0.1875rem 0.1875rem 0.0625rem;
@@ -1254,10 +1264,10 @@ select {
   margin: -3px 0 0 -2px;
   margin: -0.1875rem 0 0 -0.125rem;
 }
-.ua-android-browser .rc input {
+.browser-android .rc input {
   margin-top: -0.125rem;
 }
-.ua-android-browser.ua-android-2 .rc input {
+.browser-android.ua-android-2 .rc input {
   margin-top: -0.3125rem;
 }
 
@@ -1286,14 +1296,15 @@ a.btn:hover, a.btn:focus, .btn_wrap:hover, .btn_wrap:focus, input.submit:hover, 
 /* --------------------------------------------
 	Feature Slider
 ----------------------------------------------- */
-.js .slider li:first-child {
+.js .slider > li {
   visibility: hidden;
 }
 .slider .tile {
+  height: 100%;
   position: relative;
 }
 
-.feature_slider {
+.carousel {
   position: relative;
 }
 
@@ -1383,12 +1394,6 @@ a.btn:hover, a.btn:focus, .btn_wrap:hover, .btn_wrap:focus, input.submit:hover, 
 /* --------------------------------------------
 	Specific Sections
 ----------------------------------------------- */
-.std_width {
-  margin: auto;
-  max-width: 960px;
-  max-width: 60rem;
-}
-
 #site {
   font-size: 14px;
 }

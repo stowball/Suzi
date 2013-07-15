@@ -67,16 +67,8 @@ blockquote, .cell, .centre_object, cite, .cols, .content_area, dl, .error, .flas
 	List Bullet Removal & Display None
 ----------------------------------------------- */
 
-input[type="hidden"], .js .js_none, .no_col_1 #col_1, .no_col_3 #col_3, .list_style_none > li:before, .rc li:before, .reset li:before, .reset_lazy > li:before {
+input[type="hidden"], .display_none, .js .js_display_none, .no_col_1 #col_1, .no_col_3 #col_3, .list_style_none > li:before, .rc li:before, .reset li:before, .reset_lazy > li:before {
 	display: none;
-}
-
-/* --------------------------------------------
-	Hiddens
------------------------------------------------ */
-
-.hidden {
-	@include hidden;
 }
 
 /* --------------------------------------------
@@ -128,6 +120,7 @@ b, strong {
 blockquote, q {
 	font-family: $quote-fontfamily;
 	quotes: none;
+	
 	&:before, &:after {
 		content: '';
 		content: none;
@@ -170,6 +163,7 @@ div.clear:not(.no_zero) {
 .col {
 	float: right;
 	width: 50%;
+	
 	&:first-child {
 		float: left;
 	}
@@ -177,6 +171,7 @@ div.clear:not(.no_zero) {
 
 .float_left {
 	float: left;
+	
 	+ .content_area {
 		overflow: hidden;
 	}
@@ -186,12 +181,17 @@ div.clear:not(.no_zero) {
 	float: right;
 }
 
+.hidden {
+	@include hidden;
+}
+
 hr {
 	background: $subdued-color;
 	border: 0;
 	color: $subdued-color;
 	height: 1px;
 	@include rem(margin, $std-margin * 2 0);
+	
 	.ltie8 & {
 		@include rem(margin-bottom, ($std-margin * 2) - 7);
 		@include rem(margin-top, ($std-margin * 2) - ($std-margin - 10 + 17));
@@ -220,12 +220,15 @@ img {
 	-ms-interpolation-mode: bicubic;
 	max-width: 100%;
 	vertical-align: bottom;
+	
 	&.fixed, .ltie9 & {
 		max-width: none;
 	}
+	
 	&.border {
 		border: 1px solid $std-color;
 	}
+	
 	&.float_left, &.float_right {
 		display: block;
 		float: none;
@@ -259,9 +262,11 @@ img {
 	&.alt {
 		padding-left: 21px;
 	}
+	
 	.ltie8 &.alt {
 		padding-left: 0;
 	}
+	
 	&:after, &.alt:before {
 		background: url(/images/site/std_icons.png);
 		content: '';
@@ -270,48 +275,62 @@ img {
 		height: 16px;
 		vertical-align: middle;
 		width: 16px;
+		
 		@include media-query-retina {
 			background-image: url(/images/site/std_icons@2x.png);
 			background-size: 16px auto;
 		}
 	}
+	
 	&.alt:before {
 		margin-left: -21px;
 		@include rem(margin-right, 5px);
 	}
+	
 	&.alt:after {
 		display: none;
 	}
+	
 	&.link:after, &.alt.link:before {
 		background-position: 0 -16px;
 	}
+	
 	&.pdf:after, &.alt.pdf:before {
 		background-position: 0 -32px;
 	}
+	
 	&.zip:after, &.alt.zip:before {
 		background-position: 0 -48px;
 	}
+	
 	&.audio:after, &.alt.audio:before {
 		background-position: 0 -64px;
 	}
+	
 	&.video:after, &.alt.video:before {
 		background-position: 0 -80px;
 	}
+	
 	&.doc:after, &.alt.doc:before {
 		background-position: 0 -96px;
 	}
+	
 	&.image:after, &.alt.image:before {
 		background-position: 0 -112px;
 	}
+	
 	&.excel:after, &.alt.excel:before {
 		background-position: 0 -128px;
 	}
+	
 	&.file:after, &.alt.file:before {
 		background-position: 0 -144px;
 	}
+	
 	&.page:after, &.alt.page:before {
 		background-position: 0 -160px;
 	}
+	
 	&.rss:after, &.alt.rss:before {
 		background-position: 0 -176px;
 	}
@@ -320,16 +339,20 @@ img {
 .menu {
 	li {
 		position: static;
+		
 		& > a, & > a span {
 			display: inline-block; // Fixes IE7's whitespace bug
 		}
+		
 		& > a, & > a span {
 			display: block;
 		}
+		
 		& > a {
 			text-decoration: none;
 		}
 	}
+	
 	&.hover {
 		li {
 			& > a {
@@ -371,6 +394,7 @@ object:focus {
 	.js & {
 		display: none;
 	}
+	
 	.js &:first-child {
 		display: block;
 	}
@@ -387,17 +411,23 @@ pre {
 	width: 100%;
 }
 
-.ltie8 {
-	.rwd-swap {
+.rwd-swap {
+	.ltie8 & {
 		display: none;
 	}
 }
 
-.slider li {
+.slider > li {
 	display: none;
+
 	&:first-child {
 		display: block;
 	}
+}
+
+.std_width {
+	margin: auto;
+	@include rem(max-width, $site-width);
 }
 
 sub, sup {
@@ -419,6 +449,7 @@ sub, sup {
 
 .video {
 	position: relative;
+	
 	& iframe {
 		bottom: 0;
 		left: 0;
@@ -453,14 +484,17 @@ html {
 }
 
 body {
+	background: $body-bg;
 	color: $text-color;
 	font-family: $std-fontfamily;
 	@include rem(font-size, $std-fontsize);
 	line-height: em($std-lineheight, $std-fontsize, true);
 	min-height: 100%;
+	
 	.ie9 &, .vendor-ie-10 & {
 		line-height: em($std-lineheight + 1, $std-fontsize, true);
 	}
+	
 	* {
 		font-size: 1em;
 	}
@@ -501,11 +535,13 @@ h1, h2, h3, h4, h5, h6,
 	& + .h1, & + .h2, & + .h3, & + .h4, & + .h5, & + .h6 {
 		margin-top: 0;
 	}
+	
 	&.sub,
 	& + h1, & + h2, & + h3, & + h4, & + h5, & + h6,
 	& + .h1, & + .h2, & + .h3, & + .h4, & + .h5, & + .h6 {
 		color: $sub-color;
 	}
+	
 	&.alt {
 		color: $alt-color;
 	}
@@ -518,6 +554,7 @@ h1, h2, h3, h4, h5, h6,
 ol, ul {
 	list-style: none;
 	@include rem(margin-left, $list-margin);
+	
 	&.list_style_none {
 		list-style: none !important;
 		margin-left: 0 !important;
@@ -527,15 +564,19 @@ ol, ul {
 
 ol {
 	list-style-type: decimal;
+	
 	&.lower_alpha {
 		list-style-type: lower-alpha;
 	}
+	
 	&.upper_alpha {
 		list-style-type: upper-alpha;
 	}
+	
 	&.lower_roman {
 		list-style-type: lower-roman;
 	}
+	
 	&.upper_roman {
 		list-style-type: upper-roman;
 	}
@@ -548,12 +589,15 @@ ol {
 li {
 	@include rem(margin-bottom, $std-margin / 2);
 	position: relative;
+	
 	.ltie8 & {
 		position: static;
 	}
+	
 	& > ol, & > ul {
 		@include rem(margin-top, $std-margin);
 	}
+	
 	ul > &:before {
 		content: '';
 		display: inline-block;
@@ -564,6 +608,7 @@ li {
 .list_next_to_float, .float_left + ul, .float_right + ul, .float_left + ol, .float_right + ol {
 	overflow: hidden;
 	@include rem(padding-left, $list-margin);
+	
 	@include media-query($float-bp - 1, $max) {
 		clear: both;
 		overflow: visible;
@@ -602,6 +647,7 @@ td, th {
 .unstyled {
 	@include box-shadow(none);
 	width: auto;
+	
 	& td, & th {
 		background: none !important;
 		border: 0 !important;
@@ -645,15 +691,20 @@ input[type="search"] {
 
 input.text, textarea, select {
 	margin: 0;
+	
 	html:not(.ltie9) &:not([disabled]) {
 		&:hover {
 			background-color: $form-input-hover-color;
+			outline: none;
 		}
+		
 		&:focus {
 			background-color: $form-input-focus-color;
 			@include box-shadow(0 0 6px $form-input-boxshadow-color);
+			outline: none;
 		}
 	}
+	
 	&.form_error {
 		border-color: $form-input-error-color !important;
 	}
@@ -664,6 +715,7 @@ input {
 		&.form_error {
 			@include box-shadow(0 0 1.5px 1.5px lighten($form-input-error-color, 10%));
 		}
+		
 		&.form_error + label {
 			color: $form-input-error-color;
 		}
@@ -709,7 +761,7 @@ fieldset .description {
 	display: block;
 }
 
-input.text, textarea, html:not(.ua-android-browser) select {
+input.text, textarea, html:not(.browser-android) select {
 	background: $form-input-background-color;
 	border: 1px solid $form-input-border-color;
 }
@@ -720,6 +772,7 @@ input.text, textarea {
 
 input.submit, input.text, textarea, select {
 	@include rem(font-size, $base-font-size);
+	
 	.no-touch & {
 		@include rem(font-size, $std-fontsize);
 	}
@@ -727,6 +780,7 @@ input.submit, input.text, textarea, select {
 
 select {
 	-webkit-appearance: menulist;
+	
 	&.auto {
 		width: auto !important;
 	}
@@ -762,9 +816,11 @@ input.text, textarea, select {
 		&.small {
 			@include rem(width, $small-input-width);
 		}
+		
 		&.medium {
 			@include rem(width, $medium-input-width);
 		}
+		
 		&.large {
 			@include rem(width, $large-input-width);
 		}
@@ -778,6 +834,7 @@ a.btn, .btn_wrap {
 .btn_wrap {
 	padding: 0 !important;
 	position: relative;
+	
 	input {
 		opacity: 0;
 		position: relative;
@@ -808,16 +865,19 @@ a.btn, .btn_wrap, input.submit {
 	border: 1px solid $error-border-color;
 	@include border-radius(8px);
 	@include rem(padding, 15px);
+	
 	h3 {
 		@include rem(font-size, 16px);
 		margin-bottom: 0;
 		padding-left: 24px;
 		position: relative;
 	}
+	
 	.ltie8 & h3 {
 		color: #b00;
 		padding-left: 0;
 	}
+	
 	& h3:before {
 		background: url(/images/site/std_icons.png) 0 -192px;
 		content: '';
@@ -827,6 +887,7 @@ a.btn, .btn_wrap, input.submit {
 		position: absolute;
 		top: 50%;
 		width: 15px;
+		
 		@include media-query-retina {
 			background-image: url(/images/site/std_icons@2x.png);
 			background-size: 16px auto;
@@ -834,10 +895,12 @@ a.btn, .btn_wrap, input.submit {
 			width: 16px;
 		}
 	}
+	
 	& ul {
 		margin: 14px 0 0 23px;
 		@include rem(margin-top, 14px, false);
 	}
+	
 	& li:last-child {
 		margin-bottom: 0;
 	}
@@ -845,12 +908,15 @@ a.btn, .btn_wrap, input.submit {
 
 .ok {
 	@extend .error;
+	
 	.ltie8 & h3 {
 		color: #060;
 	}
+	
 	h3:before {
 		background-position: 0 -208px;
 		color: #417b2a;
+		
 		@include media-query-retina {
 			background-position: 0 -208px;
 		}

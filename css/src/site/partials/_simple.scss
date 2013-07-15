@@ -5,10 +5,12 @@
 a {
 	color: $std-link-color;
 	text-decoration: underline;
+	
 	&:visited {
 		color: $std-visited-color;
 		text-decoration: underline;
 	}
+	
 	@include hover {
 		color: $std-hover-color;
 		text-decoration: none;
@@ -20,9 +22,11 @@ a {
 		@include triangle;
 		margin-left: em(10px);
 	}
+	
 	@include hover(after) {
 		border-left-color: $std-hover-color;
 	}
+	
 	&.smaller:after {
 		@include triangle(right, 4px, 8px);
 	}
@@ -35,13 +39,15 @@ h1, h2, h3, h4, h5, h6,
 	font-weight: bold;
 	line-height: normal;
 	@include rem(margin, $std-margin * 2 0 $std-margin / 2);
+	
 	.no-fontface & {
-		//font-family: $heading-nofontface-fontfamily;
+		font-family: $heading-nofontface-fontfamily;
 	}
 }
 
 sub, sup {
 	font-size: em(12px);
+	
 	.ie &, .vendor-ie & {
 		font-size: em(14px);
 	}
@@ -66,6 +72,7 @@ ul > li:before {
 	left: -18px;
 	@include rem(top, $list-bullet-top);
 	width: 5px;
+	
 	.ua-desktop-macintosh.vendor-mozilla &, .ua-desktop-macintosh.vendor-opera & {
 		// Usually @include rem(top, $list-bullet-top - 1, false);
 	}
