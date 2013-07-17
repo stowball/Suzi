@@ -237,3 +237,8 @@ Four variables are provided for media query operators: `$min`, `$max`, `$min-h` 
 ---
 
 A Dreamweaver extension is available which adds code hint support for all of the above mixins and functions. Download it here: https://github.com/stowball/Suzi-Code-Hints
+
+---
+
+Copyright (c) 2013 [Izilla Partners Pty Ltd](http://www.izilla.com.au)  
+Licensed under the MIT license *(see [LICENSE](https://github.com/izilla/Suzi/blob/master/LICENSE) for details)*
