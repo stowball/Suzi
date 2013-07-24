@@ -1,10 +1,10 @@
 /*
-* Layout Engine v0.6.2
+* Layout Engine v0.7.0
 *
 * Adds the rendering engine and browser names as a class on the html tag and returns a JavaScript object containing the vendor, version and browser name (where appropriate)
 *
 * Possible vendors: '.vendor-' + 'ie', 'khtml', 'mozilla', 'opera', 'webkit'
-* '.vendor-ie' also adds the version: 'vendor-' + 'ie-7', 'ie-8', 'ie-9', 'ie-10'
+* '.vendor-ie' also adds the version: 'vendor-' + 'ie-11', 'ie-10', 'ie-9', 'ie-8', 'ie-7'
 * '.vendor-opera-mini' is also detected
 *
 * Possible browsers: '.browser-' + 'android', 'chrome', 'wiiu'
@@ -50,7 +50,7 @@
 					browser: chrome
 				}
 			}
-			else if (window.wiiu) {
+			else if (!!window.wiiu) {
 				html.className += browser + wiiu;
 				return {
 					vendor: webkit,
@@ -71,9 +71,16 @@
 			}
 		}
 		// IE
-		else if ('behavior' in style) {
+		else if ('-ms-scroll-limit' in style || 'behavior' in style) {
 			html.className += ie + vendor + ie;
-			if ('-ms-user-select' in style) {
+			if ('-ms-ime-align' in style) {
+				html.className += '-11'
+				return {
+					vendor: ie,
+					version: 11
+				}
+			}
+			else if ('-ms-user-select' in style) {
 				html.className += '-10'
 				return {
 					vendor: ie,
@@ -103,7 +110,7 @@
 			}
 		}
 		// Opera
-		else if ('OLink' in style) {
+		else if ('OLink' in style || !!window.opera) {
 			html.className += opera;
 			if ('OMiniFold' in style) {
 				html.className += vendor + opera + '-mini';
