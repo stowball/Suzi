@@ -195,6 +195,14 @@ blockquote {
   padding: 0.875rem 0.875rem 0.0625rem 0.875rem;
 }
 
+.js [data-classquery] {
+  visibility: hidden;
+}
+
+.classquery-complete [data-classquery] {
+  visibility: visible;
+}
+
 .centre_object {
   display: block;
   margin-left: auto;
@@ -1197,17 +1205,43 @@ ul > li:before {
 	Tables
 ----------------------------------------------- */
 td, th {
-  border: 1px solid #c2bfab;
-  padding: 5px 10px;
-  padding: 0.3125rem 0.625rem;
+  border: solid #ebebeb;
+  border-width: 1px 0;
+  padding: 15px 20px;
+  padding: 0.9375rem 1.25rem;
+  text-align: left;
+  text-shadow: 0 1px 1px #fff;
+}
+tr > td:first-child, tr > th:first-child {
+  border-left-width: 1px;
+}
+tr > td:last-child, tr > th:last-child {
+  border-right-width: 1px;
 }
 
-thead th {
-  color: #000066;
+thead, tfoot {
+  -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+thead th, tfoot th {
+  background: whitesmoke;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRo PSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxIDEiIHByZXNl cnZlQXNwZWN0UmF0aW89Im5vbmUiPjxsaW5lYXJHcmFkaWVudCBpZD0iZzUy MiIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIHgxPSIwJSIgeTE9 IjAlIiB4Mj0iMCUiIHkyPSIxMDAlIj48c3RvcCBzdG9wLWNvbG9yPSJ3aGl0 ZSIgb2Zmc2V0PSIwIiAvPjxzdG9wIHN0b3AtY29sb3I9IndoaXRlc21va2Ui IG9mZnNldD0iMSIgLz48L2xpbmVhckdyYWRpZW50PjxyZWN0IHg9IjAiIHk9 IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZzUyMikiIC8+ PC9zdmc+ ");
+  background: -moz-linear-gradient(top , white 0%, whitesmoke 100%);
+  background: -webkit-linear-gradient(top , white 0%, whitesmoke 100%);
+  background: linear-gradient(to bottom , white 0%, whitesmoke 100%);
+  -pie-background: linear-gradient(top , white 0%, whitesmoke 100%);
+  font-weight: bold;
+}
+
+tfoot {
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 
 tr:nth-child(even) td, tr:nth-child(even) th {
-  background: #edece6;
+  background: #f8f8f8;
 }
 
 /* --------------------------------------------

@@ -106,6 +106,12 @@ $rem-with-px-fallback: true !default;
 //	Class Mixins
 // --------------------------------------------
 
+@mixin classquery($class-name) {
+	.classquery-#{$class-name}, .ltie9 [data-classquery*=".classquery-#{$class-name}"] {
+		@content
+	}
+}
+
 @mixin clearfix {
 	min-height: 0;
 

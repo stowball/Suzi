@@ -2,7 +2,7 @@
 
 ## A responsive, Sass UI Framework by [Izilla](http://izilla.com.au)
 
-### v1.1.2 (2013-07-15)
+### v1.1.3 (2013-08-06)
 
 Suzi is the starting point for all of our web projects and a culmination of 6+ years' experience in maintaining a front-end framework.
 
@@ -110,6 +110,10 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 	* `$webkit-rotate`: whether to rotate the triangle by 360deg in WebKit for smoother appearance (default: true)
 
 #### Class mixins
+
+* `classquery($class-name)`
+
+	Generates `.classquery-$class-name & .ltie9 [data-classquery*=".classquery-$class-name"]` selectors to be used with class.query.js to managed responsive content
 
 * `clearfix`
 

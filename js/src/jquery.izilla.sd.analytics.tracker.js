@@ -90,7 +90,7 @@
 				.not(hostSelector)
 				.each(function() {
 					$(this).click(function() {
-						_gaq.push(['_link', $(this).attr(href)]);
+						_gaq.push(['_link', this.href]);
 						return false;
 					});
 				});
@@ -116,8 +116,7 @@
 		
 		$externalLinks.each(function() {
 			$(this).on('click', function() {
-				var $this = $(this),
-					thisHref = $this.attr(href);
+				var thisHref = this.href;
 				
 				_gaq.push([trackEvent, category, clk, thisHref]);
 				
@@ -127,11 +126,14 @@
 					}
 				}
 				
-				if ((!$this.attr(tgt) || $this.attr(tgt).toLowerCase() != '_blank') && delay > 0) {
-					setTimeout(function() {
-						window.location.href = thisHref;
-					}, delay);
-					return false;
+				if (delay > 0) {
+					var $this = $(this);
+					if (!$this.attr(tgt) || $this.attr(tgt).toLowerCase() != '_blank') {
+						setTimeout(function() {
+							window.location.href = thisHref;
+						}, delay);
+						return false;
+					}
 				}
 			});
 		});
@@ -153,7 +155,7 @@
 		
 		$internalLinks.each(function() {
 			$(this).on('click', function() {
-				var thisHref = $(this).attr(href);
+				var thisHref = this.href;
 				
 				_gaq.push([trackPageview, thisHref]);
 				

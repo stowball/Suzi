@@ -4,7 +4,7 @@ $(document).ready(function(e) {
 	$html.addClass('jquery');
 	
 	if (layoutEngine.vendor === 'mozilla' && cssua.ua.desktop === 'windows')
-		Modernizr.load('/js/jquery.firefox.hwa.min.js');
+		Modernizr.load('/js/firefox.hwa.min.js');
 	
 	placeholder.init();
 	forms.init();

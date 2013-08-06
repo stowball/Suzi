@@ -133,6 +133,14 @@ blockquote {
 	@include rem(padding, $std-margin $std-margin 1px $std-margin);
 }
 
+.js [data-classquery] {
+	visibility: hidden;
+}
+
+.classquery-complete [data-classquery] {
+	visibility: visible;
+}
+
 .centre_object {
 	display: block;
 	margin-left: auto;
