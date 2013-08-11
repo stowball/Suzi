@@ -1,5 +1,5 @@
-/*
- * Class Query v0.1.5
+/*!
+ * Class Query v0.1.6
  *
  * Creates media queries from .classquery- classes for elements with data-classquery attributes
  *
@@ -108,6 +108,8 @@
 		classesLength,
 		selector,
 		selectorRX,
+		classSelector,
+		classSelectorRX,
 		dataSelector,
 		before,
 		after,
@@ -134,18 +136,21 @@
 						selector = 	rules[l].selectorText
 									.replace(/\[/g, '\\[')
 									.replace(/\]/g, '\\]')
+									.replace(/\(/g, '\\(')
+									.replace(/\)/g, '\\)')
 									.replace(/\*/g, '\\*')
+									.replace(/\+/g, '\\+')
 									.replace(/\^/g, '\\^')
 									.replace(/\$/g, '\\$')
-									+ ' +?{';
-						
+									+ '\\s*?{';
 						selectorRX = new RegExp(selector, 'g');
-						before = selector.match(/\:before/g) ? ':before' : '';
-						after = selector.match(/\:after/g) ? ':after' : '';
-						dataSelector = '[data-' + classQueryId + '="' + j + '"]' + currClass + currId + before + after;
+						classSelector = '(' + classes[m] + ')(.*?)(,|{)';
+						classSelectorRX = new RegExp(classSelector);
+						
+						dataSelector = '[data-' + classQueryId + '="' + j + '"]' + currClass + currId + selector.match(classSelectorRX)[2];
 						
 						css += 	'@media ' + classes[m - 1] + '{' +
-								dataSelector + ' {' +
+								dataSelector.replace('\s*?', '').replace(/\\/g, '') + ' {' +
 								rules[l].cssText.replace(selectorRX, '') + '}\n';
 					}
 				}
