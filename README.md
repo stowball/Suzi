@@ -24,8 +24,8 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 
 ### Installation
 
-1. Install [Ruby](http://www.ruby-lang.org)
-2. Install [Sass](http://sass-lang.com) *(and add it to your Path Environment Variable on Windows)*
+1. Install [Ruby](http://www.ruby-lang.org) *(and add it to your Path Environment Variable on Windows)*
+2. Install [Sass](http://sass-lang.com)
 3. Download or clone Suzi
 4. Run sassqwatch.bat *(on Windows)* or bash sassqwatch.sh *(on Mac)*
 
