@@ -454,7 +454,6 @@ var slider = {
 		
 		if (src) {
 			img.onload = function() {
-				console.log($this.data('bg-src'));
 				if ($this.data('bg-src') === false)
 					$this[0].src = src;
 				else
