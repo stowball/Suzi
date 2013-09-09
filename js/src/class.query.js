@@ -1,5 +1,5 @@
 /*!
- * Class Query v0.1.6
+ * Class Query v0.1.8
  *
  * Creates media queries from .classquery- classes for elements with data-classquery attributes
  *
@@ -9,58 +9,57 @@
  *
  * Licensed under the MIT license
 */
-;(function() {
+;(function(document) {
 	
 	function processRules(stylesheet, processor) {
 		var rules = stylesheet.cssRules ? stylesheet.cssRules : stylesheet.media,
 			rule,
 			processed = [],
 			length = rules.length;
-
+		
 		for (var i = 0; i < length; i++) {
 			rule = rules[i];
-
+			
 			if (processor(rule))
 				processed.push(rule);
 		}
-
+		
 		return processed;
 	}
-
+	
 	function getRules(stylesheet) {
 		return processRules(stylesheet, function (rule) {
 			if (!rule.selectorText) {
 				return false;
 			}
 			else {
-				if (rule.selectorText.indexOf('.classquery-') === 0) {
+				if (rule.selectorText.indexOf('.classquery-') === 0)
 					return true;
-				}
 				else
 					return false;
 			}
 		});
 	}
-
+	
 	function sameOrigin(url) {
 		var loc = window.location,
-			a = doc.createElement('a');
+			a = document.createElement('a');
 		
 		a.href = url;
 		
 		return a.hostname === loc.hostname && a.protocol === loc.protocol;
 	}
-
+	
 	function isInline(stylesheet) {
 		return stylesheet.ownerNode.constructor === HTMLStyleElement;
 	}
-
+	
 	function isValidExternal(stylesheet) {
 		return stylesheet.href && sameOrigin(stylesheet.href);
 	}
-
+	
 	function getStylesheets() {
-		var sheets = doc.styleSheets,
+		var sheets = document.styleSheets,
 			sheet,
 			length = sheets.length,
 			i = 0,
@@ -71,16 +70,15 @@
 			if (isValidExternal(sheet) || isInline(sheet))
 				valid.push(sheet);
 		}
-
+		
 		return valid;
 	}
 	
-	var doc = document,
-		html = doc.documentElement,
+	var html = document.documentElement,
 		classQuery = 'classquery',
-		$classQueries = doc.querySelectorAll('[data-' + classQuery + ']'),
+		$classQueries = document.querySelectorAll('[data-' + classQuery + ']'),
 		classQueriesLength = $classQueries.length;
-		
+	
 	if (classQueriesLength === 0)
 		return;
 	
@@ -132,7 +130,7 @@
 				for (var m = 0; m < classesLength; m++) {
 					classes[m] = classes[m].trim();
 					
-					if (m % 2 === 1 && rules[l].selectorText.match(classes[m])) {
+					if (m % 2 === 1 && rules[l].selectorText.indexOf(classes[m]) > -1) {
 						selector = 	rules[l].selectorText
 									.replace(/\[/g, '\\[')
 									.replace(/\]/g, '\\]')
@@ -147,10 +145,10 @@
 						classSelector = '(' + classes[m] + ')(.*?)(,|{)';
 						classSelectorRX = new RegExp(classSelector);
 						
-						dataSelector = '[data-' + classQueryId + '="' + j + '"]' + currClass + currId + selector.match(classSelectorRX)[2];
+						dataSelector = '[data-' + classQueryId + '="' + j + '"]' + currClass + currId + selector.match(classSelectorRX)[2].replace('\s*?', '').replace(/\\/g, '');
 						
 						css += 	'@media ' + classes[m - 1] + '{' +
-								dataSelector.replace('\s*?', '').replace(/\\/g, '') + ' {' +
+								dataSelector + ' {' +
 								rules[l].cssText.replace(selectorRX, '') + '}\n';
 					}
 				}
@@ -158,8 +156,8 @@
 		}
 	}
 	
-	style = doc.createElement('style');
-	style.appendChild(doc.createTextNode(css));
-	doc.head.appendChild(style);
+	style = document.createElement('style');
+	style.appendChild(document.createTextNode(css));
+	document.head.appendChild(style);
 	html.className = html.className.replace(classQuery + '-init', classQuery + '-complete');
-})();
+})(document);

@@ -1,17 +1,30 @@
+<!--
+	Carousel behavior is specified with the following data- attributes:
+	
+	data-interval="x" - The time in seconds before slides auto transition. Default is 0, no auto transition
+	data-speed="xxx" - The time in milliseconds for the slides' transition speed. Default is 300
+	data-nav="false" - Do not create previous and next links. Default is true
+	data-pager="false" - Do not create caroursel pagination. Default is true
+	
+	Carousels lazy load images on any elements that have a data-src attribute, where data-src points to the source of the image to load.
+	If data-bg-src="false", the lazy load will set the elem's.src property as opposed to its style.backgroundImage.
+	Don't use data-bg-src="false" on anything other than an img for this reason
+-->
+
 <div class="carousel std_margin" data-interval="5">
 	<div class="inner">
 		<ul class="reset slider">
-			<li id="feature-1">
+			<li>
 				<div class="tile">
 					<p>Tile 1</p>
 				</div>
 			</li>
-			<li id="feature-2">
+			<li>
 				<div class="tile">
 					<p>Tile 2</p>
 				</div>
 			</li>
-			<li id="feature-3">
+			<li>
 				<div class="tile">
 					<p>Tile 3</p>
 				</div>
@@ -23,17 +36,17 @@
 <div class="carousel std_margin" data-interval="3" data-speed="600" data-nav="false" data-pager="false">
 	<div class="inner">
 		<ul class="reset slider">
-			<li id="feature-1">
+			<li>
 				<div class="tile">
 					<p>Tile 1</p>
 				</div>
 			</li>
-			<li id="feature-2">
+			<li>
 				<div class="tile">
 					<p>Tile 2</p>
 				</div>
 			</li>
-			<li id="feature-3">
+			<li>
 				<div class="tile">
 					<p>Tile 3</p>
 				</div>

@@ -1,10 +1,7 @@
-(function() {
+(function(window, document) {
 
 $(document).ready(function(e) {
 	$html.addClass('jquery');
-	
-	if (layoutEngine.vendor === 'mozilla' && cssua.ua.desktop === 'windows')
-		Modernizr.load('/js/firefox.hwa.min.js');
 	
 	placeholder.init();
 	forms.init();
@@ -41,22 +38,16 @@ var trackEvent = function(campaign, action, label) {
 
 var viewportSize = {
 	height: function() {
-		if (html.clientHeight)
-			return html.clientHeight;
-		else
-			return window.innerHeight;
+		return html.clientHeight ? html.clientHeight : window.innerHeight;
 	},
 	width: function() {
-		if (html.clientWidth)
-			return html.clientWidth;
-		else
-			return window.innerWidth;
+		return html.clientWidth ? html.clientWidth : window.innerWidth;
 	},
 	multiplier: function() {
 		if (window.getComputedStyle)
 			actualFontSize = parseInt(window.getComputedStyle(html).getPropertyValue('font-size'));
 				
-		return actualFontSize/baseFontSize;
+		return actualFontSize / baseFontSize;
 	}
 };
 
@@ -92,8 +83,10 @@ var cookie = {
 var placeholder = {
 	init: function() {
 		var pl = 'placeholder';
+		
 		if (!Modernizr.input.placeholder) {
 			var $placeholder = $('['+pl+']');
+			
 			$placeholder.focus(function() {
 				var input = $(this);
 				if (input.val() == input.attr(pl))
@@ -103,6 +96,7 @@ var placeholder = {
 				if (input.val() == '' || input.val() == input.attr(pl))
 					input.addClass(pl).val(input.attr(pl));
 			}).blur();
+			
 			$placeholder.parents('form').on('submit', function() {
 				$(this).find('['+pl+']').each(function() {
 					var $input = $(this);
@@ -111,6 +105,7 @@ var placeholder = {
 				});
 			});
 		}
+		
 		$html.addClass(pl);
 	}
 };
@@ -124,6 +119,7 @@ var forms = {
 		$forms.each(function(index) {
 			var $this = $(this);
 			forms.requiredFields[index] = $this.find('[required]');
+			
 			$this.on('submit', function() {
 				return forms.validate($this, index);
 			});
@@ -138,6 +134,7 @@ var forms = {
 		
 		$requireds.each(function() {
 			var $this = $(this);
+			
 			if ($this.is('[type="radio"], [type="checkbox"]') && !$this.hasClass(tested)) {
 				var name = $this.attr('name'),
 					$radioChecks = $requireds.filter('[name="' + name + '"]');
@@ -146,8 +143,10 @@ var forms = {
 					$radioChecks.addClass(formError);
 					$this.attr(ariaInvalid, false);
 				}
+				
 				$radioChecks.addClass(tested);
 			}
+			
 			if ($.trim($this.val()).length === 0) {
 				$this.addClass(formError);
 				$this.attr(ariaInvalid, false);
@@ -455,7 +454,11 @@ var slider = {
 		
 		if (src) {
 			img.onload = function() {
-				$this[0].style.backgroundImage = 'url(' + src + ')';
+				console.log($this.data('bg-src'));
+				if ($this.data('bg-src') === false)
+					$this[0].src = src;
+				else
+					$this[0].style.backgroundImage = 'url(' + src + ')';
 				
 				if (count) {
 					if (pos === 0) {
@@ -572,4 +575,4 @@ var accordion = {
 	}
 };
 
-})();
+})(window, document);

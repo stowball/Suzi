@@ -1,42 +1,43 @@
-/*
-* Firefox Detect Hardware Acceleration plugin v0.2
+/*!
+* Firefox Detect Hardware Acceleration plugin v0.3
 *
 * Detects whether hardware acceleration is in use in Firefox and adds a class of "hwa" or "no-hwa" class to the html tag where appropriate
+* Requires LayoutEngine and CssUserAgent
 *
 * Copyright (c) 2013 Izilla Partners Pty Ltd
 * http://izilla.com.au
 * Licensed under the MIT license
 */
-;(function() {
+;(function(window, document, body) {
+	if (!(layoutEngine.vendor === 'mozilla' && cssua.ua.desktop === 'windows'))
+		return;
+	
 	function hwa(disabled) {
 		var hwa = 'hwa';
 		if (disabled)
 			hwa = disabled + hwa;
 		
-		d.documentElement.className += ' ' + hwa;
+		document.documentElement.className += ' ' + hwa;
 	}
 	
-	var w = window,
-		d = document,
-		b = d.body,
-		hwa1 = d.createElement('div'),
-		hwa2 = d.createElement('div'),
+	var hwa1 = document.createElement('div'),
+		hwa2 = document.createElement('div'),
 		style = 'bottom: 0; line-height: normal; position: absolute; visibility: hidden; font-family: Arial; font-size: ',
 		no = 'no-';
 	
-	hwa1.appendChild(d.createTextNode('1'));
-	hwa2.appendChild(d.createTextNode('2'));	
+	hwa1.appendChild(document.createTextNode('1'));
+	hwa2.appendChild(document.createTextNode('2'));
 	hwa1.setAttribute('style', style + '20px');
 	hwa2.setAttribute('style', style + '35px');
-	b.appendChild(hwa1);
-	b.appendChild(hwa2);
+	body.appendChild(hwa1);
+	body.appendChild(hwa2);
 	
-	var fontSize1 = parseFloat(w.getComputedStyle(hwa1).getPropertyValue('font-size')),
+	var fontSize1 = parseFloat(window.getComputedStyle(hwa1).getPropertyValue('font-size')),
 		height1 = parseFloat(hwa1.offsetHeight),
 		height2 = parseFloat(hwa2.offsetHeight);
 	
-	b.removeChild(hwa1);
-	b.removeChild(hwa2);
+	body.removeChild(hwa1);
+	body.removeChild(hwa2);
 	
 	if (fontSize1 === 20) {
 		if (height1 === 25 && height2 === 41)
@@ -88,4 +89,4 @@
 	}
 	else
 		hwa(no);
-})();
+})(window, document, document.body);
