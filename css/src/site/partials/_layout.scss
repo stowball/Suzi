@@ -1,5 +1,5 @@
 #site {
-	font-size: $std-fontsize;
+	@include rem(font-size, $std-fontsize);
 }
 
 #header {

@@ -2,7 +2,7 @@
 
 ## A responsive, Sass UI Framework by [Izilla](http://izilla.com.au)
 
-### v1.1.4 (2013-09-10)
+### v1.1.5 (2013-09-16)
 
 Suzi is the starting point for all of our web projects and a culmination of 6+ years' experience in maintaining a front-end framework.
 
@@ -186,11 +186,12 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 
 * `transform($transform-function: none)`
 
-	Outputs, -moz, -o, -webkit and unprefixed `transform` with the value passed in (default: none)
+	Outputs, -ms, -moz, -o, -webkit and unprefixed `transform` with the value passed in (default: none)
 
 * `transition($property: all ease 0.2s)`
 
-	Outputs, -moz, -o, -webkit and unprefixed `transition` with the value passed in (default: all ease 0.2s)
+	Outputs, -moz, -o, -webkit and unprefixed `transition` with the value passed in (default: all ease 0.2s)  
+	Instances of `transform` or `transform-origin` will be prefixed as required.
 
 * `transition-duration($duration: 0.2s)`
 
@@ -198,7 +199,8 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 
 * `transition-property($property: all)`
 
-	Outputs, -moz, -o, -webkit and unprefixed `transition-property` with the value passed in (default: all)
+	Outputs, -moz, -o, -webkit and unprefixed `transition-property` with the value passed in (default: all)  
+	Instances of `transform` or `transform-origin` will be prefixed as required.
 
 * `transition-timing-function($timing: ease)`
 

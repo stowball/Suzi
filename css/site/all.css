@@ -1,5 +1,5 @@
 /* 
- * Suzi v1.1.4 (2013-09-10)
+ * Suzi v1.1.5 (2013-09-16)
  * Sass UI framework by Izilla
  * http://izilla.com.au
 */
@@ -1430,6 +1430,7 @@ a.btn:hover, a.btn:focus, .btn_wrap:hover, .btn_wrap:focus, input.submit:hover, 
 ----------------------------------------------- */
 #site {
   font-size: 14px;
+  font-size: 0.875rem;
 }
 
 @media print {

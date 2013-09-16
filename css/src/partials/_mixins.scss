@@ -621,26 +621,26 @@ $rem-with-px-fallback: true !default;
 //	CSS Property Mixins
 // --------------------------------------------
 
+$trans-anim-prefixes: (-moz-, -o-, -webkit-, ''); // Not used in keyframes()
+$transitionable-prefixed-values: transform, transform-origin;
+
 @mixin animation($property: default 1s ease) {
 	// name duration timing-function delay direction iteration-count fill-mode
-	-moz-animation: $property;
-	-o-animation: $property;
-	-webkit-animation: $property;
-	animation: $property;
+	@for $i from 0 to length($trans-anim-prefixes) {
+		#{nth($trans-anim-prefixes, ($i + 1))}animation: $property;
+	}
 }
 
 @mixin animation-delay($value: 1s) {
-	-moz-animation-delay: $value;
-	-o-animation-delay: $value;
-	-webkit-animation-delay: $value;
-	animation-delay: $value;
+	@for $i from 0 to length($trans-anim-prefixes) {
+		#{nth($trans-anim-prefixes, ($i + 1))}animation-delay: $value;
+	}
 }
 
 @mixin animation-duration($value: 1s) {
-	-moz-animation-duration: $value;
-	-o-animation-duration: $value;
-	-webkit-animation-duration: $value;
-	animation-duration: $value;
+	@for $i from 0 to length($trans-anim-prefixes) {
+		#{nth($trans-anim-prefixes, ($i + 1))}animation-duration: $value;
+	}
 }
 
 @mixin background($color, $duplicate-as-pie: false) {
@@ -716,38 +716,79 @@ $rem-with-px-fallback: true !default;
 }
 
 @mixin transform($transform-function: none) {
-	-moz-transform: $transform-function;
-	-o-transform: $transform-function;
-	-webkit-transform: $transform-function;
-	transform: $transform-function;
+	$additional-trans-anim-prefixes: join(-ms-, $trans-anim-prefixes);
+	@for $i from 0 to length($additional-trans-anim-prefixes) {
+		#{nth($additional-trans-anim-prefixes, ($i + 1))}transform: $transform-function;
+	}
 }
 
 @mixin transition($property: all ease 0.2s) {
-	-moz-transition: $property;
-	-o-transition: $property;
-	-webkit-transition: $property;
-	transition: $property;
+	@for $i from 0 to length($trans-anim-prefixes) {
+		$combined-property: ();
+		
+		@for $j from 0 to length($property) {		
+			$prop: nth($property, ($j + 1));
+			$prop-length: length($prop);
+			$prefixed-property: ();
+				
+			@for $k from 0 to length($prop) {
+				$item: nth($prop, ($k + 1));
+				
+				@if ($prop-length != 1) {
+					@if (($k + 1) == $prop-length and ($j + 1) != length($property)) {
+						$item: $item+ ',';
+						$item: unquote($item);
+					}
+				}
+				
+				@if ($item == nth($transitionable-prefixed-values, 1)) {
+					$prefixed-property: append($prefixed-property, #{nth($trans-anim-prefixes, ($i + 1))}#{$item}, space);
+				}
+				@else if ($item == nth($transitionable-prefixed-values, 2)) {
+					$prefixed-property: append($prefixed-property, #{nth($trans-anim-prefixes, ($i + 1))}#{$item}, space);
+				}
+				@else {
+					$prefixed-property: append($prefixed-property, $item, space);
+				}
+			}
+			
+			$combined-property: join($combined-property, $prefixed-property);
+		}
+		
+		#{nth($trans-anim-prefixes, ($i + 1))}transition: $combined-property;
+	}
 }
 
 @mixin transition-duration($duration: 0.2s) {
-	-moz-transition-duration: $duration;
-	-o-transition-duration: $duration;
-	-webkit-transition-duration: $duration;
-	transition-duration: $duration;
+	@for $i from 0 to length($trans-anim-prefixes) {
+		#{nth($trans-anim-prefixes, ($i + 1))}transition-duration: $duration;
+	}
 }
 
 @mixin transition-property($property: all) {
-	-moz-transition-property: $property;
-	-o-transition-property: $property;
-	-webkit-transition-property: $property;
-	transition-property: $property;
+	@for $i from 0 to length($trans-anim-prefixes) {
+		$prefixed-property: ();
+		
+		@each $prop in $property {
+			@if ($prop == nth($transitionable-prefixed-values, 1)) {
+				$prefixed-property: append($prefixed-property, #{nth($trans-anim-prefixes, ($i + 1))}#{$prop}, comma);
+			}
+			@else if ($prop == nth($transitionable-prefixed-values, 2)) {
+				$prefixed-property: append($prefixed-property, #{nth($trans-anim-prefixes, ($i + 1))}#{$prop}, comma);
+			}
+			@else {
+				$prefixed-property: append($prefixed-property, $prop, comma);
+			}
+		}
+		
+		#{nth($trans-anim-prefixes, ($i + 1))}transition-property: $prefixed-property;
+	}
 }
 
 @mixin transition-timing-function($timing: ease) {
-	-moz-transition-timing-function: $timing;
-	-o-transition-timing-function: $timing;
-	-webkit-transition-timing-function: $timing;
-	transition-timing-function: $timing;
+	@for $i from 0 to length($trans-anim-prefixes) {
+		#{nth($trans-anim-prefixes, ($i + 1))}transition-timing-function: $timing;
+	}
 }
 
 @mixin viewport($width: device-width) {
