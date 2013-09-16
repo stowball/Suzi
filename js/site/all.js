@@ -18,14 +18,7 @@ var html = document.documentElement,
 	$html = $(html),
 	actualFontSize = 16,
 	baseFontSize = 16,
-	multiplier,
-	current = 'current',
-	error = 'error',
-	formError = 'form_error',
-	open = 'open',
-	ariaHidden = 'aria-hidden',
-	ariaInvalid = 'aria-invalid',
-	ariaDescribedBy = 'aria-describedby';
+	multiplier;
 
 var trackEvent = function(campaign, action, label) {
 	var clean = function(str) {
@@ -34,7 +27,7 @@ var trackEvent = function(campaign, action, label) {
 	
 	if (typeof(_gaq) !== 'undefined')
 		_gaq.push(['_trackEvent', clean(campaign), clean(action), clean(label)]);
-}
+};
 
 var viewportSize = {
 	height: function() {
@@ -130,7 +123,7 @@ var forms = {
 			errors = false,
 			tested = 'tested';
 		
-		$requireds.removeClass(formError).removeClass(tested);
+		$requireds.removeClass('form_error').removeClass(tested);
 		
 		$requireds.each(function() {
 			var $this = $(this);
@@ -140,21 +133,21 @@ var forms = {
 					$radioChecks = $requireds.filter('[name="' + name + '"]');
 				
 				if (!$radioChecks.is(':checked')) {
-					$radioChecks.addClass(formError);
-					$this.attr(ariaInvalid, false);
+					$radioChecks.addClass('form_error');
+					$this.attr('aria-invalid', false);
 				}
 				
 				$radioChecks.addClass(tested);
 			}
 			
 			if ($.trim($this.val()).length === 0) {
-				$this.addClass(formError);
-				$this.attr(ariaInvalid, false);
+				$this.addClass('form_error');
+				$this.attr('aria-invalid', false);
 				errors = true;
 			}
 		});
 		
-		$requireds.filter(formError + ':first').focus();
+		$requireds.filter('form_error' + ':first').focus();
 		
 		return !errors;
 	}
@@ -255,8 +248,8 @@ var slider = {
 									$feature.css('visibility', 'visible');
 								}
 								
-								$slides.attr(ariaHidden, true);
-								$slides.eq(pos).attr(ariaHidden, false);
+								$slides.attr('aria-hidden', true);
+								$slides.eq(pos).attr('aria-hidden', false);
 								slider.lazyLoad(slider.$imagesLazy[index].eq(pos));
 								
 								if (pos > globalPos) {
@@ -278,8 +271,8 @@ var slider = {
 								}
 							
 								if (pager) {
-									$navPagerLi.removeClass(current);
-									$navPagerLi.eq(pos).addClass(current);
+									$navPagerLi.removeClass('current');
+									$navPagerLi.eq(pos).addClass('current');
 								}
 								
 								if (!interval)
@@ -324,8 +317,8 @@ var slider = {
 									slider.lazyLoad(slider.$imagesLazy[index].eq(i));
 									carousel.slide(i);
 									
-									$navPagerLi.removeClass(current);
-									$(this).parent().addClass(current);
+									$navPagerLi.removeClass('current');
+									$(this).parent().addClass('current');
 									
 									stopCarousel();
 								});
@@ -358,7 +351,7 @@ var slider = {
 						var $feature = $this.find('.slider'),
 							w = 'width: 100% !important',
 							cycleOpts = {
-								activePagerClass: current,
+								activePagerClass: 'current',
 								cleartypeNoBg: true,
 								fx: 'scrollHorz',
 								speed: speed,
@@ -387,8 +380,8 @@ var slider = {
 										}
 									}
 									
-									$slides.attr(ariaHidden, true);
-									$slides.eq(pos).attr(ariaHidden, false);
+									$slides.attr('aria-hidden', true);
+									$slides.eq(pos).attr('aria-hidden', false);
 									
 									globalPos = pos;
 									cookie.set(carouselID, globalPos);
@@ -495,13 +488,13 @@ var tabs = {
 				tabCookie = cookie.read(tabID);
 			
 			if (tabCookie) {
-				$links.eq(tabCookie).addClass(current);
-				$panes.hide().attr(ariaHidden, true);
-				$panes.eq(tabCookie).show().attr(ariaHidden, false);
+				$links.eq(tabCookie).addClass('current');
+				$panes.hide().attr('aria-hidden', true);
+				$panes.eq(tabCookie).show().attr('aria-hidden', false);
 			}
 			else {
-				$links.eq(0).addClass(current);
-				$panes.not(':first').attr(ariaHidden, true);
+				$links.eq(0).addClass('current');
+				$panes.not(':first').attr('aria-hidden', true);
 			}
 			
 			$links.on('click', function(e) {
@@ -510,13 +503,13 @@ var tabs = {
 				var $this = $(this),
 					idx = $this.parent().index();
 				
-				if (!$this.hasClass(current)) {
-					$links.removeClass(current);
-					$this.addClass(current);
+				if (!$this.hasClass('current')) {
+					$links.removeClass('current');
+					$this.addClass('current');
 				}
 				
-				$panes.hide().attr(ariaHidden, true);
-				$panes.eq(idx).show().attr(ariaHidden, false);
+				$panes.hide().attr('aria-hidden', true);
+				$panes.eq(idx).show().attr('aria-hidden', false);
 				
 				cookie.set(tabID, idx);
 				trackEvent('Website', 'Tabs', tabID + '-' + idx);
@@ -536,34 +529,34 @@ var accordion = {
 					accordionID = 'accordionid-' + window.location.pathname + '-' + index,
 					accordionCookie = cookie.read(accordionID);
 				
-				$accordionContent.attr(ariaHidden, true);
+				$accordionContent.attr('aria-hidden', true);
 				
 				$accordionLinks.each(function(idx) {
 					var $this = $(this);
 					
 					if (accordionCookie) {
 						if (parseInt(accordionCookie) === idx) {
-							$accordionLinks.removeClass(open);
-							$this.addClass(open);
-							$accordionContent.eq(idx).attr(ariaHidden, false);
+							$accordionLinks.removeClass('open');
+							$this.addClass('open');
+							$accordionContent.eq(idx).attr('aria-hidden', false);
 						}
 					}
 					else {
-						if ($this.hasClass(open)) {
-							$accordionContent.eq(idx).attr(ariaHidden, false);
+						if ($this.hasClass('open')) {
+							$accordionContent.eq(idx).attr('aria-hidden', false);
 							cookie.set(accordionID, idx);
 						}
 					}
 					
 					$this.on('click', function(e) {
 						e.preventDefault();
-						$accordionContent.attr(ariaHidden, true);
-						$accordionLinks.removeClass(open);
+						$accordionContent.attr('aria-hidden', true);
+						$accordionLinks.removeClass('open');
 						
 						var $this = $(this);
 						
-						$this.addClass(open);
-						$this.next().attr(ariaHidden, false);
+						$this.addClass('open');
+						$this.next().attr('aria-hidden', false);
 												
 						cookie.set(accordionID, idx);
 						trackEvent('Website', 'Accordions', accordionID + '-' + idx);
