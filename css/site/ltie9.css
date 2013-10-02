@@ -115,6 +115,15 @@ img.float_right {
   width: 67%;
 }
 
+.f_row.block label, .f_row.block .label, .f_row.block input.text, .f_row.block textarea, .f_row.block select {
+  display: block;
+  margin-bottom: 3%;
+  margin-left: 0;
+  margin-right: 0;
+  text-align: left;
+  width: 100%;
+}
+
 .rc.legend ul {
   margin-left: -8px;
   margin-left: -0.5rem;
