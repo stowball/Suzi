@@ -140,7 +140,7 @@ $rem-with-px-fallback: true !default;
 	}
 }
 
-@mixin hide-text($display: false, $width: false) {
+@mixin hide-text($display: false, $width: false, $height: false) {
 	@if ($display != false) {
 		display: $display;
 	}
@@ -149,7 +149,11 @@ $rem-with-px-fallback: true !default;
 	text-indent: -999em;
 	
 	@if ($width != false) {
-		width: $width
+		width: $width;
+	}
+					
+	@if ($height != false) {
+		height: $height;
 	}
 }
 
@@ -339,11 +343,11 @@ $rem-with-px-fallback: true !default;
 	
 	@for $i from 0 to length($nodes) {
 		@if ($i % 2 == 0) {
-			$css: $css + ", " + nth($nodes, ($i + 1));
+			$css: $css + ', ' + nth($nodes, ($i + 1));
 			$svg-nodes: $svg-nodes + '<stop stop-color="' + nth($nodes, ($i + 1)) + '"';
 		}
 		@else {
-			$css: $css + " " + nth($nodes, ($i + 1));
+			$css: $css + ' ' + nth($nodes, ($i + 1));
 			$svg-nodes: $svg-nodes + ' offset="' + strip-units(nth($nodes, ($i + 1)))/100 + '" />';
 		}
 		$x: $i;
@@ -590,16 +594,16 @@ $rem-with-px-fallback: true !default;
 	}
 	
 	@if ($direction == down) {
-		border-width: $bare-height + px + " " + ($bare-width / 2) + px + " 0 " + ($bare-width / 2) + px;
+		border-width: $bare-height + px + ' ' + ($bare-width / 2) + px + ' 0 ' + ($bare-width / 2) + px;
 	}
 	@else if ($direction == left) {
-		border-width: ($bare-height / 2) + px + " " + $bare-width + px + " " + ($bare-height / 2) + px + " 0" ;
+		border-width: ($bare-height / 2) + px + ' ' + $bare-width + px + ' ' + ($bare-height / 2) + px + ' 0' ;
 	}
 	@else if ($direction == right) {
-		border-width: ($bare-height / 2) + px + " 0 " + ($bare-height / 2) + px + " " + $bare-width + px ;
+		border-width: ($bare-height / 2) + px + ' 0 ' + ($bare-height / 2) + px + ' ' + $bare-width + px ;
 	}
 	@else if ($direction == up) {
-		border-width: unquote(0 + " " + ($bare-width / 2) + px + " " + $bare-height + px + " " + ($bare-width / 2) + px);
+		border-width: unquote(0 + ' ' + ($bare-width / 2) + px + ' ' + $bare-height + px + ' ' + ($bare-width / 2) + px);
 	}
 	
 	@if ($layout == true) {
@@ -645,7 +649,7 @@ $transitionable-prefixed-values: transform, transform-origin;
 
 @mixin background($color, $duplicate-as-pie: false) {
 	background: $color;
-	@if ($duplicate-as-pie == true) {
+	@if ($use-pie-background == true and $duplicate-as-pie == true) {
 		-pie-background: $color;
 	}
 }
@@ -656,7 +660,6 @@ $transitionable-prefixed-values: transform, transform-origin;
 }
 
 @mixin box-shadow($shadow: 0 1px 3px rgba(0,0,0,.25)) {
-	-moz-box-shadow: $shadow;
 	-webkit-box-shadow: $shadow;
 	box-shadow: $shadow;
 }
@@ -665,6 +668,19 @@ $transitionable-prefixed-values: transform, transform-origin;
 	-moz-box-sizing: $boxsize;
 	-webkit-box-sizing: $boxsize;
 	box-sizing: $boxsize;
+}
+
+@mixin font-size-line-height($font-size, $line-height: false, $important: false) {
+	@if ($important == true) {
+		@include rem(font-size, $font-size !important);
+	}
+	@else {
+		@include rem(font-size, $font-size);
+	}
+	
+	@if ($line-height != false) {
+		@include line-height($line-height, $font-size, $important)
+	}
 }
 
 @mixin keyframes($name) {
@@ -682,6 +698,15 @@ $transitionable-prefixed-values: transform, transform-origin;
 	
 	@keyframes #{$name} {
 		@content;
+	}
+}
+
+@mixin line-height($target, $context: 16, $important: false) {
+	@if ($important == true) {
+		line-height: em($target, $context, true) !important;
+	}
+	@else {
+		line-height: em($target, $context, true);
 	}
 }
 

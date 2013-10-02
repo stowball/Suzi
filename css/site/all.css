@@ -771,7 +771,6 @@ td, th {
 }
 
 .unstyled {
-  -moz-box-shadow: none;
   -webkit-box-shadow: none;
   box-shadow: none;
   width: auto;
@@ -854,7 +853,6 @@ html:not(.ltie9) input.text:not([disabled]):hover, html:not(.ltie9) textarea:not
 }
 html:not(.ltie9) input.text:not([disabled]):focus, html:not(.ltie9) textarea:not([disabled]):focus, html:not(.ltie9) select:not([disabled]):focus {
   background-color: #ffffcc;
-  -moz-box-shadow: 0 0 6px rgba(82, 168, 236, 0.5);
   -webkit-box-shadow: 0 0 6px rgba(82, 168, 236, 0.5);
   box-shadow: 0 0 6px rgba(82, 168, 236, 0.5);
   outline: none;
@@ -864,7 +862,6 @@ input.text.form_error, textarea.form_error, select.form_error {
 }
 
 input[type="radio"].form_error, input[type="checkbox"].form_error {
-  -moz-box-shadow: 0 0 1.5px 1.5px red;
   -webkit-box-shadow: 0 0 1.5px 1.5px red;
   box-shadow: 0 0 1.5px 1.5px red;
 }
@@ -1229,7 +1226,6 @@ tr > td:last-child, tr > th:last-child {
 }
 
 thead, tfoot {
-  -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
   -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
 }
@@ -1244,7 +1240,6 @@ thead th, tfoot th {
 }
 
 tfoot {
-  -moz-box-shadow: none;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
@@ -1456,7 +1451,6 @@ a.btn:hover, a.btn:focus, .btn_wrap:hover, .btn_wrap:focus, input.submit:hover, 
   *, *:before, *:after {
     background: none !important;
     behavior: none !important;
-    -moz-box-shadow: none !important;
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
   }
