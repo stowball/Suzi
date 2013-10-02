@@ -600,7 +600,7 @@ body {
   line-height: 1.42857;
   min-height: 100%;
 }
-.ie9 body, .vendor-ie-10 body {
+.vendor-ie:not(.ltie9) body {
   line-height: 1.5;
 }
 body * {
@@ -1432,11 +1432,6 @@ a.btn:hover, a.btn:focus, .btn_wrap:hover, .btn_wrap:focus, input.submit:hover, 
 /* --------------------------------------------
 	Specific Sections
 ----------------------------------------------- */
-#site {
-  font-size: 14px;
-  font-size: 0.875rem;
-}
-
 @media print {
   /* --------------------------------------------
   	Hiddens

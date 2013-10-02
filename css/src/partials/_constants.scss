@@ -501,12 +501,11 @@ body {
 	background: $body-bg;
 	color: $text-color;
 	font-family: $std-fontfamily;
-	@include rem(font-size, $std-fontsize);
-	line-height: em($std-lineheight, $std-fontsize, true);
+	@include font-size-line-height($std-fontsize, $std-lineheight);
 	min-height: 100%;
 	
-	.ie9 &, .vendor-ie-10 & {
-		line-height: em($std-lineheight + 1, $std-fontsize, true);
+	.vendor-ie:not(.ltie9) & {
+		@include line-height($std-lineheight + 1, $std-fontsize);
 	}
 	
 	* {
