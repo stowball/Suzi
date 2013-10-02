@@ -28,14 +28,14 @@ label, .label {
 }
 
 .f_row.block {
-    label, .label, input.text, textarea, select {
-        display: block;
-        margin-bottom: $form-label-margin;
-        margin-left: 0;
-        margin-right: 0;
-        text-align: left;
-        width: 100%;
-    }
+	label, .label, input.text, textarea, select {
+		display: block;
+		margin-bottom: $form-label-margin;
+		margin-left: 0;
+		margin-right: 0;
+		text-align: left;
+		width: 100%;
+	}
 }
 
 .rc.legend ul {
