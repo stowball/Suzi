@@ -1,8 +1,10 @@
 /* --------------------------------------------
-	Feature Slider
+	Carousels
 ----------------------------------------------- */
 
 .slider {
+	@include transition-timing-function($ease-in-out-quint);
+	
 	> li {
 		.js & {
 			visibility: hidden;
@@ -72,10 +74,8 @@
 	a {
 		background: #f2f5f7;
 		border: 1px solid #adb9c2;
-		height: 8px;
+		@include hide-text(false, 10px, 8px);
 		margin-left: 8px;
-		width: 10px;
-		@include hide-text();
 	}
 
 	.current a {

@@ -1332,8 +1332,14 @@ a.btn:hover, a.btn:focus, .btn_wrap:hover, .btn_wrap:focus, input.submit:hover, 
 }
 
 /* --------------------------------------------
-	Feature Slider
+	Carousels
 ----------------------------------------------- */
+.slider {
+  -moz-transition-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+  -o-transition-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+  -webkit-transition-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+  transition-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+}
 .js .slider > li {
   visibility: hidden;
 }
@@ -1415,11 +1421,11 @@ a.btn:hover, a.btn:focus, .btn_wrap:hover, .btn_wrap:focus, input.submit:hover, 
 .nav_pager a {
   background: #f2f5f7;
   border: 1px solid #adb9c2;
-  height: 8px;
-  margin-left: 8px;
-  width: 10px;
   overflow: hidden;
   text-indent: -999em;
+  width: 10px;
+  height: 8px;
+  margin-left: 8px;
 }
 .nav_pager .current a {
   background: #000;
