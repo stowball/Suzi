@@ -6,7 +6,8 @@ $text-color: #111;
 $std-color: #006;
 $sub-color: #555;
 $alt-color: $text-color;
-$subdued-color: #edece6;
+$hr-color: #b8b7b7;
+$blockquote-bg-color: #edece6;
 
 $body-bg: null;
 
@@ -78,7 +79,8 @@ $form-margin: 10px;
 $form-label-margin: 3%;
 $form-label-width: 30%;
 
-$list-margin: 40px;
+$list-margin-left: 40px;
+$list-item-margin-denominator: 2;
 
 // --------------------------------------------
 //	Paddings

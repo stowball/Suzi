@@ -97,7 +97,7 @@ address {
 	text-align: left !important;
 }
 
-.align_centre {
+.align_center, .align_centre {
 	text-align: center !important;
 }
 
@@ -128,7 +128,7 @@ blockquote, q {
 }
 
 blockquote {
-	background: $subdued-color;
+	background: $blockquote-bg-color;
 	border-left: 3px solid $std-color;
 	@include rem(padding, $std-margin $std-margin 1px $std-margin);
 }
@@ -194,9 +194,9 @@ div.clear:not(.no_zero) {
 }
 
 hr {
-	background: $subdued-color;
+	background: $hr-color;
 	border: 0;
-	color: $subdued-color;
+	color: $hr-color;
 	height: 1px;
 	@include rem(margin, $std-margin * 2 0);
 	
@@ -561,7 +561,7 @@ h1, h2, h3, h4, h5, h6,
 
 ol, ul {
 	list-style: none;
-	@include rem(margin-left, $list-margin);
+	@include rem(margin-left, $list-margin-left);
 	
 	&.list_style_none {
 		list-style: none !important;
@@ -595,7 +595,7 @@ ol {
 }
 
 li {
-	@include rem(margin-bottom, $std-margin / 2);
+	@include rem(margin-bottom, $std-margin / $list-item-margin-denominator);
 	position: relative;
 	
 	.ltie8 & {
@@ -615,7 +615,7 @@ li {
 
 .list_next_to_float, .float_left + ul, .float_right + ul, .float_left + ol, .float_right + ol {
 	overflow: hidden;
-	@include rem(padding-left, $list-margin);
+	@include rem(padding-left, $list-margin-left);
 	
 	@include media-query($float-bp - 1, $max) {
 		clear: both;

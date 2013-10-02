@@ -159,7 +159,7 @@ address {
   text-align: left !important;
 }
 
-.align_centre {
+.align_center, .align_centre {
   text-align: center !important;
 }
 
@@ -260,9 +260,9 @@ div.clear:not(.no_zero) {
 }
 
 hr {
-  background: #edece6;
+  background: #b8b7b7;
   border: 0;
-  color: #edece6;
+  color: #b8b7b7;
   height: 1px;
   margin: 28px 0;
   margin: 1.75rem 0;
