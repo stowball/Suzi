@@ -224,9 +224,13 @@ a img, img[usemap] {
 
 img {
 	-moz-force-broken-image-icon: 1;
-	height: auto;
 	-ms-interpolation-mode: bicubic;
-	max-width: 100%;
+	
+	@if ($is-responsive == true) {
+		height: auto;
+		max-width: 100%;
+	}
+	
 	vertical-align: bottom;
 	
 	&.fixed, .ltie9 & {
@@ -482,8 +486,10 @@ html {
 	-ms-text-size-adjust: 100%;
 	-webkit-text-size-adjust: 100%;
 	
-	@include media-query(1px, false) {
-		overflow-x: hidden;
+	@if ($is-responsive == true) {
+		@include media-query(1px, false) {
+			overflow-x: hidden;
+		}
 	}
 	
 	&.no-touch {
@@ -617,10 +623,12 @@ li {
 	overflow: hidden;
 	@include rem(padding-left, $list-margin-left);
 	
-	@include media-query($float-bp - 1, $max) {
-		clear: both;
-		overflow: visible;
-		padding-left: 0;
+	@if ($is-responsive) {	
+		@include media-query($float-bp - 1, $max) {
+			clear: both;
+			overflow: visible;
+			padding-left: 0;
+		}
 	}
 }
 

@@ -314,8 +314,8 @@ a img, img[usemap] {
 
 img {
   -moz-force-broken-image-icon: 1;
-  height: auto;
   -ms-interpolation-mode: bicubic;
+  height: auto;
   max-width: 100%;
   vertical-align: bottom;
 }
