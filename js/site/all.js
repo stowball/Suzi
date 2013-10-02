@@ -162,7 +162,7 @@ var slider = {
 		if ($sliderParent.length) {
 			$sliderParent.each(function(index) {
 				var $this = $(this),
-					$slides = $this.find('li'),
+					$slides = $this.find('.slider > li'),
 					slidesCount = $slides.length,
 					globalPos = 0,
 					isComplete = false,
@@ -186,7 +186,7 @@ var slider = {
 				else {
 					var li = '',
 						interval = false,
-						nav = true;
+						nav = true,
 						pager = true,
 						speed = 300;
 					
@@ -234,13 +234,16 @@ var slider = {
 						
 						var carousel = new Swipe($feature[0], {
 							speed: speed,
+							
 							complete: function() {
 								this.slide(globalPos);
 								isComplete = true;
 							},
+							
 							touchCallback: function() {
 								stopCarousel();
 							},
+							
 							callback: function(e, pos) {
 								if (isComplete && !isVisible) {
 									isVisible = true;
@@ -269,7 +272,7 @@ var slider = {
 										slider.lazyLoad(slider.$imagesLazy[index].eq(pos - 1));
 									}
 								}
-							
+								
 								if (pager) {
 									$navPagerLi.removeClass('current');
 									$navPagerLi.eq(pos).addClass('current');
@@ -413,22 +416,26 @@ var slider = {
 								$slides.css('visibility', 'visible');
 								$feature.css('visibility', 'visible');
 								
-								$navPrev.on('click', function(e) {
-									e.preventDefault();
-									$feature.cycle('pause');
-								});
-								
-								$navNext.on('click', function(e) {
-									e.preventDefault();
-									$feature.cycle('pause');
-								});
-								
-								$navPager.find('a').each(function(i) {
-									$(this).on('click', function(e) {
-										slider.lazyLoad(slider.$imagesLazy[index].eq(i));
+								if (nav) {
+									$navPrev.on('click', function(e) {
+										e.preventDefault();
 										$feature.cycle('pause');
 									});
-								});
+									
+									$navNext.on('click', function(e) {
+										e.preventDefault();
+										$feature.cycle('pause');
+									});
+								}
+								
+								if (pager) {
+									$navPager.css('z-index', slidesCount + 1).find('a').each(function(i) {
+										$(this).on('click', function(e) {
+											slider.lazyLoad(slider.$imagesLazy[index].eq(i));
+											$feature.cycle('pause');
+										});
+									});
+								}
 							}
 						});
 					}

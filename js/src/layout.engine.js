@@ -1,4 +1,4 @@
-/*
+/*!
 * Layout Engine v0.7.0
 *
 * Adds the rendering engine and browser names as a class on the html tag and returns a JavaScript object containing the vendor, version and browser name (where appropriate)
@@ -73,15 +73,16 @@
 		// IE
 		else if ('-ms-scroll-limit' in style || 'behavior' in style) {
 			html.className += ie + vendor + ie;
+			
 			if ('-ms-ime-align' in style) {
-				html.className += '-11'
+				html.className += '-11';
 				return {
 					vendor: ie,
 					version: 11
 				}
 			}
 			else if ('-ms-user-select' in style) {
-				html.className += '-10'
+				html.className += '-10';
 				return {
 					vendor: ie,
 					version: 10
