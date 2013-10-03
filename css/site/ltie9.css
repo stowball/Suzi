@@ -8,42 +8,6 @@
 /* --------------------------------------------
 	Constants
 ----------------------------------------------- */
-.grid {
-  display: table;
-  table-layout: fixed;
-  width: 100%;
-}
-
-.cell {
-  display: table-cell;
-  margin-bottom: 0;
-  padding-right: 20px;
-  vertical-align: top;
-}
-.cell:not(.text) {
-  text-align: center;
-}
-.cell:last-child {
-  padding-right: 0;
-}
-.cell:first-child:not(.text) {
-  text-align: left;
-}
-.cell:last-child:not(.text) {
-  text-align: right;
-}
-
-.ltie8 .grid {
-  display: block;
-}
-.ltie8 .cell {
-  float: left;
-  margin-bottom: 20px;
-}
-.ltie8 .cell img {
-  max-width: none;
-}
-
 ul.horizontal, .horizontal ul:first-of-type {
   display: table;
   width: 100%;

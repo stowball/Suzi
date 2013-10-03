@@ -10,23 +10,6 @@
 	Constants
 ----------------------------------------------- */
 
-@import "partials/bp-grid";
-
-.ltie8 {
-	.grid {
-		display: block;
-	}
-	
-	.cell {
-		float: left;
-		margin-bottom: $grid-cell-padding;
-		
-		img {
-			max-width: none;
-		}
-	}
-}
-
 ul.horizontal, .horizontal ul:first-of-type {
 	@include horizontal;
 }

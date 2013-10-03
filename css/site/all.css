@@ -57,10 +57,10 @@ font-family: font-stack;
 /* --------------------------------------------
 	Clearfix
 ----------------------------------------------- */
-.clearfix, .cols, .content_area, #content, #footer, .grid {
+.clearfix, .cols, .content_area, #content, #footer {
   min-height: 0;
 }
-.clearfix:after, .cols:after, .content_area:after, #content:after, #footer:after, .grid:after {
+.clearfix:after, .cols:after, .content_area:after, #content:after, #footer:after {
   clear: both;
   content: '.';
   display: block;
@@ -71,7 +71,7 @@ font-family: font-stack;
 /* --------------------------------------------
 	Standard Margin
 ----------------------------------------------- */
-blockquote, .cell, .centre_object, cite, .cols, .content_area, dl, .error, .ok, .flash, fieldset, .fieldset, .grid, hr, iframe, .ok, ol, p, table, ul {
+blockquote, .cell, .centre_object, cite, .cols, .content_area, dl, .error, .ok, .flash, fieldset, .fieldset, hr, iframe, .ok, ol, p, table, ul {
   margin-bottom: 14px;
   margin-bottom: 0.875rem;
 }
@@ -274,32 +274,6 @@ hr {
   margin-top: 0.4375rem;
 }
 
-@media (min-width: 30.0625em) {
-  .grid {
-    display: table;
-    table-layout: fixed;
-    width: 100%;
-  }
-
-  .cell {
-    display: table-cell;
-    margin-bottom: 0;
-    padding-right: 20px;
-    vertical-align: top;
-  }
-  .cell:not(.text) {
-    text-align: center;
-  }
-  .cell:last-child {
-    padding-right: 0;
-  }
-  .cell:first-child:not(.text) {
-    text-align: left;
-  }
-  .cell:last-child:not(.text) {
-    text-align: right;
-  }
-}
 i, em {
   font-style: italic;
 }

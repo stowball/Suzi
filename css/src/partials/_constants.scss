@@ -2,7 +2,7 @@
 	Clearfix
 ----------------------------------------------- */
 
-.clearfix, .cols, .content_area, #content, #footer, .grid {
+.clearfix, .cols, .content_area, #content, #footer {
 	@include clearfix;
 }
 
@@ -10,7 +10,7 @@
 	Standard Margin
 ----------------------------------------------- */
 
-blockquote, .cell, .centre_object, cite, .cols, .content_area, dl, .error, .flash, fieldset, .fieldset, .grid, hr, iframe, .ok, ol, p, table, ul {
+blockquote, .cell, .centre_object, cite, .cols, .content_area, dl, .error, .flash, fieldset, .fieldset, hr, iframe, .ok, ol, p, table, ul {
 	@include rem(margin-bottom, $std-margin);
 }
 
@@ -204,10 +204,6 @@ hr {
 		@include rem(margin-bottom, ($std-margin * 2) - 7);
 		@include rem(margin-top, ($std-margin * 2) - ($std-margin - 10 + 17));
 	}
-}
-
-@media ($min em($grid-bp)) {
-	@import "partials/bp-grid";
 }
 
 i, em {
