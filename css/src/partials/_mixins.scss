@@ -710,9 +710,19 @@ $transitionable-prefixed-values: transform, transform-origin;
 	}
 }
 
-@mixin pie($path: '/css/PIE.htc') {
-	behavior: url($path);
-	position: relative;
+@mixin pie($position: relative, $path: false) {
+	$pie-path: '';
+	@if ($path != false) {
+		$pie-path: $path;
+	}
+	@else {
+		$pie-path: $default-pie-path;
+	}
+	
+	behavior: url($pie-path);
+	@if ($position != false) {
+		position: $position;
+	}
 }
 
 @mixin rgba-background($color, $opacity: 0.5, $use-fallback: true, $use-background-color: false) {
