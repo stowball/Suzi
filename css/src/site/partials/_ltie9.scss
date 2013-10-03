@@ -2,7 +2,7 @@
 	Behaviors
 ----------------------------------------------- */
 
-a.btn, input.submit
+a.btn, .btn_wrap[data-label], input.submit
  {
 	@include pie;
 }

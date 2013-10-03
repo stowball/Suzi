@@ -783,6 +783,7 @@ input.text, textarea, html:not(.browser-android) select {
 
 input.text, textarea {
 	-webkit-appearance: none;
+	@include border-radius($form-input-border-radius);
 }
 
 input.submit, input.text, textarea, select {
@@ -846,20 +847,10 @@ a.btn, .btn_wrap {
 	width: auto;
 }
 
-.btn_wrap {
-	padding: 0 !important;
-	position: relative;
-	
-	input {
-		opacity: 0;
-		position: relative;
-		z-index: 2;
-	}
-}
-
 a.btn, .btn_wrap, input.submit {
 	-webkit-appearance: none;
 	@include border-radius($btn-border-radius);
+	color: $btn-text-color !important;
 	cursor: pointer;
 	display: inline-block;
 	margin: 0;
@@ -869,6 +860,35 @@ a.btn, .btn_wrap, input.submit {
 	&::-moz-focus-inner { 
 		border: 0; 
 		padding: 0; 
+	}
+	
+	@include hover {
+		color: $btn-hover-text-color !important;
+	}
+}
+
+.btn_wrap {
+	position: relative;
+	
+	input {
+		opacity: 0;
+		position: relative;
+		z-index: 2;
+	}
+	
+	&[data-label] {
+		&:before {
+			content: attr(data-label);
+		}
+		
+		input {
+			border: 0;
+			left: 0;
+			height: 100%;
+			position: absolute;
+			top: 0;
+			width: 100%;
+		}
 	}
 }
 

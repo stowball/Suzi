@@ -14,7 +14,6 @@ label, .label, p.legend {
 }
 
 input.text, textarea {
-	@include border-radius(3px);
 	@include rem(padding, $form-input-padding);
 	
 	.vendor-mozilla & {
@@ -65,10 +64,9 @@ select {
 	}
 }
 
-a.btn, .btn_wrap, input.submit {
+a.btn, .btn_wrap[data-label], input.submit {
 	@include gradient('to bottom', $btn-background-color);
 	border: 1px solid $btn-border-color;
-	color: $btn-text-color;
 	@include rem(padding, $form-btn-padding-vertical $form-btn-padding-horizontal);
 	
 	.vendor-mozilla & {
@@ -78,11 +76,11 @@ a.btn, .btn_wrap, input.submit {
 	@include hover {
 		@include background($btn-hover-background-color, true);
 		border-color: $btn-hover-border-color;
-		color: $btn-hover-text-color;
 	}
 }
 
-a.btn {
+// .btns & .submits will render at different sizes. Modify as appropriate to make them equal
+a.btn, .btn_wrap[data-label] {
 	.ie &, .vendor-ie & {
 	}
 	
