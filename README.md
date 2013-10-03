@@ -2,7 +2,7 @@
 
 ## A responsive, Sass UI Framework by [Izilla](http://izilla.com.au)
 
-### v1.1.5 (2013-09-16)
+### v1.1.6 (2013-10-04)
 
 Suzi is the starting point for all of our web projects and a culmination of 6+ years' experience in maintaining a front-end framework.
 
@@ -10,7 +10,7 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 
 ### Features
 
-* Built in a mobile-first, responsive philosophy
+* Built in a mobile-first, responsive philosophy *(but can easily be used for fixed sites as well)*
 * Mixins for lots of CSS3 features including gradients with SVG & CSS3PIE support, rems with fallbacks and CSS triangles
 * Starter content styles, including clean typography, lists, tables, etc
 * Starter form element styles: stacked on small-screen to 2-column at the breakpoint of your choice
@@ -125,12 +125,13 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 	
 	* `$hide`: whether to hide or unhide the (default: true)
 
-* `hide-text($display: false, $width: false)`
+* `hide-text($display: false, $width: false, $height: false)`
 
 	Hide an element's text content
 
 	* `$display`: sets the `display` property to a value of your choice (default: false)
 	* `$width`: sets the width of the element (default: false)
+	* `$height`: sets the heightof the element (default: false)
 
 * `horizontal`
 
@@ -160,19 +161,38 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 
 * `box-shadow($shadow: 0 1px 3px rgba(0,0,0,.25))`
 
-	Outputs, -moz, -webkit and unprefixed `box-shadow` with the value passed in (default: 0 1px 3px rgba(0,0,0,.25))
+	Outputs, -webkit and unprefixed `box-shadow` with the value passed in (default: 0 1px 3px rgba(0,0,0,.25))
 
 * `box-sizing($boxsize: border-box)`
 
 	Outputs -moz, -webkit and unprefixed `box-sizing` with the value passed in (default: border-box)
+
+* `font-size-line-height($font-size, $line-height: false, $important: false)`
+
+	Outputs a rem (and pixel fallback) font-size and an optional unitless line-height from the values provided
+	
+	* `$font-size`: target `font-size` to achieve in pixels
+	* `$line-height`: target `line-height` size to achieve in pixels if not `false` (default: false)
+	* `$important`: whether to also output an `!important` declaration on both properties (default: false)
 	
 * `keyframes($name)`
 
 	Outputs -moz, -o-, -webkit and unprefixed animation `@keyframes` named with the value passed in
 
-* `pie($path: '/css/PIE.htc')`
+* `line-height($target, $context: 16, $important: false)`
 
-	Outputs CSS3PIE `behavior` property with path to PIE.htc and `position: relative` (default $path: '/css/PIE.htc')
+	Outputs a unitless line-height from the target and context sizes provided
+	
+	* `$target`: target `line-height` size to achieve in pixels
+	* `$context`: the `font-size` in pixels of the current element (default: 16)
+	* `$important`: whether to also output an `!important` declaration (default: false)
+
+* `pie($position: relative, $path: false)`
+
+	Outputs a `position` property and CSS3PIE `behavior` property with path to PIE.htc
+	
+	* `$position:` `position` property to use or `false` for none (default: relative)
+	* `$path`: path to PIE.htc if specified, otherwise uses `$default-pie-path` variable when `false` (default: false [$default-pie-path: '/css/PIE.htc'])
 
 * `rgba-background($color, $opacity: 0.5, $use-fallback: true, $use-background-color: false)`
 
