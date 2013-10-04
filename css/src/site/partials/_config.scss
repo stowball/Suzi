@@ -126,7 +126,6 @@ $desktop-bp: $site-width;
 $main-nav-horizontal: 700px;
 
 $float-bp: 464px;
-$grid-bp: 481px;
 $form-bp: 534px;
 
 $feature-bp: 464px;
@@ -134,7 +133,6 @@ $feature-bp: 464px;
 @if ($is-responsive == false) {
 	$main-nav-horizontal: 1px;
 	$float-bp: 1px;
-	$grid-bp: 1px;
 	$form-bp: 1px;
 	$feature-bp: 1px;
 }
