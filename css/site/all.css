@@ -1338,7 +1338,7 @@ a.btn:hover, a.btn:focus, .btn_wrap[data-label]:hover, .btn_wrap[data-label]:foc
   position: relative;
 }
 
-.nav {
+.carousel_nav {
   bottom: 0;
   left: 0;
   position: absolute;
@@ -1346,25 +1346,25 @@ a.btn:hover, a.btn:focus, .btn_wrap[data-label]:hover, .btn_wrap[data-label]:foc
   width: 30px;
   z-index: 30;
 }
-.ltie9 .nav {
+.ltie9 .carousel_nav {
   background: #666666;
   background: rgba(0, 0, 0, 0.57);
 }
-.ltie9 .nav:hover {
+.ltie9 .carousel_nav:hover {
   background: black;
   background: rgba(0, 0, 0, 0.77);
 }
 @media (min-width: 29em) {
-  .nav {
+  .carousel_nav {
     background: #666666;
     background: rgba(0, 0, 0, 0.57);
   }
-  .nav:hover {
+  .carousel_nav:hover {
     background: black;
     background: rgba(0, 0, 0, 0.77);
   }
 }
-.nav:after {
+.carousel_nav:after {
   border-color: transparent white transparent transparent;
   border-color: rgba(255, 255, 255, 0) white rgba(255, 255, 255, 0) rgba(255, 255, 255, 0);
   border-style: solid;
@@ -1379,32 +1379,32 @@ a.btn:hover, a.btn:focus, .btn_wrap[data-label]:hover, .btn_wrap[data-label]:foc
   position: absolute;
   top: 50%;
 }
-.nav.next {
+.carousel_nav.next {
   left: auto;
   right: 0;
 }
-.nav.next.next:after {
+.carousel_nav.next.next:after {
   border-color: transparent transparent transparent white;
   border-color: rgba(255, 255, 255, 0) rgba(255, 255, 255, 0) rgba(255, 255, 255, 0) white;
   border-style: solid;
   border-width: 8px 0 8px 8px;
 }
-.nav span {
+.carousel_nav span {
   display: block;
   overflow: hidden;
   text-indent: -999em;
   width: 0;
 }
 
-.nav_pager {
+.carousel_nav_pager {
   bottom: -16px;
   position: absolute;
   right: 0;
 }
-.nav_pager li {
+.carousel_nav_pager li {
   float: left;
 }
-.nav_pager a {
+.carousel_nav_pager a {
   background: #f2f5f7;
   border: 1px solid #adb9c2;
   overflow: hidden;
@@ -1413,7 +1413,7 @@ a.btn:hover, a.btn:focus, .btn_wrap[data-label]:hover, .btn_wrap[data-label]:foc
   height: 8px;
   margin-left: 8px;
 }
-.nav_pager .current a {
+.carousel_nav_pager .current a {
   background: #000;
   border-color: #000;
 }

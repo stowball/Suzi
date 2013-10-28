@@ -212,14 +212,14 @@ var slider = {
 						nav = false;
 					}
 					else {
-						var $navPrev = $('<a href="#previous" class="nav prev"><span>Previous</span></a>'),
-							$navNext = $('<a href="#next" class="nav next"><span>Next</span></a>');
+						var $navPrev = $('<a href="#previous" class="carousel_nav prev"><span>Previous</span></a>'),
+							$navNext = $('<a href="#next" class="carousel_nav next"><span>Next</span></a>');
 					}
 					
 					if ($this.data('pager') === false)
 						pager = false;
 					else
-						var $navPager = $('<ul class="nav_pager reset menu" />');
+						var $navPager = $('<ul class="carousel_nav_pager reset menu" />');
 					
 					if (nav)
 						$this.append($navPrev).append($navNext);

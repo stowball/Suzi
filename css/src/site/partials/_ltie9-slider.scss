@@ -1,28 +1,11 @@
 /* --------------------------------------------
-	Feature Slider
+	Carousels
 ----------------------------------------------- */
 
 .slider {
-	// min-height
-	
 	li {
-		// #col_2 width
-		.no_col_1 &, .no_col_3 &  {
-			// #col_2 width
-		}
-		
-		.no_col_1.no_col_3 & {
-			// #col_2 width
-		}
 	}
 }
 
-.nav {
-	.ltie8 & span {
-		// image replacement
-	}
-	
-	.ltie8 &.next span {
-		// image replacement
-	}
+.carousel_nav {
 }
