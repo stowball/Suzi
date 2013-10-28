@@ -2,7 +2,7 @@
 	Hiddens
 ----------------------------------------------- */
 
-#logo, #nav_main {
+#logo, #nav_main, .managed:after, .managed.alt:before {
 	display: none !important;
 }
 
@@ -42,4 +42,8 @@ ul {
 .rwd-swap {
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
 	opacity: 1 !important;
+}
+
+.managed.alt {
+	padding-left: 0;
 }
