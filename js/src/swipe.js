@@ -1,5 +1,5 @@
-/*
- * Swipe 1.0.4
+/*!
+ * Swipe 1.0.5
  *
  * Brad Birdsall, Prime
  * Copyright 2011, Licensed GPL & MIT
@@ -201,7 +201,8 @@ Swipe.prototype = {
     this.deltaX = 0;
 
     // set transition time to 0 for 1-to-1 touch movement
-    this.element.style.MozTransitionDuration = this.element.style.webkitTransitionDuration = 0;
+    this.element.style.MozTransitionDuration = this.element.style.webkitTransitionDuration = this.element.style.transitionDuration = 0;
+    this.element.style.MozTransitionTimingFunction = this.element.style.OTransitionTimingFunction = this.element.style.webkitTransitionTimingFunction = this.element.style.transitionTimingFunction = 'linear';
     
     e.stopPropagation();
   },
@@ -233,7 +234,7 @@ Swipe.prototype = {
           ( (!this.index && this.deltaX > 0               // if first slide and sliding left
             || this.index == this.length - 1              // or if last slide and sliding right
             && this.deltaX < 0                            // and if sliding at all
-          ) ?                      
+          ) ?
           ( Math.abs(this.deltaX) / this.width + 1 )      // determine resistance level
           : 1 );                                          // no resistance if false
       
@@ -248,7 +249,7 @@ Swipe.prototype = {
   onTouchEnd: function(e) {
 
     // determine if slide attempt triggers next/prev slide
-    var isValidSlide = 
+    var isValidSlide =
           Number(new Date()) - this.start.time < 250      // if slide duration is less than 250ms
           && Math.abs(this.deltaX) > 20                   // and if slide amt is greater than 20px
           || Math.abs(this.deltaX) > this.width/2,        // or if slide amt is greater than half the width
@@ -262,7 +263,7 @@ Swipe.prototype = {
     if (!this.isScrolling) {
 
       // call slide function with slide end value based on isValidSlide and isPastBounds tests
-      this.slide( this.index + ( isValidSlide && !isPastBounds ? (this.deltaX < 0 ? 1 : -1) : 0 ), this.speed );
+      this.slide( this.index + ( isValidSlide && !isPastBounds ? (this.deltaX < 0 ? 1 : -1) : 0 ), 300 );
       this.touchCallback();
     }
     
