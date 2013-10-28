@@ -737,7 +737,7 @@ input {
 	cursor: pointer;
 }
 
-a.btn, .btn_wrap, input.submit, input.text, label, .label, p.legend, select, textarea {
+.btn, .btn_wrap, input.submit, input.text, label, .label, p.legend, select, textarea {
 	@include box-sizing;
 	display: block;
 	font-family: $std-fontfamily;
@@ -839,11 +839,11 @@ input.text, textarea, select {
 	}
 }
 
-a.btn, .btn_wrap {
+.btn, .btn_wrap {
 	width: auto;
 }
 
-a.btn, .btn_wrap, input.submit {
+.btn, .btn_wrap, input.submit {
 	-webkit-appearance: none;
 	@include border-radius($btn-border-radius);
 	color: $btn-text-color !important;
