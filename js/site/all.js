@@ -22,7 +22,7 @@ var html = document.documentElement,
 
 var trackEvent = function(campaign, action, label) {
 	var clean = function(str) {
-		return str.toString().replace(/\s|'|"/g, '-')
+		return str.toString().replace(/\s|'|"/g, '-');
 	}
 	
 	if (typeof(_gaq) !== 'undefined')
@@ -602,7 +602,7 @@ var accordion = {
 						
 						$this.addClass('open');
 						$this.next().attr('aria-hidden', false);
-												
+						
 						cookie.set(accordionID, idx);
 						trackEvent('Website', 'Accordions', accordionID + '-' + idx);
 					});

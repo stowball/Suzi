@@ -1,5 +1,5 @@
 /*!
-* Layout Engine v0.7.0
+* Layout Engine v0.8.0
 *
 * Adds the rendering engine and browser names as a class on the html tag and returns a JavaScript object containing the vendor, version and browser name (where appropriate)
 *
@@ -27,37 +27,37 @@
 		browser = ' browser-',
 		android = 'android',
 		chrome = 'chrome',
-		wiiu = 'wiiu';
-		
-		html.className += vendor;
+		wiiu = 'wiiu',
+		cssClass = vendor;
 		
 		// WebKit
 		if ('WebkitAppearance' in style) {
-			html.className += webkit;
+			cssClass += webkit;
 			var ua = navigator.userAgent;
 			
 			if (ua.indexOf('Android') >= 0 && ua.indexOf('Chrome') === -1) {
-				html.className += browser + android;
+				html.className += cssClass + browser + android;
 				return {
 					vendor: webkit,
 					browser: android
 				}
 			}
 			else if (!!window.chrome || ua.indexOf('OPR') >= 0) {
-				html.className += browser + chrome;
+				html.className += cssClass + browser + chrome;
 				return {
 					vendor: webkit,
 					browser: chrome
 				}
 			}
 			else if (!!window.wiiu) {
-				html.className += browser + wiiu;
+				html.className += cssClass + browser + wiiu;
 				return {
 					vendor: webkit,
 					browser: wiiu
 				}
 			}
 			else {
+				html.className += cssClass;
 				return {
 					vendor: webkit
 				}
@@ -65,45 +65,44 @@
 		}
 		// Mozilla
 		else if ('MozAppearance' in style) {
-			html.className += mozilla;
+			html.className += cssClass + mozilla;
 			return {
 				vendor: mozilla
 			}
 		}
 		// IE
 		else if ('-ms-scroll-limit' in style || 'behavior' in style) {
-			html.className += ie + vendor + ie;
-			
+			cssClass += ie + vendor + ie;
 			if ('-ms-ime-align' in style) {
-				html.className += '-11';
+				html.className += cssClass + '-11'
 				return {
 					vendor: ie,
 					version: 11
 				}
 			}
 			else if ('-ms-user-select' in style) {
-				html.className += '-10';
+				html.className += cssClass + '-10'
 				return {
 					vendor: ie,
 					version: 10
 				}
 			}
 			else if ('fill' in style) {
-				html.className += '-9';
+				html.className += cssClass + '-9';
 				return {
 					vendor: ie,
 					version: 9
 				}
 			}
 			else if ('widows' in style) {
-				html.className += '-8';
+				html.className += cssClass + '-8';
 				return {
 					vendor: ie,
 					version: 8
 				}
 			}
 			else {
-				html.className += '-7';
+				html.className += cssClass + '-7';
 				return {
 					vendor: ie,
 					version: 7
@@ -112,15 +111,16 @@
 		}
 		// Opera
 		else if ('OLink' in style || !!window.opera) {
-			html.className += opera;
+			cssClass += opera;
 			if ('OMiniFold' in style) {
-				html.className += vendor + opera + '-mini';
+				html.className += cssClass + opera + '-mini';
 				return {
 					vendor: opera,
 					version: 'mini'
 				}
 			}
 			else {
+				html.className += cssClass;
 				return {
 					vendor: opera
 				}
@@ -128,13 +128,12 @@
 		}
 		// KHTML
 		else if ('KhtmlUserInput' in style) {
-			html.className += khtml;
+			html.className += cssClass + khtml;
 			return {
 				vendor: khtml
 			}
 		}
 		else {
-			html.className = html.className.replace(vendor, '');
 			return false;
 		}
 })();
