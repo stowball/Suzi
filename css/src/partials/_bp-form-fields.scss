@@ -24,7 +24,7 @@ label, .label {
 .f_row input.text, .f_row textarea, .f_row select, .rc.legend ul {
 	display: inline-block;
 	@include rem(margin-left, $std-whitespace-margin);
-	width: (100% - ($form-label-margin + $form-label-width));
+	width: (100% - ($form-label-margin + $form-label-width) + $form-input-width-adjuster);
 }
 
 .f_row.block {
