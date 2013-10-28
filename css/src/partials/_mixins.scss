@@ -237,7 +237,7 @@ $rem-with-px-fallback: true !default;
 //	Functional Mixins
 // --------------------------------------------
 
-@mixin gradient($direction: 'to bottom', $nodes: (#f6f8f9, 0%, #e5ebee, 50%, #d7dee3, 50%, #f2f5f7, 100%), $repeating: false) {
+@mixin gradient($nodes: (#f6f8f9, 0%, #e5ebee, 50%, #d7dee3, 50%, #f2f5f7, 100%), $direction: 'to bottom', $repeating: false) {
 	$fallback: '';
 	$background: background;
 	$lgy-direction: '';
@@ -342,48 +342,58 @@ $rem-with-px-fallback: true !default;
 		}
 	}
 	
-	@for $i from 0 to length($nodes) {
-		@if ($i % 2 == 0) {
-			$css: $css + ', ' + nth($nodes, ($i + 1));
-			$svg-nodes: $svg-nodes + '<stop stop-color="' + nth($nodes, ($i + 1)) + '"';
+	@if (length($nodes) > 1) {	
+		@for $i from 0 to length($nodes) {
+			@if ($i % 2 == 0) {
+				$css: $css + ', ' + nth($nodes, ($i + 1));
+				$svg-nodes: $svg-nodes + '<stop stop-color="' + nth($nodes, ($i + 1)) + '"';
+			}
+			@else {
+				$css: $css + ' ' + nth($nodes, ($i + 1));
+				$svg-nodes: $svg-nodes + ' offset="' + strip-units(nth($nodes, ($i + 1)))/100 + '" />';
+			}
+			$x: $i;
 		}
-		@else {
-			$css: $css + ' ' + nth($nodes, ($i + 1));
-			$svg-nodes: $svg-nodes + ' offset="' + strip-units(nth($nodes, ($i + 1)))/100 + '" />';
-		}
-		$x: $i;
-	}
-		
-	$fallback: nth($nodes, $x);
-	$css: unquote($css);
-	$svg: '<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 1 1" preserveAspectRatio="none"><linearGradient id="g522" gradientUnits="userSpaceOnUse" x1="' + $x1 + '" y1="' + $y1 + '" x2="' + $x2 + '" y2="' + $y2 + '">' + $svg-nodes + '</linearGradient><rect x="0" y="0" width="1" height="1" fill="url(#g522)" /></svg>';
-
-	@if ($use-background-property == false) {
-		$background: background-image;
-	}
-
-	@if ($use-background-fallback == true) {
+			
+		$fallback: nth($nodes, $x);
+		$css: unquote($css);
+		$svg: '<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 1 1" preserveAspectRatio="none"><linearGradient id="g522" gradientUnits="userSpaceOnUse" x1="' + $x1 + '" y1="' + $y1 + '" x2="' + $x2 + '" y2="' + $y2 + '">' + $svg-nodes + '</linearGradient><rect x="0" y="0" width="1" height="1" fill="url(#g522)" /></svg>';
+	
 		@if ($use-background-property == false) {
-			background-color: $fallback;
+			$background: background-image;
+		}
+	
+		@if ($use-background-fallback == true) {
+			@if ($use-background-property == false) {
+				background-color: $fallback;
+			}
+			@else {
+				background: $fallback;
+			}
+		}
+	
+		@if ($repeating == false) {
+			background-image: url('data:image/svg+xml;base64,' + base64Encode($svg));
+			#{$background}: -moz-linear-gradient($lgy-direction $css);
+			#{$background}: -webkit-linear-gradient($lgy-direction $css);
+			#{$background}: linear-gradient($std-direction $css);
+			@if ($use-pie-background == true) {
+				-pie-background: linear-gradient($lgy-direction $css);
+			}
 		}
 		@else {
-			background: $fallback;
-		}
-	}
-
-	@if ($repeating == false) {
-		background-image: url('data:image/svg+xml;base64,' + base64Encode($svg));
-		#{$background}: -moz-linear-gradient($lgy-direction $css);
-		#{$background}: -webkit-linear-gradient($lgy-direction $css);
-		#{$background}: linear-gradient($std-direction $css);
-		@if ($use-pie-background == true) {
-			-pie-background: linear-gradient($lgy-direction $css);
+			#{$background}: -moz-linear-gradient($lgy-direction $css);
+			#{$background}: -webkit-repeating-linear-gradient($lgy-direction $css);
+			#{$background}: repeating-linear-gradient($std-direction $css);
 		}
 	}
 	@else {
-		#{$background}: -moz-linear-gradient($lgy-direction $css);
-		#{$background}: -webkit-repeating-linear-gradient($lgy-direction $css);
-		#{$background}: repeating-linear-gradient($std-direction $css);
+		@if ($use-background-property == false) {
+			$background-color: $nodes;
+		}
+		@else {
+			background: $nodes;
+		}
 	}
 }
 
