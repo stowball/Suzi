@@ -6,10 +6,10 @@
 /* --------------------------------------------
 	Clearfix
 ----------------------------------------------- */
-.clearfix, .cols, .content_area {
+.clearfix, .cols, .content_area, #content, #col_1, #col_2, #col_3 {
   min-height: 0;
 }
-.clearfix:after, .cols:after, .content_area:after {
+.clearfix:after, .cols:after, .content_area:after, #content:after, #col_1:after, #col_2:after, #col_3:after {
   clear: both;
   content: '.';
   display: block;

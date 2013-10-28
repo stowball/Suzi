@@ -1,16 +1,14 @@
-#header {
-}
-
-#nav_main {
-}
-
 #content {
+	@extend %clearfix;
 }
 
 #col_1 {
+	@extend %clearfix;
 }
 
 #col_2 {
+	@extend %clearfix;
+	
 	.no_col_1 & {
 	}
 	
@@ -19,13 +17,5 @@
 }
 
 #col_3 {
-}
-
-#nav_sub {
-}
-
-#footer {
-}
-
-#nav_seo {
+	@extend %clearfix;
 }
