@@ -494,7 +494,6 @@ html {
 }
 
 body {
-	background: $body-bg;
 	color: $text-color;
 	font-family: $std-fontfamily;
 	@include font-size-line-height($std-fontsize, $std-lineheight);
