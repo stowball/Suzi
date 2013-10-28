@@ -828,23 +828,25 @@ $transitionable-prefixed-values: transform, transform-origin;
 }
 
 @mixin viewport($width: device-width) {
-	@-moz-viewport {
-		width: $width;
-	}
-	
-	@-ms-viewport {
-		width: $width;
-	}
-	
-	@-o-viewport {
-		width: $width;
-	}
-	
-	@-webkit-viewport {
-		width: $width;
-	}
-	
-	@viewport {
-		width: $width;
+	@if ($is-responsive == true) {
+		@-moz-viewport {
+			width: $width;
+		}
+		
+		@-ms-viewport {
+			width: $width;
+		}
+		
+		@-o-viewport {
+			width: $width;
+		}
+		
+		@-webkit-viewport {
+			width: $width;
+		}
+		
+		@viewport {
+			width: $width;
+		}
 	}
 }
