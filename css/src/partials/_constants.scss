@@ -381,12 +381,10 @@ img {
 }
 
 @media ($min em($main-nav-horizontal)) {
-	ul.horizontal, .horizontal ul:first-of-type {
-		@include horizontal;
-	}
+	@import "partials/bp-horizontal";
 }
 
-ul.horizontal_always, .horizontal_always ul:first-of-type {
+ul.horizontal_always, .horizontal_always:not(ul) ul:first-of-type {
 	@include horizontal;
 }
 

@@ -157,12 +157,13 @@ $rem-with-px-fallback: true !default;
 	}
 }
 
-@mixin horizontal {
+@mixin horizontal($vertical-align: top) {
 	display: table;
 	width: 100%;
 	
 	> li {
 		display: table-cell;
+		vertical-align: $vertical-align;
 		
 		> a {
 			text-align: center;

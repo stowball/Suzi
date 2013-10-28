@@ -1,0 +1,3 @@
+ul.horizontal, div.horizontal:not(ul) ul:first-of-type {
+	@include horizontal;
+}

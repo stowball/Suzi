@@ -10,9 +10,7 @@
 	Constants
 ----------------------------------------------- */
 
-ul.horizontal, .horizontal ul:first-of-type {
-	@include horizontal;
-}
+@import "partials/bp-horizontal";
 
 /* --------------------------------------------
 	Simple Customisations
