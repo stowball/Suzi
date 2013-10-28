@@ -1,5 +1,5 @@
 /*!
- * Swipe 1.0.5
+ * Swipe 1.0.6
  *
  * Brad Birdsall, Prime
  * Copyright 2011, Licensed GPL & MIT
@@ -16,11 +16,13 @@
   // retreive options
   this.options = options || {};
   this.index = this.options.startSlide || 0;
+  this.oldIndex = this.index;
   this.speed = this.options.speed || 300;
   this.complete = this.options.complete || function() {};
   this.callback = this.options.callback || function() {};
   this.touchCallback = this.options.touchCallback || function() {};
-  this.delay = this.options.auto || 0;
+  this.circular = this.options.circular || false;
+  this.hasEnded = false;
 
   // reference dom elements
   this.container = element;
@@ -87,14 +89,24 @@ Swipe.prototype = {
   },
 
   slide: function(index, duration) {
-
+    if (!this.hasEnded) {
+      if (this.oldIndex === this.length - 2 && this.index === this.length - 1 && index === 0) { // double-click next on last
+        this.slide(2);
+        return;
+      }
+      else if (this.oldIndex === 1 && this.index === 0 && index === this.length - 1) { // double-click prev on first
+        this.slide(this.length - 3);
+        return;
+      }
+    }
+    
     var style = this.element.style;
 
     // fallback to default speed
     if (duration == undefined) {
         duration = this.speed;
     }
-
+    
     // set duration speed (0 represents 1-to-1 scrolling)
     style.webkitTransitionDuration = style.MozTransitionDuration = style.msTransitionDuration = style.OTransitionDuration = style.transitionDuration = duration + 'ms';
 
@@ -102,7 +114,10 @@ Swipe.prototype = {
     style.MozTransform = style.webkitTransform = 'translate3d(' + -(index * this.width) + 'px,0,0)';
     style.msTransform = style.OTransform = 'translateX(' + -(index * this.width) + 'px)';
     // set new index to allow for expression arguments
+    
+    this.oldIndex = this.index;
     this.index = index;
+    this.hasEnded = false;
 
   },
 
@@ -113,22 +128,14 @@ Swipe.prototype = {
 
   },
 
-  prev: function(delay) {
-
-    // cancel next scheduled automatic transition, if any
-    this.delay = delay || 0;
-    clearTimeout(this.interval);
+  prev: function() {
 
     if (this.index) this.slide(this.index-1, this.speed); // if not at first slide
     else this.slide(this.length - 1, this.speed); //if first slide return to end
 
   },
 
-  next: function(delay) {
-
-    // cancel next scheduled automatic transition, if any
-    this.delay = delay || 0;
-    clearTimeout(this.interval);
+  next: function() {
 
     if (this.index < this.length - 1) this.slide(this.index+1, this.speed); // if not last slide
     else this.slide(0, this.speed); //if last slide return to start
@@ -139,21 +146,9 @@ Swipe.prototype = {
 
     var _this = this;
 
-    this.interval = (this.delay)
-      ? setTimeout(function() { 
-        _this.next(_this.delay);
-      }, this.delay)
-      : 0;
-  
-  },
-  
-  stop: function() {
-    this.delay = 0;
-    clearTimeout(this.interval);
   },
   
   resume: function() {
-    this.delay = this.options.auto || 0;
     this.begin();
   },
 
@@ -175,8 +170,17 @@ Swipe.prototype = {
     if (e.target.className.indexOf('slider') < 0)
         return;
     
-    if (this.delay) this.begin();
-
+    this.hasEnded = true;
+    
+    if (this.circular) {
+      if (this.index === this.length - 1 && this.oldIndex > 0) { // Clicked next from from last slide
+        this.slide(1, 0);
+      }
+      else if (this.index === 0) { // Clicked back from first slide
+        this.slide(this.length - 2, 0);
+      }
+    }
+    
     this.callback(e, this.index, this.slides[this.index]);
 
   },
@@ -224,9 +228,6 @@ Swipe.prototype = {
 
       // prevent native scrolling 
       e.preventDefault();
-
-      // cancel slideshow
-      clearTimeout(this.interval);
 
       // increase resistance if first or last slide
       this.deltaX = 

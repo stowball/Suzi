@@ -154,6 +154,7 @@ var forms = {
 };
 
 var slider = {
+	swipejs: Modernizr.csstransforms && !(layoutEngine.vendor === 'ie' && layoutEngine.version === 9),
 	$imagesLazy: [],
 	
 	init: function() {
@@ -162,16 +163,28 @@ var slider = {
 		if ($sliderParent.length) {
 			$sliderParent.each(function(index) {
 				var $this = $(this),
-					$slides = $this.find('.slider > li'),
+					$slider = $this.find('.slider'),
+					$slides = $slider.find('> li'),
 					slidesCount = $slides.length,
 					globalPos = 0,
 					isComplete = false,
 					isVisible = false,
 					carouselID = 'carouselid-' + window.location.pathname + '-' + index,
-					carouselCookie = cookie.read(carouselID);
-								
+					carouselCookie = cookie.read(carouselID),
+					circular = $this.data('circular') === false ? false : true;
+				
+				if (slider.swipejs && circular) {
+					$slides.eq(0).clone().appendTo($slider);
+					$slides.eq(slidesCount - 1).clone().prependTo($slider);
+					$slides = $slider.find('> li'),
+					slidesCount = slidesCount + 2;
+				}
+				
 				if (carouselCookie)
 					globalPos = parseInt(carouselCookie);
+				
+				if (slider.swipejs && circular && globalPos === 0)
+					globalPos = 1;
 				
 				slider.$imagesLazy[index] = $slides.find('[data-src]');
 				
@@ -179,7 +192,7 @@ var slider = {
 					slider.lazyLoad(slider.$imagesLazy[index].eq(globalPos), index, globalPos, slidesCount);
 					
 					var $feature = $this.find('.inner');
-						
+					
 					$slides.css('visibility', 'visible');
 					$feature.css('visibility', 'visible');
 				}
@@ -219,7 +232,7 @@ var slider = {
 					
 					$this.addClass('multiple');
 					
-					if (Modernizr.csstransforms && !(layoutEngine.vendor === 'ie' && layoutEngine.version === 9)) {
+					if (slider.swipejs) {
 						if (pager) {
 							for (var i = 1; i <= slidesCount; i++) {
 								li += '<li><a href="#slide-' + i + '">Slide ' + i + '</a></li>';
@@ -228,11 +241,17 @@ var slider = {
 							$navPager.append(li);
 							var $navPagerLi = $navPager.find('li'),
 								$navPagerA = $navPager.find('a');
+							
+							if (circular) {
+								$navPagerLi.eq(0).hide();
+								$navPagerLi.eq(slidesCount - 1).hide();
+							}
 						}
 						
 						var $feature = $this.find('.inner');
 						
 						var carousel = new Swipe($feature[0], {
+							circular: circular,
 							speed: speed,
 							
 							complete: function() {
@@ -251,13 +270,20 @@ var slider = {
 									$feature.css('visibility', 'visible');
 								}
 								
-								$slides.attr('aria-hidden', true);
-								$slides.eq(pos).attr('aria-hidden', false);
+								$slides
+									.attr('aria-hidden', true)
+									.eq(pos)
+									.attr('aria-hidden', false);
+								
 								slider.lazyLoad(slider.$imagesLazy[index].eq(pos));
 								
 								if (pos > globalPos) {
-									if (pos < slidesCount - 1)
+									if (pos < slidesCount - 1) {
 										slider.lazyLoad(slider.$imagesLazy[index].eq(pos + 1));
+										if (circular && pos === slidesCount - 2 && globalPos === 1) {
+											slider.lazyLoad(slider.$imagesLazy[index].eq(pos - 1));
+										}
+									}
 									else if (pos === slidesCount - 1 && globalPos === 0)
 										slider.lazyLoad(slider.$imagesLazy[index].eq(pos - 1));
 								}
@@ -268,14 +294,17 @@ var slider = {
 										else
 											slider.lazyLoad(slider.$imagesLazy[index].eq(pos - 1));
 									}
+									else if (circular && pos === 1)
+										slider.lazyLoad(slider.$imagesLazy[index].eq(pos - 1));
 									else if (pos > 1) {
 										slider.lazyLoad(slider.$imagesLazy[index].eq(pos - 1));
 									}
 								}
 								
 								if (pager) {
-									$navPagerLi.removeClass('current');
-									$navPagerLi.eq(pos).addClass('current');
+									$navPagerLi
+										.removeClass('current')
+										.eq(pos).addClass('current');
 								}
 								
 								if (!interval)
@@ -294,7 +323,7 @@ var slider = {
 								interval = false;
 							}
 						};
-												
+						
 						if (nav) {
 							$navPrev.on('click', function(e) {
 								e.preventDefault();
@@ -352,7 +381,8 @@ var slider = {
 					}
 					else {
 						var $feature = $this.find('.slider'),
-							w = 'width: 100% !important',
+							widthOverride = 'width: 100% !important',
+							
 							cycleOpts = {
 								activePagerClass: 'current',
 								cleartypeNoBg: true,
@@ -364,7 +394,7 @@ var slider = {
 									var pos = opts.currSlide;
 									
 									slider.lazyLoad(slider.$imagesLazy[index].eq(pos));
-								
+									
 									if (pos > globalPos) {
 										if (pos < slidesCount - 1)
 											slider.lazyLoad(slider.$imagesLazy[index].eq(pos + 1));
@@ -383,8 +413,10 @@ var slider = {
 										}
 									}
 									
-									$slides.attr('aria-hidden', true);
-									$slides.eq(pos).attr('aria-hidden', false);
+									$slides
+										.attr('aria-hidden', true)
+										.eq(pos)
+										.attr('aria-hidden', false);
 									
 									globalPos = pos;
 									cookie.set(carouselID, globalPos);
@@ -406,15 +438,21 @@ var slider = {
 							}
 						}
 						
-						$feature.attr('style', w);
-						$feature.find('li').attr('style', w);
+						$feature
+							.attr('style', widthOverride)
+							.find('li')
+							.attr('style', widthOverride);
 						
 						Modernizr.load({
 							load: '/js/jquery.cycle.all.min.js',
 							complete: function() {
-								$feature.cycle(cycleOpts);
+								$feature
+									.cycle(cycleOpts)
+									.css('visibility', 'visible')
+									.closest('.carousel')
+									.addClass('jqcycle');
+								
 								$slides.css('visibility', 'visible');
-								$feature.css('visibility', 'visible');
 								
 								if (nav) {
 									$navPrev.on('click', function(e) {
@@ -443,34 +481,34 @@ var slider = {
 			});
 		}
 	},
+	
 	lazyLoad: function(el, index, globalPos, slidesCount) {
 		var $this = $(el),
-			idx = index,
-			pos = globalPos,
-			count = slidesCount,
-			src = $this.data('src'),
-			$swap = $this.next('.rwd-swap'),
-			img = new Image();
+			src = $this.data('src');
 		
-		if (src) {
+		if (src && !$this.data('loaded')) {
+			var img = new Image();
+			
 			img.onload = function() {
 				if ($this.data('bg-src') === false)
 					$this[0].src = src;
 				else
 					$this[0].style.backgroundImage = 'url(' + src + ')';
 				
-				if (count) {
-					if (pos === 0) {
-						slider.lazyLoad(slider.$imagesLazy[idx].eq(pos + 1));
-						slider.lazyLoad(slider.$imagesLazy[idx].eq(count - 1));
+				$this.data('loaded', true);
+				
+				if (slidesCount) {
+					if (globalPos === 0) {
+						slider.lazyLoad(slider.$imagesLazy[index].eq(globalPos + 1));
+						slider.lazyLoad(slider.$imagesLazy[index].eq(slidesCount - 1));
 					}
-					else if (pos === count - 1) {
-						slider.lazyLoad(slider.$imagesLazy[idx].eq(0));
-						slider.lazyLoad(slider.$imagesLazy[idx].eq(pos - 1));
+					else if (globalPos === slidesCount - 1) {
+						slider.lazyLoad(slider.$imagesLazy[index].eq(0));
+						slider.lazyLoad(slider.$imagesLazy[index].eq(globalPos - 1));
 					}
 					else {
-						slider.lazyLoad(slider.$imagesLazy[idx].eq(pos + 1));
-						slider.lazyLoad(slider.$imagesLazy[idx].eq(pos - 1));
+						slider.lazyLoad(slider.$imagesLazy[index].eq(globalPos + 1));
+						slider.lazyLoad(slider.$imagesLazy[index].eq(globalPos - 1));
 					}
 				}
 				
