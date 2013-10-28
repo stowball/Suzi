@@ -38,7 +38,7 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 * Make simple customisations to links, headings, lists & tables in /css/site/partials/_simple.scss
 * Make simple customisations to form elements in /css/site/partials/_forms.scss
 * Modify the carousels in /css/site/partials/_slider.scss
-* Add site specific styles to /css/site/partials/_site.scss
+* Create and add site specific partials to /css/site/partials/_site.scss
 * Add any LT IE9 overrides to /css/site/partials/_ltie9.scss
 * Add any print overrides to /css/site/partials/_print.scss
 
@@ -70,14 +70,14 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 	* `$values`: valid CSS value in pixels
 	* `$use-px-fallback`: whether to output a pixel fallback as well (default: $rem-with-px-fallback [true])
 
-* `gradient($direction: 'to bottom', $nodes: (#f6f8f9, 0%, #e5ebee, 50%, #d7dee3, 50%, #f2f5f7, 100%), repeating: false)`
+* `gradient($nodes: (#f6f8f9, 0%, #e5ebee, 50%, #d7dee3, 50%, #f2f5f7, 100%), $direction: 'to bottom', repeating: false)`
 
 	Outputs the complete CSS3 gradient syntax for Chrome, Safari, Firefox, Opera, IE10, other capable browsers and SVG for IE9
 
+	* `$nodes` takes a list of comma-separated #color, position% pairs. If only a single color is passed in, a plain `background` or `background-color` will be created depending on `$use-background-property`
 	* `$direction` takes either the legacy syntax or the unprefixed W3C syntax, including angles. The following angles are supported for SVGs: 0, 10, 45, 90, 135, 170, 180, 190, 225, 270, 315, 350
-	* `$nodes` takes a list of comma separated #color, position% pairs
 	* `$repeating`: whether to create repeating linear gradients (default: false)
-	* Uses the background property (and background-image for IE9) unless the global `$use-background-property` is `false`  
+	* Uses the background property (and background-image for IE9) unless the global `$use-background-property` is `false`
 	* Outputs a fallback background of the last color in the list unless the global `$use-background-fallback` is `false`
 	* Outputs base 64 SVG syntax for IE9 unless `$repeating` is true
 	* Outputs CSS3PIE syntax for LT IE9 unless the global `$use-pie-background` is `false` or `$repeating` is true
@@ -97,7 +97,7 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 	* `$sibling`: the sibling element selector, eg: 'li', 'div' (default: '*')
 	* `$count` how many sibling selectors to support, eg: 10, 20 (default: 15)
 
-* `triangle($direction: right, $width: 5px, $height: 10px, $color: $std-link-color, $layout: true, $border-style: true, $webkit-rotate: true)`
+* `triangle($direction: right, $width: 5px, $height: 10px, $color: $std-link-color, $layout: true, $border-style: true, $webkit-rotate: true, $important: false)`
 
 	Outputs a CSS triangle for use in :before/:after pseudo-elements. It duplicates the rule, using rgba for transparency to prevent 'black fringes'
 
@@ -108,6 +108,7 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 	* `$layout`: whether to output CSS `content`, `display`, `height` & `width` properties (default: true)
 	* `$border-style`: whether to output the CSS `border-style` property (default: true)
 	* `$webkit-rotate`: whether to rotate the triangle by 360deg in WebKit for smoother appearance (default: true)
+	* `$important`: whether to also output `!important` on `border-color` and `border-width` properties (default: false)
 
 #### Class mixins
 
@@ -133,9 +134,11 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 	* `$width`: sets the width of the element (default: false)
 	* `$height`: sets the heightof the element (default: false)
 
-* `horizontal`
+* `horizontal($vertical-align: top)`
 
 	Sets the `UL` specified (or first `UL` of a parent element) and its immediate `LI`s to use `display: table` to create an evenly spaced, horizontal list for modern browsers and uses floats for `.ltie8`. Used in the `.horizontal` and `.horizontal_always` classes
+	
+	* `$vertical-align`: the `vertical-align` property to give to the child `LI`s (default: top)
 	
 #### CSS Property mixins
 
@@ -210,7 +213,7 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 
 * `transition($property: all ease 0.2s)`
 
-	Outputs, -moz, -o, -webkit and unprefixed `transition` with the value passed in (default: all ease 0.2s)  
+	Outputs, -moz, -o, -webkit and unprefixed `transition` with the value passed in (default: all ease 0.2s)
 	Instances of `transform` or `transform-origin` will be prefixed as required.
 
 * `transition-duration($duration: 0.2s)`
@@ -219,7 +222,7 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 
 * `transition-property($property: all)`
 
-	Outputs, -moz, -o, -webkit and unprefixed `transition-property` with the value passed in (default: all)  
+	Outputs, -moz, -o, -webkit and unprefixed `transition-property` with the value passed in (default: all)
 	Instances of `transform` or `transform-origin` will be prefixed as required.
 
 * `transition-timing-function($timing: ease)`
