@@ -7,14 +7,6 @@
 }
 
 /* --------------------------------------------
-	Standard Margin
------------------------------------------------ */
-
-blockquote, .cell, .centre_object, cite, .cols, .content_area, dl, .error, .flash, fieldset, .fieldset, hr, iframe, .ok, ol, p, table, ul {
-	@include rem(margin-bottom, $std-margin);
-}
-
-/* --------------------------------------------
 	Reset
 ----------------------------------------------- */
 
@@ -25,9 +17,17 @@ blockquote, .cell, .centre_object, cite, .cols, .content_area, dl, .error, .flas
 }
 
 .content_area > {
-	& *:last-child, & ul > li, & ol > li {
+	& *:last-child, & ul:last-child > li:last-child, & ol:last-child > li:last-child {
 		margin-bottom: 0;
 	}
+}
+
+/* --------------------------------------------
+	List Bullet Removal & Display None
+----------------------------------------------- */
+
+input[type="hidden"], .display_none, .js .js_display_none, .no_col_1 #col_1, .no_col_3 #col_3, .list_style_none > li:before, .radio_check li:before, .reset li:before, .reset_lazy > li:before {
+	display: none;
 }
 
 /* --------------------------------------------
@@ -64,11 +64,11 @@ blockquote, .cell, .centre_object, cite, .cols, .content_area, dl, .error, .flas
 }
 
 /* --------------------------------------------
-	List Bullet Removal & Display None
+	Standard Margin
 ----------------------------------------------- */
 
-input[type="hidden"], .display_none, .js .js_display_none, .no_col_1 #col_1, .no_col_3 #col_3, .list_style_none > li:before, .rc li:before, .reset li:before, .reset_lazy > li:before {
-	display: none;
+blockquote, .cell, .centre_object, cite, .cols, .content_area, dl, .error, .flash, fieldset, .fieldset, hr, iframe, .ok, ol, p, .panes, table, ul {
+	@extend .std_margin;
 }
 
 /* --------------------------------------------

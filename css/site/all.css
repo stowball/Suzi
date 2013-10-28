@@ -75,14 +75,6 @@ font-family: font-stack;
 	Clearfix
 ----------------------------------------------- */
 /* --------------------------------------------
-	Standard Margin
------------------------------------------------ */
-blockquote, .cell, .centre_object, cite, .cols, .content_area, dl, .error, .ok, .flash, fieldset, .fieldset, hr, iframe, .ok, ol, p, table, ul {
-  margin-bottom: 14px;
-  margin-bottom: 0.875rem;
-}
-
-/* --------------------------------------------
 	Reset
 ----------------------------------------------- */
 .reset, .reset ul, .reset_lazy > ul, .reset ol, .reset_lazy > ol, .reset li, .reset_lazy > li, .rc ul {
@@ -91,14 +83,21 @@ blockquote, .cell, .centre_object, cite, .cols, .content_area, dl, .error, .ok, 
   padding: 0;
 }
 
-.content_area > *:last-child, .content_area > ul > li, .content_area > ol > li {
+.content_area > *:last-child, .content_area > ul:last-child > li:last-child, .content_area > ol:last-child > li:last-child {
   margin-bottom: 0;
+}
+
+/* --------------------------------------------
+	List Bullet Removal & Display None
+----------------------------------------------- */
+input[type="hidden"], .display_none, .js .js_display_none, .no_col_1 #col_1, .no_col_3 #col_3, .list_style_none > li:before, .radio_check li:before, .reset li:before, .reset_lazy > li:before {
+  display: none;
 }
 
 /* --------------------------------------------
 	Consistent Margins
 ----------------------------------------------- */
-.std_margin {
+.std_margin, blockquote, .cell, .centre_object, cite, .cols, .content_area, dl, .error, .ok, .flash, fieldset, .fieldset, hr, iframe, ol, p, .panes, table, ul {
   margin-bottom: 14px;
   margin-bottom: 0.875rem;
 }
@@ -134,12 +133,8 @@ blockquote, .cell, .centre_object, cite, .cols, .content_area, dl, .error, .ok, 
 }
 
 /* --------------------------------------------
-	List Bullet Removal & Display None
+	Standard Margin
 ----------------------------------------------- */
-input[type="hidden"], .display_none, .js .js_display_none, .no_col_1 #col_1, .no_col_3 #col_3, .list_style_none > li:before, .rc li:before, .reset li:before, .reset_lazy > li:before {
-  display: none;
-}
-
 /* --------------------------------------------
 	Constants
 ----------------------------------------------- */
