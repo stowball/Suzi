@@ -5,8 +5,8 @@
 	CSS3PIE
 ----------------------------------------------- */
 .btn, .btn_wrap[data-label], input.submit {
-  behavior: url("/css/PIE.htc");
   position: relative;
+  behavior: url("/css/PIE.htc");
 }
 
 /* --------------------------------------------

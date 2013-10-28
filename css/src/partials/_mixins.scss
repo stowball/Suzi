@@ -555,7 +555,7 @@ $rem-with-px-fallback: true !default;
 	#{$property}: $rem-values;
 }
 
-@mixin triangle($direction: right, $width: 5px, $height: 10px, $color: $std-link-color, $layout: true, $border-style: true, $webkit-rotate: true) {
+@mixin triangle($direction: right, $width: 5px, $height: 10px, $color: $std-link-color, $layout: true, $border-style: true, $webkit-rotate: true, $important: false) {
 	$hex-color: unquote($color);
 	$rgba-color: rgba($hex-color, 0);
 	$bare-width: strip-units($width);
@@ -566,27 +566,67 @@ $rem-with-px-fallback: true !default;
 	}
 	
 	@if ($direction == down) {
-		border-color: $hex-color transparent transparent transparent;
+		@if ($important != false) {
+			border-color: $hex-color transparent transparent transparent !important;
+		}
+		@else {
+			border-color: $hex-color transparent transparent transparent;
+		}
 		@if ($rgba-color != false) {
-			border-color: $hex-color $rgba-color $rgba-color $rgba-color;
+			@if ($important != false) {
+				border-color: $hex-color $rgba-color $rgba-color $rgba-color !important;
+			}
+			@else {
+				border-color: $hex-color $rgba-color $rgba-color $rgba-color;
+			}
 		}
 	}
 	@else if ($direction == left) {
-		border-color: transparent $hex-color transparent transparent;
+		@if ($important != false) {
+			border-color: transparent $hex-color transparent transparent !important;
+		}
+		@else {
+			border-color: transparent $hex-color transparent transparent;
+		}
 		@if ($rgba-color != false) {
-			border-color: $rgba-color $hex-color $rgba-color $rgba-color;
+			@if ($important != false) {
+				border-color: $rgba-color $hex-color $rgba-color $rgba-color !important;
+			}
+			@else {
+				border-color: $rgba-color $hex-color $rgba-color $rgba-color;
+			}
 		}
 	}
 	@else if ($direction == right) {
-		border-color: transparent transparent transparent $hex-color;
+		@if ($important != false) {
+			border-color: transparent transparent transparent $hex-color !important;
+		}
+		@else {
+			border-color: transparent transparent transparent $hex-color;
+		}
 		@if ($rgba-color != false) {
-			border-color: $rgba-color $rgba-color $rgba-color $hex-color;
+			@if ($important != false) {
+				border-color: $rgba-color $rgba-color $rgba-color $hex-color !important;
+			}
+			@else {
+				border-color: $rgba-color $rgba-color $rgba-color $hex-color;
+			}
 		}
 	}
 	@else if ($direction == up) {
-		border-color: transparent transparent $hex-color transparent;
+		@if ($important != false) {
+			border-color: transparent transparent $hex-color transparent !important;
+		}
+		@else {
+			border-color: transparent transparent $hex-color transparent;
+		}
 		@if ($rgba-color != false) {
-			border-color: $rgba-color $rgba-color $hex-color $rgba-color;
+			@if ($important != false) {
+				border-color: $rgba-color $rgba-color $hex-color $rgba-color !important;
+			}
+			@else {
+				border-color: $rgba-color $rgba-color $hex-color $rgba-color;
+			}
 		}
 	}
 	
@@ -595,16 +635,36 @@ $rem-with-px-fallback: true !default;
 	}
 	
 	@if ($direction == down) {
-		border-width: $bare-height + px + ' ' + ($bare-width / 2) + px + ' 0 ' + ($bare-width / 2) + px;
+		@if ($important != false) {
+			border-width: $bare-height + px + ' ' + ($bare-width / 2) + px + ' 0 ' + ($bare-width / 2) + px !important;
+		}
+		@else {
+			border-width: $bare-height + px + ' ' + ($bare-width / 2) + px + ' 0 ' + ($bare-width / 2) + px;
+		}
 	}
 	@else if ($direction == left) {
-		border-width: ($bare-height / 2) + px + ' ' + $bare-width + px + ' ' + ($bare-height / 2) + px + ' 0' ;
+		@if ($important != false) {
+			border-width: ($bare-height / 2) + px + ' ' + $bare-width + px + ' ' + ($bare-height / 2) + px + ' 0' !important;
+		}
+		@else {
+			border-width: ($bare-height / 2) + px + ' ' + $bare-width + px + ' ' + ($bare-height / 2) + px + ' 0';
+		}
 	}
 	@else if ($direction == right) {
-		border-width: ($bare-height / 2) + px + ' 0 ' + ($bare-height / 2) + px + ' ' + $bare-width + px ;
+		@if ($important != false) {
+			border-width: ($bare-height / 2) + px + ' 0 ' + ($bare-height / 2) + px + ' ' + $bare-width + px !important;
+		}
+		@else {
+			border-width: ($bare-height / 2) + px + ' 0 ' + ($bare-height / 2) + px + ' ' + $bare-width + px;
+		}
 	}
 	@else if ($direction == up) {
-		border-width: unquote(0 + ' ' + ($bare-width / 2) + px + ' ' + $bare-height + px + ' ' + ($bare-width / 2) + px);
+		@if ($important != false) {
+			border-width: unquote(0 + ' ' + ($bare-width / 2) + px + ' ' + $bare-height + px + ' ' + ($bare-width / 2) + px) !important;
+		}
+		@else {
+			border-width: unquote(0 + ' ' + ($bare-width / 2) + px + ' ' + $bare-height + px + ' ' + ($bare-width / 2) + px);
+		}
 	}
 	
 	@if ($layout == true) {
@@ -713,17 +773,19 @@ $transitionable-prefixed-values: transform, transform-origin;
 
 @mixin pie($position: relative, $path: false) {
 	$pie-path: '';
+	
 	@if ($path != false) {
 		$pie-path: $path;
 	}
 	@else {
 		$pie-path: $default-pie-path;
 	}
-	
-	behavior: url($pie-path);
+		
 	@if ($position != false) {
 		position: $position;
 	}
+	
+	behavior: url($pie-path);
 }
 
 @mixin rgba-background($color, $opacity: 0.5, $use-fallback: true, $use-background-color: false) {
