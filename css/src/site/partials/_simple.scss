@@ -65,16 +65,14 @@ sup {
 	Lists
 ----------------------------------------------- */
 
-ul > li:before {
-	background: $text-color;
-	@include border-radius(50%);
-	height: 5px;
-	left: -18px;
-	@include rem(top, $list-bullet-top);
-	width: 5px;
-	
-	.ua-desktop-macintosh.vendor-mozilla &, .ua-desktop-macintosh.vendor-opera & {
-		// Usually @include rem(top, $list-bullet-top - 1, false);
+ul > li {
+	&:before {
+		background: $text-color;
+		@include border-radius(50%);
+		height: 5px;
+		left: -18px;
+		@include rem(top, $list-bullet-top);
+		width: 5px;
 	}
 }
 
