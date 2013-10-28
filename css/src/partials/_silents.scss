@@ -1,16 +1,19 @@
 /* --------------------------------------------
-	Behaviors
+	Clearfix
 ----------------------------------------------- */
 
-.btn, .btn_wrap[data-label], input.submit
- {
-	@extend %pie;
+%clearfix {
+	@include clearfix;
 }
 
 /* --------------------------------------------
-	Site Specific
+	CSS3PIE
 ----------------------------------------------- */
 
-.std_width {
-	min-width: $site-width;
+%pie {
+	@include pie;
+}
+
+%pie-abs {
+	@include pie(absolute);
 }

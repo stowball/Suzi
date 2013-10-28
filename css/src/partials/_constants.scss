@@ -2,8 +2,8 @@
 	Clearfix
 ----------------------------------------------- */
 
-.clearfix, .cols, .content_area, #content, #footer {
-	@include clearfix;
+.clearfix {
+	@extend %clearfix;
 }
 
 /* --------------------------------------------
@@ -168,6 +168,10 @@ div.clear:not(.no_zero) {
 	width: 100%;
 }
 
+.cols {
+	@extend %clearfix;
+}
+
 .col {
 	float: right;
 	width: 50%;
@@ -175,6 +179,10 @@ div.clear:not(.no_zero) {
 	&:first-child {
 		float: left;
 	}
+}
+
+.content_area {
+	@extend %clearfix;
 }
 
 .float_left {

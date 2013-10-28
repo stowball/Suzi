@@ -4,6 +4,23 @@
  * http://izilla.com.au
 */
 /* --------------------------------------------
+	Clearfix
+----------------------------------------------- */
+.clearfix, .cols, .content_area {
+  min-height: 0;
+}
+.clearfix:after, .cols:after, .content_area:after {
+  clear: both;
+  content: '.';
+  display: block;
+  height: 0;
+  visibility: hidden;
+}
+
+/* --------------------------------------------
+	CSS3PIE
+----------------------------------------------- */
+/* --------------------------------------------
 	Viewport
 ----------------------------------------------- */
 @-moz-viewport {
@@ -57,17 +74,6 @@ font-family: font-stack;
 /* --------------------------------------------
 	Clearfix
 ----------------------------------------------- */
-.clearfix, .cols, .content_area, #content, #footer {
-  min-height: 0;
-}
-.clearfix:after, .cols:after, .content_area:after, #content:after, #footer:after {
-  clear: both;
-  content: '.';
-  display: block;
-  height: 0;
-  visibility: hidden;
-}
-
 /* --------------------------------------------
 	Standard Margin
 ----------------------------------------------- */
