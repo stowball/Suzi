@@ -387,6 +387,7 @@ var slider = {
 								activePagerClass: 'current',
 								cleartypeNoBg: true,
 								fx: 'scrollHorz',
+								pause: true,
 								speed: speed,
 								startingSlide: globalPos,
 								timeout: interval,
