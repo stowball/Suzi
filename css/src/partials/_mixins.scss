@@ -2,14 +2,10 @@
 //	Default Variables
 // --------------------------------------------
 
-$min: 'min-width:';
-$min: unquote($min);
-$max: 'max-width:';
-$max: unquote($max);
-$min-h: 'min-height:';
-$min-h: unquote($min-h);
-$max-h: 'max-height:';
-$max-h: unquote($max-h);
+$min: unquote('min-width:');
+$max: unquote('max-width:');
+$min-h: unquote('min-height:');
+$max-h: unquote('max-height:');
 
 $use-background-property: true;
 $use-background-fallback: true;
@@ -184,18 +180,7 @@ $rem-with-px-fallback: true !default;
 //	Media Query Mixins
 // --------------------------------------------
 
-@mixin media-query($value, $ltie9: $use-ltie9-mq-fallbacks, $operator: $min, $px: false) {
-	@if ($operator == $max and $value < $site-width) {
-		// Do nothing
-	}
-	@else {
-		@if ($ltie9 == true) {
-			.ltie9 & {
-				@content;
-			}
-		}
-	}
-	
+@mixin media-query($value, $ltie9: $use-ltie9-mq-fallbacks, $operator: $min, $px: false) {	
 	@if ($px == false) {
 		@media (#{$operator} #{em($value)}) {
 			@content;
@@ -206,22 +191,36 @@ $rem-with-px-fallback: true !default;
 			@content;
 		}
 	}
-}
-
-@mixin media-query-and($first-value, $second-value, $ltie9: $use-ltie9-mq-fallbacks, $first-operator: $min, $second-operator: $max, $px: false) {
-	@if ($ltie9 == true and ($second-value >= $site-width)) {
-		.ltie9 & {
-			@content;
+	
+	@if ($ltie9 == true) {
+		@if ($operator == $max and $value < $site-width) {
+			// Using max-width media query that's smaller than $site-width: do nothing
+		}
+		@else if ($operator == $min and $value > $site-width) {
+			// Using min-width media query that's larger than $site-width: do nothing
+		}
+		@else {
+			.ltie9 & {
+				@content;
+			}
 		}
 	}
-	
+}
+
+@mixin media-query-and($first-value, $second-value, $ltie9: $use-ltie9-mq-fallbacks, $first-operator: $min, $second-operator: $max, $px: false) {	
 	@if ($px == false) {
 		@media (#{$first-operator} #{em($first-value)}) and (#{$second-operator} #{em($second-value)}) {
 			@content;
 		}
 	}
 	@else {
-		@media (#{$first-operator} #{strip-units($first-value)}) and (#{$second-operator} #{strip-units($second-value)}) {
+		@media (#{$first-operator} #{strip-units($first-value)}px) and (#{$second-operator} #{strip-units($second-value)}px) {
+			@content;
+		}
+	}
+	
+	@if ($ltie9 == true and $second-value >= $site-width and $first-operator == $min and $second-operator == $max) {
+		.ltie9 & {
 			@content;
 		}
 	}

@@ -1349,14 +1349,6 @@ select {
   width: 30px;
   z-index: 30;
 }
-.ltie9 .carousel_nav {
-  background: #666666;
-  background: rgba(0, 0, 0, 0.57);
-}
-.ltie9 .carousel_nav:hover {
-  background: black;
-  background: rgba(0, 0, 0, 0.77);
-}
 @media (min-width: 29em) {
   .carousel_nav {
     background: #666666;
@@ -1366,6 +1358,14 @@ select {
     background: black;
     background: rgba(0, 0, 0, 0.77);
   }
+}
+.ltie9 .carousel_nav {
+  background: #666666;
+  background: rgba(0, 0, 0, 0.57);
+}
+.ltie9 .carousel_nav:hover {
+  background: black;
+  background: rgba(0, 0, 0, 0.77);
 }
 .carousel_nav:after {
   border-color: transparent white transparent transparent;
