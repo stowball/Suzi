@@ -485,7 +485,8 @@ var slider = {
 	
 	lazyLoad: function(el, index, globalPos, slidesCount) {
 		var $this = $(el),
-			src = $this.data('src');
+			src = $this.data('src'),
+			$swap = $this.next('.rwd-swap');
 		
 		if (src && !$this.data('loaded')) {
 			var img = new Image();
