@@ -873,6 +873,12 @@ $transitionable-prefixed-values: transform, transform-origin;
 	}
 }
 
+@mixin transition-delay($delay: 0.2s) {
+	@for $i from 0 to length($trans-anim-prefixes) {
+		#{nth($trans-anim-prefixes, ($i + 1))}transition-delay: $delay;
+	}
+}
+
 @mixin transition-duration($duration: 0.2s) {
 	@for $i from 0 to length($trans-anim-prefixes) {
 		#{nth($trans-anim-prefixes, ($i + 1))}transition-duration: $duration;

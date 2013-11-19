@@ -219,6 +219,10 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 	Outputs, -moz, -o, -webkit and unprefixed `transition` with the value passed in (default: all ease 0.2s)
 	Instances of `transform` or `transform-origin` will be prefixed as required.
 
+* `transition-delay($delay: 0.2s`
+
+	Outputs, -moz, -o, -webkit and unprefixed `transition-delay` with the value passed in (default: 0.2s)
+
 * `transition-duration($duration: 0.2s)`
 
 	Outputs, -moz, -o, -webkit and unprefixed `transition-duration` with the value passed in (default: 0.2s)
