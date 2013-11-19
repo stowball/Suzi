@@ -100,8 +100,6 @@ $form-required-indicator-right: -5px;
 //	Sizes
 // --------------------------------------------
 
-$site-width: 960px;
-
 $small-input-width: 100px;
 $medium-input-width: 200px;
 $large-input-width: 300px;
@@ -122,8 +120,8 @@ $default-pie-path: '/css/PIE.htc';
 
 $is-responsive: true;
 
+$site-width: 960px;
 $desktop-bp: $site-width;
-$main-nav-horizontal: 700px;
 
 $float-bp: 464px;
 $form-bp: 534px;
