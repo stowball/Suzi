@@ -403,6 +403,51 @@ $rem-with-px-fallback: true !default;
 	}
 }
 
+@mixin grid($breakpoints: (480, 600, 768, 960), $percentages: (10, 20, 25, 30, 33.3333, 40, 50, 60, 66.6666, 70, 75, 80, 90, 100)) {
+	$bp: '';
+	$pc: '';
+	
+	.grid_container {
+		@extend %clearfix;
+		list-style: none;
+		margin-left: -$std-gutter;
+	}
+	
+	.grid_item {
+		@include box-sizing;
+		float: left;
+		margin-bottom: $std-gutter;
+		padding-left: $std-gutter;
+		width: 100%;
+	}
+	
+	@for $i from 0 to length($breakpoints) {
+		$bp: nth($breakpoints, $i + 1);
+		
+		@for $j from 0 to length($percentages) {
+			$pc: nth($percentages, $j + 1);
+			
+			.w#{floor($pc)}_at_#{$bp} {
+				@include media-query($bp) {
+					width: percentage($pc / 100);
+				}
+			}
+			
+			.clear_at_#{$bp} {
+				@include media-query($bp) {
+					clear: both;
+				}
+			}
+			
+			.unclear_at_#{$bp} {
+				@include media-query($bp) {
+					clear: none;
+				}
+			}
+		}
+	}
+}
+
 @mixin hover($pseudo: false) {
 	@if ($pseudo) {
 		@if type-of($pseudo) == 'list' {

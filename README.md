@@ -82,6 +82,13 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 	* Outputs base 64 SVG syntax for IE9 unless `$repeating` is true
 	* Outputs CSS3PIE syntax for LT IE9 unless the global `$use-pie-background` is `false` or `$repeating` is true
 
+* `grid($breakpoints: (480, 600, 768, 960), $percentages: (10, 20, 25, 30, 33.3333, 40, 50, 60, 66.6666, 70, 75, 80, 90, 100))`
+
+	Outputs relevant media queries and classes for Suzi's flexible and responsive grid system
+	
+	* `$breakpoints`: A list of the breakpoints (in pixels) that media queries and classes should be generated for (default: 480, 600, 768, 960))
+	* `$percentages`: A list of the class name percentages to be output for each breakpoint (default: 10, 20, 25, 30, 33.3333, 40, 50, 60, 66.6666, 70, 75, 80, 90, 100)
+
 * `hover($pseudo: false)`
 
 	Outputs `:hover` & `:focus` rules for the current element
