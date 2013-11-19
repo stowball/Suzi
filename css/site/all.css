@@ -21,6 +21,9 @@
 	CSS3PIE
 ----------------------------------------------- */
 /* --------------------------------------------
+	Constants
+----------------------------------------------- */
+/* --------------------------------------------
 	Viewport
 ----------------------------------------------- */
 @-moz-viewport {
@@ -416,59 +419,6 @@ img.float_left, img.float_right {
 }
 .menu.hover li > a:hover, .menu.hover li > a:focus {
   text-decoration: underline;
-}
-
-@media (min-width: 43.75em) {
-  ul.horizontal, div.horizontal:not(ul) ul:first-of-type {
-    display: table;
-    width: 100%;
-  }
-  ul.horizontal > li, div.horizontal:not(ul) ul:first-of-type > li {
-    display: table-cell;
-    vertical-align: top;
-  }
-  ul.horizontal > li > a, div.horizontal:not(ul) ul:first-of-type > li > a {
-    text-align: center;
-  }
-  .ltie8 ul.horizontal, .ltie8 div.horizontal:not(ul) ul:first-of-type {
-    min-height: 0;
-    display: block;
-  }
-  .ltie8 ul.horizontal:after, .ltie8 div.horizontal:not(ul) ul:first-of-type:after {
-    clear: both;
-    content: '.';
-    display: block;
-    height: 0;
-    visibility: hidden;
-  }
-  .ltie8 ul.horizontal > li, .ltie8 div.horizontal:not(ul) ul:first-of-type > li {
-    float: left;
-  }
-}
-ul.horizontal_always, .horizontal_always:not(ul) ul:first-of-type {
-  display: table;
-  width: 100%;
-}
-ul.horizontal_always > li, .horizontal_always:not(ul) ul:first-of-type > li {
-  display: table-cell;
-  vertical-align: top;
-}
-ul.horizontal_always > li > a, .horizontal_always:not(ul) ul:first-of-type > li > a {
-  text-align: center;
-}
-.ltie8 ul.horizontal_always, .ltie8 .horizontal_always:not(ul) ul:first-of-type {
-  min-height: 0;
-  display: block;
-}
-.ltie8 ul.horizontal_always:after, .ltie8 .horizontal_always:not(ul) ul:first-of-type:after {
-  clear: both;
-  content: '.';
-  display: block;
-  height: 0;
-  visibility: hidden;
-}
-.ltie8 ul.horizontal_always > li, .ltie8 .horizontal_always:not(ul) ul:first-of-type > li {
-  float: left;
 }
 
 .no_wrap {

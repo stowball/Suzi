@@ -17,3 +17,12 @@
 %pie-abs {
 	@include pie(absolute);
 }
+
+/* --------------------------------------------
+	Constants
+----------------------------------------------- */
+
+%horizontal {
+	@include horizontal;
+}
+

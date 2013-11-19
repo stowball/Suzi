@@ -380,14 +380,6 @@ img {
 	}
 }
 
-@media ($min em($main-nav-horizontal)) {
-	@import "partials/bp-horizontal";
-}
-
-ul.horizontal_always, .horizontal_always:not(ul) ul:first-of-type {
-	@include horizontal;
-}
-
 .no_wrap {
 	white-space: nowrap;
 }
