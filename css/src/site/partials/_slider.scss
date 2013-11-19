@@ -5,6 +5,9 @@
 .slider {
 	@include transition-timing-function($ease-in-out-quint);
 	
+	.resizing & {
+		@include transition-duration(0s !important);
+	}
 	> li {
 		.js & {
 			visibility: hidden;

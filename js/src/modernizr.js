@@ -1,5 +1,5 @@
-/* Modernizr 2.6.2 (Custom Build) | MIT & BSD
- * Build: http://modernizr.com/download/#-fontface-csstransforms-input-inputtypes-cssclasses-teststyles-testprop-testallprops-domprefixes-load
+/* Modernizr 2.6.3 (Custom Build) | MIT & BSD
+ * Build: http://modernizr.com/download/#-fontface-csstransforms-csstransforms3d-input-inputtypes-cssclasses-teststyles-testprop-testallprops-prefixes-domprefixes-load
  */
 ;
 
@@ -7,7 +7,7 @@
 
 window.Modernizr = (function( window, document, undefined ) {
 
-    var version = '2.6.2',
+    var version = '2.6.3',
 
     Modernizr = {},
 
@@ -23,7 +23,13 @@ window.Modernizr = (function( window, document, undefined ) {
 
     smile = ':)',
 
-    toString = {}.toString,    omPrefixes = 'Webkit Moz O ms',
+    toString = {}.toString,
+
+    prefixes = ' -webkit- -moz- -o- -ms- '.split(' '),
+
+
+
+    omPrefixes = 'Webkit Moz O ms',
 
     cssomPrefixes = omPrefixes.split(' '),
 
@@ -198,6 +204,18 @@ window.Modernizr = (function( window, document, undefined ) {
     };
 
 
+    tests['csstransforms3d'] = function() {
+
+        var ret = !!testPropsAll('perspective');
+
+                        if ( ret && 'webkitPerspective' in docElement.style ) {
+
+                      injectElementWithStyles('@media (transform-3d),(-webkit-transform-3d){#modernizr{left:9px;position:absolute;height:3px;}}', function( node, rule ) {
+            ret = node.offsetLeft === 9 && node.offsetHeight === 3;
+          });
+        }
+        return ret;
+    };
     tests['fontface'] = function() {
         var bool;
 
@@ -305,6 +323,7 @@ window.Modernizr = (function( window, document, undefined ) {
 
     Modernizr._version      = version;
 
+    Modernizr._prefixes     = prefixes;
     Modernizr._domPrefixes  = domPrefixes;
     Modernizr._cssomPrefixes  = cssomPrefixes;
 

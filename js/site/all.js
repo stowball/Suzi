@@ -154,7 +154,7 @@ var forms = {
 };
 
 var slider = {
-	swipejs: Modernizr.csstransforms && !(layoutEngine.vendor === 'ie' && layoutEngine.version === 9),
+	swipejs: Modernizr.csstransforms3d || layoutEngine.vendor === 'opera',
 	$imagesLazy: [],
 	
 	init: function() {
@@ -233,6 +233,22 @@ var slider = {
 					$this.addClass('multiple');
 					
 					if (slider.swipejs) {
+						
+						var hasResizeClass = false,
+							resizeSwipe = function() {
+								$html.removeClass('resizing');
+								hasResizeClass = false;
+							};
+						
+						$(window).resize(function() {
+							clearTimeout(window.resizeTimer);
+							if (!hasResizeClass) {
+								$html.addClass('resizing');
+								hasResizeClass = true;
+							}
+							window.resizeTimer = setTimeout(resizeSwipe, 250);
+						});
+						
 						if (pager) {
 							for (var i = 1; i <= slidesCount; i++) {
 								li += '<li><a href="#slide-' + i + '">Slide ' + i + '</a></li>';
@@ -386,6 +402,7 @@ var slider = {
 							cycleOpts = {
 								activePagerClass: 'current',
 								cleartypeNoBg: true,
+								easing: 'easeInOutQuint',
 								fx: 'scrollHorz',
 								pause: true,
 								speed: speed,
@@ -445,7 +462,7 @@ var slider = {
 							.attr('style', widthOverride);
 						
 						Modernizr.load({
-							load: '/js/jquery.cycle.all.min.js',
+							load: ['/js/jquery.cycle.all.min.js', '/js/jquery.easing.1.3.min.js'],
 							complete: function() {
 								$feature
 									.cycle(cycleOpts)
