@@ -18,17 +18,19 @@ a {
 }
 
 .feature {
+	text-decoration: none;
+	
 	&:after {
 		@include triangle;
 		margin-left: em(10px);
 	}
 	
-	@include hover(after) {
-		border-left-color: $std-hover-color;
+	&:visited:after {
+		border-left-color: $std-visited-color;
 	}
 	
-	&.smaller:after {
-		@include triangle(right, 4px, 8px);
+	@include hover(after) {
+		border-left-color: $std-hover-color;
 	}
 }
 
