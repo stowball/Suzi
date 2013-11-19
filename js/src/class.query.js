@@ -1,5 +1,5 @@
 /*!
- * Class Query v0.1.8
+ * Class Query v0.1.9
  *
  * Creates media queries from .classquery- classes for elements with data-classquery attributes
  *
@@ -84,13 +84,13 @@
 	
 	var stylesheets = getStylesheets(),
 		stylesheetsLength = stylesheets.length,
-		rules;
+		rules = [];
 	
 	for (var i = 0; i < stylesheetsLength; i++) {
-		rules = getRules(stylesheets[i]);
+		rules = rules.concat(getRules(stylesheets[i]));
 	}
 	
-	if (!rules || rules.length === 0)
+	if (rules.length === 0)
 		return;
 	
 	html.className += ' ' + classQuery + '-init';
