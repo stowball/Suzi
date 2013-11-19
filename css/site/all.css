@@ -86,7 +86,7 @@ font-family: font-stack;
   padding: 0;
 }
 
-.content_area > *:last-child, .content_area > ul:last-child > li:last-child, .content_area > ol:last-child > li:last-child {
+.content_area > *:last-child, .content_area > ul:last-child > li:last-child, .content_area > ol:last-child > li:last-child, th > *:last-child, th > ul:last-child > li:last-child, th > ol:last-child > li:last-child, td > *:last-child, td > ul:last-child > li:last-child, td > ol:last-child > li:last-child {
   margin-bottom: 0;
 }
 

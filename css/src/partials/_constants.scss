@@ -16,7 +16,7 @@
 	padding: 0;
 }
 
-.content_area > {
+.content_area >, th >, td > {
 	& *:last-child, & ul:last-child > li:last-child, & ol:last-child > li:last-child {
 		margin-bottom: 0;
 	}
