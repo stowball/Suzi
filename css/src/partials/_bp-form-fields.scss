@@ -8,7 +8,7 @@ label, .label {
 		
 		em {
 			position: absolute;
-			@include rem(right, -10px);
+			@include rem(right, $form-required-indicator-right);
 		}
 	}
 }
