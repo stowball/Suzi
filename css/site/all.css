@@ -1271,6 +1271,12 @@ select {
   border-color: #333333;
 }
 
+.btns > .btn {
+  background: 0 !important;
+  border: 0 !important;
+  padding: 0 !important;
+}
+
 /* --------------------------------------------
 	Carousels
 ----------------------------------------------- */
