@@ -112,9 +112,12 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 
 #### Class mixins
 
-* `classquery($class-name)`
+* `classquery($class-name, $output-ltie9-rule)`
 
-	Generates `.classquery-$class-name & .ltie9 [data-classquery*=".classquery-$class-name"]` selectors to be used with class.query.js to managed responsive content
+	Generates `.classquery-$class-name & (optional) .ltie9 [data-classquery*=".classquery-$class-name"]` selectors to be used with class.query.js to manage responsive content
+	
+	* `$class-name`: the class name to use (default: default)
+	* `$output-ltie9-rule`: whether to output the `.ltie9` rule. Set to false if the class is used for a max-width media query (default: true)
 
 * `clearfix`
 

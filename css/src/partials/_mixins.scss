@@ -102,9 +102,16 @@ $rem-with-px-fallback: true !default;
 //	Class Mixins
 // --------------------------------------------
 
-@mixin classquery($class-name) {
-	.classquery-#{$class-name}, .ltie9 [data-classquery*=".classquery-#{$class-name}"] {
-		@content
+@mixin classquery($class-name: default, $output-ltie9-rule: true) {
+	@if ($output-ltie9-rule == true) {
+		.classquery-#{$class-name}, .ltie9 [data-classquery*=".classquery-#{$class-name}"] {
+			@content;
+		}
+	}
+	@else {
+		.classquery-#{$class-name} {
+			@content;
+		}
 	}
 }
 
