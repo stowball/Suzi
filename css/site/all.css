@@ -1,4 +1,4 @@
-/* 
+/*
  * Suzi v1.1.7 (2013-10-28)
  * Sass UI framework by Izilla
  * http://izilla.com.au
@@ -554,7 +554,6 @@ sub, sup {
 	Root Defaults
 ----------------------------------------------- */
 html {
-  border: 0;
   min-height: 100%;
   overflow-y: scroll;
   -ms-text-size-adjust: 100%;
@@ -766,7 +765,6 @@ td, th {
 ----------------------------------------------- */
 fieldset {
   border: 0;
-  min-height: 0;
 }
 
 legend {

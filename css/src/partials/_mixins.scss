@@ -180,7 +180,7 @@ $rem-with-px-fallback: true !default;
 //	Media Query Mixins
 // --------------------------------------------
 
-@mixin media-query($value, $ltie9: $use-ltie9-mq-fallbacks, $operator: $min, $px: false) {	
+@mixin media-query($value, $ltie9: $use-ltie9-mq-fallbacks, $operator: $min, $px: false) {
 	@if ($px == false) {
 		@media (#{$operator} #{em($value)}) {
 			@content;
@@ -207,7 +207,7 @@ $rem-with-px-fallback: true !default;
 	}
 }
 
-@mixin media-query-and($first-value, $second-value, $ltie9: $use-ltie9-mq-fallbacks, $first-operator: $min, $second-operator: $max, $px: false) {	
+@mixin media-query-and($first-value, $second-value, $ltie9: $use-ltie9-mq-fallbacks, $first-operator: $min, $second-operator: $max, $px: false) {
 	@if ($px == false) {
 		@media (#{$first-operator} #{em($first-value)}) and (#{$second-operator} #{em($second-value)}) {
 			@content;
@@ -341,7 +341,7 @@ $rem-with-px-fallback: true !default;
 		}
 	}
 	
-	@if (length($nodes) > 1) {	
+	@if (length($nodes) > 1) {
 		@for $i from 0 to length($nodes) {
 			@if ($i % 2 == 0) {
 				$css: $css + ', ' + nth($nodes, ($i + 1));
@@ -833,7 +833,7 @@ $transitionable-prefixed-values: transform, transform-origin;
 	@for $i from 0 to length($trans-anim-prefixes) {
 		$combined-property: ();
 		
-		@for $j from 0 to length($property) {		
+		@for $j from 0 to length($property) {
 			$prop: nth($property, ($j + 1));
 			$prop-length: length($prop);
 			$prefixed-property: ();

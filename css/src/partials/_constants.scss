@@ -482,7 +482,6 @@ sub, sup {
 ----------------------------------------------- */
 
 html {
-	border: 0;
 	min-height: 100%;
 	overflow-y: scroll;
 	-ms-text-size-adjust: 100%;
@@ -623,7 +622,7 @@ li {
 	overflow: hidden;
 	@include rem(padding-left, $list-margin-left);
 	
-	@if ($is-responsive) {	
+	@if ($is-responsive) {
 		@include media-query($float-bp - 1, $max) {
 			clear: both;
 			overflow: visible;
@@ -680,13 +679,12 @@ td, th {
 
 fieldset {
 	border: 0;
-	min-height: 0;
 }
 
 legend {
 	left: -999em;
 	position: absolute;
-	top: -999em;	
+	top: -999em;
 }
 
 [data-legend]:before {
@@ -858,9 +856,9 @@ input.text, textarea, select {
 	overflow: visible;
 	text-decoration: none !important;
 	
-	&::-moz-focus-inner { 
-		border: 0; 
-		padding: 0; 
+	&::-moz-focus-inner {
+		border: 0;
+		padding: 0;
 	}
 	
 	@include hover {
