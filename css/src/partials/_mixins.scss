@@ -154,7 +154,7 @@ $rem-with-px-fallback: true !default;
 	@if ($width != false) {
 		width: $width;
 	}
-					
+	
 	@if ($height != false) {
 		height: $height;
 	}
@@ -364,11 +364,11 @@ $rem-with-px-fallback: true !default;
 		$fallback: nth($nodes, $x);
 		$css: unquote($css);
 		$svg: '<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 1 1" preserveAspectRatio="none"><linearGradient id="g522" gradientUnits="userSpaceOnUse" x1="' + $x1 + '" y1="' + $y1 + '" x2="' + $x2 + '" y2="' + $y2 + '">' + $svg-nodes + '</linearGradient><rect x="0" y="0" width="1" height="1" fill="url(#g522)" /></svg>';
-	
+		
 		@if ($use-background-property == false) {
 			$background: background-image;
 		}
-	
+		
 		@if ($use-background-fallback == true) {
 			@if ($use-background-property == false) {
 				background-color: $fallback;
@@ -377,7 +377,7 @@ $rem-with-px-fallback: true !default;
 				background: $fallback;
 			}
 		}
-	
+		
 		@if ($repeating == false) {
 			background-image: url('data:image/svg+xml;base64,' + base64Encode($svg));
 			#{$background}: -moz-linear-gradient($lgy-direction $css);
