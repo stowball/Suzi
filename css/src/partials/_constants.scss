@@ -432,6 +432,7 @@ pre {
 }
 
 .std_width {
+	@include box-sizing;
 	margin: auto;
 	@include rem(max-width, $site-width);
 }
