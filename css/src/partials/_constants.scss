@@ -75,6 +75,10 @@ blockquote, .cell, .centre_object, cite, .cols, .content_area, dl, .error, .flas
 	Constants
 ----------------------------------------------- */
 
+a, input, button {
+	-ms-touch-action: none !important;
+}
+
 a[name], a[name]:hover {
 	color: inherit !important;
 	text-decoration: none !important;
@@ -733,7 +737,7 @@ input {
 	cursor: pointer;
 }
 
-.btn, .btn_wrap, input.submit, input.text, label, .label, p.legend, select, textarea {
+.btn, .btn_wrap, button, [type="submit"], input.text, label, .label, p.legend, select, textarea {
 	@include box-sizing;
 	display: block;
 	font-family: $std-fontfamily;
@@ -778,7 +782,7 @@ input.text, textarea {
 	@include border-radius($form-input-border-radius);
 }
 
-input.submit, input.text, textarea, select {
+button, [type="submit"], input.text, textarea, select {
 	@include rem(font-size, $base-font-size);
 	
 	.no-touch & {
@@ -839,7 +843,7 @@ input.text, textarea, select {
 	width: auto;
 }
 
-.btn, .btn_wrap, input.submit {
+.btn, .btn_wrap, button, [type="submit"] {
 	-webkit-appearance: none;
 	@include border-radius($btn-border-radius);
 	color: $btn-text-color !important;

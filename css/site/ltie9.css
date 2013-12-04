@@ -92,7 +92,7 @@ img.float_right {
   margin-left: 0 !important;
 }
 
-input.submit {
+button, [type="submit"] {
   width: auto;
 }
 

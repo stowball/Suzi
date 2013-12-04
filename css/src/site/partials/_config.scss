@@ -31,9 +31,9 @@ $form-description-color: #888;
 $btn-background-color: #f6f8f9, 0%, #e5ebee, 50%, #d7dee3, 50%, #f2f5f7, 100%;
 $btn-border-color: #5d5d5d;
 $btn-text-color: #120c08;
-$btn-hover-background-color: #333;
-$btn-hover-border-color: #333;
-$btn-hover-text-color: #fff;
+$btn-hover-background-color: darken(#f6f8f9, 5%), 0%, darken(#e5ebee, 5%), 50%, darken(#d7dee3, 5%), 50%, darken(#f2f5f7, 5%), 100%;
+$btn-hover-border-color: darken($btn-border-color, 5%);
+$btn-hover-text-color: darken($btn-text-color, 5%);
 
 $error-border-color: #ddd;
 

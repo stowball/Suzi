@@ -64,7 +64,7 @@ select {
 	}
 }
 
-.btn, .btn_wrap[data-label], input.submit {
+.btn, .btn_wrap[data-label], button, [type="submit"] {
 	@include gradient($btn-background-color);
 	border: 1px solid $btn-border-color;
 	@include rem(padding, $form-btn-padding-vertical $form-btn-padding-horizontal);
@@ -74,12 +74,12 @@ select {
 	}
 	
 	@include hover {
-		@include background($btn-hover-background-color, true);
+		@include gradient($btn-hover-background-color);
 		border-color: $btn-hover-border-color;
 	}
 }
 
-// .buttons & .submits will render at different sizes. Modify as appropriate to make them equal
+// .btns & .submits will render at different sizes. Modify as appropriate to make them equal
 .btn, .btn_wrap[data-label] {
 	.ie &, .vendor-ie & {
 	}
@@ -91,7 +91,7 @@ select {
 	}
 }
 
-input.submit {
+button, [type="submit"] {
 	.ie &, .vendor-ie & {
 	}
 	
