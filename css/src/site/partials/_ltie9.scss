@@ -2,7 +2,7 @@
 	Behaviors
 ----------------------------------------------- */
 
-.btn, .btn_wrap[data-label], input.submit
+.btn, .btn_wrap[data-label], button, [type="submit"]
  {
 	@extend %pie;
 }
