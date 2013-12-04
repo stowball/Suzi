@@ -100,9 +100,21 @@ input[type="hidden"], .display_none, .js .js_display_none, .no_col_1 #col_1, .no
 /* --------------------------------------------
 	Consistent Margins
 ----------------------------------------------- */
-.std_margin, blockquote, .cell, .centre_object, cite, .cols, .content_area, dl, .error, .ok, .flash, fieldset, .fieldset, hr, iframe, ol, p, .panes, table, ul {
+.std_margin, blockquote, .cell, .centre_object, cite, .cols, .content_area, dl, .error, .ok, .flash, fieldset, .fieldset, hr, iframe, ol, p, .panes, table, ul, .std_mb {
   margin-bottom: 14px;
   margin-bottom: 0.875rem;
+}
+
+.std_m {
+  margin-bottom: 14px;
+  margin-bottom: 0.875rem;
+  margin-top: 14px;
+  margin-top: 0.875rem;
+}
+
+.std_mt {
+  margin-top: 14px;
+  margin-top: 0.875rem;
 }
 
 .dbl_m {
@@ -120,11 +132,6 @@ input[type="hidden"], .display_none, .js .js_display_none, .no_col_1 #col_1, .no
 .dbl_mt {
   margin-top: 28px;
   margin-top: 1.75rem;
-}
-
-.sm_mb {
-  margin-bottom: 4px;
-  margin-bottom: 0.25rem;
 }
 
 .no_mb {

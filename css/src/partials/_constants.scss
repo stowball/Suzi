@@ -34,8 +34,17 @@ input[type="hidden"], .display_none, .js .js_display_none, .no_col_1 #col_1, .no
 	Consistent Margins
 ----------------------------------------------- */
 
-.std_margin {
+.std_margin, .std_mb {
 	@include rem(margin-bottom, $std-margin);
+}
+
+.std_m {
+	@include rem(margin-bottom, $std-margin);
+	@include rem(margin-top, $std-margin);
+}
+
+.std_mt {
+	@include rem(margin-top, $std-margin);
 }
 
 .dbl_m {
@@ -49,10 +58,6 @@ input[type="hidden"], .display_none, .js .js_display_none, .no_col_1 #col_1, .no
 
 .dbl_mt {
 	@include rem(margin-top, $std-margin * 2);
-}
-
-.sm_mb {
-	@include rem(margin-bottom, $std-margin - 10);
 }
 
 .no_mb {
