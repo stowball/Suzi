@@ -48,10 +48,10 @@ h1, h2, h3, h4, h5, h6,
 }
 
 sub, sup {
-	font-size: em(12px);
+	font-size: em(12px, $std-fontsize);
 	
 	.ie &, .vendor-ie & {
-		font-size: em(14px);
+		font-size: em(14px, $std-fontsize);
 	}
 }
 
