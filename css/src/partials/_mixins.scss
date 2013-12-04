@@ -33,6 +33,10 @@ $rem-with-px-fallback: true !default;
 	}
 }
 
+@function percent($pixels, $context: $site-width) {
+	@return percentage($pixels / $context);
+}
+
 // @private Default font-size for all browsers
 // Convert any CSS <length> or <percentage> value to any other.
 @function convert-length($length, $to-unit, $from-context: $base-font-size, $to-context: $from-context) {

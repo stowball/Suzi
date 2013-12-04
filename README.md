@@ -60,6 +60,13 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 	* `$context`: context size in pixels (default: 16)
 	* `$unitless`: whether to omit the em unit (default: false)
 
+* `percent($pixels, $context: $site-width)`
+
+	Converts a pixel value to a percentage
+	
+	* `$pixels`: target size in pixels
+	* `$context`: context size in pixels (default: $site-width)
+
 #### Functional mixins
 
 * `rem($property, $values, $use-px-fallback: $rem-with-px-fallback)`
