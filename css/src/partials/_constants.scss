@@ -462,6 +462,18 @@ sub, sup {
 	text-transform: uppercase;
 }
 
+.valign_bottom {
+	vertical-align: bottom;
+}
+
+.valign_middle {
+	vertical-align: middle;
+}
+
+.valign_top {
+	vertical-align: top;
+}
+
 .video {
 	position: relative;
 	
@@ -653,6 +665,7 @@ caption {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+	table-layout: fixed;
 	width: 100%;
 }
 
