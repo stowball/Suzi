@@ -845,6 +845,7 @@ input.text, textarea, html:not(.browser-android) select {
 
 input.text, textarea {
   -webkit-appearance: none;
+  background-clip: padding-box;
   -webkit-border-radius: 3px;
   border-radius: 3px;
 }
@@ -961,6 +962,7 @@ textarea {
 
 .btn, .btn_wrap, input.submit {
   -webkit-appearance: none;
+  background-clip: padding-box;
   -webkit-border-radius: 3px;
   border-radius: 3px;
   color: #120c08 !important;
@@ -1003,6 +1005,7 @@ textarea {
 -----------------------------------------------*/
 .error, .ok {
   border: 1px solid #dddddd;
+  background-clip: padding-box;
   -webkit-border-radius: 8px;
   border-radius: 8px;
   padding: 15px;
@@ -1160,6 +1163,7 @@ sup {
 ----------------------------------------------- */
 ul > li:before {
   background: #111111;
+  background-clip: padding-box;
   -webkit-border-radius: 50%;
   border-radius: 50%;
   height: 5px;
@@ -1383,6 +1387,7 @@ select {
 }
 .carousel_nav_pager a {
   border: 1px solid #fff;
+  background-clip: padding-box;
   -webkit-border-radius: 50%;
   border-radius: 50%;
   overflow: hidden;

@@ -780,7 +780,11 @@ $transitionable-prefixed-values: transform, transform-origin;
 	}
 }
 
-@mixin border-radius($radius: 5px) {
+@mixin border-radius($radius: 5px, $background-clip: padding-box) {
+	@if ($background-clip != false) {
+		background-clip: $background-clip;
+	}
+	
 	-webkit-border-radius: $radius;
 	border-radius: $radius;
 }

@@ -175,9 +175,12 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 
 	Outputs a background rule with the $color specified. If $duplicate-as-pie is true, it will also output a -pie-background property (useful for overriding a gradient on hover, for example)
 
-* `border-radius($radius: 5px)`
+* `border-radius($radius: 5px, $background-clip: padding-box)`
 
-	Outputs -webkit and unprefixed `border-radius` with the value passed in (default: 5px)
+	Outputs -webkit and unprefixed `border-radius`
+	
+	* `$radius`: radius to use (default: 5px)
+	* `$background-clip`: which `background-clip` property to use (if any) (default: padding-box)
 
 * `box-shadow($shadow: 0 1px 3px rgba(0,0,0,.25))`
 
