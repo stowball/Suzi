@@ -238,13 +238,12 @@ a img, img[usemap] {
 img {
 	-moz-force-broken-image-icon: 1;
 	-ms-interpolation-mode: bicubic;
+	vertical-align: bottom;
 	
 	@if ($is-responsive == true) {
 		height: auto;
 		max-width: 100%;
 	}
-	
-	vertical-align: bottom;
 	
 	&.fixed, .ltie9 & {
 		max-width: none;

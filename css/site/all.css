@@ -304,9 +304,9 @@ a img, img[usemap] {
 img {
   -moz-force-broken-image-icon: 1;
   -ms-interpolation-mode: bicubic;
+  vertical-align: bottom;
   height: auto;
   max-width: 100%;
-  vertical-align: bottom;
 }
 img.fixed, .ltie9 img {
   max-width: none;
