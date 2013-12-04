@@ -2,7 +2,7 @@
 
 ## A responsive, Sass UI Framework by [Izilla](http://izilla.com.au)
 
-### v1.1.8 (2013-11-19)
+### v1.1.9 (2013-12-04)
 
 Suzi is the starting point for all of our web projects and a culmination of 6+ years' experience in maintaining a front-end framework.
 
@@ -230,8 +230,8 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 * `transform($transform-function: none)`
 
 	Outputs, -ms, -moz, -o, -webkit and unprefixed `transform` with the value passed in (default: none)
-
 * `transform-origin($transform-origin: 50% 50% 0)`
+
 
 	Outputs, -ms, -moz, -o, -webkit and unprefixed `transform-origin` with the value passed in (default: 50% 50% 0)
 
