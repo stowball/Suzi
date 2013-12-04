@@ -889,6 +889,13 @@ $transitionable-prefixed-values: transform, transform-origin;
 	}
 }
 
+@mixin transform-origin($transform-origin: 50% 50% 0) {
+	$additional-trans-anim-prefixes: join(-ms-, $trans-anim-prefixes);
+	@for $i from 0 to length($additional-trans-anim-prefixes) {
+		#{nth($additional-trans-anim-prefixes, ($i + 1))}transform-origin: $transform-origin;
+	}
+}
+
 @mixin transition($property: all ease 0.2s) {
 	@for $i from 0 to length($trans-anim-prefixes) {
 		$combined-property: ();

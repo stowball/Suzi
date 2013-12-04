@@ -231,6 +231,10 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 
 	Outputs, -ms, -moz, -o, -webkit and unprefixed `transform` with the value passed in (default: none)
 
+* `transform-origin($transform-origin: 50% 50% 0)`
+
+	Outputs, -ms, -moz, -o, -webkit and unprefixed `transform-origin` with the value passed in (default: 50% 50% 0)
+
 * `transition($property: all ease 0.2s)`
 
 	Outputs, -moz, -o, -webkit and unprefixed `transition` with the value passed in (default: all ease 0.2s)
