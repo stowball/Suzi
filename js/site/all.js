@@ -3,6 +3,8 @@
 $(document).ready(function(e) {
 	$html.addClass('jquery');
 	
+	FastClick.attach(document.body);
+	
 	placeholder.init();
 	forms.init();
 	slider.init();
