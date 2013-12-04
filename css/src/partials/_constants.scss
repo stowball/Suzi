@@ -951,6 +951,36 @@ input.text, textarea, select {
 }
 
 /* --------------------------------------------
+	Accordions
+----------------------------------------------- */
+
+.accordion {
+	.js & {
+		visibility: hidden;
+	}
+	
+	.jquery & {
+		visibility: visible;
+	}
+}
+
+.accordion_toggler {
+	display: block;
+	text-decoration: none;
+}
+
+.accordion_content {
+	.js & {
+		height: 0;
+		overflow: hidden;
+	}
+	
+	.js .open + & {
+		height: auto;
+	}
+}
+
+/* --------------------------------------------
 	Site
 ----------------------------------------------- */
 

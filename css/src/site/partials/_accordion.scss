@@ -1,0 +1,5 @@
+.accordion_content {
+	.js & {
+		@include transition(height ease 0.7s);
+	}
+}

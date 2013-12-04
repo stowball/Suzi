@@ -1059,6 +1059,29 @@ textarea {
 }
 
 /* --------------------------------------------
+	Accordions
+----------------------------------------------- */
+.js .accordion {
+  visibility: hidden;
+}
+.jquery .accordion {
+  visibility: visible;
+}
+
+.accordion_toggler {
+  display: block;
+  text-decoration: none;
+}
+
+.js .accordion_content {
+  height: 0;
+  overflow: hidden;
+}
+.js .open + .accordion_content {
+  height: auto;
+}
+
+/* --------------------------------------------
 	Site
 ----------------------------------------------- */
 .no_col_1.no_col_3 #col_2 {
@@ -1369,6 +1392,13 @@ select {
 }
 .carousel_nav_pager .current a {
   background: #fff;
+}
+
+.js .accordion_content {
+  -moz-transition: height ease 0.7s;
+  -o-transition: height ease 0.7s;
+  -webkit-transition: height ease 0.7s;
+  transition: height ease 0.7s;
 }
 
 /* --------------------------------------------

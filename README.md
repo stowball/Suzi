@@ -17,7 +17,7 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 * Simple form validation
 * Responsive, lazy-load, touch-friendly carousels with optional navigation & pagination, analytics tracking & cookie-based remembering of last visible slide
 * Simple, accessible JavaScript tabs with cookie-based remembering of the open pane
-* Simple, accessible JavaScript accordions with cookie-based remembering of the open pane
+* Simple, accessible JavaScript accordions which transition to and from `height: auto`, and support multiple open panes
 * Tabs instead of spaces :)
 
 ---

@@ -587,47 +587,101 @@ var tabs = {
 var accordion = {
 	init: function() {
 		var $accordion = $('.accordion');
-		if ($accordion.length) {
-			$accordion.each(function(index) {
-				var $this = $(this),
-					$accordionLinks = $this.find('> ul > li > a'),
-					$accordionContent = $this.find($('.accordion_content')),
-					accordionID = 'accordionid-' + window.location.pathname + '-' + index,
-					accordionCookie = cookie.read(accordionID);
-				
-				$accordionContent.attr('aria-hidden', true);
-				
-				$accordionLinks.each(function(idx) {
-					var $this = $(this);
-					
-					if (accordionCookie) {
-						if (parseInt(accordionCookie) === idx) {
-							$accordionLinks.removeClass('open');
-							$this.addClass('open');
-							$accordionContent.eq(idx).attr('aria-hidden', false);
-						}
-					}
-					else {
-						if ($this.hasClass('open')) {
-							$accordionContent.eq(idx).attr('aria-hidden', false);
-							cookie.set(accordionID, idx);
-						}
-					}
-					
-					$this.on('click', function(e) {
-						e.preventDefault();
-						$accordionContent.attr('aria-hidden', true);
-						$accordionLinks.removeClass('open');
+		
+		if ($accordion.length > 0) {
+			Modernizr.load({
+				load: '/js/jquery.transit.min.js',
+				complete: function() {
+					$accordion.each(function(index) {
+						var $this = $(this),
+							multiple = $this.data('multiple'),
+							$accordionLinks = $this.find('.accordion_toggler'),
+							$accordionContent = $this.find('.accordion_content'),
+							accordionID = 'accordionid-' + window.location.pathname + '-' + index,
+							accordionCookie = cookie.read(accordionID);
 						
-						var $this = $(this);
+						$accordionContent.each(function(idx) {
+							if (window.getComputedStyle) {
+								var $this = $(this),
+									transitionDuration = window.getComputedStyle(this).getPropertyValue('transition-duration') || window.getComputedStyle(this).getPropertyValue('-webkit-transition-duration'),
+									transitionTimingFunction = window.getComputedStyle(this).getPropertyValue('transition-timing-function') || window.getComputedStyle(this).getPropertyValue('-webkit-transition-timing-function');
+								
+								if (transitionDuration.match(/\d+s$/g))
+									transitionDuration = parseFloat(transitionDuration) * 1000;
+								else
+									transitionDuration = parseInt(transitionDuration);
+								
+								$this.attr('aria-hidden', true).data('transition-duration', transitionDuration).data('transition-timing-function', transitionTimingFunction);
+							}
+						});
 						
-						$this.addClass('open');
-						$this.next().attr('aria-hidden', false);
-						
-						cookie.set(accordionID, idx);
-						trackEvent('Website', 'Accordions', accordionID + '-' + idx);
+						$accordionLinks.each(function(idx) {
+							var $this = $(this),
+								$accordionContentIndex = $accordionContent.eq(idx);
+							
+							if (accordionCookie || !multiple) {
+								if (parseInt(accordionCookie) === idx) {
+									$accordionLinks.removeClass('open');
+									$this.addClass('open is_open');
+									$accordionContentIndex.attr('aria-hidden', false);
+									$accordionContentIndex.css('height', $accordionContentIndex.height());
+								}
+							}
+							else {
+								if ($this.hasClass('open')) {
+									$this.addClass('is_open');
+									$accordionContentIndex.attr('aria-hidden', false);
+									$accordionContentIndex.css('height', $accordionContentIndex.height());
+									
+									if (!multiple)
+										cookie.set(accordionID, idx);
+								}
+							}
+							
+							$this.on('click', function(e) {
+								e.preventDefault();
+								
+								var $this = $(this),
+									$accordionContentSibling = $this.next(),
+									transitionPropertyValue = 'auto',
+									transitionDuration = $accordionContentSibling.data('transition-duration'),
+									transitionTimingFunction = $accordionContentSibling.data('transition-timing-function'),
+									ariaHidden = false;
+								
+								if (!multiple) {
+									$accordionLinks.removeClass('open');
+									$accordionContent.each(function(index) {
+										if (index === idx)
+											$(this).attr('aria-hidden', false).removeClass('is_open').transition({height: transitionPropertyValue}, transitionDuration, transitionTimingFunction);
+										else
+											$(this).attr('aria-hidden', true).addClass('is_open').transition({height: 0}, transitionDuration, transitionTimingFunction);
+									});
+								}
+								else {
+									$this.removeClass('open').toggleClass('is_open');
+									
+									if ($accordionContentSibling.attr('aria-hidden') == 'false') {
+										ariaHidden = true;
+										transitionPropertyValue = 0;
+									}
+									
+									$accordionContentSibling.attr('aria-hidden', ariaHidden).transition({height: transitionPropertyValue}, transitionDuration, transitionTimingFunction);
+								}
+								
+								if (!multiple) {
+									cookie.set(accordionID, idx);
+									trackEvent('Website', 'Accordions', accordionID + '-' + idx);
+								}
+							});
+						});
 					});
-				});
+					
+					if (window.getComputedStyle) {
+						var style = document.createElement('style');
+						style.appendChild(document.createTextNode('.jquery .accordion_content { -moz-transition: none; -o-transition: none; -webkit-transition: none; transition: none; }'));
+						document.head.appendChild(style);
+					}
+				}
 			});
 		}
 	}
