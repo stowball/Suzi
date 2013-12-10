@@ -85,7 +85,7 @@ ul > li {
 td, th {
 	border: solid darken($std-table-color, 5%);
 	border-width: 1px 0;
-	@include rem(padding, 15px 20px);
+	@include rem(padding, 15px 20px !important);
 	text-align: left;
 	text-shadow: 0 1px 1px #fff;
 	

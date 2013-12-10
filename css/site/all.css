@@ -1213,8 +1213,8 @@ ul > li:before {
 td, th {
   border: solid #ebebeb;
   border-width: 1px 0;
-  padding: 15px 20px;
-  padding: 0.9375rem 1.25rem;
+  padding: 15px 20px !important;
+  padding: 0.9375rem 1.25rem !important;
   text-align: left;
   text-shadow: 0 1px 1px #fff;
 }
