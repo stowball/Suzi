@@ -1,5 +1,5 @@
 /*!
- * Class Query v0.1.9
+ * Class Query v0.2.0
  *
  * Creates media queries from .classquery- classes for elements with data-classquery attributes
  *
@@ -51,7 +51,7 @@
 	}
 	
 	function isInline(stylesheet) {
-		return stylesheet.ownerNode.constructor === HTMLStyleElement;
+		return !stylesheet.ownerNode ? false : stylesheet.ownerNode.constructor === HTMLStyleElement;
 	}
 	
 	function isValidExternal(stylesheet) {
