@@ -737,6 +737,11 @@ td, th {
   vertical-align: top !important;
 }
 
+.ie9_grid_dummy td {
+  background: none !important;
+  padding: 0 !important;
+}
+
 /* --------------------------------------------
 	Forms
 ----------------------------------------------- */

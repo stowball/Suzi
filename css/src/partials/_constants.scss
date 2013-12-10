@@ -687,6 +687,13 @@ td, th {
 	}
 }
 
+.ie9_grid_dummy {
+	td {
+		background: none !important;
+		padding: 0 !important;
+	}
+}
+
 /* --------------------------------------------
 	Forms
 ----------------------------------------------- */

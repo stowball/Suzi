@@ -10,6 +10,7 @@ $(document).ready(function(e) {
 	slider.init();
 	tabs.init();
 	accordion.init();
+	tables.init();
 	
 	$('img.rwd').rwdImages({
 		display: 'block'
@@ -684,6 +685,19 @@ var accordion = {
 				}
 			});
 		}
+	}
+};
+
+var tables = {
+	init: function() {
+		if (layoutEngine.vendor === 'ie' && layoutEngine.version === 9)
+			this.gridFix();
+	},
+	
+	gridFix: function() {
+		$('table').each(function() {
+			$(this).append('<tr class="ie9_grid_dummy"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>');
+		});
 	}
 };
 
