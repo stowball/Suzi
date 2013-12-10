@@ -10,7 +10,9 @@
 	Constants
 ----------------------------------------------- */
 
-
+.std_width {
+	min-width: $site-width;
+}
 
 /* --------------------------------------------
 	Simple Customisations
