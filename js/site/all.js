@@ -78,31 +78,29 @@ var cookie = {
 
 var placeholder = {
 	init: function() {
-		var pl = 'placeholder';
-		
 		if (!Modernizr.input.placeholder) {
-			var $placeholder = $('['+pl+']');
+			var $placeholder = $('[placeholder]');
 			
 			$placeholder.focus(function() {
 				var input = $(this);
-				if (input.val() == input.attr(pl))
-					input.val('').removeClass(pl);
+				if (input.val() == input.attr('placeholder'))
+					input.val('').removeClass('placeholder');
 			}).blur(function() {
 				var input = $(this);
-				if (input.val() == '' || input.val() == input.attr(pl))
-					input.addClass(pl).val(input.attr(pl));
+				if (input.val() == '' || input.val() == input.attr('placeholder'))
+					input.addClass('placeholder').val(input.attr('placeholder'));
 			}).blur();
 			
 			$placeholder.parents('form').on('submit', function() {
-				$(this).find('['+pl+']').each(function() {
+				$(this).find('[placeholder]').each(function() {
 					var $input = $(this);
-					if ($input.val() == $input.attr(pl))
+					if ($input.val() == $input.attr('placeholder'))
 						$input.val('');
 				});
 			});
 		}
 		
-		$html.addClass(pl);
+		$html.addClass('placeholder');
 	}
 };
 
