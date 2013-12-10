@@ -517,12 +517,6 @@ body {
 	@include font-size-line-height($std-fontsize, $std-lineheight);
 	min-height: 100%;
 	
-	@if ($is-responsive == true) {
-		@include media-query(1px, false) {
-			overflow-x: hidden;
-		}
-	}
-	
 	.vendor-ie:not(.ltie9) & {
 		@include line-height($std-lineheight + 1, $std-fontsize);
 	}
