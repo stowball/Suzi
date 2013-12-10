@@ -82,19 +82,19 @@ var placeholder = {
 			var $placeholder = $('[placeholder]');
 			
 			$placeholder.focus(function() {
-				var input = $(this);
-				if (input.val() == input.attr('placeholder'))
-					input.val('').removeClass('placeholder');
+				var $input = $(this);
+				if ($input.val() === $input.attr('placeholder'))
+					$input.val('').removeClass('placeholder');
 			}).blur(function() {
-				var input = $(this);
-				if (input.val() == '' || input.val() == input.attr('placeholder'))
-					input.addClass('placeholder').val(input.attr('placeholder'));
+				var $input = $(this);
+				if ($input.val() === '' || $input.val() === $input.attr('placeholder'))
+					$input.addClass('placeholder').val($input.attr('placeholder'));
 			}).blur();
 			
 			$placeholder.parents('form').on('submit', function() {
 				$(this).find('[placeholder]').each(function() {
 					var $input = $(this);
-					if ($input.val() == $input.attr('placeholder'))
+					if ($input.val() === $input.attr('placeholder'))
 						$input.val('');
 				});
 			});
