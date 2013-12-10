@@ -552,6 +552,11 @@ body {
   line-height: 1.42857;
   min-height: 100%;
 }
+@media (min-width: 0.0625em) {
+  body {
+    overflow-x: hidden;
+  }
+}
 .vendor-ie:not(.ltie9) body {
   line-height: 1.5;
 }
