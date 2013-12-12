@@ -1,6 +1,17 @@
 {
   "name": "Suzi",
   "version": "1.2.0",
+  "path": {
+    "css": {
+      "site": "css/site",
+      "src": "css/src",
+    },
+    "js": {
+      "base": "js/",
+      "site": "js/site",
+      "build": "js/build"
+    }
+  }
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-sass": "~0.6.0",
