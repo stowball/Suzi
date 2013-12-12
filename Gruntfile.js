@@ -9,8 +9,8 @@ module.exports = function (grunt) {
           style: 'compressed'
         },
         files: {
-          'css/site/all.css': 'css/src/all.scss',
-          'css/site/ltie9.css': 'css/src/ltie9.scss'
+          '<%= pkg.path.css.site %>/all.css': 'css/src/all.scss',
+          '<%= pkg.path.css.site %>': '<%= pkg.path.css.src %>/ltie9.scss'
         }
       }
     },
@@ -18,36 +18,36 @@ module.exports = function (grunt) {
     concat: {
       base: {
         src: [
-          'js/cssua.min.js',
-          'js/modernizr.min.js',
-          'js/supports.touch.min.js',
-          'js/izilla.gup.min.js',
-          'js/layout.engine.min.js',
-          'js/mq.genie.min.js'
+          '<%= pkg.path.js.base %>/cssua.min.js',
+          '<%= pkg.path.js.base %>/modernizr.min.js',
+          '<%= pkg.path.js.base %>/supports.touch.min.js',
+          '<%= pkg.path.js.base %>/izilla.gup.min.js',
+          '<%= pkg.path.js.base %>/layout.engine.min.js',
+          '<%= pkg.path.js.base %>/mq.genie.min.js'
         ],
-        dest: 'js/build/base.js'
+        dest: '<%= pkg.path.js.build %>/base.js'
       },
       all: {
         src: [
-          'js/class.query.min.js',
-          'js/jquery.rwdImages.min.js',
-          'js/swipe.min.js',
-          'js/firefox.hwa.min.js',
-          'js/fastclick.min.js',
-          'js/site/all.js'
+          '<%= pkg.path.js.base %>/class.query.min.js',
+          '<%= pkg.path.js.base %>/jquery.rwdImages.min.js',
+          '<%= pkg.path.js.base %>/swipe.min.js',
+          '<%= pkg.path.js.base %>/firefox.hwa.min.js',
+          '<%= pkg.path.js.base %>/fastclick.min.js',
+          '<%= pkg.path.js.base %>/site/all.js'
         ],
-        dest: 'js/build/all.js'
+        dest: '<%= pkg.path.js.build %>/all.js'
       }
     },
     
     uglify: {
       base: {
-        src: 'js/build/base.js',
-        dest: 'js/build/base.min.js'
+        src: '<%= pkg.path.js.build %>/base.js',
+        dest: '<%= pkg.path.js.build %>/base.min.js'
       },
       all: {
-        src: 'js/build/all.js',
-        dest: 'js/build/all.min.js'
+        src: '<%= pkg.path.js.build %>/all.js',
+        dest: '<%= pkg.path.js.build %>/all.min.js'
       }
     },
     
