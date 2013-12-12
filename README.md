@@ -2,7 +2,7 @@
 
 ## A responsive, Sass UI Framework by [Izilla](http://izilla.com.au)
 
-### v1.1.9 (2013-12-04)
+### v1.2.0 (2013-12-12)
 
 Suzi is the starting point for all of our web projects and a culmination of 6+ years' experience in maintaining a front-end framework.
 
@@ -26,8 +26,12 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 
 1. Install [Ruby](http://www.ruby-lang.org) *(and add it to your Path Environment Variable on Windows)*
 2. Install [Sass](http://sass-lang.com)
+3. Install [node.js](http://nodejs.org)
 3. Download or clone Suzi
-4. Run sassqwatch.bat *(on Windows)* or bash sassqwatch.sh *(on Mac)*
+4. If using Grunt, in a shell:
+	1. `npm install` *(first-run only)*
+	2. `grunt`
+5. If using Sass only, run sassqwatch.bat *(on Windows)* or bash sassqwatch.sh *(on Mac)*
 
 ---
 
