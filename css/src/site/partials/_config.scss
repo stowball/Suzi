@@ -11,7 +11,7 @@ $blockquote-bg-color: #edece6;
 
 $std-link-color: #00e;
 $std-hover-color: #e00;
-$std-visited-color: #551a8b;
+$std-visited-color: mix(#551a8b, $text-color, 60%);
 
 $alt-link-color: #ff1;
 $alt-hover-color: #1ff;

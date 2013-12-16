@@ -1132,7 +1132,7 @@ a {
   text-decoration: underline;
 }
 a:visited {
-  color: #551a8b;
+  color: #39165a;
   text-decoration: underline;
 }
 a:hover, a:focus {
@@ -1156,7 +1156,7 @@ a:hover, a:focus {
   margin-left: 0.625em;
 }
 .feature:visited:after {
-  border-left-color: #551a8b;
+  border-left-color: #39165a;
 }
 .feature:hover:after, .feature:focus:after {
   border-left-color: #ee0000;
