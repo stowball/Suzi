@@ -1,6 +1,6 @@
 # Suzi
 
-## A responsive, Sass UI Framework by [Izilla](http://izilla.com.au)
+## A responsive, Sass and Grunt UI Framework by [Izilla](http://izilla.com.au)
 
 ### v1.2.0 (2013-12-16)
 
@@ -18,6 +18,10 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 * Responsive, lazy-load, touch-friendly carousels with optional navigation & pagination, analytics tracking & cookie-based remembering of last visible slide
 * Simple, accessible JavaScript tabs with cookie-based remembering of the open pane
 * Simple, accessible JavaScript accordions which transition to and from `height: auto`, and support multiple open panes
+* Simple, but powerful HTML templating using grunt-includereplace
+* Concatenation and minification of CSS and JS files with grunt-contrib-concat and grunt-contrib-uglify
+* Cache busting of CSS and JS assets with a unique timestamp querystring
+* Optimising of images with grunt-imagemin
 * Tabs instead of spaces :)
 
 ---
@@ -26,21 +30,28 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 
 1. Install [Ruby](http://www.ruby-lang.org) *(and add it to your Path Environment Variable on Windows)*
 2. Install [Sass](http://sass-lang.com)
-3. Download or clone Suzi
-4. Run sassqwatch.bat *(on Windows)* or bash sassqwatch.sh *(on Mac)*
+3. Install [node.js](http://nodejs.org) *(and add it to your Path Environment Variable on Windows)*
+4. Open a shell window and install the Grunt CLI with `npm install -g grunt-cli`
+5. [Download](https://github.com/izilla/Suzi/archive/master.zip) or [clone](https://github.com/izilla/Suzi.git) Suzi
+6. Open a shell window in the Suzi root directory
+7. Run `npm install` to install Suzi's Grunt dependencies
 
 ---
 
 ### Usage
 
+1. In a shell window, run `grunt` or open gruntwatch.bat for quick access in Windows `
+
 * Set up variables for colors, fonts, sizes, breakpoints, etc in /css/site/partials/_config.scss
 * Add @font-face declarations to /css/site/partials/_fonts.scss
 * Make simple customisations to links, headings, lists & tables in /css/site/partials/_simple.scss
 * Make simple customisations to form elements in /css/site/partials/_forms.scss
-* Modify the carousels in /css/site/partials/_slider.scss
+* Modify the carousels in /css/site/partials/_carousel.scss
 * Create and add site specific partials to /css/site/partials/_site.scss
 * Add any LT IE9 overrides to /css/site/partials/_ltie9.scss
 * Add any print overrides to /css/site/partials/_print.scss
+
+To use the Sass-only features of Suzi, run sassqwatch.bat *(on Windows)* or bash sassqwatch.sh *(on Mac)*
 
 ---
 
