@@ -26,14 +26,16 @@
 
 @import "partials/bp-form-fields";
 
-.f_row label, .f_row .label, p.legend {
-	.ltie8 & {
-		width: $form-label-width - $form-label-margin;
+@if ($form-bp > 0) {
+	.f_row label, .f_row .label, p.legend {
+		.ltie8 & {
+			width: $form-label-width - $form-label-margin;
+		}
 	}
-}
-
-.btns, .f_comment, .rc ul, .required {
-	.ltie8 & {
-		margin-left: ($form-label-margin + $form-label-width) - $form-label-margin;
+	
+	.btns, .f_comment, .rc ul, .required {
+		.ltie8 & {
+			margin-left: ($form-label-margin + $form-label-width) - $form-label-margin;
+		}
 	}
 }

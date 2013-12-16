@@ -1,56 +1,58 @@
-label, .label {
-	.f_row & {
-		@include rem(margin-top, $form-margin / 2);
-				
-		.ie &, .vendor-ie & {
-			@include rem(margin-top, ($form-margin / 2) + 1);
-		}
-		
-		em {
-			position: absolute;
-			@include rem(right, $form-required-indicator-right);
+@if ($form-bp > 0) {
+	label, .label {
+		.f_row & {
+			@include rem(margin-top, $form-margin / 2);
+					
+			.ie &, .vendor-ie & {
+				@include rem(margin-top, ($form-margin / 2) + 1);
+			}
+			
+			em {
+				position: absolute;
+				@include rem(right, $form-required-indicator-right);
+			}
 		}
 	}
-}
-
-.f_row label, .f_row .label, p.legend {
-	display: inline-block;
-	margin-right: $form-label-margin;
-	position: relative;
-	text-align: right;
-	width: $form-label-width;
-}
-
-.f_row input.text, .f_row textarea, .f_row select, .rc.legend ul {
-	display: inline-block;
-	@include rem(margin-left, $std-whitespace-margin);
-	width: (100% - ($form-label-margin + $form-label-width) + $form-input-width-adjuster);
-}
-
-.f_row.block {
-	label, .label, input.text, textarea, select {
-		display: block;
-		margin-bottom: $form-label-margin;
-		margin-left: 0;
-		margin-right: 0;
-		text-align: left;
-		width: 100%;
+	
+	.f_row label, .f_row .label, p.legend {
+		display: inline-block;
+		margin-right: $form-label-margin;
+		position: relative;
+		text-align: right;
+		width: $form-label-width;
 	}
-}
-
-.rc.legend ul {
-	@include rem(margin-left, $std-whitespace-margin * 2);
-}
-
-.btns, .f_comment, .rc:not(.legend) ul, .required {
-	padding-left: $form-label-margin + $form-label-width;
-	@include rem(margin-left, $std-whitespace-margin);
-}
-
-.btns {
-	margin-left: 0 !important;
-}
-
-button, [type="submit"] {
-	width: auto;
+	
+	.f_row input.text, .f_row textarea, .f_row select, .rc.legend ul {
+		display: inline-block;
+		@include rem(margin-left, $std-whitespace-margin);
+		width: (100% - ($form-label-margin + $form-label-width) + $form-input-width-adjuster);
+	}
+	
+	.f_row.block {
+		label, .label, input.text, textarea, select {
+			display: block;
+			margin-bottom: $form-label-margin;
+			margin-left: 0;
+			margin-right: 0;
+			text-align: left;
+			width: 100%;
+		}
+	}
+	
+	.rc.legend ul {
+		@include rem(margin-left, $std-whitespace-margin * 2);
+	}
+	
+	.btns, .f_comment, .rc:not(.legend) ul, .required {
+		padding-left: $form-label-margin + $form-label-width;
+		@include rem(margin-left, $std-whitespace-margin);
+	}
+	
+	.btns {
+		margin-left: 0 !important;
+	}
+	
+	button, [type="submit"] {
+		width: auto;
+	}
 }
