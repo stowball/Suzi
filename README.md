@@ -177,10 +177,30 @@ To use the Sass-only features of Suzi, run sassqwatch.bat *(on Windows)* or bash
 * `animation-delay($value: 1s)`
 
 	Outputs -moz, -o-, -webkit and unprefixed `animation-delay` with the value passed in (default: 1s)
-	
+
+* `animation-direction($value: normal)`
+
+	Outputs -moz, -o-, -webkit and unprefixed `animation-direction` with the value passed in (default: normal)
+
 * `animation-duration($value: 1s)`
 
 	Outputs -moz, -o-, -webkit and unprefixed `animation-duration` with the value passed in (default: 1s)
+
+* `animation-fill-mode($value: none)`
+
+	Outputs -moz, -o-, -webkit and unprefixed `animation-fill-mode` with the value passed in (default: none)
+
+* `animation-iteration-count($value: 1)`
+
+	Outputs -moz, -o-, -webkit and unprefixed `animation-iteration-count` with the value passed in (default: 1)
+
+* `animation-name($value: default)`
+
+	Outputs -moz, -o-, -webkit and unprefixed `animation-name` with the value passed in (default: default)
+
+* `animation-timing-function($value: ease)`
+
+	Outputs -moz, -o-, -webkit and unprefixed `animation-timing-function` with the value passed in (default: ease)
 
 * `background($color, $duplicate-as-pie: false)`
 

@@ -767,9 +767,38 @@ $transitionable-prefixed-values: transform, transform-origin;
 	}
 }
 
+@mixin animation-direction($value: normal) {
+	@for $i from 0 to length($trans-anim-prefixes) {
+		#{nth($trans-anim-prefixes, ($i + 1))}animation-direction: $value;
+	}
+}
 @mixin animation-duration($value: 1s) {
 	@for $i from 0 to length($trans-anim-prefixes) {
 		#{nth($trans-anim-prefixes, ($i + 1))}animation-duration: $value;
+	}
+}
+
+@mixin animation-fill-mode($value: none) {
+	@for $i from 0 to length($trans-anim-prefixes) {
+		#{nth($trans-anim-prefixes, ($i + 1))}animation-fill-mode: $value;
+	}
+}
+
+@mixin animation-iteration-count($value: 1) {
+	@for $i from 0 to length($trans-anim-prefixes) {
+		#{nth($trans-anim-prefixes, ($i + 1))}animation-iteration-count: $value;
+	}
+}
+
+@mixin animation-name($value: default) {
+	@for $i from 0 to length($trans-anim-prefixes) {
+		#{nth($trans-anim-prefixes, ($i + 1))}animation-name: $value;
+	}
+}
+
+@mixin animation-timing-function($value: ease) {
+	@for $i from 0 to length($trans-anim-prefixes) {
+		#{nth($trans-anim-prefixes, ($i + 1))}animation-timing-function: $value;
 	}
 }
 
