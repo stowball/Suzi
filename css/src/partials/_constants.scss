@@ -498,6 +498,7 @@ html {
 	background: #fff;
 	min-height: 100%;
 	overflow-y: scroll;
+	-ms-overflow-style: scrollbar;
 	-ms-text-size-adjust: 100%;
 	-webkit-text-size-adjust: 100%;
 	
@@ -507,8 +508,8 @@ html {
 		}
 	}
 	
-	&.no-touch {
-		-ms-overflow-style: scrollbar;
+	@include media-query(776px, false, $max) {
+		-ms-overflow-style: auto;
 	}
 }
 
