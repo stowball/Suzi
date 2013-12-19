@@ -15,13 +15,13 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 * Starter content styles, including clean typography, lists, tables, etc
 * Starter form element styles: stacked on small-screen to 2-column at the breakpoint of your choice
 * Simple form validation
-* Responsive, lazy-load, touch-friendly carousels with optional navigation & pagination, analytics tracking & cookie-based remembering of last visible slide
+* Responsive, lazy-loaded, touch-friendly carousels with optional navigation & pagination, analytics tracking & cookie-based remembering of last visible slide
 * Simple, accessible JavaScript tabs with cookie-based remembering of the open pane
 * Simple, accessible JavaScript accordions which transition to and from `height: auto`, and support multiple open panes
-* Simple, but powerful HTML templating using grunt-includereplace
-* Concatenation and minification of CSS and JS files with grunt-contrib-concat and grunt-contrib-uglify
+* Simple, but powerful HTML templating using [grunt-includereplace](https://github.com/alanshaw/grunt-include-replace)
+* Concatenation and minification of CSS and JS files with [grunt-contrib-concat](https://github.com/gruntjs/grunt-contrib-concat) and [grunt-contrib-uglify](https://github.com/gruntjs/grunt-contrib-uglify)
 * Cache busting of CSS and JS assets with a unique timestamp querystring
-* Optimising of images with grunt-imagemin
+* Optimising of images with [grunt-contrib-imagemin](https://github.com/gruntjs/grunt-contrib-imagemin)
 * Tabs instead of spaces :)
 
 ---
@@ -40,7 +40,7 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 
 ### Usage
 
-1. In a shell window, run `grunt` or open gruntwatch.bat for quick access in Windows `
+In a shell window, run `grunt` or open gruntwatch.bat for quick access in Windows
 
 * Set up variables for colors, fonts, sizes, breakpoints, etc in /css/site/partials/_config.scss
 * Add @font-face declarations to /css/site/partials/_fonts.scss
@@ -115,7 +115,7 @@ To use the Sass-only features of Suzi, run sassqwatch.bat *(on Windows)* or bash
 	
 * `nth-child($an: 2n, $sibling: '*', $count: 15)`
 
-	Allows nth-child functionality for .ltie9 (if you can't/don't want to use Selectivzr) by outputting crazy sibling selectors
+	Allows nth-child functionality for .ltie9 (if you can't/don't want to use [Selectivzr](http://selectivizr.com)) by outputting crazy sibling selectors
 	
 	* `$an`: the counting method, eg: 2n, 3n, odd (default: 2n)
 	* `$an` can also be a list, with the 2nd parameter being the modifier, eg: 2 for ($an+2) or -3 for ($an-3)
@@ -139,7 +139,7 @@ To use the Sass-only features of Suzi, run sassqwatch.bat *(on Windows)* or bash
 
 * `classquery($class-name, $output-ltie9-rule)`
 
-	Generates `.classquery-$class-name & (optional) .ltie9 [data-classquery*=".classquery-$class-name"]` selectors to be used with class.query.js to manage responsive content
+	Generates `.classquery-$class-name` & (optional) `.ltie9 [data-classquery*=".classquery-$class-name"]` selectors to be used with class.query.js to manage responsive content
 	
 	* `$class-name`: the class name to use (default: default)
 	* `$output-ltie9-rule`: whether to output the `.ltie9` rule. Set to false if the class is used for a max-width media query (default: true)
