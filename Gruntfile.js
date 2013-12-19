@@ -1,3 +1,27 @@
+var fs = require('fs')
+	, path = require('path')
+	, _ = require('underscore');
+
+// Generate a list of top-level templates (make-shift menu)
+var menuItems = _.chain(fs.readdirSync(path.resolve(__dirname, 'builds')))
+	.filter(function(f) {
+		// Only get html files, excluding index
+		return ~f.indexOf('.html') && f != "index.html";
+	})
+	.map(function(f){
+		// Format strings
+		capitalized = f[0].toUpperCase() + f.slice(1);
+		return {
+			path: '/dist/builds/' + f,
+			title: capitalized.replace(/-/g, ' ').replace('.html', '')
+		};
+	})
+	.reduce(function(out, f){
+		// Turn into markup
+		return out + "<li><a class='feature' href='" + f.path + "'>" + f.title + "</a></li>"
+	}, "")
+	.value();
+
 module.exports = function (grunt) {
 	var globalConfig = {
 		path: {
@@ -86,6 +110,7 @@ module.exports = function (grunt) {
 				includesDir: 'builds/includes/',
 				globals: {
 					currentYear: grunt.template.today('yyyy'),
+					menuItems: menuItems,
 					siteTitle: 'Project Name'
 				}
 			},
