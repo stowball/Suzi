@@ -121,6 +121,18 @@ module.exports = function (grunt) {
 		},
 		
 		'regex-replace': {
+			version: {
+				src: [
+					'README.md',
+					'<%= globalConfig.path.css.src %>/all.scss'
+				],
+				actions: [
+					{
+						search: /( v).*?\)/g,
+						replace: '$1' + '<%= pkg.version %> (' + grunt.template.today('yyyy-mm-dd') + ')'
+					}
+				]
+			},
 			cachebust: {
 				// Add additional src dirs for the "developed" templates
 				src: [
@@ -220,7 +232,8 @@ module.exports = function (grunt) {
 	grunt.renameTask('watch', 'watchdev');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	
-	grunt.registerTask('default', ['sass:dist', 'concat', 'uglify', 'includereplace', 'regex-replace', 'imagemin', 'watch']);
-	grunt.registerTask('dev', ['sass:dev', 'concat', 'includereplace', 'regex-replace', 'imagemin', 'watchdev']);
-	grunt.registerTask('bust', ['regex-replace']);
+	grunt.registerTask('default', ['sass:dist', 'concat', 'uglify', 'includereplace', 'regex-replace:cachebust', 'imagemin', 'watch']);
+	grunt.registerTask('dev', ['sass:dev', 'concat', 'includereplace', 'regex-replace:cachebust', 'imagemin', 'watchdev']);
+	grunt.registerTask('bust', ['regex-replace:cachebust']);
+	grunt.registerTask('version', ['sass:dist', 'regex-replace:version']);
 };
