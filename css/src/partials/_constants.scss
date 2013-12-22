@@ -171,12 +171,6 @@ cite {
 	clear: both;
 }
 
-div.clear:not(.no_zero) {
-	font-size: 0;
-	line-height: 0px;
-	width: 100%;
-}
-
 .cols {
 	@extend %clearfix;
 }

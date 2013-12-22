@@ -425,27 +425,37 @@ $rem-with-px-fallback: true !default;
 		width: 100%;
 	}
 	
-	@for $i from 0 to length($breakpoints) {
-		$bp: nth($breakpoints, $i + 1);
+	@for $j from 0 to length($percentages) {
+		$pc: nth($percentages, $j + 1);
 		
-		@for $j from 0 to length($percentages) {
-			$pc: nth($percentages, $j + 1);
+		.w#{floor($pc)} {
+			width: percentage($pc / 100);
+		}
+	}
+	
+	@if ($is-responsive == true) {
+		@for $i from 0 to length($breakpoints) {
+			$bp: nth($breakpoints, $i + 1);
 			
-			.w#{floor($pc)}_at_#{$bp} {
-				@include media-query($bp) {
-					width: percentage($pc / 100);
+			@for $j from 0 to length($percentages) {
+				$pc: nth($percentages, $j + 1);
+				
+				.w#{floor($pc)}_at_#{$bp} {
+					@include media-query($bp) {
+						width: percentage($pc / 100);
+					}
 				}
-			}
-			
-			.clear_at_#{$bp} {
-				@include media-query($bp) {
-					clear: both;
+				
+				.clear_at_#{$bp} {
+					@include media-query($bp) {
+						clear: both;
+					}
 				}
-			}
-			
-			.unclear_at_#{$bp} {
-				@include media-query($bp) {
-					clear: none;
+				
+				.unclear_at_#{$bp} {
+					@include media-query($bp) {
+						clear: none;
+					}
 				}
 			}
 		}
