@@ -128,8 +128,8 @@ module.exports = function (grunt) {
 				],
 				actions: [
 					{
-						search: /( v).*?\)/g,
-						replace: '$1' + '<%= pkg.version %> (' + grunt.template.today('yyyy-mm-dd') + ')'
+						search: /v\d+\.\d+\.\d+\ \(\d{4}-\d{2}-\d{2}\)/g,
+						replace: 'v<%= pkg.version %> (' + grunt.template.today('yyyy-mm-dd') + ')'
 					}
 				]
 			},
