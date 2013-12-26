@@ -182,7 +182,7 @@ module.exports = function (grunt) {
 			},
 			html: {
 				files: ['builds/**/*.html'],
-				tasks: ['includereplace', 'regex-replace'],
+				tasks: ['includereplace', 'regex-replace:cachebust'],
 				options: {
 					spawn: false
 				}
@@ -213,7 +213,7 @@ module.exports = function (grunt) {
 			},
 			html: {
 				files: ['builds/**/*.html'],
-				tasks: ['includereplace', 'regex-replace'],
+				tasks: ['includereplace', 'regex-replace:cachebust'],
 				options: {
 					spawn: false
 				}
