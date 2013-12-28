@@ -11,7 +11,7 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 ### Features
 
 * Built in a mobile-first, responsive philosophy *(but can easily be used for fixed sites as well)*
-* Mixins for lots of CSS3 features including gradients with SVG & CSS3PIE support, rems with fallbacks and CSS triangles
+* Mixins for lots of CSS3 features including gradients with SVG & CSS3PIE support, rems with pixel fallbacks, correctly-prefixed transitioned transforms and CSS triangles
 * Starter content styles, including clean typography, lists, tables, etc
 * Starter form element styles: stacked on small-screen to 2-column at the breakpoint of your choice
 * Simple form validation
