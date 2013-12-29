@@ -25,6 +25,11 @@ var menuItems = _.chain(fs.readdirSync(path.resolve(__dirname, 'builds')))
 module.exports = function (grunt) {
 	var globalConfig = {
 		path: {
+			// Add additional src dirs for the "developed" templates
+			cachebust: [
+				'builds/includes/*.html',
+				'dist/builds/*.html'
+			],
 			css: {
 				root: 'css',
 				site: 'css/site',
@@ -133,15 +138,21 @@ module.exports = function (grunt) {
 					}
 				]
 			},
-			cachebust: {
-				// Add additional src dirs for the "developed" templates
-				src: [
-					'dist/builds/*.html'
-				],
+			cachebustcss: {
+				src: globalConfig.path.cachebust,
 				actions: [
 					{
-						search: /(\?v=)\d+?(")/g,
-						replace: '$1' + grunt.template.today('yymmddHHMMss') + '$2'
+						search: /(.css\?v=)\d+?(")/g,
+						replace: '$1' + grunt.template.today('yymmddHHMMss') + (Math.random() * 10000000000000000) + '$2'
+					}
+				]
+			},
+			cachebustjs: {
+				src: globalConfig.path.cachebust,
+				actions: [
+					{
+						search: /(.js\?v=)\d+?(")/g,
+						replace: '$1' + grunt.template.today('yymmddHHMMss') + (Math.random() * 10000000000000000) + '$2'
 					}
 				]
 			}
@@ -161,14 +172,14 @@ module.exports = function (grunt) {
 		watch: {
 			css: {
 				files: ['<%= globalConfig.path.css.root %>/**/*.scss'],
-				tasks: ['sass:dist'],
+				tasks: ['sass:dist', 'regex-replace:cachebustcss'],
 				options: {
 					spawn: false,
 				}
 			},
 			scripts: {
 				files: ['<%= globalConfig.path.js.root %>/**/*.js'],
-				tasks: ['concat', 'uglify'],
+				tasks: ['concat', 'uglify', 'regex-replace:cachebustjs'],
 				options: {
 					spawn: false
 				}
@@ -182,7 +193,7 @@ module.exports = function (grunt) {
 			},
 			html: {
 				files: ['builds/**/*.html'],
-				tasks: ['includereplace', 'regex-replace:cachebust'],
+				tasks: ['includereplace'],
 				options: {
 					spawn: false
 				}
@@ -192,14 +203,14 @@ module.exports = function (grunt) {
 		watchdev: {
 			css: {
 				files: ['<%= globalConfig.path.css.root %>/**/*.scss'],
-				tasks: ['sass:dev'],
+				tasks: ['sass:dev', 'regex-replace:cachebustcss'],
 				options: {
 					spawn: false,
 				}
 			},
 			scripts: {
 				files: ['<%= globalConfig.path.js.root %>/**/*.js'],
-				tasks: ['concat'],
+				tasks: ['concat', 'regex-replace:cachebustjs'],
 				options: {
 					spawn: false
 				}
@@ -213,7 +224,7 @@ module.exports = function (grunt) {
 			},
 			html: {
 				files: ['builds/**/*.html'],
-				tasks: ['includereplace', 'regex-replace:cachebust'],
+				tasks: ['includereplace'],
 				options: {
 					spawn: false
 				}
@@ -232,8 +243,8 @@ module.exports = function (grunt) {
 	grunt.renameTask('watch', 'watchdev');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	
-	grunt.registerTask('default', ['sass:dist', 'concat', 'uglify', 'includereplace', 'regex-replace:cachebust', 'imagemin', 'watch']);
-	grunt.registerTask('dev', ['sass:dev', 'concat', 'includereplace', 'regex-replace:cachebust', 'imagemin', 'watchdev']);
-	grunt.registerTask('bust', ['regex-replace:cachebust']);
+	grunt.registerTask('default', ['sass:dist', 'concat', 'uglify', 'includereplace', 'imagemin', 'watch']);
+	grunt.registerTask('dev', ['sass:dev', 'concat', 'includereplace', 'imagemin', 'watchdev']);
+	grunt.registerTask('bust', ['regex-replace:cachebustcss', 'regex-replace:cachebustjs']);
 	grunt.registerTask('version', ['sass:dist', 'regex-replace:version']);
 };
