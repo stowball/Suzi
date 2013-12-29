@@ -143,7 +143,7 @@ module.exports = function (grunt) {
 				actions: [
 					{
 						search: /(.css\?v=)\d+?(")/g,
-						replace: '$1' + grunt.template.today('yymmddHHMMss') + (Math.random() * 10000000000000000) + '$2'
+						replace: '$1' + grunt.template.today('yymmddHHMMss') + '$2'
 					}
 				]
 			},
@@ -152,7 +152,7 @@ module.exports = function (grunt) {
 				actions: [
 					{
 						search: /(.js\?v=)\d+?(")/g,
-						replace: '$1' + grunt.template.today('yymmddHHMMss') + (Math.random() * 10000000000000000) + '$2'
+						replace: '$1' + grunt.template.today('yymmddHHMMss') + '$2'
 					}
 				]
 			}
