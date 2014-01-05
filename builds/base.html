@@ -1,19 +1,19 @@
-@@include('_head.html', {"title": "Page Title"})
+{{ include('_head.html', {"title": "Page Title"}) }}
 
-@@include('header.html')
+{{ include('header.html') }}
 
-@@include('nav-main.html')
+{{ include('nav-main.html') }}
 
 <div id="content">
 	<div id="col_1">
 		
-		@@include('nav-sub.html')
+		{{ include('nav-sub.html') }}
 		
 	</div>
 	
 	<div id="col_2" role="main">
 		
-		@@include('breadcrumbs.html')
+		{{ include('breadcrumbs.html') }}
 		
 		<div class="content_area">
 		
@@ -30,6 +30,6 @@
 	</div>
 </div>
 
-@@include('footer.html')
+{{ include('footer.html') }}
 
-@@include('_foot.html')
+{{ include('_foot.html') }}

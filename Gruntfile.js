@@ -113,6 +113,8 @@ module.exports = function (grunt) {
 		includereplace: {
 			options: {
 				includesDir: 'builds/includes/',
+				prefix: '{{ ',
+				suffix: ' }}',
 				globals: {
 					currentYear: grunt.template.today('yyyy'),
 					menuItems: menuItems,
