@@ -2,12 +2,12 @@
 
 {{ include('header.html') }}
 
-{{ include('nav-main.html') }}
+{{ include('nav-main.html', {"currentPath": "base.html"}) }}
 
 <div id="content">
 	<div id="col_1">
 		
-		{{ include('nav-sub.html') }}
+		{{ include('nav-sub.html', {"currentPath": "base.html"}) }}
 		
 	</div>
 	

@@ -25,10 +25,18 @@ var menuItems = _.chain(fs.readdirSync(path.resolve(__dirname, 'builds')))
 module.exports = function (grunt) {
 	var globalConfig = {
 		path: {
+			builds: {
+				root: 'builds',
+				includes: 'builds/includes',
+				dist: {
+					root: 'dist',
+					builds: 'dist/builds'
+				}
+			},
 			// Add additional src dirs for the "developed" templates
 			cachebust: [
-				'builds/includes/*.html',
-				'dist/builds/*.html'
+				'<%= globalConfig.path.builds.includes %>/*.html',
+				'<%= globalConfig.path.builds.dist.builds %>/*.html'
 			],
 			css: {
 				root: 'css',
@@ -112,7 +120,7 @@ module.exports = function (grunt) {
 		
 		includereplace: {
 			options: {
-				includesDir: 'builds/includes/',
+				includesDir: '<%= globalConfig.path.builds.includes %>',
 				prefix: '{{ ',
 				suffix: ' }}',
 				globals: {
@@ -122,8 +130,8 @@ module.exports = function (grunt) {
 				}
 			},
 			templates: {
-				src: 'builds/*.html',
-				dest: 'dist/'
+				src: '<%= globalConfig.path.builds.root %>/*.html',
+				dest: '<%= globalConfig.path.builds.dist.root %>'
 			}
 		},
 		
@@ -155,6 +163,17 @@ module.exports = function (grunt) {
 					{
 						search: /(.js\?v=)\d+?(")/g,
 						replace: '$1' + grunt.template.today('yymmddHHMMss') + '$2'
+					}
+				]
+			},
+			currentpaths: {
+				src: '<%= globalConfig.path.builds.dist.builds %>/*.html',
+				actions: [
+					{
+						search: / \{(.*?\.html)\}(.*?")((.*?\.html|#))/g,
+						replace: function(str, p1, p2, p3) {
+							return p1 == p3 ? ' class="current"' + p2 + p3 : p2 + p3;
+						}
 					}
 				]
 			}
@@ -194,8 +213,8 @@ module.exports = function (grunt) {
 				}
 			},
 			html: {
-				files: ['builds/**/*.html'],
-				tasks: ['includereplace'],
+				files: ['<%= globalConfig.path.builds.root %>/**/*.html', '<%= globalConfig.path.builds.dist.builds %>/*.html'],
+				tasks: ['includereplace', 'regex-replace:currentpaths'],
 				options: {
 					spawn: false
 				}
@@ -225,8 +244,8 @@ module.exports = function (grunt) {
 				}
 			},
 			html: {
-				files: ['builds/**/*.html'],
-				tasks: ['includereplace'],
+				files: ['<%= globalConfig.path.builds.root %>/**/*.html', '<%= globalConfig.path.builds.dist.builds %>/*.html'],
+				tasks: ['includereplace', 'regex-replace:currentpaths'],
 				options: {
 					spawn: false
 				}
@@ -245,7 +264,7 @@ module.exports = function (grunt) {
 	grunt.renameTask('watch', 'watchdev');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	
-	grunt.registerTask('default', ['sass:dist', 'concat', 'uglify', 'includereplace', 'imagemin', 'watch']);
+	grunt.registerTask('default', ['sass:dist', 'concat', 'uglify', 'includereplace', 'regex-replace:currentpaths', 'imagemin', 'watch']);
 	grunt.registerTask('dev', ['sass:dev', 'concat', 'includereplace', 'imagemin', 'watchdev']);
 	grunt.registerTask('bust', ['regex-replace:cachebustcss', 'regex-replace:cachebustjs']);
 	grunt.registerTask('version', ['sass:dist', 'regex-replace:version']);
