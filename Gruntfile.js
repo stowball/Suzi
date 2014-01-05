@@ -176,6 +176,15 @@ module.exports = function (grunt) {
 						}
 					}
 				]
+			},
+			unusedvars: {
+				src: '<%= globalConfig.path.builds.dist.builds %>/*.html',
+				actions: [
+					{
+						search: /(\{\{+.*?\}\}+|\{[a-zA-Z]*?\})/g,
+						replace: ''
+					}
+				]
 			}
 		},
 		
@@ -214,7 +223,7 @@ module.exports = function (grunt) {
 			},
 			html: {
 				files: ['<%= globalConfig.path.builds.root %>/**/*.html', '<%= globalConfig.path.builds.dist.builds %>/*.html'],
-				tasks: ['includereplace', 'regex-replace:currentpaths'],
+				tasks: ['includereplace', 'regex-replace:currentpaths', 'regex-replace:unusedvars'],
 				options: {
 					spawn: false
 				}
@@ -245,7 +254,7 @@ module.exports = function (grunt) {
 			},
 			html: {
 				files: ['<%= globalConfig.path.builds.root %>/**/*.html', '<%= globalConfig.path.builds.dist.builds %>/*.html'],
-				tasks: ['includereplace', 'regex-replace:currentpaths'],
+				tasks: ['includereplace', 'regex-replace:currentpaths', 'regex-replace:unusedvars'],
 				options: {
 					spawn: false
 				}
@@ -264,7 +273,7 @@ module.exports = function (grunt) {
 	grunt.renameTask('watch', 'watchdev');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	
-	grunt.registerTask('default', ['sass:dist', 'concat', 'uglify', 'includereplace', 'regex-replace:currentpaths', 'imagemin', 'watch']);
+	grunt.registerTask('default', ['sass:dist', 'concat', 'uglify', 'includereplace', 'regex-replace:currentpaths', 'regex-replace:unusedvars', 'imagemin', 'watch']);
 	grunt.registerTask('dev', ['sass:dev', 'concat', 'includereplace', 'imagemin', 'watchdev']);
 	grunt.registerTask('bust', ['regex-replace:cachebustcss', 'regex-replace:cachebustjs']);
 	grunt.registerTask('version', ['sass:dist', 'regex-replace:version']);
