@@ -128,7 +128,6 @@ $float-bp: 464px;
 $form-bp: 534px; // Set to 0 to have "block-level" form fields always
 
 @if ($is-responsive == false) {
-	$main-nav-horizontal: 1px;
 	$float-bp: 1px;
 	$form-bp: 1px;
 	$feature-bp: 1px;
