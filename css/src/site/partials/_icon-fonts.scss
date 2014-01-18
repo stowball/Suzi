@@ -1,0 +1,19 @@
+%icomoon {
+	font-family: 'icomoon';
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	line-height: 1;
+	speak: none;
+	text-transform: none;
+	
+	/* Better Font Rendering =========== */
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+}
+
+@include icomoon {
+	@extend %icomoon;
+}
+
+// Add custom icomoon classes here

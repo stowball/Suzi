@@ -167,7 +167,11 @@ To use the Sass-only features of Suzi, run sassqwatch.bat *(on Windows)* or bash
 	Sets the `UL` specified (or first `UL` of a parent element) and its immediate `LI`s to use `display: table` to create an evenly spaced, horizontal list for modern browsers and uses floats for `.ltie8`. Used in the `.horizontal` and `.horizontal_always` classes
 	
 	* `$vertical-align`: the `vertical-align` property to give to the child `LI`s (default: top)
-	
+
+* `icomoon`
+
+	Generates `[class^="icon-"], [class*=" icon-"]` selector for easy overriding of base [icomoon](http://icomoon.io) icon font styles
+
 #### CSS Property mixins
 
 * `animation($property: default 1s ease)`

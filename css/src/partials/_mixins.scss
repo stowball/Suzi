@@ -187,6 +187,12 @@ $rem-with-px-fallback: true !default;
 	}
 }
 
+@mixin icomoon {
+	[class^="icon-"], [class*=" icon-"] {
+		@content;
+	}
+}
+
 // --------------------------------------------
 //	Media Query Mixins
 // --------------------------------------------
