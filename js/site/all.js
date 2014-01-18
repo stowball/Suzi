@@ -42,7 +42,7 @@ var viewportSize = {
 	multiplier: function() {
 		if (window.getComputedStyle)
 			actualFontSize = parseInt(window.getComputedStyle(html).getPropertyValue('font-size'));
-				
+		
 		return actualFontSize / baseFontSize;
 	}
 };
@@ -108,9 +108,7 @@ var forms = {
 	requiredFields: [],
 	
 	init: function() {
-		var $forms = $('form');
-		
-		$forms.each(function(index) {
+		$('form').each(function(index) {
 			var $this = $(this);
 			forms.requiredFields[index] = $this.find('[required]');
 			
@@ -119,31 +117,28 @@ var forms = {
 			});
 		});
 	},
+	
 	validate: function(form, index) {
 		var $requireds = $(forms.requiredFields[index]),
-			errors = false,
-			tested = 'tested';
+			errors = false;
 		
-		$requireds.removeClass('form_error').removeClass(tested);
+		$requireds.removeClass('form_error').removeClass('tested');
 		
 		$requireds.each(function() {
 			var $this = $(this);
 			
-			if ($this.is('[type="radio"], [type="checkbox"]') && !$this.hasClass(tested)) {
+			if ($this.is('[type="radio"], [type="checkbox"]') && !$this.hasClass('tested')) {
 				var name = $this.attr('name'),
 					$radioChecks = $requireds.filter('[name="' + name + '"]');
 				
-				if (!$radioChecks.is(':checked')) {
+				if (!$radioChecks.is(':checked'))
 					$radioChecks.addClass('form_error');
-					$this.attr('aria-invalid', false);
-				}
 				
-				$radioChecks.addClass(tested);
+				$radioChecks.addClass('tested');
 			}
 			
 			if ($.trim($this.val()).length === 0) {
 				$this.addClass('form_error');
-				$this.attr('aria-invalid', false);
 				errors = true;
 			}
 		});
