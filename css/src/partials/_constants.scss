@@ -937,13 +937,12 @@ input.text, textarea, select {
 		margin-top: -8px;
 		position: absolute;
 		top: 50%;
-		width: 15px;
+		width: 16px;
 		
 		@include media-query-retina {
 			background-image: url(/images/site/std_icons@2x.png);
 			background-size: 16px auto;
 			background-position: 0 -192px;
-			width: 16px;
 		}
 	}
 	
