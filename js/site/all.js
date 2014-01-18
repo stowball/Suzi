@@ -156,146 +156,264 @@ var slider = {
 	init: function() {
 		var $sliderParent = $('.carousel');
 		
-		if ($sliderParent.length) {
-			$sliderParent.each(function(index) {
-				var $this = $(this),
-					$slider = $this.find('.slider'),
-					$slides = $slider.find('> li'),
-					slidesCount = $slides.length,
-					globalPos = 0,
-					isComplete = false,
-					isVisible = false,
-					carouselID = 'carouselid-' + window.location.pathname + '-' + index,
-					carouselCookie = cookie.read(carouselID),
-					circular = $this.data('circular') === false ? false : true;
+		if ($sliderParent.length === 0)
+			return;
+		
+		$sliderParent.each(function(index) {
+			var $this = $(this),
+				$slider = $this.find('.slider'),
+				$slides = $slider.find('> li'),
+				slidesCount = $slides.length,
+				globalPos = 0,
+				isComplete = false,
+				isVisible = false,
+				carouselID = 'carouselid-' + window.location.pathname + '-' + index,
+				carouselCookie = cookie.read(carouselID),
+				circular = $this.data('circular') === false ? false : true;
+			
+			if (slider.swipejs && circular) {
+				$slides.eq(0).clone().appendTo($slider);
+				$slides.eq(slidesCount - 1).clone().prependTo($slider);
+				$slides = $slider.find('> li'),
+				slidesCount = slidesCount + 2;
+			}
+			
+			if (carouselCookie)
+				globalPos = parseInt(carouselCookie);
+			
+			if (slider.swipejs && circular && globalPos === 0)
+				globalPos = 1;
+			
+			slider.$imagesLazy[index] = $slides.find('[data-src]');
+			
+			if (slidesCount === 1) {
+				slider.lazyLoad(slider.$imagesLazy[index].eq(globalPos), index, globalPos, slidesCount);
 				
-				if (slider.swipejs && circular) {
-					$slides.eq(0).clone().appendTo($slider);
-					$slides.eq(slidesCount - 1).clone().prependTo($slider);
-					$slides = $slider.find('> li'),
-					slidesCount = slidesCount + 2;
+				var $feature = $this.find('.inner');
+				
+				$slides.css('visibility', 'visible');
+				$feature.css('visibility', 'visible');
+			}
+			else {
+				var li = '',
+					interval = false,
+					nav = true,
+					pager = true,
+					speed = 300;
+				
+				slider.lazyLoad(slider.$imagesLazy[index].eq(globalPos), index, globalPos, slidesCount);
+				
+				if (parseInt($this.data('interval')))
+					interval = parseInt($this.data('interval') * 1000);
+				
+				if ($this.data('nav') === false) {
+					nav = false;
+				}
+				else {
+					var $navPrev = $('<a href="#previous" class="carousel_nav prev"><span>Previous</span></a>'),
+						$navNext = $('<a href="#next" class="carousel_nav next"><span>Next</span></a>');
 				}
 				
-				if (carouselCookie)
-					globalPos = parseInt(carouselCookie);
+				if ($this.data('pager') === false)
+					pager = false;
+				else
+					var $navPager = $('<ul class="carousel_nav_pager reset menu" />');
 				
-				if (slider.swipejs && circular && globalPos === 0)
-					globalPos = 1;
+				if (nav)
+					$this.append($navPrev).append($navNext);
 				
-				slider.$imagesLazy[index] = $slides.find('[data-src]');
+				if (pager)
+					$this.append($navPager);
 				
-				if (slidesCount === 1) {
-					slider.lazyLoad(slider.$imagesLazy[index].eq(globalPos), index, globalPos, slidesCount);
+				if (parseInt($this.data('speed')))
+					speed = parseInt($this.data('speed'));
+				
+				$this.addClass('multiple');
+				
+				if (slider.swipejs) {
+					
+					var hasResizeClass = false,
+						resizeSwipe = function() {
+							$html.removeClass('resizing');
+							hasResizeClass = false;
+						};
+					
+					$(window).resize(function() {
+						clearTimeout(window.resizeTimer);
+						if (!hasResizeClass) {
+							$html.addClass('resizing');
+							hasResizeClass = true;
+						}
+						window.resizeTimer = setTimeout(resizeSwipe, 250);
+					});
+					
+					if (pager) {
+						for (var i = 1; i <= slidesCount; i++) {
+							li += '<li><a href="#slide-' + i + '">Slide ' + i + '</a></li>';
+						}
+						
+						$navPager.append(li);
+						var $navPagerLi = $navPager.find('li'),
+							$navPagerA = $navPager.find('a');
+						
+						if (circular) {
+							$navPagerLi.eq(0).hide();
+							$navPagerLi.eq(slidesCount - 1).hide();
+						}
+					}
 					
 					var $feature = $this.find('.inner');
 					
-					$slides.css('visibility', 'visible');
-					$feature.css('visibility', 'visible');
-				}
-				else {
-					var li = '',
-						interval = false,
-						nav = true,
-						pager = true,
-						speed = 300;
-					
-					slider.lazyLoad(slider.$imagesLazy[index].eq(globalPos), index, globalPos, slidesCount);
-					
-					if (parseInt($this.data('interval')))
-						interval = parseInt($this.data('interval') * 1000);
-					
-					if ($this.data('nav') === false) {
-						nav = false;
-					}
-					else {
-						var $navPrev = $('<a href="#previous" class="carousel_nav prev"><span>Previous</span></a>'),
-							$navNext = $('<a href="#next" class="carousel_nav next"><span>Next</span></a>');
-					}
-					
-					if ($this.data('pager') === false)
-						pager = false;
-					else
-						var $navPager = $('<ul class="carousel_nav_pager reset menu" />');
-					
-					if (nav)
-						$this.append($navPrev).append($navNext);
-					
-					if (pager)
-						$this.append($navPager);
-					
-					if (parseInt($this.data('speed')))
-						speed = parseInt($this.data('speed'));
-					
-					$this.addClass('multiple');
-					
-					if (slider.swipejs) {
+					var carousel = new Swipe($feature[0], {
+						circular: circular,
+						speed: speed,
 						
-						var hasResizeClass = false,
-							resizeSwipe = function() {
-								$html.removeClass('resizing');
-								hasResizeClass = false;
-							};
+						complete: function() {
+							this.slide(globalPos);
+							isComplete = true;
+						},
 						
-						$(window).resize(function() {
-							clearTimeout(window.resizeTimer);
-							if (!hasResizeClass) {
-								$html.addClass('resizing');
-								hasResizeClass = true;
+						touchCallback: function() {
+							stopCarousel();
+						},
+						
+						callback: function(e, pos) {
+							if (isComplete && !isVisible) {
+								isVisible = true;
+								$slides.css('visibility', 'visible');
+								$feature.css('visibility', 'visible');
 							}
-							window.resizeTimer = setTimeout(resizeSwipe, 250);
+							
+							$slides
+								.attr('aria-hidden', true)
+								.eq(pos)
+								.attr('aria-hidden', false);
+							
+							slider.lazyLoad(slider.$imagesLazy[index].eq(pos));
+							
+							if (pos > globalPos) {
+								if (pos < slidesCount - 1) {
+									slider.lazyLoad(slider.$imagesLazy[index].eq(pos + 1));
+									if (circular && pos === slidesCount - 2 && globalPos === 1) {
+										slider.lazyLoad(slider.$imagesLazy[index].eq(pos - 1));
+									}
+								}
+								else if (pos === slidesCount - 1 && globalPos === 0)
+									slider.lazyLoad(slider.$imagesLazy[index].eq(pos - 1));
+							}
+							else if (pos < globalPos) {
+								if (pos === 0) {
+									if (globalPos > 1)
+										slider.lazyLoad(slider.$imagesLazy[index].eq(pos + 1));
+									else
+										slider.lazyLoad(slider.$imagesLazy[index].eq(pos - 1));
+								}
+								else if (circular && pos === 1)
+									slider.lazyLoad(slider.$imagesLazy[index].eq(pos - 1));
+								else if (pos > 1) {
+									slider.lazyLoad(slider.$imagesLazy[index].eq(pos - 1));
+								}
+							}
+							
+							if (pager) {
+								$navPagerLi
+									.removeClass('current')
+									.eq(pos).addClass('current');
+							}
+							
+							if (!interval)
+								trackEvent('Website', 'Carousel', 'Slide ' + (pos + 1));
+							
+							globalPos = pos;
+							cookie.set(carouselID, globalPos);
+						}
+					});
+					
+					$this.addClass('swipejs');
+					
+					var stopCarousel = function() {
+						if (interval) {
+							window.clearTimeout(timer);
+							interval = false;
+						}
+					};
+					
+					if (nav) {
+						$navPrev.on('click', function(e) {
+							e.preventDefault();
+							
+							carousel.prev();
+							stopCarousel();
 						});
 						
-						if (pager) {
-							for (var i = 1; i <= slidesCount; i++) {
-								li += '<li><a href="#slide-' + i + '">Slide ' + i + '</a></li>';
-							}
+						$navNext.on('click', function(e) {
+							e.preventDefault();
 							
-							$navPager.append(li);
-							var $navPagerLi = $navPager.find('li'),
-								$navPagerA = $navPager.find('a');
-							
-							if (circular) {
-								$navPagerLi.eq(0).hide();
-								$navPagerLi.eq(slidesCount - 1).hide();
-							}
-						}
-						
-						var $feature = $this.find('.inner');
-						
-						var carousel = new Swipe($feature[0], {
-							circular: circular,
-							speed: speed,
-							
-							complete: function() {
-								this.slide(globalPos);
-								isComplete = true;
-							},
-							
-							touchCallback: function() {
-								stopCarousel();
-							},
-							
-							callback: function(e, pos) {
-								if (isComplete && !isVisible) {
-									isVisible = true;
-									$slides.css('visibility', 'visible');
-									$feature.css('visibility', 'visible');
-								}
+							carousel.next();
+							stopCarousel();
+						});
+					}
+					
+					if (pager) {
+						$navPagerA.each(function(idx) {
+							var i = idx;
+							$(this).on('click', function(e) {
+								e.preventDefault();
 								
-								$slides
-									.attr('aria-hidden', true)
-									.eq(pos)
-									.attr('aria-hidden', false);
+								slider.lazyLoad(slider.$imagesLazy[index].eq(i));
+								carousel.slide(i);
+								
+								$navPagerLi.removeClass('current');
+								$(this).parent().addClass('current');
+								
+								stopCarousel();
+							});
+						});
+					}
+					
+					var autoCarousel = function() {
+						carousel.next();
+					};
+					
+					if (interval) {
+						timer = window.setInterval(autoCarousel, interval);
+						var $tile = $this.find('.tile');
+						
+						$tile.hover(
+							function(e) {
+								e.stopPropagation();
+								if (interval)
+									window.clearTimeout(timer);
+							},
+							function(e) {
+								e.stopPropagation();
+								if (interval)
+									timer = window.setInterval(autoCarousel, interval);
+							}
+						);
+					}
+				}
+				else {
+					var $feature = $this.find('.slider'),
+						widthOverride = 'width: 100% !important',
+						
+						cycleOpts = {
+							activePagerClass: 'current',
+							cleartypeNoBg: true,
+							easing: 'easeInOutQuint',
+							fx: 'scrollHorz',
+							pause: true,
+							speed: speed,
+							startingSlide: globalPos,
+							timeout: interval,
+							after: function(curr, next, opts) {
+								var pos = opts.currSlide;
 								
 								slider.lazyLoad(slider.$imagesLazy[index].eq(pos));
 								
 								if (pos > globalPos) {
-									if (pos < slidesCount - 1) {
+									if (pos < slidesCount - 1)
 										slider.lazyLoad(slider.$imagesLazy[index].eq(pos + 1));
-										if (circular && pos === slidesCount - 2 && globalPos === 1) {
-											slider.lazyLoad(slider.$imagesLazy[index].eq(pos - 1));
-										}
-									}
 									else if (pos === slidesCount - 1 && globalPos === 0)
 										slider.lazyLoad(slider.$imagesLazy[index].eq(pos - 1));
 								}
@@ -306,194 +424,77 @@ var slider = {
 										else
 											slider.lazyLoad(slider.$imagesLazy[index].eq(pos - 1));
 									}
-									else if (circular && pos === 1)
-										slider.lazyLoad(slider.$imagesLazy[index].eq(pos - 1));
 									else if (pos > 1) {
 										slider.lazyLoad(slider.$imagesLazy[index].eq(pos - 1));
 									}
 								}
 								
-								if (pager) {
-									$navPagerLi
-										.removeClass('current')
-										.eq(pos).addClass('current');
-								}
-								
-								if (!interval)
-									trackEvent('Website', 'Carousel', 'Slide ' + (pos + 1));
+								$slides
+									.attr('aria-hidden', true)
+									.eq(pos)
+									.attr('aria-hidden', false);
 								
 								globalPos = pos;
 								cookie.set(carouselID, globalPos);
 							}
-						});
-						
-						$this.addClass('swipejs');
-						
-						var stopCarousel = function() {
-							if (interval) {
-								window.clearTimeout(timer);
-								interval = false;
-							}
 						};
-						
-						if (nav) {
-							$navPrev.on('click', function(e) {
-								e.preventDefault();
-								
-								carousel.prev();
-								stopCarousel();
-							});
+					
+					if (nav) {
+						$navPrev.attr('id', 'nav_prev-' + index);
+						$navNext.attr('id', 'nav_next-' + index);
+						cycleOpts.prev = '#nav_prev-' + index;
+						cycleOpts.next = '#nav_next-' + index;
+					}
+					
+					if (pager) {
+						$navPager.attr('id', 'nav_pager-' + index);
+						cycleOpts.pager = '#nav_pager-' + index;
+						cycleOpts.pagerAnchorBuilder = function(idx, slide) {
+							return '<li><a href="#slide-' + (idx + 1) + '">Slide ' + (idx + 1) + '</a></li>';
+						};
+					}
+					
+					$feature
+						.attr('style', widthOverride)
+						.find('li')
+						.attr('style', widthOverride);
+					
+					Modernizr.load({
+						load: ['/js/jquery.cycle.all.min.js', '/js/jquery.easing.1.3.min.js'],
+						complete: function() {
+							$feature
+								.cycle(cycleOpts)
+								.css('visibility', 'visible')
+								.closest('.carousel')
+								.addClass('jqcycle');
 							
-							$navNext.on('click', function(e) {
-								e.preventDefault();
-								
-								carousel.next();
-								stopCarousel();
-							});
-						}
-						
-						if (pager) {
-							$navPagerA.each(function(idx) {
-								var i = idx;
-								$(this).on('click', function(e) {
+							$slides.css('visibility', 'visible');
+							
+							if (nav) {
+								$navPrev.on('click', function(e) {
 									e.preventDefault();
-									
-									slider.lazyLoad(slider.$imagesLazy[index].eq(i));
-									carousel.slide(i);
-									
-									$navPagerLi.removeClass('current');
-									$(this).parent().addClass('current');
-									
-									stopCarousel();
+									$feature.cycle('pause');
 								});
-							});
-						}
-						
-						var autoCarousel = function() {
-							carousel.next();
-						};
-						
-						if (interval) {
-							timer = window.setInterval(autoCarousel, interval);
-							var $tile = $this.find('.tile');
-							
-							$tile.hover(
-								function(e) {
-									e.stopPropagation();
-									if (interval)
-										window.clearTimeout(timer);
-								},
-								function(e) {
-									e.stopPropagation();
-									if (interval)
-										timer = window.setInterval(autoCarousel, interval);
-								}
-							);
-						}
-					}
-					else {
-						var $feature = $this.find('.slider'),
-							widthOverride = 'width: 100% !important',
-							
-							cycleOpts = {
-								activePagerClass: 'current',
-								cleartypeNoBg: true,
-								easing: 'easeInOutQuint',
-								fx: 'scrollHorz',
-								pause: true,
-								speed: speed,
-								startingSlide: globalPos,
-								timeout: interval,
-								after: function(curr, next, opts) {
-									var pos = opts.currSlide;
-									
-									slider.lazyLoad(slider.$imagesLazy[index].eq(pos));
-									
-									if (pos > globalPos) {
-										if (pos < slidesCount - 1)
-											slider.lazyLoad(slider.$imagesLazy[index].eq(pos + 1));
-										else if (pos === slidesCount - 1 && globalPos === 0)
-											slider.lazyLoad(slider.$imagesLazy[index].eq(pos - 1));
-									}
-									else if (pos < globalPos) {
-										if (pos === 0) {
-											if (globalPos > 1)
-												slider.lazyLoad(slider.$imagesLazy[index].eq(pos + 1));
-											else
-												slider.lazyLoad(slider.$imagesLazy[index].eq(pos - 1));
-										}
-										else if (pos > 1) {
-											slider.lazyLoad(slider.$imagesLazy[index].eq(pos - 1));
-										}
-									}
-									
-									$slides
-										.attr('aria-hidden', true)
-										.eq(pos)
-										.attr('aria-hidden', false);
-									
-									globalPos = pos;
-									cookie.set(carouselID, globalPos);
-								}
-							};
-						
-						if (nav) {
-							$navPrev.attr('id', 'nav_prev-' + index);
-							$navNext.attr('id', 'nav_next-' + index);
-							cycleOpts.prev = '#nav_prev-' + index;
-							cycleOpts.next = '#nav_next-' + index;
-						}
-						
-						if (pager) {
-							$navPager.attr('id', 'nav_pager-' + index);
-							cycleOpts.pager = '#nav_pager-' + index;
-							cycleOpts.pagerAnchorBuilder = function(idx, slide) {
-								return '<li><a href="#slide-' + (idx + 1) + '">Slide ' + (idx + 1) + '</a></li>';
-							};
-						}
-						
-						$feature
-							.attr('style', widthOverride)
-							.find('li')
-							.attr('style', widthOverride);
-						
-						Modernizr.load({
-							load: ['/js/jquery.cycle.all.min.js', '/js/jquery.easing.1.3.min.js'],
-							complete: function() {
-								$feature
-									.cycle(cycleOpts)
-									.css('visibility', 'visible')
-									.closest('.carousel')
-									.addClass('jqcycle');
 								
-								$slides.css('visibility', 'visible');
-								
-								if (nav) {
-									$navPrev.on('click', function(e) {
-										e.preventDefault();
-										$feature.cycle('pause');
-									});
-									
-									$navNext.on('click', function(e) {
-										e.preventDefault();
-										$feature.cycle('pause');
-									});
-								}
-								
-								if (pager) {
-									$navPager.css('z-index', slidesCount + 1).find('a').each(function(i) {
-										$(this).on('click', function(e) {
-											slider.lazyLoad(slider.$imagesLazy[index].eq(i));
-											$feature.cycle('pause');
-										});
-									});
-								}
+								$navNext.on('click', function(e) {
+									e.preventDefault();
+									$feature.cycle('pause');
+								});
 							}
-						});
-					}
+							
+							if (pager) {
+								$navPager.css('z-index', slidesCount + 1).find('a').each(function(i) {
+									$(this).on('click', function(e) {
+										slider.lazyLoad(slider.$imagesLazy[index].eq(i));
+										$feature.cycle('pause');
+									});
+								});
+							}
+						}
+					});
 				}
-			});
-		}
+			}
+		});
 	},
 	
 	lazyLoad: function(el, index, globalPos, slidesCount) {
