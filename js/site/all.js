@@ -26,7 +26,7 @@ var html = document.documentElement,
 var trackEvent = function(campaign, action, label) {
 	var clean = function(str) {
 		return str.toString().replace(/\s|'|"/g, '-');
-	}
+	};
 	
 	if (typeof(_gaq) !== 'undefined')
 		_gaq.push(['_trackEvent', clean(campaign), clean(action), clean(label)]);
@@ -449,7 +449,7 @@ var slider = {
 							cycleOpts.pager = '#nav_pager-' + index;
 							cycleOpts.pagerAnchorBuilder = function(idx, slide) {
 								return '<li><a href="#slide-' + (idx + 1) + '">Slide ' + (idx + 1) + '</a></li>';
-							}
+							};
 						}
 						
 						$feature
