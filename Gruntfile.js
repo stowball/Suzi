@@ -1,14 +1,15 @@
-var fs = require('fs')
-	, path = require('path')
-	, _ = require('underscore');
+var fs = require('fs'),
+	path = require('path'),
+	_ = require('underscore');
 
 // Generate a list of top-level templates (make-shift menu)
-var menuItems = _.chain(fs.readdirSync(path.resolve(__dirname, 'builds')))
+var menuItems =
+	_.chain(fs.readdirSync(path.resolve(__dirname, 'builds')))
 	.filter(function(f) {
 		// Only get html files, excluding index
-		return ~f.indexOf('.html') && f != "index.html";
+		return ~f.indexOf('.html') && f !== "index.html";
 	})
-	.map(function(f){
+	.map(function(f) {
 		// Format strings
 		capitalized = f[0].toUpperCase() + f.slice(1);
 		return {
@@ -16,11 +17,11 @@ var menuItems = _.chain(fs.readdirSync(path.resolve(__dirname, 'builds')))
 			title: capitalized.replace(/-/g, ' ').replace('.html', '')
 		};
 	})
-	.reduce(function(out, f){
+	.reduce(function(out, f) {
 		// Turn into markup
-		return out + "<li><a class='feature' href='" + f.path + "'>" + f.title + "</a></li>"
-	}, "")
-	.value();
+		return out + '<li><a class="feature" href="' + f.path + '">' + f.title + '</a></li>\n';
+	}, '')
+	.value().replace(/\n$/, '');
 
 module.exports = function (grunt) {
 	var globalConfig = {
