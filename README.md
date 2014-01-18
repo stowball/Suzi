@@ -2,7 +2,7 @@
 
 ## A responsive, Sass and Grunt UI Framework by [Izilla](http://izilla.com.au)
 
-### v1.3.1 (2013-12-22)
+### v1.3.2 (2014-01-18)
 
 Suzi is the starting point for all of our web projects and a culmination of 6+ years' experience in maintaining a front-end framework.
 
@@ -328,5 +328,5 @@ Four variables are provided for media query operators: `$min`, `$max`, `$min-h` 
 
 ---
 
-Copyright (c) 2013 [Izilla Partners Pty Ltd](http://www.izilla.com.au)  
+Copyright (c) 2014 [Izilla Partners Pty Ltd](http://www.izilla.com.au)  
 Licensed under the MIT license *(see [LICENSE](https://github.com/izilla/Suzi/blob/master/LICENSE) for details)*
