@@ -82,7 +82,7 @@
 				props = {
 					adjusted: width > 0,
 					fontSize: parseFloat(window.getComputedStyle(html).getPropertyValue('font-size')),
-					width: width					
+					width: width
 				};
 			
 			if (props.adjusted) {
