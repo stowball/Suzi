@@ -171,7 +171,7 @@ module.exports = function (grunt) {
 				src: '<%= globalConfig.path.builds.dist.builds %>/*.html',
 				actions: [
 					{
-						search: / \{(.*?\.html)\}(.*?")((.*?\.html|#))/g,
+						search: / \{(.*?\.html)\}(.*(?:"|'))((.*?\.html|#))/g,
 						replace: function(str, p1, p2, p3) {
 							return p1 == p3 ? ' class="current"' + p2 + p3 : p2 + p3;
 						}
