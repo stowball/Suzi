@@ -132,7 +132,7 @@ module.exports = function (grunt) {
 			},
 			templates: {
 				src: '<%= globalConfig.path.builds.root %>/*.html',
-				dest: '<%= globalConfig.path.builds.dist.root %>'
+				dest: '<%= globalConfig.path.builds.dist.root %>/'
 			}
 		},
 		
