@@ -173,12 +173,21 @@ module.exports = function (grunt) {
 					{
 						search: /[\s\S]*/m,
 						replace: function(str) {
-							for (var i = 0; i < 5; i++) {
-								str = str.replace(/\{\{ var (\$.*?): "(.*?)" \}\}[\s\S]*/m, function(str2, p1, p2) {
-									var $var = p1.replace(/\$/g, '\\$');
-									return str2.replace(new RegExp($var, 'g'), p2);
-								});
+							var variables = str.replace(/(\n|\r)/g, '').match(/\{\{ var (\$.*?): "(.*?)" \}\}/g),
+								varLength = 0;
+							
+							if (variables)
+								varLength += variables.length;
+							
+							if (varLength > 0) {
+								for (var i = 0; i < varLength; i++) {
+									str = str.replace(/\{\{ var (\$.*?): "(.*?)" \}\}[\s\S]*/m, function(str2, p1, p2) {
+										var $var = p1.replace(/\$/g, '\\$');
+										return str2.replace(new RegExp($var, 'g'), p2);
+									});
+								}
 							}
+							
 							return str;
 						}
 					}
