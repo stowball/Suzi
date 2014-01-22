@@ -167,6 +167,23 @@ module.exports = function (grunt) {
 					}
 				]
 			},
+			customvars: {
+				src: '<%= globalConfig.path.builds.dist.builds %>/*.html',
+				actions: [
+					{
+						search: /[\s\S]*/m,
+						replace: function(str) {
+							for (var i = 0; i < 5; i++) {
+								str = str.replace(/\{\{ var (\$.*?): "(.*?)" \}\}[\s\S]*/m, function(str2, p1, p2) {
+									var $var = p1.replace(/\$/g, '\\$');
+									return str2.replace(new RegExp($var, 'g'), p2);
+								});
+							}
+							return str;
+						}
+					}
+				]
+			},
 			currentpaths: {
 				src: '<%= globalConfig.path.builds.dist.builds %>/*.html',
 				actions: [
@@ -182,7 +199,7 @@ module.exports = function (grunt) {
 				src: '<%= globalConfig.path.builds.dist.builds %>/*.html',
 				actions: [
 					{
-						search: /(\{\{+.*?\}\}+|\{[a-zA-Z]*?\})/g,
+						search: /(\{\{+.*?\}\}+|\{[a-zA-Z]*?\})(\n|\r)?/g,
 						replace: ''
 					}
 				]
@@ -224,7 +241,7 @@ module.exports = function (grunt) {
 			},
 			html: {
 				files: ['<%= globalConfig.path.builds.root %>/**/*.html', '<%= globalConfig.path.builds.dist.builds %>/*.html'],
-				tasks: ['includereplace', 'regex-replace:currentpaths', 'regex-replace:unusedvars'],
+				tasks: ['includereplace', 'regex-replace:customvars', 'regex-replace:currentpaths', 'regex-replace:unusedvars'],
 				options: {
 					spawn: false
 				}
@@ -255,7 +272,7 @@ module.exports = function (grunt) {
 			},
 			html: {
 				files: ['<%= globalConfig.path.builds.root %>/**/*.html', '<%= globalConfig.path.builds.dist.builds %>/*.html'],
-				tasks: ['includereplace', 'regex-replace:currentpaths', 'regex-replace:unusedvars'],
+				tasks: ['includereplace', 'regex-replace:customvars', 'regex-replace:currentpaths', 'regex-replace:unusedvars'],
 				options: {
 					spawn: false
 				}
@@ -274,8 +291,8 @@ module.exports = function (grunt) {
 	grunt.renameTask('watch', 'watchdev');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	
-	grunt.registerTask('default', ['sass:dist', 'concat', 'uglify', 'includereplace', 'regex-replace:currentpaths', 'regex-replace:unusedvars', 'imagemin', 'watch']);
-	grunt.registerTask('dev', ['sass:dev', 'concat', 'includereplace', 'imagemin', 'watchdev']);
+	grunt.registerTask('default', ['sass:dist', 'concat', 'uglify', 'includereplace', 'regex-replace:customvars', 'regex-replace:currentpaths', 'regex-replace:unusedvars', 'imagemin', 'watch']);
+	grunt.registerTask('dev', ['sass:dev', 'concat', 'includereplace', 'regex-replace:customvars', 'regex-replace:currentpaths', 'regex-replace:unusedvars', , 'imagemin', 'watchdev']);
 	grunt.registerTask('bust', ['regex-replace:cachebustcss', 'regex-replace:cachebustjs']);
 	grunt.registerTask('version', ['sass:dist', 'regex-replace:version']);
 };

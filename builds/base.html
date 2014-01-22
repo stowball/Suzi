@@ -1,19 +1,22 @@
-{{ include('_head.html', {"title": "Page Title", "bodyClass": ""}) }}
+{{ var $title: "Page Title" }}
+{{ var $currentPath: "base.html" }}
+
+{{ include('_head.html', {"title": "$title", "bodyClass": ""}) }}
 
 {{ include('header.html') }}
 
-{{ include('nav-main.html', {"currentPath": "base.html"}) }}
+{{ include('nav-main.html', {"currentPath": "$currentPath"}) }}
 
 <div id="content">
 	<div id="col_1">
 		
-		{{ include('nav-sub.html', {"currentPath": "base.html"}) }}
+		{{ include('nav-sub.html', {"currentPath": "$currentPath"}) }}
 		
 	</div>
 	
 	<div id="col_2" role="main">
 		
-		{{ include('breadcrumbs.html') }}
+		{{ include('breadcrumbs.html', {"title": "$title", "parentTag": ""}) }}
 		
 		<div class="content_area">
 		
