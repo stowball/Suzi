@@ -6,8 +6,8 @@ var fs = require('fs'),
 var menuItems =
 	_.chain(fs.readdirSync(path.resolve(__dirname, 'builds')))
 	.filter(function(f) {
-		// Only get html files, excluding index
-		return ~f.indexOf('.html') && f !== "index.html";
+		// Only get html files, excluding index and base
+		return ~f.indexOf('.html') && (f !== "index.html" && f !== "base.html");
 	})
 	.map(function(f) {
 		// Format strings
