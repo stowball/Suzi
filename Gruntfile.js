@@ -301,7 +301,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	
 	grunt.registerTask('default', ['sass:dist', 'concat', 'uglify', 'includereplace', 'regex-replace:customvars', 'regex-replace:currentpaths', 'regex-replace:unusedvars', 'imagemin', 'watch']);
-	grunt.registerTask('dev', ['sass:dev', 'concat', 'includereplace', 'regex-replace:customvars', 'regex-replace:currentpaths', 'regex-replace:unusedvars', , 'imagemin', 'watchdev']);
+	grunt.registerTask('dev', ['sass:dev', 'concat', 'includereplace', 'regex-replace:customvars', 'regex-replace:currentpaths', 'regex-replace:unusedvars', 'imagemin', 'watchdev']);
 	grunt.registerTask('bust', ['regex-replace:cachebustcss', 'regex-replace:cachebustjs']);
 	grunt.registerTask('version', ['sass:dist', 'regex-replace:version']);
 };
