@@ -162,11 +162,12 @@ To use the Sass-only features of Suzi, run sassqwatch.bat *(on Windows)* or bash
 	* `$width`: sets the width of the element (default: false)
 	* `$height`: sets the heightof the element (default: false)
 
-* `horizontal($vertical-align: top)`
+* `horizontal($vertical-align: top, $width: 100%%)`
 
-	Sets the `UL` specified (or first `UL` of a parent element) and its immediate `LI`s to use `display: table` to create an evenly spaced, horizontal list for modern browsers and uses floats for `.ltie8`. Used in the `.horizontal` and `.horizontal_always` classes
+	Sets the `UL` specified and its immediate `LI`s to use `display: table` to create an evenly spaced, horizontal list for modern browsers and uses floats for `.ltie8`. Used in the `.horizontal` and `.horizontal_auto` classes
 	
-	* `$vertical-align`: the `vertical-align` property to give to the child `LI`s (default: top)
+	* `$vertical-align`: the `vertical-align` value to give to the child `LI`s (default: top)
+	* `$width`: the `width` value to give to the `UL`
 
 * `icomoon`
 

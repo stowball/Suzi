@@ -164,9 +164,9 @@ $rem-with-px-fallback: true !default;
 	}
 }
 
-@mixin horizontal($vertical-align: top) {
+@mixin horizontal($vertical-align: top, $width: 100%) {
 	display: table;
-	width: 100%;
+	width: $width;
 	
 	> li {
 		display: table-cell;

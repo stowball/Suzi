@@ -26,3 +26,6 @@
 	@include horizontal;
 }
 
+%horizontal_auto {
+	@include horizontal(top, auto);
+}

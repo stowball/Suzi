@@ -204,6 +204,14 @@ cite {
 	@include hidden;
 }
 
+.horizontal {
+	@extend %horizontal;
+}
+
+.horizontal_auto {
+	@extend %horizontal_auto;
+}
+
 hr {
 	background: $hr-color;
 	border: 0;
