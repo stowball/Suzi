@@ -429,11 +429,6 @@ $rem-with-px-fallback: true !default;
 		@extend %clearfix;
 		list-style: none;
 		margin-left: -$std-gutter;
-		
-		.grid_container {
-			margin-bottom: -$std-gutter;
-			overflow: hidden;
-		}
 	}
 	
 	.grid_item {
@@ -474,6 +469,12 @@ $rem-with-px-fallback: true !default;
 				.unclear_at_#{$bp} {
 					@include media-query($bp) {
 						clear: none;
+					}
+				}
+				
+				.no_mb_at_#{$bp} {
+					@include media-query($bp) {
+						margin-bottom: 0;
 					}
 				}
 			}
