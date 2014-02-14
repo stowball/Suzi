@@ -193,6 +193,14 @@ $rem-with-px-fallback: true !default;
 	}
 }
 
+@mixin icon($name) {
+	.icon-#{$name} {
+		&:before {
+			@content;
+		}
+	}
+}
+
 // --------------------------------------------
 //	Media Query Mixins
 // --------------------------------------------

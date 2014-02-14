@@ -172,6 +172,10 @@ To use the Sass-only features of Suzi, run sassqwatch.bat *(on Windows)* or bash
 
 	Generates `[class^="icon-"], [class*=" icon-"]` selector for easy overriding of base [icomoon](http://icomoon.io) icon font styles
 
+* `icon($name)`
+
+	Generates `.icon-$name` selector for easy overriding of individual [icomoon](http://icomoon.io) icon font styles
+
 #### CSS Property mixins
 
 * `animation($property: default 1s ease)`
