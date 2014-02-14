@@ -135,6 +135,13 @@ To use the Sass-only features of Suzi, run sassqwatch.bat *(on Windows)* or bash
 	* `$webkit-rotate`: whether to rotate the triangle by 360deg in WebKit for smoother appearance (default: true)
 	* `$important`: whether to also output `!important` on `border-color` and `border-width` properties (default: false)
 
+* `placeholder($color: $form-placeholder-color, $text-transform: $form-placeholder-text-transform)`
+
+	Outputs cross-browser placeholder styles using
+	
+	* `$color`: Sets the `color` of the placeholder text (default: $form-placeholder-color)
+	* `$text-transform`: Sets the `text-transform` property of the placeholder text (default: $form-placeholder-text-transform)
+
 #### Class mixins
 
 * `classquery($class-name, $output-ltie9-rule)`
@@ -162,12 +169,12 @@ To use the Sass-only features of Suzi, run sassqwatch.bat *(on Windows)* or bash
 	* `$width`: sets the width of the element (default: false)
 	* `$height`: sets the heightof the element (default: false)
 
-* `horizontal($vertical-align: top, $width: 100%%)`
+* `horizontal($vertical-align: top, $width: 100%)`
 
 	Sets the `UL` specified and its immediate `LI`s to use `display: table` to create an evenly spaced, horizontal list for modern browsers and uses floats for `.ltie8`. Used in the `.horizontal` and `.horizontal_auto` classes
 	
 	* `$vertical-align`: the `vertical-align` value to give to the child `LI`s (default: top)
-	* `$width`: the `width` value to give to the `UL`
+	* `$width`: the `width` value to give to the `UL` (default: 100%)
 
 * `icomoon`
 

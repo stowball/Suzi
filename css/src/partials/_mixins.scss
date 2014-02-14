@@ -576,25 +576,30 @@ $rem-with-px-fallback: true !default;
 	}
 }
 
-@mixin placeholder($color: $form-placeholder-color) {
+@mixin placeholder($color: $form-placeholder-color, $text-transform: $form-placeholder-text-transform) {
 	:-moz-placeholder {
 		color: $color;
+		text-transform: $text-transform;
 	}
 	
 	::-moz-placeholder {
 		color: $color;
+		text-transform: $text-transform;
 	}
 	
 	:-ms-input-placeholder {
 		color: $color;
+		text-transform: $text-transform;
 	}
 	
 	::-webkit-input-placeholder {
 		color: $color;
+		text-transform: $text-transform;
 	}
 	
 	input.placeholder, textarea.placeholder {
 		color: $color;
+		text-transform: $text-transform;
 	}
 	
 	label + [placeholder]:focus:-moz-placeholder {
