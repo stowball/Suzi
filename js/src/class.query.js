@@ -1,5 +1,5 @@
 /*!
- * Class Query v0.2.0
+ * Class Query v0.2.1
  *
  * Creates media queries from .classquery- classes for elements with data-classquery attributes
  *
@@ -10,6 +10,9 @@
  * Licensed under the MIT license
 */
 ;(function(document) {
+	
+	if (!document.querySelectorAll)
+		return;
 	
 	function processRules(stylesheet, processor) {
 		var rules = stylesheet.cssRules ? stylesheet.cssRules : stylesheet.media,
