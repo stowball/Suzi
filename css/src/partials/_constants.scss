@@ -408,6 +408,18 @@ object:focus {
 	}
 }
 
+.pos_absolute {
+	position: absolute;
+}
+
+.pos_fixed {
+	position: fixed;
+}
+
+.pos_relative {
+	position: relative;
+}
+
 pre {
 	white-space: pre-wrap;
 }
