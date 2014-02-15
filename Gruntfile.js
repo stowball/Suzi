@@ -97,11 +97,14 @@ module.exports = function (grunt) {
 			},
 			all: {
 				src: [
+					'<%= globalConfig.path.js.root %>/matchMedia.min.js',
+					'<%= globalConfig.path.js.root %>/matchMedia.addListener.min.js',
+					'<%= globalConfig.path.js.root %>/enquire.min.js',
+					'<%= globalConfig.path.js.root %>/rwd.images.min.js',
 					'<%= globalConfig.path.js.root %>/class.query.min.js',
 					'<%= globalConfig.path.js.root %>/swipe.min.js',
 					'<%= globalConfig.path.js.root %>/firefox.hwa.min.js',
 					'<%= globalConfig.path.js.root %>/fastclick.min.js',
-					'<%= globalConfig.path.js.root %>/jquery.rwdImages.min.js',
 					'<%= globalConfig.path.js.site %>/all.js'
 				],
 				dest: '<%= globalConfig.path.js.build %>/all.js'
