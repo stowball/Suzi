@@ -261,6 +261,16 @@ $rem-with-px-fallback: true !default;
 //	Functional Mixins
 // --------------------------------------------
 
+@mixin calc($property, $expression, $fallback: false) {
+	@if ($fallback != false) {
+		#{$property}: #{$fallback};
+	}
+	
+	#{$property}: -moz-calc(#{$expression});
+	#{$property}: -webkit-calc(#{$expression});
+	#{$property}: calc(#{$expression});
+}
+
 @mixin gradient($nodes: (#f6f8f9, 0%, #e5ebee, 50%, #d7dee3, 50%, #f2f5f7, 100%), $direction: 'to bottom', $repeating: false) {
 	$fallback: '';
 	$background: background;

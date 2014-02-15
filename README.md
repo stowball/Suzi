@@ -80,13 +80,13 @@ To use the Sass-only features of Suzi, run sassqwatch.bat *(on Windows)* or bash
 
 #### Functional mixins
 
-* `rem($property, $values, $use-px-fallback: $rem-with-px-fallback)`
+* `calc($property, $expression, $fallback: false)`
 
-	Converts a pixel value to rems, while also outputting the pixel fallback (optional)
+	Outputs the [`calc()`](https://developer.mozilla.org/en-US/docs/Web/CSS/calc) CSS function and an optional fallback
 	
-	* `$property`: valid CSS property
-	* `$values`: valid CSS value in pixels
-	* `$use-px-fallback`: whether to output a pixel fallback as well (default: $rem-with-px-fallback [true])
+	* `$property`: The CSS property to be used
+	* `$expression`: A mathematical expression, the result of which is used as the value
+	* `fallback`: A fallback value for browsers that don't support `calc()`
 
 * `gradient($nodes: (#f6f8f9, 0%, #e5ebee, 50%, #d7dee3, 50%, #f2f5f7, 100%), $direction: 'to bottom', repeating: false)`
 
@@ -141,6 +141,14 @@ To use the Sass-only features of Suzi, run sassqwatch.bat *(on Windows)* or bash
 	
 	* `$color`: Sets the `color` of the placeholder text (default: $form-placeholder-color)
 	* `$text-transform`: Sets the `text-transform` property of the placeholder text (default: $form-placeholder-text-transform)
+
+* `rem($property, $values, $use-px-fallback: $rem-with-px-fallback)`
+
+	Converts a pixel value to rems, while also outputting the pixel fallback (optional)
+	
+	* `$property`: valid CSS property
+	* `$values`: valid CSS value in pixels
+	* `$use-px-fallback`: whether to output a pixel fallback as well (default: $rem-with-px-fallback [true])
 
 #### Class mixins
 
