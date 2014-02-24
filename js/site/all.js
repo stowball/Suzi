@@ -490,6 +490,9 @@ var slider = {
 	},
 	
 	lazyLoad: function(el, index, globalPos, slidesCount) {
+		if (el.length === 0)
+			return;
+		
 		var $this = $(el);
 		
 		if ($this.hasClass('lazy-loaded'))
