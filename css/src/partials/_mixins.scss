@@ -460,6 +460,7 @@ $rem-with-px-fallback: true !default;
 	@if ($is-responsive == true) {
 		@for $i from 0 to length($breakpoints) {
 			$bp: nth($breakpoints, $i + 1);
+			$output-helper-classes: true;
 			
 			@for $j from 0 to length($percentages) {
 				$pc: nth($percentages, $j + 1);
@@ -470,23 +471,27 @@ $rem-with-px-fallback: true !default;
 					}
 				}
 				
-				.clear_at_#{$bp} {
-					@include media-query($bp) {
-						clear: both;
+				@if ($output-helper-classes == true) {
+					.clear_at_#{$bp} {
+						@include media-query($bp) {
+							clear: both;
+						}
+					}
+					
+					.unclear_at_#{$bp} {
+						@include media-query($bp) {
+							clear: none;
+						}
+					}
+					
+					.no_mb_at_#{$bp} {
+						@include media-query($bp) {
+							margin-bottom: 0;
+						}
 					}
 				}
 				
-				.unclear_at_#{$bp} {
-					@include media-query($bp) {
-						clear: none;
-					}
-				}
-				
-				.no_mb_at_#{$bp} {
-					@include media-query($bp) {
-						margin-bottom: 0;
-					}
-				}
+				$output-helper-classes: false;
 			}
 		}
 	}
