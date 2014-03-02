@@ -457,6 +457,14 @@ $rem-with-px-fallback: true !default;
 		}
 	}
 	
+	.clear {
+		clear: both;
+	}
+	
+	.no_mb {
+		margin-bottom: 0;
+	}
+	
 	@if ($is-responsive == true) {
 		@for $i from 0 to length($breakpoints) {
 			$bp: nth($breakpoints, $i + 1);
