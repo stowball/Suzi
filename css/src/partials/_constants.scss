@@ -795,7 +795,7 @@ em {
 	}
 }
 
-f_comment, .f_margin, .f_row, .required, .rc {
+.f_comment, .f_margin, .f_row, .required, .rc {
 	@include rem(margin-bottom, $form-margin);
 }
 

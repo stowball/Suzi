@@ -2,7 +2,7 @@
 	label, .label {
 		.f_row & {
 			@include rem(margin-top, $form-margin / 2);
-					
+			
 			.ie &, .vendor-ie & {
 				@include rem(margin-top, ($form-margin / 2) + 1);
 			}
@@ -43,13 +43,12 @@
 		@include rem(margin-left, $std-whitespace-margin * 2);
 	}
 	
-	.btns, .f_comment, .rc:not(.legend) ul, .required {
-		padding-left: $form-label-margin + $form-label-width;
+	.rc:not(.legend) ul {
 		@include rem(margin-left, $std-whitespace-margin);
 	}
 	
-	.btns {
-		margin-left: 0 !important;
+	.btns, .f_comment, .rc:not(.legend) ul, .required {
+		padding-left: $form-label-margin + $form-label-width;
 	}
 	
 	button, [type="submit"] {
