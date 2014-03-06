@@ -735,7 +735,7 @@ input[type="search"] {
 
 @include placeholder;
 
-input.text, textarea, select {
+.text, textarea, select {
 	margin: 0;
 	
 	html:not(.ltie9) &:not([disabled]) {
@@ -772,7 +772,7 @@ input {
 	cursor: pointer;
 }
 
-.btn, .btn_wrap, button, [type="submit"], input.text, label, .label, p.legend, select, textarea {
+.btn, .btn_wrap, button, [type="submit"], .text, label, .label, p.legend, select, textarea {
 	@include box-sizing;
 	display: block;
 	font-family: $std-fontfamily;
@@ -780,7 +780,7 @@ input {
 	width: 100%;
 }
 
-input.text, label, .label, p.legend, select, textarea {
+.text, label, .label, p.legend, select, textarea {
 	vertical-align: top;
 }
 
@@ -807,17 +807,17 @@ fieldset .description {
 	display: block;
 }
 
-input.text, textarea, html:not(.browser-android) select {
+.text, textarea, html:not(.browser-android) select {
 	background-color: $form-input-background-color;
 	border: 1px solid $form-input-border-color;
 }
 
-input.text, textarea {
+.text, textarea {
 	-webkit-appearance: none;
 	@include border-radius($form-input-border-radius);
 }
 
-button, [type="submit"], input.text, textarea, select {
+button, [type="submit"], .text, textarea, select {
 	@include rem(font-size, $base-font-size);
 	
 	.no-touch & {

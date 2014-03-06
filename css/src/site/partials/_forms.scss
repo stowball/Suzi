@@ -13,7 +13,7 @@ label, .label, p.legend {
 	@include rem(margin-bottom, $form-margin / 2);
 }
 
-input.text, textarea {
+.text, textarea {
 	@include rem(padding, $form-input-padding-vertical $form-input-padding-horizontal);
 	
 	.vendor-mozilla & {
