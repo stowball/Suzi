@@ -76,8 +76,6 @@ $std-whitespace-margin: -4px;
 
 $form-margin: 10px;
 $form-label-margin: 3%;
-$form-label-width: 30%;
-$form-input-width-adjuster: -0%;
 
 $list-margin-left: 40px;
 $list-item-margin-denominator: 2;
@@ -102,9 +100,15 @@ $form-required-indicator-right: -5px;
 //	Sizes
 // --------------------------------------------
 
-$small-input-width: 100px;
-$medium-input-width: 200px;
-$large-input-width: 300px;
+$form-label-width: 30%;
+$form-input-width-adjuster: -0%;
+
+$form-smaller-input-width: 16.6666%;
+$form-small-input-width: 33.3333%;
+$form-medium-input-width: 50%;
+$form-large-input-width: 66.6666%;
+$form-larger-input-width: 83.3333%;
+
 $text-area-minheight: 120px;
 
 // --------------------------------------------

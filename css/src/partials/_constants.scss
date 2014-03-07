@@ -854,24 +854,38 @@ textarea {
 	}
 }
 
-@media ($min em($form-bp)) {
-	@import "partials/bp-form-fields";
+.f_row, .btns {
+	.w_auto {
+		width: auto;
+	}
+	
+	.w_smaller {
+		width: $form-smaller-input-width;
+	}
+
+	.w_small {
+		width: $form-small-input-width;
+	}
+
+	.w_medium {
+		width: $form-medium-input-width;
+	}
+
+	.w_large {
+		width: $form-large-input-width;
+	}
+
+	.w_larger {
+		width: $form-larger-input-width;
+	}
+	
+	.w_max {
+		width: 100%;
+	}
 }
 
-input.text, textarea, select {
-	.f_row & {
-		&.small {
-			@include rem(width, $small-input-width);
-		}
-		
-		&.medium {
-			@include rem(width, $medium-input-width);
-		}
-		
-		&.large {
-			@include rem(width, $large-input-width);
-		}
-	}
+@media ($min em($form-bp)) {
+	@import "partials/bp-form-fields";
 }
 
 .btn, .btn_wrap {

@@ -28,6 +28,36 @@
 		width: (100% - ($form-label-margin + $form-label-width) + $form-input-width-adjuster);
 	}
 	
+	.f_row, .btns {
+		.w_bp_auto {
+			width: auto;
+		}
+		
+		.w_bp_smaller {
+			width: ((100% - ($form-label-margin + $form-label-width) + $form-input-width-adjuster) * strip-units($form-smaller-input-width / 100));
+		}
+		
+		.w_bp_small {
+			width: ((100% - ($form-label-margin + $form-label-width) + $form-input-width-adjuster) * strip-units($form-small-input-width / 100));
+		}
+		
+		.w_bp_medium {
+			width: ((100% - ($form-label-margin + $form-label-width) + $form-input-width-adjuster) * strip-units($form-medium-input-width / 100));
+		}
+		
+		.w_bp_large {
+			width: ((100% - ($form-label-margin + $form-label-width) + $form-input-width-adjuster) * strip-units($form-large-input-width / 100));
+		}
+		
+		.w_bp_larger {
+			width: ((100% - ($form-label-margin + $form-label-width) + $form-input-width-adjuster) * strip-units($form-larger-input-width / 100));
+		}
+		
+		.w_bp_max {
+			width: (100% - ($form-label-margin + $form-label-width) + $form-input-width-adjuster);
+		}
+	}
+	
 	.f_row.block {
 		label, .label, .text, textarea, select {
 			display: block;
@@ -47,8 +77,12 @@
 		@include rem(margin-left, $std-whitespace-margin);
 	}
 	
-	.btns, .f_comment, .rc:not(.legend) ul, .required {
+	.f_comment, .rc:not(.legend) ul, .required {
 		padding-left: $form-label-margin + $form-label-width;
+	}
+	
+	.btns > :first-child {
+		margin-left: $form-label-margin + $form-label-width;
 	}
 	
 	button, [type="submit"] {
