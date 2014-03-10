@@ -866,6 +866,14 @@ textarea {
 	.js .open + & {
 		height: auto;
 	}
+	
+	.js .accordion_to_tabs .open + & {
+		height: auto !important;
+	}
+	
+	.accordion_to_tabs & {
+		@include transition(none !important);
+	}
 }
 
 /* --------------------------------------------

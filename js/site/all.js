@@ -614,18 +614,23 @@ var accordion = {
 							$accordionContentIndex = $accordionContent.eq(idx);
 						
 						if (accordionCookie || !multiple) {
+							if (!accordionCookie) {
+								if ($this.hasClass('open'))
+									accordionCookie = idx;
+							}
+							
 							if (parseInt(accordionCookie) === idx) {
 								$accordionLinks.removeClass('open');
 								$this.addClass('open is_open');
-								$accordionContentIndex.attr('aria-hidden', false);
-								$accordionContentIndex.css('height', $accordionContentIndex.height());
+								
+								$accordionContentIndex.attr('aria-hidden', false).css('height', $accordionContentIndex.height());
 							}
 						}
 						else {
 							if ($this.hasClass('open')) {
 								$this.addClass('is_open');
-								$accordionContentIndex.attr('aria-hidden', false);
-								$accordionContentIndex.css('height', $accordionContentIndex.height());
+								
+								$accordionContentIndex.attr('aria-hidden', false).css('height', $accordionContentIndex.height());
 								
 								if (!multiple)
 									cookie.set(accordionID, idx);
@@ -643,13 +648,16 @@ var accordion = {
 								ariaHidden = false;
 							
 							if (!multiple) {
-								$accordionLinks.removeClass('open');
+								$accordionLinks.removeClass('open is_open');
+								
 								$accordionContent.each(function(index) {
 									if (index === idx)
-										$(this).attr('aria-hidden', false).removeClass('is_open').transition({height: transitionPropertyValue}, transitionDuration, transitionTimingFunction);
+										$(this).attr('aria-hidden', false).transition({height: transitionPropertyValue}, transitionDuration, transitionTimingFunction);
 									else
-										$(this).attr('aria-hidden', true).addClass('is_open').transition({height: 0}, transitionDuration, transitionTimingFunction);
+										$(this).attr('aria-hidden', true).transition({height: 0}, transitionDuration, transitionTimingFunction);
 								});
+								
+								$this.addClass('open is_open');
 							}
 							else {
 								$this.removeClass('open').toggleClass('is_open');
