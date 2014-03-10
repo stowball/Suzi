@@ -31,49 +31,11 @@ input[type="hidden"], .display_none, .js .js_display_none, .no_col_1 #col_1, .no
 }
 
 /* --------------------------------------------
-	Consistent Margins
------------------------------------------------ */
-
-.std_margin, .std_mb {
-	@include rem(margin-bottom, $std-margin);
-}
-
-.std_m {
-	@include rem(margin-bottom, $std-margin);
-	@include rem(margin-top, $std-margin);
-}
-
-.std_mt {
-	@include rem(margin-top, $std-margin);
-}
-
-.dbl_m {
-	@include rem(margin-bottom, $std-margin * 2);
-	@include rem(margin-top, $std-margin * 2);
-}
-
-.dbl_mb {
-	@include rem(margin-bottom, $std-margin * 2);
-}
-
-.dbl_mt {
-	@include rem(margin-top, $std-margin * 2);
-}
-
-.no_mb {
-	margin-bottom: 0;
-}
-
-.no_mt {
-	margin-top: 0;
-}
-
-/* --------------------------------------------
 	Standard Margin
 ----------------------------------------------- */
 
 blockquote, .cell, .centre_object, cite, .cols, .content_area, dl, .error, .flash, fieldset, .fieldset, hr, iframe, .ok, ol, p, .panes, table, ul {
-	@extend .std_margin;
+	@include rem(margin-bottom, $std-margin);
 }
 
 /* --------------------------------------------
@@ -102,28 +64,8 @@ address {
 	font-style: normal;
 }
 
-.align_left {
-	text-align: left !important;
-}
-
-.align_center, .align_centre {
-	text-align: center !important;
-}
-
-.align_right {
-	text-align: right !important;
-}
-
-.align_justify {
-	text-align: justify !important;
-}
-
 b, strong {
 	font-weight: bold;
-}
-
-.block {
-	display: block !important;
 }
 
 blockquote, q {
@@ -148,16 +90,6 @@ blockquote {
 
 .classquery-complete [data-classquery], .ltie9 [data-classquery] {
 	visibility: visible;
-}
-
-.centre_object {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-table.centre_object {
-	display: table;
 }
 
 cite {
@@ -186,30 +118,6 @@ cite {
 
 .content_area {
 	@extend %clearfix;
-}
-
-.float_left {
-	float: left;
-	
-	+ .content_area {
-		overflow: hidden;
-	}
-}
-
-.float_right {
-	float: right;
-}
-
-.hidden {
-	@include hidden;
-}
-
-.horizontal {
-	@extend %horizontal;
-}
-
-.horizontal_auto {
-	@extend %horizontal_auto;
 }
 
 hr {
@@ -264,22 +172,6 @@ img {
 
 @media ($min em($float-bp)) {
 	@import "partials/bp-img-float";
-}
-
-.inline {
-	display: inline !important;
-}
-
-.inline_block {
-	display: inline-block !important;
-}
-
-.invisible {
-	visibility: hidden !important;
-}
-
-.lowercase {
-	text-transform: lowercase;
 }
 
 .managed {
@@ -390,20 +282,8 @@ img {
 	}
 }
 
-.no_wrap {
-	white-space: nowrap;
-}
-
-.normalcase {
-	text-transform: none;
-}
-
 object:focus {
 	outline: none;
-}
-
-.overflow_x {
-	overflow-x: auto;
 }
 
 .pane {
@@ -414,18 +294,6 @@ object:focus {
 	.js &:first-child {
 		display: block;
 	}
-}
-
-.pos_absolute {
-	position: absolute;
-}
-
-.pos_fixed {
-	position: fixed;
-}
-
-.pos_relative {
-	position: relative;
 }
 
 pre {
@@ -451,28 +319,8 @@ sub, sup {
 	vertical-align: baseline;
 }
 
-.titlecase {
-	text-transform: capitalize;
-}
-
 .ua-windows_phone-7 {
 	@extend .no-fontface !optional;
-}
-
-.uppercase {
-	text-transform: uppercase;
-}
-
-.valign_bottom {
-	vertical-align: bottom;
-}
-
-.valign_middle {
-	vertical-align: middle;
-}
-
-.valign_top {
-	vertical-align: top;
 }
 
 .video {
@@ -485,18 +333,6 @@ sub, sup {
 		right: 0;
 		top: 0;
 	}
-}
-
-.visible {
-	visibility: visible !important;
-}
-
-.weight_bold {
-	font-weight: bold !important;
-}
-
-.weight_normal {
-	font-weight: normal !important;
 }
 
 /* --------------------------------------------

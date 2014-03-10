@@ -24,6 +24,8 @@
 
 @import "site/partials/site";
 
+@import "partials/generic-classes";
+
 @media print {
 	@import "partials/print";
 	@import "site/partials/print";

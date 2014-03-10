@@ -1,0 +1,197 @@
+/* --------------------------------------------
+	Consistent Margins
+----------------------------------------------- */
+
+.std_m, .standard_m, %std_m, %standard_m {
+	@include rem(margin-bottom, $std-margin);
+	@include rem(margin-top, $std-margin);
+}
+
+.std_mb, .standard_mb, %std_mb, %standard_mb {
+	@include rem(margin-bottom, $std-margin);
+}
+
+.std_mt, .standard_mt, %std_mt, %standard_mt {
+	@include rem(margin-top, $std-margin);
+}
+
+.dbl_m, .double_m, %dbl_m, %double_m {
+	@include rem(margin-bottom, $std-margin * 2);
+	@include rem(margin-top, $std-margin * 2);
+}
+
+.dbl_mb, .double_mb, %dbl_mb, %double_mb {
+	@include rem(margin-bottom, $std-margin * 2);
+}
+
+.dbl_mt, .double_mt, %dbl_mt, %double_mt {
+	@include rem(margin-top, $std-margin * 2);
+}
+
+.hlf_m, .half_m, %hlf_m, %half_m {
+	@include rem(margin-bottom, $std-margin / 2);
+	@include rem(margin-top, $std-margin / 2);
+}
+
+.hlf_mb, .half_mb, %hlf_mb, %half_mb {
+	@include rem(margin-bottom, $std-margin / 2);
+}
+
+.hlf_mt, .half_mb, %hlf_mt, %half_mb {
+	@include rem(margin-top, $std-margin / 2);
+}
+
+.no_m, %no_m {
+	margin-bottom: 0;
+	margin-top: 0;
+}
+
+.no_mb, %no_mb {
+	margin-bottom: 0;
+}
+
+.no_mt, %no_mt {
+	margin-top: 0;
+}
+
+/* --------------------------------------------
+	Helper Classes
+----------------------------------------------- */
+
+.align_left {
+	text-align: left;
+}
+
+.align_center, .align_centre {
+	text-align: center;
+}
+
+.align_right {
+	text-align: right;
+}
+
+.align_justify {
+	text-align: justify;
+}
+
+.block {
+	display: block;
+}
+
+.center_object, .centre_object {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+table.center_object, table.centre_object {
+	display: table;
+}
+
+.float_left {
+	float: left;
+	
+	+ .content_area {
+		overflow: hidden;
+	}
+}
+
+.float_right {
+	float: right;
+}
+
+.hidden {
+	@include hidden;
+}
+
+.horizontal {
+	@extend %horizontal;
+}
+
+.horizontal_auto {
+	@extend %horizontal_auto;
+}
+
+.inline {
+	display: inline;
+}
+
+.inline_block {
+	display: inline-block;
+}
+
+.invisible {
+	visibility: hidden;
+}
+
+.lowercase {
+	text-transform: lowercase;
+}
+
+.no_wrap {
+	white-space: nowrap;
+}
+
+.normalcase {
+	text-transform: none;
+}
+
+.overflow_x_auto {
+	overflow-x: auto;
+}
+
+.overflow_x_hidden {
+	overflow-x: hidden;
+}
+
+.overflow_y_auto {
+	overflow-y: auto;
+}
+
+.overflow_y_hidden {
+	overflow-y: hidden;
+}
+
+.pos_absolute {
+	position: absolute;
+}
+
+.pos_fixed {
+	position: fixed;
+}
+
+.pos_relative {
+	position: relative;
+}
+
+.titlecase {
+	text-transform: capitalize;
+}
+
+.uppercase {
+	text-transform: uppercase;
+}
+
+.valign_bottom {
+	vertical-align: bottom;
+}
+
+.valign_middle {
+	vertical-align: middle;
+}
+
+.valign_top {
+	vertical-align: top;
+}
+
+.visible {
+	visibility: visible;
+}
+
+.weight_bold {
+	font-weight: bold;
+}
+
+.weight_normal {
+	font-weight: normal;
+}
