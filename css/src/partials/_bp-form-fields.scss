@@ -7,9 +7,11 @@
 				@include rem(margin-top, ($form-margin / 2) + 1);
 			}
 			
-			em {
-				position: absolute;
-				@include rem(right, $form-required-indicator-right);
+			@if ($form-labels-aligned-right == true) {
+				em {
+					position: absolute;
+					@include rem(right, $form-required-indicator-right);
+				}
 			}
 		}
 	}
@@ -17,9 +19,12 @@
 	.f_row label, .f_row .label, p.legend {
 		display: inline-block;
 		margin-right: $form-label-margin;
-		position: relative;
-		text-align: right;
 		width: $form-label-width;
+		
+		@if ($form-labels-aligned-right == true) {
+			position: relative;
+			text-align: right;
+		}
 	}
 	
 	.f_row .text, .f_row textarea, .f_row select, .rc.legend ul {
