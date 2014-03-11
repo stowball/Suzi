@@ -572,6 +572,7 @@ input[type="search"] {
 @include placeholder;
 
 .text, textarea, select {
+	color: $form-input-color;
 	margin: 0;
 	
 	html:not(.ltie9) &:not([disabled]) {
