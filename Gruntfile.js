@@ -122,11 +122,9 @@ module.exports = function (grunt) {
 			}
 		},
 		
-		includereplace: {
+		includereplacemore: {
 			options: {
 				includesDir: '<%= globalConfig.path.builds.includes %>',
-				prefix: '{{ ',
-				suffix: ' }}',
 				globals: {
 					currentYear: grunt.template.today('yyyy'),
 					menuItems: menuItems,
@@ -170,48 +168,17 @@ module.exports = function (grunt) {
 					}
 				]
 			},
-			customvars: {
-				src: '<%= globalConfig.path.builds.dist.builds %>/*.html',
-				actions: [
-					{
-						search: /[\s\S]*/m,
-						replace: function(str) {
-							var variables = str.replace(/(\n|\r)/g, '').match(/\{\{ var (\$.*?): "(.*?)" \}\}/g),
-								varLength = 0;
-							
-							if (variables)
-								varLength += variables.length;
-							
-							if (varLength > 0) {
-								for (var i = 0; i < varLength; i++) {
-									str = str.replace(/\{\{ var (\$.*?): "(.*?)" \}\}[\s\S]*/m, function(str2, p1, p2) {
-										var $var = p1.replace(/\$/g, '\\$');
-										return str2.replace(new RegExp($var, 'g'), p2);
-									});
-								}
-							}
-							
-							return str;
-						}
-					}
-				]
-			},
 			currentpaths: {
 				src: '<%= globalConfig.path.builds.dist.builds %>/*.html',
 				actions: [
 					{
-						search: / \{(.*?\.html)\}(.*(?:"|'))((.*?\.html|#))/g,
+						search: / {(.*?\.html)}(.*(?:"|'))((.*?\.html|#))/g,
 						replace: function(str, p1, p2, p3) {
 							return p1 == p3 ? ' class="current"' + p2 + p3 : p2 + p3;
 						}
-					}
-				]
-			},
-			unusedvars: {
-				src: '<%= globalConfig.path.builds.dist.builds %>/*.html',
-				actions: [
+					},
 					{
-						search: /(\{\{+.*?\}\}+|\{[a-zA-Z]*?\})(\n|\r)?/g,
+						search: /{\w*?}/g,
 						replace: ''
 					}
 				]
@@ -253,7 +220,7 @@ module.exports = function (grunt) {
 			},
 			html: {
 				files: ['<%= globalConfig.path.builds.root %>/**/*.html', '<%= globalConfig.path.builds.dist.builds %>/*.html'],
-				tasks: ['includereplace', 'regex-replace:customvars', 'regex-replace:currentpaths', 'regex-replace:unusedvars'],
+				tasks: ['includereplacemore', 'regex-replace:currentpaths'],
 				options: {
 					spawn: false
 				}
@@ -284,7 +251,7 @@ module.exports = function (grunt) {
 			},
 			html: {
 				files: ['<%= globalConfig.path.builds.root %>/**/*.html', '<%= globalConfig.path.builds.dist.builds %>/*.html'],
-				tasks: ['includereplace', 'regex-replace:customvars', 'regex-replace:currentpaths', 'regex-replace:unusedvars'],
+				tasks: ['includereplacemore', 'regex-replace:currentpaths'],
 				options: {
 					spawn: false
 				}
@@ -296,15 +263,15 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
-	grunt.loadNpmTasks('grunt-include-replace');
+	grunt.loadNpmTasks('grunt-include-replace-more');
 	grunt.loadNpmTasks('grunt-regex-replace');
 	grunt.loadNpmTasks('grunt-contrib-imagemin');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.renameTask('watch', 'watchdev');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	
-	grunt.registerTask('default', ['sass:dist', 'concat', 'uglify', 'includereplace', 'regex-replace:customvars', 'regex-replace:currentpaths', 'regex-replace:unusedvars', 'imagemin', 'watch']);
-	grunt.registerTask('dev', ['sass:dev', 'concat', 'includereplace', 'regex-replace:customvars', 'regex-replace:currentpaths', 'regex-replace:unusedvars', 'imagemin', 'watchdev']);
+	grunt.registerTask('default', ['sass:dist', 'concat', 'uglify', 'includereplacemore', 'regex-replace:currentpaths', 'imagemin', 'watch']);
+	grunt.registerTask('dev', ['sass:dev', 'concat', 'includereplacemore', 'regex-replace:currentpaths', 'imagemin', 'watchdev']);
 	grunt.registerTask('bust', ['regex-replace:cachebustcss', 'regex-replace:cachebustjs']);
 	grunt.registerTask('version', ['sass:dist', 'regex-replace:version']);
 };

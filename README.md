@@ -18,7 +18,7 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 * Responsive, lazy-loaded, touch-friendly carousels with optional navigation & pagination, analytics tracking & cookie-based remembering of last visible slide
 * Simple, accessible JavaScript tabs with cookie-based remembering of the open pane
 * Simple, accessible JavaScript accordions which transition to and from `height: auto`, and support multiple open panes
-* Simple, but powerful HTML templating using [grunt-includereplace](https://github.com/alanshaw/grunt-include-replace)
+* Simple, but powerful HTML templating using [grunt-includereplace-more](https://github.com/stowball/grunt-include-replace-more)
 * Concatenation and minification of CSS and JS files with [grunt-contrib-concat](https://github.com/gruntjs/grunt-contrib-concat) and [grunt-contrib-uglify](https://github.com/gruntjs/grunt-contrib-uglify)
 * Cache busting of CSS and JS assets with a unique timestamp querystring
 * Optimising of images with [grunt-contrib-imagemin](https://github.com/gruntjs/grunt-contrib-imagemin)
