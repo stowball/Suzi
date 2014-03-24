@@ -26,7 +26,7 @@
 	List Bullet Removal & Display None
 ----------------------------------------------- */
 
-input[type="hidden"], .display_none, .js .js_display_none, .no_col_1 #col_1, .no_col_3 #col_3, .grid_container > li.grid_item:before, .list_style_none > li:before, .rc li:before, .reset li:before, .reset_lazy > li:before {
+input[type="hidden"], .display_none, .js_display, .js .js_display_none, .no_col_1 #col_1, .no_col_3 #col_3, .grid_container > li.grid_item:before, .list_style_none > li:before, .rc li:before, .reset li:before, .reset_lazy > li:before {
 	display: none;
 }
 
@@ -172,6 +172,34 @@ img {
 
 @media ($min em($float-bp)) {
 	@import "partials/bp-img-float";
+}
+
+.js {
+	.js_display_block {
+		display: block;
+	}
+	
+	.js_display_inline {
+		display: inline;
+	}
+	
+	.js_display_inline_block {
+		display: inline-block;
+	}
+}
+
+.jquery {
+	.jquery_display_block {
+		display: block;
+	}
+	
+	.jquery_display_inline {
+		display: inline;
+	}
+	
+	.jquery_display_inline_block {
+		display: inline-block;
+	}
 }
 
 .managed {
