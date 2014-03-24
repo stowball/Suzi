@@ -431,7 +431,7 @@ $rem-with-px-fallback: true !default;
 	}
 }
 
-@mixin grid($breakpoints: (480, 600, 768, 960), $percentages: (10, 20, 25, 30, 33.3333, 40, 50, 60, 66.6666, 70, 75, 80, 90, 100)) {
+@mixin grid($breakpoints: (480, 600, 768, 960), $percentages: (10, 20, 25, 30, 33.3333, 40, 50, 60, 66.6666, 70, 75, 80, 90, 100), $float-classes: false) {
 	$bp: '';
 	$pc: '';
 	
@@ -465,6 +465,16 @@ $rem-with-px-fallback: true !default;
 		margin-bottom: 0;
 	}
 	
+	@if ($float-classes == true) {
+		.float_left {
+			float: left;
+		}
+		
+		.float_right {
+			float: right;
+		}
+	}
+	
 	@if ($is-responsive == true) {
 		@for $i from 0 to length($breakpoints) {
 			$bp: nth($breakpoints, $i + 1);
@@ -495,6 +505,20 @@ $rem-with-px-fallback: true !default;
 					.no_mb_at_#{$bp} {
 						@include media-query($bp) {
 							margin-bottom: 0;
+						}
+					}
+					
+					@if ($float-classes == true) {
+						.float_left_at_#{$bp} {
+							@include media-query($bp) {
+								float: left;
+							}
+						}
+						
+						.float_right_at_#{$bp} {
+							@include media-query($bp) {
+								float: right;
+							}
 						}
 					}
 				}
