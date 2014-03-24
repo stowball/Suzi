@@ -653,10 +653,6 @@ input {
 	vertical-align: top;
 }
 
-input.date_time {
-	display: -webkit-inline-flex;
-}
-
 em {
 	.required &, label & , .label &, p.legend & {
 		color: $form-input-error-color;
@@ -682,8 +678,15 @@ fieldset .description {
 }
 
 .text, textarea {
-	-webkit-appearance: none;
 	@include border-radius($form-input-border-radius);
+}
+
+.text:not(.date_time) {
+	-webkit-appearance: none;
+}
+
+.text.date_time {
+	display: -webkit-inline-flex;
 }
 
 button, [type="submit"], .text, textarea, select {
