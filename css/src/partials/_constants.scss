@@ -621,6 +621,10 @@ input[type="search"] {
 	}
 }
 
+:-moz-ui-invalid:not(output) {
+	box-shadow: 0 0 3px 0 $form-input-error-color !important;
+}
+
 input {
 	&[type="radio"], &[type="checkbox"] {
 		&.form_error {
