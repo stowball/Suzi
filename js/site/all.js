@@ -141,7 +141,7 @@ var forms = {
 			}
 		});
 		
-		$requireds.filter('form_error:first').focus();
+		$requireds.filter('.form_error:first').focus();
 		
 		return !errors;
 	}
