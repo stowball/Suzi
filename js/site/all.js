@@ -136,12 +136,12 @@ var forms = {
 			}
 			
 			if ($.trim($this.val()).length === 0) {
-				$this.addClass('form_error');
+				$this.addClass('.form_error');
 				errors = true;
 			}
 		});
 		
-		$requireds.filter('form_error:first').focus();
+		$requireds.filter('.form_error:first').focus();
 		
 		return !errors;
 	}
