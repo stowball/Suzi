@@ -42,10 +42,6 @@ blockquote, .cell, .centre_object, cite, .cols, .content_area, dl, .error, .flas
 	Constants
 ----------------------------------------------- */
 
-a, input, button {
-	-ms-touch-action: none !important;
-}
-
 a[name], a[name]:hover {
 	color: inherit !important;
 	text-decoration: none !important;
