@@ -136,7 +136,7 @@ var forms = {
 			}
 			
 			if ($.trim($this.val()).length === 0) {
-				$this.addClass('.form_error');
+				$this.addClass('form_error');
 				errors = true;
 			}
 		});
