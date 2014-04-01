@@ -178,8 +178,8 @@ module.exports = function (grunt) {
 						}
 					},
 					{
-						search: /{\w*?}/g,
-						replace: ''
+						search: /(<.*?){\w*?}(.*?>)/g,
+						replace: '$1$2'
 					}
 				]
 			}
