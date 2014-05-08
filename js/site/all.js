@@ -185,6 +185,7 @@ var slider = {
 			slider.$imagesLazy[index] = $slides.find('.rwdimage');
 			
 			if (slidesCount === 1) {
+				globalPos = 0;
 				slider.lazyLoad(slider.$imagesLazy[index].eq(globalPos));
 				
 				var $feature = $this.find('.inner');
