@@ -1,8 +1,8 @@
-/*
- * Izilla touchMenuHover jQuery plugin v1.6
+/*!
+ * Izilla touchMenuHover jQuery plugin v1.7
  * Allows ULs (or any element of your choice) that open on li:hover to open on tap/click on mobile platforms such as iOS, Android, WP7, WP8, BlackBerry, Bada, WebOS, 3DS & WiiU
  *
- * Copyright (c) 2013 Izilla Partners Pty Ltd
+ * Copyright (c) 2014 Izilla Partners Pty Ltd
  *
  * http://izilla.com.au
  *
@@ -19,14 +19,12 @@
 		
 		var $a = $(this).find('a'),
 			devices = '3ds|android|bada|bb10|hpwos|iemobile|kindle fire|opera mini|opera mobi|opera tablet|rim|silk|wiiu',
-			ios = '|ipad|ipod|iphone',
 			devicesRX,
-			aria = 'aria-haspopup',
 			closeStr = 'html',
 			$close;
 		
 		if (settings.childTag.toString().toLowerCase() !== 'ul' || settings.forceiOS)
-			devices += ios;
+			devices += '|ipad|ipod|iphone';
 		
 		devicesRX = new RegExp(devices, 'gi');
 		
@@ -37,14 +35,14 @@
 					$siblings = $parent.siblings().find('a');
 				
 				if ($this.next(settings.childTag).length > 0)
-					$parent.attr(aria, true);
+					$parent.attr('aria-haspopup', true);
 				
 				$this.click(function(e) {
 					var $this = $(this);
 					e.stopPropagation();
 					$siblings.removeClass(settings.openClass);
 					
-					if (!$this.hasClass(settings.openClass) && $this.next(settings.childTag).length > 0) {
+					if (!$this.hasClass(settings.openClass) && $this.nextAll(settings.childTag).length > 0) {
 						e.preventDefault();
 						$this.addClass(settings.openClass);
 					}
@@ -63,6 +61,7 @@
 				$a.removeClass(settings.openClass);
 			});
 		}
+		
 		return this;
 	};
 })(jQuery);
