@@ -529,6 +529,17 @@ $rem-with-px-fallback: true !default;
 	}
 }
 
+@mixin grid-override($name, $gutter) {
+	.#{$name}_grid_container {
+		margin-left: -$gutter;
+	}
+
+	.#{$name}_grid_item {
+		margin-bottom: $gutter;
+		padding-left: $gutter;
+	}
+}
+
 @mixin hover($pseudo: false) {
 	@if ($pseudo) {
 		@if type-of($pseudo) == 'list' {
