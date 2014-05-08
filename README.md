@@ -112,8 +112,8 @@ To use the Sass-only features of Suzi, run sassqwatch.bat *(on Windows)* or bash
 
 	Outputs `$name_`-prefixed `.grid_container` and `.grid_item` classes to override standard grid styles.
 	
-	* `$name`: The prefix to use for `.grid_container` and `.grid_item` classes. For instance, `$name: small` produces `.small_grid_container` and `.small_grid_item'
-	* `$gutter`: The new gutter value for the relevant `margin` and `padding` properties these grid override classes
+	* `$name`: The prefix to use for `.grid_container` and `.grid_item` classes. For instance, `$name: small` produces `.small_grid_container` and `.small_grid_item`
+	* `$gutter`: The new gutter value for the relevant `margin` and `padding` properties for these grid override classes
 
 * `hover($pseudo: false)`
 
