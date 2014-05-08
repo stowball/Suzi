@@ -2,7 +2,7 @@
 	Hiddens
 ----------------------------------------------- */
 
-#logo, #nav_main, .managed:after, .managed.alt:before {
+#nav_main, .managed:after, .managed.alt:before {
 	display: none !important;
 }
 
@@ -14,10 +14,6 @@
 	background: none !important;
 	behavior: none !important;
 	@include box-shadow(none !important);
-}
-
-#print_logo {
-	@include hidden(false);
 }
 
 ul {
