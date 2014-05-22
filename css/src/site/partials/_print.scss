@@ -3,7 +3,7 @@
 ----------------------------------------------- */
 
 #header form, #col_1, #nav_seo {
-	display: none !important;
+	@extend .print_display_none;
 }
 
 /* --------------------------------------------

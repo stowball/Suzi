@@ -2,8 +2,12 @@
 	Hiddens
 ----------------------------------------------- */
 
-#nav_main, .managed:after, .managed.alt:before {
+.print_display_none {
 	display: none !important;
+}
+
+#nav_main, .managed:after, .managed.alt:before {
+	@extend .print_display_none;
 }
 
 /* --------------------------------------------
