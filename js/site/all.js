@@ -696,7 +696,7 @@ var tables = {
 	},
 	
 	gridFix: function() {
-		$('table').each(function() {
+		$('.data_table').each(function() {
 			$(this).append('<tr class="ie9_grid_dummy"><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>');
 		});
 	}
