@@ -105,6 +105,7 @@ module.exports = function (grunt) {
 					'<%= globalConfig.path.js.root %>/swipe.min.js',
 					'<%= globalConfig.path.js.root %>/firefox.hwa.min.js',
 					'<%= globalConfig.path.js.root %>/fastclick.min.js',
+					'<%= globalConfig.path.js.root %>/jquery.transit.min.js',
 					'<%= globalConfig.path.js.site %>/all.js'
 				],
 				dest: '<%= globalConfig.path.js.build %>/all.js'

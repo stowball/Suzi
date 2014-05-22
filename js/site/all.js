@@ -577,115 +577,114 @@ var tabs = {
 	}
 };
 
+var transition = {
+	storeInitial: function($elem) {
+		if (window.getComputedStyle) {
+			var transitionDuration = window.getComputedStyle($elem[0]).getPropertyValue('transition-duration') || window.getComputedStyle($elem[0]).getPropertyValue('-webkit-transition-duration'),
+				transitionTimingFunction = window.getComputedStyle($elem[0]).getPropertyValue('transition-timing-function') || window.getComputedStyle($elem[0]).getPropertyValue('-webkit-transition-timing-function');
+			
+			if (transitionDuration.match(/\d+s$/g))
+				transitionDuration = parseFloat(transitionDuration) * 1000;
+			else
+				transitionDuration = parseInt(transitionDuration);
+			
+			$elem.attr('aria-hidden', true).data('transition-duration', transitionDuration).data('transition-timing-function', transitionTimingFunction);
+		}
+	},
+	
+	setStyle: function(css) {
+		if (window.getComputedStyle) {
+			var style = document.createElement('style');
+			style.appendChild(document.createTextNode(css));
+			document.head.appendChild(style);
+		}
+	}
+};
+
 var accordion = {
 	init: function() {
-		var $accordion = $('.accordion');
-		
-		if ($accordion.length === 0)
-			return;
-		
-		Modernizr.load({
-			load: '/js/jquery.transit.min.js',
-			complete: function() {
-				$accordion.each(function(index) {
-					var $this = $(this),
-						multiple = $this.data('multiple'),
-						$accordionLinks = $this.find('.accordion_toggler'),
-						$accordionContent = $this.find('.accordion_content'),
-						accordionID = 'accordionid-' + window.location.pathname + '-' + index,
-						accordionCookie = cookie.read(accordionID);
-					
-					$accordionContent.each(function(idx) {
-						if (window.getComputedStyle) {
-							var $this = $(this),
-								transitionDuration = window.getComputedStyle(this).getPropertyValue('transition-duration') || window.getComputedStyle(this).getPropertyValue('-webkit-transition-duration'),
-								transitionTimingFunction = window.getComputedStyle(this).getPropertyValue('transition-timing-function') || window.getComputedStyle(this).getPropertyValue('-webkit-transition-timing-function');
-							
-							if (transitionDuration.match(/\d+s$/g))
-								transitionDuration = parseFloat(transitionDuration) * 1000;
-							else
-								transitionDuration = parseInt(transitionDuration);
-							
-							$this.attr('aria-hidden', true).data('transition-duration', transitionDuration).data('transition-timing-function', transitionTimingFunction);
-						}
-					});
-					
-					$accordionLinks.each(function(idx) {
-						var $this = $(this),
-							$accordionContentIndex = $accordionContent.eq(idx);
-						
-						if (accordionCookie || !multiple) {
-							if (!accordionCookie) {
-								if ($this.hasClass('open'))
-									accordionCookie = idx;
-							}
-							
-							if (parseInt(accordionCookie) === idx) {
-								$accordionLinks.removeClass('open');
-								$this.addClass('open is_open');
-								
-								$accordionContentIndex.attr('aria-hidden', false).css('height', $accordionContentIndex.height());
-							}
-						}
-						else {
-							if ($this.hasClass('open')) {
-								$this.addClass('is_open');
-								
-								$accordionContentIndex.attr('aria-hidden', false).css('height', $accordionContentIndex.height());
-								
-								if (!multiple)
-									cookie.set(accordionID, idx);
-							}
-						}
-						
-						$this.on('click', function(e) {
-							e.preventDefault();
-							
-							var $this = $(this),
-								$accordionContentSibling = $this.next(),
-								transitionPropertyValue = 'auto',
-								transitionDuration = $accordionContentSibling.data('transition-duration'),
-								transitionTimingFunction = $accordionContentSibling.data('transition-timing-function'),
-								ariaHidden = false;
-							
-							if (!multiple) {
-								$accordionLinks.removeClass('open is_open');
-								
-								$accordionContent.each(function(index) {
-									if (index === idx)
-										$(this).attr('aria-hidden', false).transition({height: transitionPropertyValue}, transitionDuration, transitionTimingFunction);
-									else
-										$(this).attr('aria-hidden', true).transition({height: 0}, transitionDuration, transitionTimingFunction);
-								});
-								
-								$this.addClass('open is_open');
-							}
-							else {
-								$this.removeClass('open').toggleClass('is_open');
-								
-								if ($accordionContentSibling.attr('aria-hidden') == 'false') {
-									ariaHidden = true;
-									transitionPropertyValue = 0;
-								}
-								
-								$accordionContentSibling.attr('aria-hidden', ariaHidden).transition({height: transitionPropertyValue}, transitionDuration, transitionTimingFunction);
-							}
-							
-							if (!multiple) {
-								cookie.set(accordionID, idx);
-								trackEvent('Website', 'Accordions', accordionID + '-' + idx);
-							}
-						});
-					});
-				});
+		$('.accordion').each(function(index) {
+			var $this = $(this),
+				multiple = $this.data('multiple'),
+				$accordionLinks = $this.find('> ul > li > .accordion_toggler'),
+				$accordionContent = $this.find('> ul > li > .accordion_content'),
+				accordionID = 'accordionid-' + window.location.pathname + '-' + index,
+				accordionCookie = cookie.read(accordionID);
+			
+			$accordionContent.each(function() {
+				transition.storeInitial($(this));
+			});
+			
+			$accordionLinks.each(function(idx) {
+				var $this = $(this),
+					$accordionContentIndex = $accordionContent.eq(idx);
 				
-				if (window.getComputedStyle) {
-					var style = document.createElement('style');
-					style.appendChild(document.createTextNode('.jquery .accordion_content { -moz-transition: none; -o-transition: none; -webkit-transition: none; transition: none; }'));
-					document.head.appendChild(style);
+				if (accordionCookie || !multiple) {
+					if (!accordionCookie) {
+						if ($this.hasClass('open'))
+							accordionCookie = idx;
+					}
+					
+					if (parseInt(accordionCookie) === idx) {
+						$accordionLinks.removeClass('open');
+						$this.addClass('open is_open');
+						
+						$accordionContentIndex.attr('aria-hidden', false).css('height', $accordionContentIndex.height());
+					}
 				}
-			}
+				else {
+					if ($this.hasClass('open')) {
+						$this.addClass('is_open');
+						
+						$accordionContentIndex.attr('aria-hidden', false).css('height', $accordionContentIndex.height());
+						
+						if (!multiple)
+							cookie.set(accordionID, idx);
+					}
+				}
+				
+				$this.on('click', function(e) {
+					e.preventDefault();
+					
+					var $this = $(this),
+						$accordionContentSibling = $this.next(),
+						transitionPropertyValue = 'auto',
+						transitionDuration = $accordionContentSibling.data('transition-duration'),
+						transitionTimingFunction = $accordionContentSibling.data('transition-timing-function'),
+						ariaHidden = false;
+					
+					if (!multiple) {
+						$accordionLinks.removeClass('open is_open');
+						
+						$accordionContent.each(function(index) {
+							if (index === idx)
+								$(this).attr('aria-hidden', false).transition({height: transitionPropertyValue}, transitionDuration, transitionTimingFunction);
+							else
+								$(this).attr('aria-hidden', true).transition({height: 0}, transitionDuration, transitionTimingFunction);
+						});
+						
+						$this.addClass('open is_open');
+					}
+					else {
+						$this.removeClass('open').toggleClass('is_open');
+						
+						if ($accordionContentSibling.attr('aria-hidden') == 'false') {
+							ariaHidden = true;
+							transitionPropertyValue = 0;
+						}
+						
+						$accordionContentSibling.attr('aria-hidden', ariaHidden).transition({height: transitionPropertyValue}, transitionDuration, transitionTimingFunction);
+					}
+					
+					if (!multiple) {
+						cookie.set(accordionID, idx);
+						trackEvent('Website', 'Accordions', accordionID + '-' + idx);
+					}
+				});
+			});
 		});
+		
+		transition.setStyle('.jquery .accordion_content { -moz-transition: none; -o-transition: none; -webkit-transition: none; transition: none; }');
 	}
 };
 
