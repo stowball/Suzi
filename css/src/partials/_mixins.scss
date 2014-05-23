@@ -431,6 +431,27 @@ $rem-with-px-fallback: true !default;
 	}
 }
 
+@mixin _grid-clearing($pc) {
+	$fraction: 100 / $pc;
+	
+	@if ((floor($pc) == 33) or (round($fraction) == $fraction and ($fraction > 1 and $fraction < 6))) {
+		&:nth-child(n) {
+			clear: none;
+		}
+		
+		@if (floor($pc) == 33) {
+			&:nth-child(3n+4) {
+				clear: both;
+			}
+		}
+		@else {
+			&:nth-child(#{$fraction}n+#{1 + $fraction}) {
+				clear: both;
+			}
+		}
+	}
+}
+
 @mixin grid($breakpoints: (480, 600, 768, 960), $percentages: (10, 20, 25, 30, 33.3333, 40, 50, 60, 66.6666, 70, 75, 80, 90, 100), $float-classes: false) {
 	$bp: '';
 	$pc: '';
@@ -454,11 +475,17 @@ $rem-with-px-fallback: true !default;
 		
 		.w#{floor($pc)} {
 			width: percentage($pc / 100);
+			
+			@include _grid-clearing($pc);
 		}
 	}
 	
-	.clear {
+	.clear:nth-child(n) {
 		clear: both;
+	}
+	
+	.unclear:nth-child(n) {
+		clear: none;
 	}
 	
 	.no_mb {
@@ -478,7 +505,6 @@ $rem-with-px-fallback: true !default;
 	@if ($is-responsive == true) {
 		@for $i from 0 to length($breakpoints) {
 			$bp: nth($breakpoints, $i + 1);
-			$output-helper-classes: true;
 			
 			@for $j from 0 to length($percentages) {
 				$pc: nth($percentages, $j + 1);
@@ -486,17 +512,19 @@ $rem-with-px-fallback: true !default;
 				.w#{floor($pc)}_at_#{$bp} {
 					@include media-query($bp) {
 						width: percentage($pc / 100);
+						
+						@include _grid-clearing($pc);
 					}
 				}
 				
-				@if ($output-helper-classes == true) {
-					.clear_at_#{$bp} {
+				@if ($j == length($percentages) - 1) {
+					.clear_at_#{$bp}:nth-child(n) {
 						@include media-query($bp) {
 							clear: both;
 						}
 					}
 					
-					.unclear_at_#{$bp} {
+					.unclear_at_#{$bp}:nth-child(n) {
 						@include media-query($bp) {
 							clear: none;
 						}
@@ -522,8 +550,6 @@ $rem-with-px-fallback: true !default;
 						}
 					}
 				}
-				
-				$output-helper-classes: false;
 			}
 		}
 	}
