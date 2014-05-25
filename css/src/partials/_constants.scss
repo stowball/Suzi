@@ -210,7 +210,7 @@ img {
 	}
 	
 	&:after, &.alt:before {
-		background: url(/images/site/std_icons.png);
+		background: url('{{ imgPath }}std_icons.png');
 		content: '';
 		display: inline-block;
 		@include rem(margin-left, 5px);
@@ -219,7 +219,7 @@ img {
 		width: 16px;
 		
 		@include media-query-retina {
-			background-image: url(/images/site/std_icons@2x.png);
+			background-image: url('{{ imgPath }}std_icons@2x.png');
 			background-size: 16px auto;
 		}
 	}
@@ -836,7 +836,7 @@ textarea {
 	}
 	
 	& h3:before {
-		background: url(/images/site/std_icons.png) 0 -192px;
+		background: url('{{ imgPath }}std_icons.png') 0 -192px;
 		content: '';
 		height: 16px;
 		margin-left: -24px;
@@ -846,7 +846,7 @@ textarea {
 		width: 16px;
 		
 		@include media-query-retina {
-			background-image: url(/images/site/std_icons@2x.png);
+			background-image: url('{{ imgPath }}std_icons@2x.png');
 			background-size: 16px auto;
 			background-position: 0 -192px;
 		}

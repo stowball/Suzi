@@ -28,10 +28,15 @@
 				msViewportStyle.appendChild(document.createTextNode('@-ms-viewport{width:auto!important}'));
 				document.getElementsByTagName('head')[0].appendChild(msViewportStyle);
 			}
+			
+			window.suzi = {
+				jsRootPath: '/js/',
+				jsDistPath: '/js/build/'
+			};
 		})();
 	</script>
 	<script src="/js/build/base.js?v=140401142207"></script>
-	<link rel="shortcut icon" href="/images/site/favicon.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 </head>
 
 <body class="">
