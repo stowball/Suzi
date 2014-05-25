@@ -5,6 +5,7 @@ $(document).ready(function(e) {
 	
 	FastClick.attach(document.body);
 	
+	grid.init();
 	placeholder.init();
 	forms.init();
 	slider.init();
@@ -71,6 +72,13 @@ var cookie = {
 	},
 	erase: function(name) {
 		cookie.set(name, '', -1);
+	}
+};
+
+var grid = {
+	init: function() {
+		if (window.location.search.match(/suzigrid/g))
+			Modernizr.load('/js/suzi.grid.min.js');
 	}
 };
 
