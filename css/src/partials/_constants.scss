@@ -65,7 +65,7 @@ b, strong {
 }
 
 blockquote, q {
-	font-family: $quote-fontfamily;
+	font-family: $quote-font-family;
 	quotes: none;
 	
 	&:before, &:after {
@@ -384,12 +384,12 @@ html {
 
 body {
 	color: $text-color;
-	font-family: $std-fontfamily;
-	@include font-size-line-height($std-fontsize, $std-lineheight);
+	font-family: $std-font-family;
+	@include font-size-line-height($std-font-size, $std-line-height);
 	min-height: 100%;
 	
 	.vendor-ie:not(.ltie9) & {
-		@include line-height($std-lineheight + 1, $std-fontsize);
+		@include line-height($std-line-height + 1, $std-font-size);
 	}
 	
 	* {
@@ -402,27 +402,27 @@ body {
 ----------------------------------------------- */
 
 h1, .h1 {
-	@include rem(font-size, $heading1-fontsize);
+	@include rem(font-size, $heading1-font-size);
 }
 
 h2, .h2 {
-	@include rem(font-size, $heading2-fontsize);
+	@include rem(font-size, $heading2-font-size);
 }
 
 h3, .h3 {
-	@include rem(font-size, $heading3-fontsize);
+	@include rem(font-size, $heading3-font-size);
 }
 
 h4, .h4 {
-	@include rem(font-size, $heading4-fontsize);
+	@include rem(font-size, $heading4-font-size);
 }
 
 h5, .h5 {
-	@include rem(font-size, $heading5-fontsize);
+	@include rem(font-size, $heading5-font-size);
 }
 
 h6, .h6 {
-	@include rem(font-size, $heading6-fontsize);
+	@include rem(font-size, $heading6-font-size);
 }
 
 h1, h2, h3, h4, h5, h6,
@@ -646,7 +646,7 @@ input {
 .btn, .btn_wrap, button, [type="submit"], .text, label, .label, p.legend, select, textarea {
 	@include box-sizing;
 	display: block;
-	font-family: $std-fontfamily;
+	font-family: $std-font-family;
 	line-height: normal;
 	width: 100%;
 }
@@ -695,7 +695,7 @@ button, [type="submit"], .text, textarea, select {
 	@include rem(font-size, $base-font-size);
 	
 	.no-touch & {
-		@include rem(font-size, $std-fontsize);
+		@include rem(font-size, $std-font-size);
 	}
 }
 
