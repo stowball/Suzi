@@ -219,7 +219,7 @@ module.exports = function (grunt) {
 		watch: {
 			css: {
 				files: ['<%= globalConfig.path.css.root %>/**/*.scss'],
-				tasks: ['sass:dist', 'regex-replace:cachebustcss'],
+				tasks: ['sass:dist', 'regex-replace:cachebustcss', 'regex-replace:cssimages'],
 				options: {
 					spawn: false,
 				}
@@ -250,7 +250,7 @@ module.exports = function (grunt) {
 		watchdev: {
 			css: {
 				files: ['<%= globalConfig.path.css.root %>/**/*.scss'],
-				tasks: ['sass:dev', 'regex-replace:cachebustcss'],
+				tasks: ['sass:dev', 'regex-replace:cachebustcss', 'regex-replace:cssimages'],
 				options: {
 					spawn: false,
 				}
