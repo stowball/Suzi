@@ -282,15 +282,12 @@ img {
 	li {
 		position: static;
 		
-		& > a, & > a span {
+		& > a {
 			display: inline-block; // Fixes IE7's whitespace bug
 		}
 		
-		& > a, & > a span {
-			display: block;
-		}
-		
 		& > a {
+			display: block;
 			text-decoration: none;
 		}
 	}
