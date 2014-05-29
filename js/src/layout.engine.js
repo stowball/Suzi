@@ -1,5 +1,5 @@
 /*!
-* Layout Engine v0.8.0
+* Layout Engine v0.8.1
 *
 * Adds the rendering engine and browser names as a class on the html tag and returns a JavaScript object containing the vendor, version and browser name (where appropriate)
 *
@@ -113,7 +113,7 @@
 		else if ('OLink' in style || !!window.opera) {
 			cssClass += opera;
 			if ('OMiniFold' in style) {
-				html.className += cssClass + opera + '-mini';
+				html.className += cssClass + '-mini';
 				return {
 					vendor: opera,
 					version: 'mini'
