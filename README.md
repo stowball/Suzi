@@ -257,6 +257,10 @@ To use the Sass-only features of Suzi, run sassqwatch.bat *(on Windows)* or bash
 
 	Outputs -moz, -webkit and unprefixed `box-sizing` with the value passed in (default: border-box)
 
+* Flexbox
+
+	A complete set of Flexbox mixins for all syntax variations. See https://github.com/mastastealth/sass-flex-mixin for details and documentation.
+
 * `font-size-line-height($font-size, $line-height: false, $important: false)`
 
 	Outputs a rem (and pixel fallback) font-size and an optional unitless line-height from the values provided

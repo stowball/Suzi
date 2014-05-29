@@ -876,6 +876,8 @@ $rem-with-px-fallback: true !default;
 //	CSS Property Mixins
 // --------------------------------------------
 
+@import "flex";
+
 $trans-anim-prefixes: (-moz-, -o-, -webkit-, ''); // Not used in keyframes()
 $transitionable-prefixed-values: transform, transform-origin;
 
