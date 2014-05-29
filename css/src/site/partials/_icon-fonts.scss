@@ -10,6 +10,23 @@
 	/* Better Font Rendering =========== */
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-font-smoothing: antialiased;
+	
+	@include no-fontface {
+		&:before {
+			content: '' !important;
+		}
+		
+		~ .hidden {
+			display: inline-block;
+			@include font-size-line-height(10px, 12px);
+			height: auto;
+			left: 0;
+			position: static;
+			text-align: left;
+			top: 0;
+			width: auto;
+		}
+	}
 }
 
 @include icomoon {
