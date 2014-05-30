@@ -288,6 +288,17 @@ To use the Sass-only features of Suzi, run sassqwatch.bat *(on Windows)* or bash
 	* `$position:` `position` property to use or `false` for none (default: relative)
 	* `$path`: path to PIE.htc if specified, otherwise uses `$default-pie-path` variable when `false` (default: false [$default-pie-path: '/css/PIE.htc'])
 
+* `rgba($property, $value: '', $color: #000, $opacity: 0.5, $use-fallback: true)`
+
+	Converts any property's color and opacity to `rgba`, with the option to output a default fallback color or a composite fallback color of your choice
+	
+	* `$property`: the CSS property to use, for example `border`
+	* `$value`: an optional value prefix to use, such as `1px solid` (default '')
+	* `$color`: color to be converted - either a single value or a list
+	* if `$color` is a list, the second parameter is used as the fallback colour - useful for composite fallbacks
+	* `$opacity`: alpha opacity of the color (default: 0.5)
+	* `$use-fallback`: whether to output the fallback color (default: true)
+
 * `rgba-background($color, $opacity: 0.5, $use-fallback: true, $use-background-color: false)`
 
 	Converts a background color and opacity to `rgba`, with the option to output a default fallback color or a composite fallback color of your choice
@@ -311,7 +322,7 @@ To use the Sass-only features of Suzi, run sassqwatch.bat *(on Windows)* or bash
 	Outputs, -moz, -o, -webkit and unprefixed `transition` with the value passed in (default: all ease 0.2s)
 	Instances of `transform` or `transform-origin` will be prefixed as required.
 
-* `transition-delay($delay: 0.2s`
+* `transition-delay($delay: 0.2s)`
 
 	Outputs, -moz, -o, -webkit and unprefixed `transition-delay` with the value passed in (default: 0.2s)
 

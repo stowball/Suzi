@@ -1013,6 +1013,28 @@ $transitionable-prefixed-values: transform, transform-origin;
 	behavior: url($pie-path);
 }
 
+@mixin rgba($property, $value: '', $color: #000, $opacity: 0.5, $use-fallback: true) {
+	$rgba: '';
+	$composite: '';
+	$property: unquote($property);
+	$value: unquote($value);
+	
+	@if (type-of($color) == list) {
+		$rgba: nth($color, 1);
+		$composite: nth($color, 2);
+	}
+	@else {
+		$rgba: $color;
+		$composite: $color;
+	}
+	
+	@if ($use-fallback) {
+		#{$property}: #{$value} $composite;
+	}
+	
+	#{$property}: #{$value} rgba($rgba, $opacity);
+}
+
 @mixin rgba-background($color, $opacity: 0.5, $use-fallback: true, $use-background-color: false) {
 	$rgba: '';
 	$composite: '';
