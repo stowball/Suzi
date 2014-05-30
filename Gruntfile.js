@@ -293,5 +293,5 @@ module.exports = function (grunt) {
 	grunt.registerTask('default', ['sass:dist', 'concat', 'uglify', 'includereplacemore', 'regex-replace:currentpaths', 'regex-replace:cssimages', 'imagemin', 'watch']);
 	grunt.registerTask('dev', ['sass:dev', 'concat', 'includereplacemore', 'regex-replace:currentpaths', 'regex-replace:cssimages', 'imagemin', 'watchdev']);
 	grunt.registerTask('bust', ['regex-replace:cachebustcss', 'regex-replace:cachebustjs']);
-	grunt.registerTask('version', ['sass:dist', 'regex-replace:version']);
+	grunt.registerTask('version', ['regex-replace:version']);
 };
