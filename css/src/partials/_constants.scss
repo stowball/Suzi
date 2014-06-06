@@ -398,6 +398,22 @@ body {
 }
 
 /* --------------------------------------------
+	Link Colors
+----------------------------------------------- */
+
+a {
+	color: $std-link-color;
+	
+	&:visited {
+		color: $std-visited-color;
+	}
+	
+	@include hover {
+		color: $std-hover-color;
+	}
+}
+
+/* --------------------------------------------
 	Headings
 ----------------------------------------------- */
 
@@ -773,7 +789,7 @@ textarea {
 .btn, .btn_wrap, button, [type="submit"] {
 	-webkit-appearance: none;
 	@include border-radius($btn-border-radius);
-	color: $btn-text-color !important;
+	color: $btn-text-color;
 	cursor: pointer;
 	display: inline-block;
 	margin: 0;
@@ -786,7 +802,7 @@ textarea {
 	}
 	
 	@include hover {
-		color: $btn-hover-text-color !important;
+		color: $btn-hover-text-color;
 	}
 }
 

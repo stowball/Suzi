@@ -3,16 +3,13 @@
 ----------------------------------------------- */
 
 a {
-	color: $std-link-color;
 	text-decoration: underline;
 	
 	&:visited {
-		color: $std-visited-color;
 		text-decoration: underline;
 	}
 	
 	@include hover {
-		color: $std-hover-color;
 		text-decoration: none;
 	}
 }
