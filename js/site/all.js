@@ -600,10 +600,10 @@ var transition = {
 		}
 	},
 	
-	setStyle: function(css) {
+	overrideDefault: function(selector) {
 		if (window.getComputedStyle) {
 			var style = document.createElement('style');
-			style.appendChild(document.createTextNode(css));
+			style.appendChild(document.createTextNode('.jquery ' + selector.replace(/,/g, ',.jquery ') + '{ -moz-transition: none; -o-transition: none; -webkit-transition: none; transition: none; }'));
 			document.head.appendChild(style);
 		}
 	}
@@ -611,7 +611,12 @@ var transition = {
 
 var accordion = {
 	init: function() {
-		$('.accordion').each(function(index) {
+		var $accordion = $('.accordion');
+		
+		if ($accordion.length === 0)
+			return;
+		
+		$accordion.each(function(index) {
 			var $this = $(this),
 				multiple = $this.data('multiple'),
 				$accordionLinks = $this.find('> ul > li > .accordion_toggler'),
@@ -692,7 +697,7 @@ var accordion = {
 			});
 		});
 		
-		transition.setStyle('.jquery .accordion_content { -moz-transition: none; -o-transition: none; -webkit-transition: none; transition: none; }');
+		transition.overrideDefault('.accordion_content');
 	}
 };
 
