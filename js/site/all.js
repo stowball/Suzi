@@ -642,14 +642,14 @@ var accordion = {
 						$accordionLinks.removeClass('open');
 						$this.addClass('open is_open');
 						
-						$accordionContentIndex.attr('aria-hidden', false).css('height', $accordionContentIndex.height());
+						$accordionContentIndex.attr('aria-hidden', false).css('height', 'auto');
 					}
 				}
 				else {
 					if ($this.hasClass('open')) {
 						$this.addClass('is_open');
 						
-						$accordionContentIndex.attr('aria-hidden', false).css('height', $accordionContentIndex.height());
+						$accordionContentIndex.attr('aria-hidden', false).css('height', 'auto');
 						
 						if (!multiple)
 							cookie.set(accordionID, idx);
