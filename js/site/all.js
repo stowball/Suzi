@@ -177,6 +177,9 @@ var slider = {
 				carouselCookie = cookie.read(carouselID),
 				circular = $this.data('circular') === false ? false : true;
 			
+			if ($slider.length === 0 || $slides.length === 0)
+				return;
+			
 			if (slider.swipejs && circular) {
 				$slides.eq(0).clone().appendTo($slider);
 				$slides.eq(slidesCount - 1).clone().prependTo($slider);
