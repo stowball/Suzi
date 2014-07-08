@@ -727,7 +727,7 @@ textarea {
 	
 	label {
 		font-weight: normal;
-		padding-left: 23px;
+		padding-left: $form-rc-label-indent;
 		width: auto;
 	}
 }
