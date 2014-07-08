@@ -148,12 +148,20 @@ table.center_object, table.centre_object {
 	overflow-x: hidden;
 }
 
+.overflow_x_visible {
+	overflow-x: visible;
+}
+
 .overflow_y_auto {
 	overflow-y: auto;
 }
 
 .overflow_y_hidden {
 	overflow-y: hidden;
+}
+
+.overflow_y_visible {
+	overflow-y: visible;
 }
 
 .pos_absolute {
