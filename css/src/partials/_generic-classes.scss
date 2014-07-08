@@ -88,6 +88,10 @@ table.center_object, table.centre_object {
 	display: table;
 }
 
+.clear {
+	clear: both;
+}
+
 .float_left {
 	float: left;
 	
@@ -166,6 +170,10 @@ table.center_object, table.centre_object {
 
 .titlecase {
 	text-transform: capitalize;
+}
+
+.unclear {
+	clear: none;
 }
 
 .uppercase {
