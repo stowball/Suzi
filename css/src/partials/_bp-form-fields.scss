@@ -1,10 +1,10 @@
 @if ($form-bp > 0) {
 	label, .label {
 		.f_row & {
-			@include rem(margin-top, $form-margin / 2);
+			@include rem(margin-top, $form-input-padding-vertical + $form-input-border-width);
 			
 			.ie &, .vendor-ie & {
-				@include rem(margin-top, ($form-margin / 2) + 1);
+				@include rem(margin-top, ($form-input-padding-vertical + $form-input-border-width) + 1);
 			}
 			
 			@if ($form-labels-aligned-right == true) {

@@ -680,7 +680,7 @@ fieldset .description {
 
 .text, textarea, html:not(.browser-android) select {
 	background-color: $form-input-background-color;
-	border: 1px solid $form-input-border-color;
+	border: $form-input-border-width solid $form-input-border-color;
 }
 
 .text, textarea {
