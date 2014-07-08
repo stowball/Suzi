@@ -99,18 +99,6 @@ cite {
 	clear: both;
 }
 
-.cols {
-	@extend %clearfix;
-}
-
-.col {
-	float: right;
-	width: 50%;
-	
-	&:first-child {
-		float: left;
-	}
-}
 
 .content_area {
 	@extend %clearfix;
