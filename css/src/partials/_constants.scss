@@ -392,13 +392,13 @@ body {
 a {
 	color: $std-link-color;
 	
-	&:visited {
-		color: $std-visited-color;
-	}
-	
 	@include hover {
 		color: $std-hover-color;
 	}
+}
+
+:visited {
+	color: $std-visited-color;
 }
 
 /* --------------------------------------------
