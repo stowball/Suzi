@@ -1,5 +1,5 @@
 /*!
- * Suzi Grid v0.1.0
+ * Suzi Grid v0.1.1
  *
  * A JavaScript implementation of Suzi's grid system for rapid development
  *
@@ -21,7 +21,6 @@
 				widthsAtArray = [],
 				uniqueWidthsAt,
 				currentElem,
-				has100 = false,
 				css,
 				customGutter = window.location.search.match(/gutter=(\d+)/),
 				gutterValue = customGutter ? window.location.search.match(/gutter=(\d+)/)[1] + 'px' : '20px',
@@ -94,37 +93,12 @@
 			if (widthsArray.length === 0 && widthsAtArray.length === 0)
 				return;
 			
-			widthsArray.forEach(function(elem, pos) {
-				widthsArray[pos] = elem.replace(/_at_.*/g, '');
-			});
-			
-			widthsArray.sort();
-			
-			uniqueWidths = widthsArray.filter(function(elem, pos) {
-				if (elem === 'w100') {
-					has100 = true;
-					return false;
-				}
-				else {
-					return widthsArray.indexOf(elem) === pos;
-				}
-			});
-			
-			if (has100)
-				uniqueWidths.push('w100');
-			
-			widthsAtArray.forEach(function(elem, pos) {
-				widthsAtArray[pos] = elem.replace(/.*?_at_/g, '');
-			});
-			
-			widthsAtArray.sort();
-			
-			uniqueWidthsAt = widthsAtArray.filter(function(elem, pos) {
-				return widthsAtArray.indexOf(elem) === pos;
-			});
+			var sortNumber = function(a, b) {
+				return a - b;
+			};
 			
 			var convertWidth = function(value) {
-				var width = parseInt(value.replace(/w/, ''), 10);
+				var width = parseInt(value, 10);
 				
 				if (width === 16)
 					width = 16.6667;
@@ -136,10 +110,30 @@
 				return width;
 			};
 			
+			widthsArray.forEach(function(elem, pos) {
+				widthsArray[pos] = parseInt(elem.replace(/_at_.*/g, '').replace(/w/, ''));
+			});
+			
+			widthsArray.sort(sortNumber);
+			
+			uniqueWidths = widthsArray.filter(function(elem, pos) {
+				return widthsArray.indexOf(elem) === pos;
+			});
+			
+			widthsAtArray.forEach(function(elem, pos) {
+				widthsAtArray[pos] = parseInt(elem.replace(/.*?_at_/g, '').replace(/w/, ''));
+			});
+			
+			widthsAtArray.sort(sortNumber);
+			
+			uniqueWidthsAt = widthsAtArray.filter(function(elem, pos) {
+				return widthsAtArray.indexOf(elem) === pos;
+			});
+			
 			var nthClearing = function(elem, width, mq) {
 				var fraction = 100 / width,
 					is33 = width === 33.3333 ? true : false,
-					mqAdjusted = !mq ? false : parseInt(mq);
+					mqAdjusted = window.mqGenie && window.mqGenie.adjusted ? mq + window.mqGenie.width : mq;
 				
 				if (is33 || (Math.round(fraction) === fraction && (fraction > 1 && fraction < 6))) {
 					if (!mq) {
@@ -153,18 +147,13 @@
 						}
 					}
 					else {
-						if (window.mqGenie && window.mqGenie.adjusted)
-							mqAdjusted += window.mqGenie.width;
-						
-						mq += 'px';
-						
-						css += '@media (min-width: ' + mqAdjusted + 'px) { .' + elem + '_at_' + parseInt(mq) + ':nth-child(n) { clear: none; } }\n';
+						css += '@media (min-width: ' + mqAdjusted + 'px) { .' + elem + '_at_' + mq + ':nth-child(n) { clear: none; } }\n';
 						
 						if (is33) {
-							css += '@media (min-width: ' + mqAdjusted + 'px) { .' + elem + '_at_' + parseInt(mq) + ':nth-child(3n+4) { clear: both; } }\n';
+							css += '@media (min-width: ' + mqAdjusted + 'px) { .' + elem + '_at_' + mq + ':nth-child(3n+4) { clear: both; } }\n';
 						}
 						else {
-							css += '@media (min-width: ' + mqAdjusted + 'px) { .' + elem + '_at_' + parseInt(mq) + ':nth-child(' + fraction + 'n+' + (fraction + 1) + ') { clear: both; } }\n';
+							css += '@media (min-width: ' + mqAdjusted + 'px) { .' + elem + '_at_' + mq + ':nth-child(' + fraction + 'n+' + (fraction + 1) + ') { clear: both; } }\n';
 						}
 					}
 				}
@@ -173,9 +162,9 @@
 			uniqueWidths.forEach(function(elem, pos) {
 				var width = convertWidth(elem);
 				
-				css += '.' + elem + ' { width: ' + width + '%; }\n';
+				css += '.w' + elem + ' { width: ' + width + '%; }\n';
 				
-				nthClearing(elem, width);
+				nthClearing('w' + elem, width);
 			});
 			
 			css +=  '.clear:nth-child(n) { clear: both; }\n' +
@@ -189,9 +178,9 @@
 					if (window.mqGenie && window.mqGenie.adjusted)
 						mq += window.mqGenie.width;
 					
-					css += '@media (min-width: ' + mq + 'px) { .' + elem2 + '_at_' + elem + ' { width: ' + width + '%; } }\n'
+					css += '@media (min-width: ' + mq + 'px) { .w' + elem2 + '_at_' + elem + ' { width: ' + width + '%; } }\n'
 					
-					nthClearing(elem2, width, elem);
+					nthClearing('w' + elem2, width, elem);
 					
 					if (pos2 === uniqueWidths.length - 1) {
 						css +=  '@media (min-width: ' + mq + 'px) { .clear_at_' + elem + ' { clear: both; } }\n' +

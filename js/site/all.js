@@ -77,7 +77,7 @@ var cookie = {
 
 var grid = {
 	init: function() {
-		if (window.location.search.match(/suzigrid/g))
+		if (window.location.search.match(/suzigrid=true/g))
 			Modernizr.load(window.suzi.jsRootPath + 'suzi.grid.min.js');
 	}
 };
