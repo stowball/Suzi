@@ -465,6 +465,7 @@ $rem-with-px-fallback: true !default;
 	.grid_container {
 		@extend %clearfix;
 		list-style: none;
+		margin-bottom: 0;
 		margin-left: -$std-gutter;
 	}
 	
