@@ -114,6 +114,7 @@ To use the Sass-only features of Suzi, run sassqwatch.bat *(on Windows)* or bash
 	
 	* `$name`: The prefix to use for `.grid_container` and `.grid_item` classes. For instance, `$name: small` produces `.small_grid_container` and `.small_grid_item`
 	* `$gutter`: The new gutter value for the relevant `margin` and `padding` properties for these grid override classes
+	* `$gutter` can also be a list to allow different horizontal and vertical gutters. The 1st parameter is horizontal, and the 2nd vertical, eg: `(30px, 10px)` for 30px horizontal and 10px vertical
 
 * `hover($pseudo: false)`
 

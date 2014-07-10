@@ -563,13 +563,21 @@ $rem-with-px-fallback: true !default;
 }
 
 @mixin grid-override($name, $gutter) {
+	$gutter-left: $gutter;
+	$gutter-bottom: $gutter;
+	
+	@if (type-of($gutter) == 'list') {
+		$gutter-left: nth($gutter, 1);
+		$gutter-bottom: nth($gutter, 2);
+	}
+	
 	.#{$name}_grid_container {
-		margin-left: -$gutter;
+		margin-left: -$gutter-left;
 	}
 
 	.#{$name}_grid_item {
-		margin-bottom: $gutter;
-		padding-left: $gutter;
+		margin-bottom: $gutter-bottom;
+		padding-left: $gutter-left;
 	}
 }
 
