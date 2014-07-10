@@ -1,5 +1,5 @@
 /*!
- * Suzi Grid v0.1.1
+ * Suzi Grid v0.1.2
  *
  * A JavaScript implementation of Suzi's grid system for rapid development
  *
@@ -22,6 +22,7 @@
 				uniqueWidthsAt,
 				currentElem,
 				css,
+				sassArgs = '',
 				customGutter = window.location.search.match(/gutter=(\d+)/),
 				gutterValue = customGutter ? window.location.search.match(/gutter=(\d+)/)[1] + 'px' : '20px',
 				getSetStyle = function(elem, property) {
@@ -192,7 +193,19 @@
 			grid.css = css;
 			//console.log(grid.css);
 			
-			console.log('(' + uniqueWidthsAt.toString().replace(/,/g, ', ') + '), (' + uniqueWidths.toString().replace(/w33/g, 'w33.3333').replace(/w66/g, 'w66.6666').replace(/w/g, '').replace(/,/g, ', ') + ')');
+			sassArgs =  '(' +
+						uniqueWidthsAt.toString().replace(/,/g, ', ') +
+						'), (' +
+						uniqueWidths.toString().replace(/,/g, ', ') +
+						')';
+			
+			sassArgs =  sassArgs
+						.replace(/(\(|, )16/, '$116.6667')
+						.replace(/(\(|, )33/, '$133.3333')
+						.replace(/(\(|, )66/, '$166.6666')
+						.replace(/(\(|, )83/, '$183.3333');
+
+			console.log(sassArgs);
 		},
 		
 		init: function() {
