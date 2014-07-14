@@ -77,7 +77,11 @@ blockquote, q {
 blockquote {
 	background: $blockquote-bg-color;
 	border-left: 3px solid $std-color;
-	@include rem(padding, $std-margin $std-margin 1px $std-margin);
+	@include rem(padding, $std-margin);
+	
+	& > :last-child {
+		margin-bottom: 0;
+	}
 }
 
 .js [data-classquery] {
