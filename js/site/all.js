@@ -175,7 +175,8 @@ var slider = {
 				isVisible = false,
 				carouselID = 'carouselid-' + window.location.pathname + '-' + index,
 				carouselCookie = cookie.read(carouselID),
-				circular = $this.data('circular');
+				circular = $this.data('circular'),
+				thumbnails = $this.data('pager-thumbnails');
 			
 			if ($slider.length === 0 || $slides.length === 0)
 				return;
@@ -295,7 +296,10 @@ var slider = {
 					
 					if (pager) {
 						for (var i = 1; i <= slidesCount; i++) {
-							li += '<li><a href="#slide-' + i + '">Slide ' + i + '</a></li>';
+							if (thumbnails)
+								li += '<li><a href="#slide-' + i + '">' + ($slides.eq(i - 1).data('pager-thumbnail') ? '<img src="' + $slides.eq(i - 1).data('pager-thumbnail') + '" alt="Slide ' + i + '" />' : 'Slide ' + i) + '</a></li>';
+							else
+								li += '<li><a href="#slide-' + i + '">Slide ' + i + '</a></li>';
 						}
 						
 						$navPager.append(li);
