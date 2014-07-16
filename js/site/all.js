@@ -175,7 +175,7 @@ var slider = {
 				isVisible = false,
 				carouselID = 'carouselid-' + window.location.pathname + '-' + index,
 				carouselCookie = cookie.read(carouselID),
-				circular = $this.data('circular') === false ? false : true;
+				circular = $this.data('circular');
 			
 			if ($slider.length === 0 || $slides.length === 0)
 				return;
