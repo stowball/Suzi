@@ -5,11 +5,10 @@
 	data-speed="xxx" - The time in milliseconds for the slides' transition speed. Default is 300
 	data-nav="false" - Do not create previous and next links. Default is true
 	data-pager="false" - Do not create caroursel pagination. Default is true
-	data-circular="false" - Do not use "circular" caroursel appearance, i.e. visibly go back to beginning. Default is true
+	data-pager-thumbnails="true" - Whether to use images for the carousel's pager. Uses data-pager-thumbnail="path-to-img" on the carousel's LIs for the img src, otherwise outputs plain text
+	data-circular="true" - Use "circular" caroursel appearance, i.e. visibly go back to beginning. Default is false
 	
-	Carousels lazy load images on any elements that have a data-src attribute, where data-src points to the source of the image to load.
-	If data-bg-src="false", the lazy load will set the elem's.src property as opposed to its style.backgroundImage.
-	Don't use data-bg-src="false" on anything other than an img for this reason
+	Carousels lazy load images that use rwd.images.js
 -->
 
 <div class="carousel" data-interval="5">
@@ -34,7 +33,7 @@
 	</div>
 </div>
 
-<div class="carousel" data-interval="3" data-speed="600" data-nav="false" data-pager="false" data-circular="false">
+<div class="carousel" data-interval="3" data-speed="600" data-nav="false" data-pager="false" data-circular="true">
 	<div class="inner">
 		<ul class="reset slider">
 			<li>
