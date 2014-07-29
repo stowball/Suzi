@@ -1,28 +1,3 @@
-var fs = require('fs'),
-	path = require('path'),
-	_ = require('underscore');
-
-// Generate a list of top-level templates (make-shift menu)
-var menuItems =
-	_.chain(fs.readdirSync(path.resolve(__dirname, 'builds')))
-	.filter(function(f) {
-		// Only get html files, excluding index and base
-		return ~f.indexOf('.html') && (f !== "index.html" && f !== "base.html");
-	})
-	.map(function(f) {
-		// Format strings
-		capitalized = f[0].toUpperCase() + f.slice(1);
-		return {
-			path: '/dist/builds/' + f,
-			title: capitalized.replace(/-/g, ' ').replace('.html', '')
-		};
-	})
-	.reduce(function(out, f) {
-		// Turn into markup
-		return out + '<li><a class="feature" href="' + f.path + '">' + f.title + '</a></li>\n';
-	}, '')
-	.value().replace(/\n$/, '');
-
 module.exports = function (grunt) {
 	var globalConfig = {
 		path: {
@@ -60,6 +35,22 @@ module.exports = function (grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		globalConfig: globalConfig,
+		
+		fileindex: {
+			custom: {
+				options: {
+					format: function(list) {
+						return list.join('\n') + '\n';
+					}
+				},
+				files: [
+					{
+						dest: '<%= globalConfig.path.builds.includes %>/_index.html', src: ['<%= globalConfig.path.builds.root %>/*.html']
+					}
+				]
+			}
+
+		},
 		
 		sass: {
 			dev: {
@@ -132,7 +123,6 @@ module.exports = function (grunt) {
 				includesDir: '<%= globalConfig.path.builds.includes %>',
 				globals: {
 					currentYear: grunt.template.today('yyyy'),
-					menuItems: menuItems,
 					cssRootPath: '/<%= globalConfig.path.css.root %>/',
 					cssDistPath: '/<%= globalConfig.path.css.site %>/',
 					jsRootPath: '/<%= globalConfig.path.js.root %>/',
@@ -160,6 +150,25 @@ module.exports = function (grunt) {
 					{
 						search: /v\d+\.\d+\.\d+\ \(\d{4}-\d{2}-\d{2}\)/g,
 						replace: 'v<%= pkg.version %> (' + grunt.template.today('yyyy-mm-dd') + ')'
+					}
+				]
+			},
+			fileindex: {
+				src: '<%= globalConfig.path.builds.includes %>/_index.html',
+				actions: [
+					{
+						search: /.*(base|index).html(\n|\r)/g,
+						replace: ''
+					},
+					{
+						search: /.*\/(.*?)(\.html)(\n|\r)/g,
+						replace: function(str, p1, p2, p3) {
+							var pageName = p1.replace(/-/g, ' ').replace(/(?:^|\s)\S/g, function(a) {
+								return a.toUpperCase();
+							});
+							
+							return '<li><a class="feature" href="' + p1 + p2 + '">' + pageName + '</a></li>' + p3; 
+						}
 					}
 				]
 			},
@@ -242,7 +251,7 @@ module.exports = function (grunt) {
 			},
 			html: {
 				files: ['<%= globalConfig.path.builds.root %>/**/*.html', '<%= globalConfig.path.builds.dist.builds %>/*.html'],
-				tasks: ['clean', 'includereplacemore', 'regex-replace:currentpaths'],
+				tasks: ['clean', 'fileindex', 'regex-replace:fileindex', 'includereplacemore', 'regex-replace:currentpaths'],
 				options: {
 					spawn: false
 				}
@@ -273,7 +282,7 @@ module.exports = function (grunt) {
 			},
 			html: {
 				files: ['<%= globalConfig.path.builds.root %>/**/*.html', '<%= globalConfig.path.builds.dist.builds %>/*.html'],
-				tasks: ['clean', 'includereplacemore', 'regex-replace:currentpaths'],
+				tasks: ['clean', 'fileindex', 'regex-replace:fileindex', 'includereplacemore', 'regex-replace:currentpaths'],
 				options: {
 					spawn: false
 				}
@@ -282,6 +291,7 @@ module.exports = function (grunt) {
 	
 	});
 	
+	grunt.loadNpmTasks('grunt-fileindex');
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -293,8 +303,8 @@ module.exports = function (grunt) {
 	grunt.renameTask('watch', 'watchdev');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	
-	grunt.registerTask('default', ['sass:dist', 'concat', 'uglify', 'clean', 'includereplacemore', 'regex-replace:currentpaths', 'regex-replace:cssimages', 'imagemin', 'watch']);
-	grunt.registerTask('dev', ['sass:dev', 'concat', 'clean', 'includereplacemore', 'regex-replace:currentpaths', 'regex-replace:cssimages', 'imagemin', 'watchdev']);
+	grunt.registerTask('default', ['sass:dist', 'concat', 'uglify', 'clean', 'fileindex', 'regex-replace:fileindex', 'includereplacemore', 'regex-replace:currentpaths', 'regex-replace:cssimages', 'imagemin', 'watch']);
+	grunt.registerTask('dev', ['sass:dev', 'concat', 'clean', 'fileindex', 'regex-replace:fileindex', 'includereplacemore', 'regex-replace:currentpaths', 'regex-replace:cssimages', 'imagemin', 'watchdev']);
 	grunt.registerTask('bust', ['regex-replace:cachebustcss', 'regex-replace:cachebustjs']);
 	grunt.registerTask('version', ['regex-replace:version']);
 };
