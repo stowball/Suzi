@@ -125,6 +125,8 @@ module.exports = function (grunt) {
 			}
 		},
 		
+		clean: ['<%= globalConfig.path.builds.dist.builds %>/*'],
+		
 		includereplacemore: {
 			options: {
 				includesDir: '<%= globalConfig.path.builds.includes %>',
@@ -240,7 +242,7 @@ module.exports = function (grunt) {
 			},
 			html: {
 				files: ['<%= globalConfig.path.builds.root %>/**/*.html', '<%= globalConfig.path.builds.dist.builds %>/*.html'],
-				tasks: ['includereplacemore', 'regex-replace:currentpaths'],
+				tasks: ['clean', 'includereplacemore', 'regex-replace:currentpaths'],
 				options: {
 					spawn: false
 				}
@@ -271,7 +273,7 @@ module.exports = function (grunt) {
 			},
 			html: {
 				files: ['<%= globalConfig.path.builds.root %>/**/*.html', '<%= globalConfig.path.builds.dist.builds %>/*.html'],
-				tasks: ['includereplacemore', 'regex-replace:currentpaths'],
+				tasks: ['clean', 'includereplacemore', 'regex-replace:currentpaths'],
 				options: {
 					spawn: false
 				}
@@ -283,6 +285,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-include-replace-more');
 	grunt.loadNpmTasks('grunt-regex-replace');
 	grunt.loadNpmTasks('grunt-contrib-imagemin');
@@ -290,8 +293,8 @@ module.exports = function (grunt) {
 	grunt.renameTask('watch', 'watchdev');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	
-	grunt.registerTask('default', ['sass:dist', 'concat', 'uglify', 'includereplacemore', 'regex-replace:currentpaths', 'regex-replace:cssimages', 'imagemin', 'watch']);
-	grunt.registerTask('dev', ['sass:dev', 'concat', 'includereplacemore', 'regex-replace:currentpaths', 'regex-replace:cssimages', 'imagemin', 'watchdev']);
+	grunt.registerTask('default', ['sass:dist', 'concat', 'uglify', 'clean', 'includereplacemore', 'regex-replace:currentpaths', 'regex-replace:cssimages', 'imagemin', 'watch']);
+	grunt.registerTask('dev', ['sass:dev', 'concat', 'clean', 'includereplacemore', 'regex-replace:currentpaths', 'regex-replace:cssimages', 'imagemin', 'watchdev']);
 	grunt.registerTask('bust', ['regex-replace:cachebustcss', 'regex-replace:cachebustjs']);
 	grunt.registerTask('version', ['regex-replace:version']);
 };
