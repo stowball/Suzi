@@ -213,6 +213,15 @@ module.exports = function (grunt) {
 						replace: '/<%= globalConfig.path.images.site %>/'
 					}
 				]
+			},
+			csslinebreaks: {
+				src: '<%= globalConfig.path.css.site %>/*.css',
+				actions: [
+					{
+						search: /(\r|\n)/g,
+						replace: ''
+					}
+				]
 			}
 		},
 		
@@ -230,7 +239,7 @@ module.exports = function (grunt) {
 		watch: {
 			css: {
 				files: ['<%= globalConfig.path.css.root %>/**/*.scss'],
-				tasks: ['sass:dist', 'regex-replace:cachebustcss', 'regex-replace:cssimages'],
+				tasks: ['sass:dist', 'regex-replace:cachebustcss', 'regex-replace:cssimages', 'regex-replace:csslinebreaks'],
 				options: {
 					spawn: false,
 				}
@@ -303,7 +312,7 @@ module.exports = function (grunt) {
 	grunt.renameTask('watch', 'watchdev');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	
-	grunt.registerTask('default', ['sass:dist', 'concat', 'uglify', 'clean', 'fileindex', 'regex-replace:fileindex', 'includereplacemore', 'regex-replace:currentpaths', 'regex-replace:cssimages', 'imagemin', 'watch']);
+	grunt.registerTask('default', ['sass:dist', 'concat', 'uglify', 'clean', 'fileindex', 'regex-replace:fileindex', 'includereplacemore', 'regex-replace:currentpaths', 'regex-replace:cssimages', 'regex-replace:csslinebreaks', 'imagemin', 'watch']);
 	grunt.registerTask('dev', ['sass:dev', 'concat', 'clean', 'fileindex', 'regex-replace:fileindex', 'includereplacemore', 'regex-replace:currentpaths', 'regex-replace:cssimages', 'imagemin', 'watchdev']);
 	grunt.registerTask('bust', ['regex-replace:cachebustcss', 'regex-replace:cachebustjs']);
 	grunt.registerTask('version', ['regex-replace:version']);
