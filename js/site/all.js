@@ -458,7 +458,10 @@ var slider = {
 						$navPager.attr('id', 'nav_pager-' + index);
 						cycleOpts.pager = '#nav_pager-' + index;
 						cycleOpts.pagerAnchorBuilder = function(idx, slide) {
-							return '<li><a href="#slide-' + (idx + 1) + '">Slide ' + (idx + 1) + '</a></li>';
+							if (thumbnails)
+								return '<li><a href="#slide-' + (idx + 1) + '">' + ($slides.eq(idx).data('pager-thumbnail') ? '<img src="' + $slides.eq(idx).data('pager-thumbnail') + '" alt="Slide ' + (idx + 1) + '" />' : 'Slide ' + (idx + 1)) + '</a></li>';
+							else
+								return '<li><a href="#slide-' + (idx + 1) + '">Slide ' + (idx + 1) + '</a></li>';
 						};
 					}
 					
