@@ -264,7 +264,7 @@ var slider = {
 				if ($this.data('pager') === false)
 					pager = false;
 				else
-					var $navPager = $('<ul class="carousel_nav_pager reset menu" />');
+					var $navPager = $('<ul class="carousel_nav_pager' + (thumbnails ? ' carousel_nav_pager_thumbnails' : '') + ' reset menu" />');
 				
 				if (nav)
 					$this.append($navPrev).append($navNext);
