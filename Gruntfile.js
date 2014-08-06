@@ -236,6 +236,17 @@ module.exports = function (grunt) {
 			}
 		},
 		
+		svgmin: {
+			dynamic: {
+				files: [{
+					expand: true,
+					cwd: '<%= globalConfig.path.images.site %>',
+					src: ['**/*.svg'],
+					dest: '<%= globalConfig.path.images.site %>'
+				}]
+			}
+		},
+		
 		watch: {
 			css: {
 				files: ['<%= globalConfig.path.css.root %>/**/*.scss'],
@@ -254,6 +265,13 @@ module.exports = function (grunt) {
 			images: {
 				files: ['<%= globalConfig.path.images.site %>/*.{png,jpg,gif}'],
 				tasks: ['imagemin'],
+				options: {
+					spawn: false
+				}
+			},
+			svgs: {
+				files: ['<%= globalConfig.path.images.site %>/*.svg'],
+				tasks: ['svgmin'],
 				options: {
 					spawn: false
 				}
@@ -289,6 +307,13 @@ module.exports = function (grunt) {
 					spawn: false
 				}
 			},
+			svgs: {
+				files: ['<%= globalConfig.path.images.site %>/*.svg'],
+				tasks: ['svgmin'],
+				options: {
+					spawn: false
+				}
+			},
 			html: {
 				files: ['<%= globalConfig.path.builds.root %>/**/*.html', '<%= globalConfig.path.builds.dist.builds %>/*.html'],
 				tasks: ['clean', 'fileindex', 'regex-replace:fileindex', 'includereplacemore', 'regex-replace:currentpaths'],
@@ -308,12 +333,13 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-include-replace-more');
 	grunt.loadNpmTasks('grunt-regex-replace');
 	grunt.loadNpmTasks('grunt-contrib-imagemin');
+	grunt.loadNpmTasks('grunt-svgmin');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.renameTask('watch', 'watchdev');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	
-	grunt.registerTask('default', ['sass:dist', 'concat', 'uglify', 'clean', 'fileindex', 'regex-replace:fileindex', 'includereplacemore', 'regex-replace:currentpaths', 'regex-replace:cssimages', 'regex-replace:csslinebreaks', 'imagemin', 'watch']);
-	grunt.registerTask('dev', ['sass:dev', 'concat', 'clean', 'fileindex', 'regex-replace:fileindex', 'includereplacemore', 'regex-replace:currentpaths', 'regex-replace:cssimages', 'imagemin', 'watchdev']);
+	grunt.registerTask('default', ['sass:dist', 'concat', 'uglify', 'clean', 'fileindex', 'regex-replace:fileindex', 'includereplacemore', 'regex-replace:currentpaths', 'regex-replace:cssimages', 'regex-replace:csslinebreaks', 'imagemin', 'svgmin', 'watch']);
+	grunt.registerTask('dev', ['sass:dev', 'concat', 'clean', 'fileindex', 'regex-replace:fileindex', 'includereplacemore', 'regex-replace:currentpaths', 'regex-replace:cssimages', 'imagemin', 'svgmin', 'watchdev']);
 	grunt.registerTask('bust', ['regex-replace:cachebustcss', 'regex-replace:cachebustjs']);
 	grunt.registerTask('version', ['regex-replace:version']);
 };
