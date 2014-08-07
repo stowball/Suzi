@@ -1,33 +1,35 @@
 module.exports = function (grunt) {
 	var globalConfig = {
 		path: {
+			dist: 'public',
 			builds: {
-				root: 'builds',
-				includes: 'builds/includes',
+				src: 'builds',
+				includes: '<%= globalConfig.path.builds.src %>/includes',
 				dist: {
-					root: 'dist',
-					builds: 'dist/builds'
+					root: '<%= globalConfig.path.dist %>',
+					builds: '<%= globalConfig.path.dist %>/<%= globalConfig.path.builds.src %>'
 				}
 			},
 			// Add additional src dirs for the "developed" templates
 			cachebust: [
-				'<%= globalConfig.path.builds.includes %>/*.html',
+				'<%= globalConfig.path.builds.includes %>/_foot.html',
+				'<%= globalConfig.path.builds.includes %>/_head.html',
 				'<%= globalConfig.path.builds.dist.builds %>/*.html'
 			],
 			css: {
-				root: 'css',
-				site: 'css/site',
-				src: 'css/src'
+				src: 'css',
+				dist: '<%= globalConfig.path.dist %>/css'
 			},
 			js: {
-				root: 'js',
-				src: 'js/src',
-				site: 'js/site',
-				build: 'js/build'
+				src: 'js',
+				vendor: '<%= globalConfig.path.js.src %>/vendor',
+				lazy: '<%= globalConfig.path.js.vendor %>/lazy-loaded',
+				dist: '<%= globalConfig.path.dist %>/<%= globalConfig.path.js.src %>',
+				distvendor: '<%= globalConfig.path.js.dist %>/vendor'
 			},
 			images: {
-				content: 'images/content',
-				site: 'images/site'
+				src: 'images',
+				dist: '<%= globalConfig.path.dist %>/<%= globalConfig.path.images.src %>'
 			}
 		}
 	};
@@ -45,32 +47,31 @@ module.exports = function (grunt) {
 				},
 				files: [
 					{
-						dest: '<%= globalConfig.path.builds.includes %>/_index.html', src: ['<%= globalConfig.path.builds.root %>/*.html']
+						dest: '<%= globalConfig.path.builds.includes %>/_index.html', src: ['<%= globalConfig.path.builds.src %>/*.html']
 					}
 				]
 			}
-
 		},
 		
 		sass: {
 			dev: {
 				options: {
-					require: './sass/functions/base64-encode.rb',
+					require: './ruby/functions/base64-encode.rb',
 					style: 'expanded'
 				},
 				files: {
-					'<%= globalConfig.path.css.site %>/all.css': '<%= globalConfig.path.css.src %>/all.scss',
-					'<%= globalConfig.path.css.site %>/ltie9.css': '<%= globalConfig.path.css.src %>/ltie9.scss'
+					'<%= globalConfig.path.css.dist %>/all.css': '<%= globalConfig.path.css.src %>/all.scss',
+					'<%= globalConfig.path.css.dist %>/ltie9.css': '<%= globalConfig.path.css.src %>/ltie9.scss'
 				}
 			},
 			dist: {
 				options: {
-					require: './sass/functions/base64-encode.rb',
+					require: './ruby/functions/base64-encode.rb',
 					style: 'compressed'
 				},
 				files: {
-					'<%= globalConfig.path.css.site %>/all.css': '<%= globalConfig.path.css.src %>/all.scss',
-					'<%= globalConfig.path.css.site %>/ltie9.css': '<%= globalConfig.path.css.src %>/ltie9.scss'
+					'<%= globalConfig.path.css.dist %>/all.css': '<%= globalConfig.path.css.src %>/all.scss',
+					'<%= globalConfig.path.css.dist %>/ltie9.css': '<%= globalConfig.path.css.src %>/ltie9.scss'
 				}
 			}
 		},
@@ -78,64 +79,82 @@ module.exports = function (grunt) {
 		concat: {
 			base: {
 				src: [
-					'<%= globalConfig.path.js.root %>/cssua.min.js',
-					'<%= globalConfig.path.js.root %>/modernizr.min.js',
-					'<%= globalConfig.path.js.root %>/supports.touch.min.js',
-					'<%= globalConfig.path.js.root %>/izilla.gup.min.js',
-					'<%= globalConfig.path.js.root %>/layout.engine.min.js',
-					'<%= globalConfig.path.js.root %>/mq.genie.min.js'
+					'<%= globalConfig.path.js.vendor %>/cssua.js',
+					'<%= globalConfig.path.js.vendor %>/modernizr.js',
+					'<%= globalConfig.path.js.vendor %>/supports.touch.js',
+					'<%= globalConfig.path.js.vendor %>/izilla.gup.js',
+					'<%= globalConfig.path.js.vendor %>/layout.engine.js',
+					'<%= globalConfig.path.js.vendor %>/mq.genie.js'
 				],
-				dest: '<%= globalConfig.path.js.build %>/base.js'
+				dest: '<%= globalConfig.path.js.dist %>/base.js'
 			},
 			all: {
 				// Customise as appropriate
 				src: [
-					'<%= globalConfig.path.js.root %>/matchMedia.min.js',
-					'<%= globalConfig.path.js.root %>/matchMedia.addListener.min.js',
-					'<%= globalConfig.path.js.root %>/enquire.min.js',
-					'<%= globalConfig.path.js.root %>/rwd.images.min.js',
-					'<%= globalConfig.path.js.root %>/class.query.min.js',
-					'<%= globalConfig.path.js.root %>/swipe.min.js',
-					'<%= globalConfig.path.js.root %>/firefox.hwa.min.js',
-					'<%= globalConfig.path.js.root %>/fastclick.min.js',
-					'<%= globalConfig.path.js.root %>/jquery.transit.min.js',
-					'<%= globalConfig.path.js.site %>/all.js'
+					'<%= globalConfig.path.js.vendor %>/matchMedia.js',
+					'<%= globalConfig.path.js.vendor %>/matchMedia.addListener.js',
+					'<%= globalConfig.path.js.vendor %>/enquire.js',
+					'<%= globalConfig.path.js.vendor %>/rwd.images.js',
+					'<%= globalConfig.path.js.vendor %>/class.query.js',
+					'<%= globalConfig.path.js.vendor %>/swipe.js',
+					'<%= globalConfig.path.js.vendor %>/firefox.hwa.js',
+					'<%= globalConfig.path.js.vendor %>/fastclick.js',
+					'<%= globalConfig.path.js.vendor %>/jquery.transit.js',
+					'<%= globalConfig.path.js.src %>/all.js'
 				],
-				dest: '<%= globalConfig.path.js.build %>/all.js'
+				dest: '<%= globalConfig.path.js.dist %>/all.js'
 			}
 		},
 		
 		uglify: {
 			base: {
-				src: '<%= globalConfig.path.js.build %>/base.js',
-				dest: '<%= globalConfig.path.js.build %>/base.js'
+				src: '<%= globalConfig.path.js.dist %>/base.js',
+				dest: '<%= globalConfig.path.js.dist %>/base.js'
 			},
 			all: {
-				src: '<%= globalConfig.path.js.build %>/all.js',
-				dest: '<%= globalConfig.path.js.build %>/all.js'
+				src: '<%= globalConfig.path.js.dist %>/all.js',
+				dest: '<%= globalConfig.path.js.dist %>/all.js'
+			},
+			vendor: {
+				expand: true,
+				cwd: '<%= globalConfig.path.js.vendor %>',
+				src: '*js',
+				dest: '<%= globalConfig.path.js.distvendor %>'
 			}
 		},
 		
-		clean: ['<%= globalConfig.path.builds.dist.builds %>/*'],
+		copy: {
+			js: {
+				expand: true,
+				cwd: '<%= globalConfig.path.js.vendor %>',
+				src: '*js',
+				dest: '<%= globalConfig.path.js.distvendor %>'
+			}
+		},
+		
+		clean: {
+			html: '<%= globalConfig.path.builds.dist.builds %>/*',
+			images: '<%= globalConfig.path.images.dist %>/*',
+			js: '<%= globalConfig.path.js.dist %>/*'
+		},
 		
 		includereplacemore: {
 			options: {
 				includesDir: '<%= globalConfig.path.builds.includes %>',
 				globals: {
 					currentYear: grunt.template.today('yyyy'),
-					cssRootPath: '/<%= globalConfig.path.css.root %>/',
-					cssDistPath: '/<%= globalConfig.path.css.site %>/',
-					jsRootPath: '/<%= globalConfig.path.js.root %>/',
-					jsDistPath: '/<%= globalConfig.path.js.build %>/',
-					imgPath: '/<%= globalConfig.path.images.site %>/',
-					imgContentPath: '/<%= globalConfig.path.images.content %>/',
+					cssPath: '/<%= globalConfig.path.css.src %>/',
+					jsPath: '/<%= globalConfig.path.js.src %>/',
+					jsVendorPath: '/<%= globalConfig.path.js.vendor %>/',
+					imgPath: '/<%= globalConfig.path.images.src %>/',
+					imgContentPath: '/<%= globalConfig.path.images.src %>/content/',
 					
 					// Customise as appropriate
 					siteTitle: 'Project Name'
 				}
 			},
 			templates: {
-				src: '<%= globalConfig.path.builds.root %>/*.html',
+				src: '<%= globalConfig.path.builds.src %>/*.html',
 				dest: '<%= globalConfig.path.builds.dist.root %>/'
 			}
 		},
@@ -206,16 +225,16 @@ module.exports = function (grunt) {
 				]
 			},
 			cssimages: {
-				src: '<%= globalConfig.path.css.site %>/*.css',
+				src: '<%= globalConfig.path.css.dist %>/*.css',
 				actions: [
 					{
 						search: /{{ imgPath }}/g,
-						replace: '/<%= globalConfig.path.images.site %>/'
+						replace: '/<%= globalConfig.path.images.src %>/'
 					}
 				]
 			},
 			csslinebreaks: {
-				src: '<%= globalConfig.path.css.site %>/*.css',
+				src: '<%= globalConfig.path.css.dist %>/*.css',
 				actions: [
 					{
 						search: /(\r|\n)/g,
@@ -229,9 +248,9 @@ module.exports = function (grunt) {
 			dynamic: {
 				files: [{
 					expand: true,
-					cwd: '<%= globalConfig.path.images.site %>',
+					cwd: '<%= globalConfig.path.images.src %>',
 					src: ['**/*.{png,jpg,gif,ico}'],
-					dest: '<%= globalConfig.path.images.site %>'
+					dest: '<%= globalConfig.path.images.dist %>'
 				}]
 			}
 		},
@@ -240,45 +259,45 @@ module.exports = function (grunt) {
 			dynamic: {
 				files: [{
 					expand: true,
-					cwd: '<%= globalConfig.path.images.site %>',
+					cwd: '<%= globalConfig.path.images.src %>',
 					src: ['**/*.svg'],
-					dest: '<%= globalConfig.path.images.site %>'
+					dest: '<%= globalConfig.path.images.dist %>'
 				}]
 			}
 		},
 		
 		watch: {
 			css: {
-				files: ['<%= globalConfig.path.css.root %>/**/*.scss'],
+				files: ['<%= globalConfig.path.css.src %>/**/*.scss'],
 				tasks: ['sass:dist', 'regex-replace:cachebustcss', 'regex-replace:cssimages', 'regex-replace:csslinebreaks'],
 				options: {
 					spawn: false,
 				}
 			},
-			scripts: {
-				files: ['<%= globalConfig.path.js.root %>/**/*.js'],
-				tasks: ['concat', 'uglify', 'regex-replace:cachebustjs'],
+			html: {
+				files: ['<%= globalConfig.path.builds.src %>/**/*.html', '<%= globalConfig.path.builds.dist.builds %>/*.html'],
+				tasks: ['clean:html', 'fileindex', 'regex-replace:fileindex', 'includereplacemore', 'regex-replace:currentpaths'],
+				options: {
+					spawn: false
+				}
+			},
+			js: {
+				files: ['<%= globalConfig.path.js.src %>/**/*.js'],
+				tasks: ['newer:concat', 'newer:uglify', 'regex-replace:cachebustjs'],
 				options: {
 					spawn: false
 				}
 			},
 			images: {
-				files: ['<%= globalConfig.path.images.site %>/*.{png,jpg,gif}'],
-				tasks: ['imagemin'],
+				files: ['<%= globalConfig.path.images.src %>/**/*.{png,jpg,gif,ico}'],
+				tasks: ['newer:imagemin'],
 				options: {
 					spawn: false
 				}
 			},
 			svgs: {
-				files: ['<%= globalConfig.path.images.site %>/*.svg'],
-				tasks: ['svgmin'],
-				options: {
-					spawn: false
-				}
-			},
-			html: {
-				files: ['<%= globalConfig.path.builds.root %>/**/*.html', '<%= globalConfig.path.builds.dist.builds %>/*.html'],
-				tasks: ['clean', 'fileindex', 'regex-replace:fileindex', 'includereplacemore', 'regex-replace:currentpaths'],
+				files: ['<%= globalConfig.path.images.src %>/**/*.svg'],
+				tasks: ['newer:svgmin'],
 				options: {
 					spawn: false
 				}
@@ -287,36 +306,36 @@ module.exports = function (grunt) {
 		
 		watchdev: {
 			css: {
-				files: ['<%= globalConfig.path.css.root %>/**/*.scss'],
+				files: ['<%= globalConfig.path.css.src %>/**/*.scss'],
 				tasks: ['sass:dev', 'regex-replace:cachebustcss', 'regex-replace:cssimages'],
 				options: {
 					spawn: false,
 				}
 			},
-			scripts: {
-				files: ['<%= globalConfig.path.js.root %>/**/*.js'],
-				tasks: ['concat', 'regex-replace:cachebustjs'],
+			html: {
+				files: ['<%= globalConfig.path.builds.src %>/**/*.html', '<%= globalConfig.path.builds.dist.builds %>/*.html'],
+				tasks: ['clean:html', 'fileindex', 'regex-replace:fileindex', 'includereplacemore', 'regex-replace:currentpaths'],
+				options: {
+					spawn: false
+				}
+			},
+			js: {
+				files: ['<%= globalConfig.path.js.src %>/**/*.js'],
+				tasks: ['newer:concat', 'regex-replace:cachebustjs'],
 				options: {
 					spawn: false
 				}
 			},
 			images: {
-				files: ['<%= globalConfig.path.images.site %>/*.{png,jpg,gif}'],
-				tasks: ['imagemin'],
+				files: ['<%= globalConfig.path.images.src %>/**/*.{png,jpg,gif,ico}'],
+				tasks: ['newer:imagemin'],
 				options: {
 					spawn: false
 				}
 			},
 			svgs: {
-				files: ['<%= globalConfig.path.images.site %>/*.svg'],
-				tasks: ['svgmin'],
-				options: {
-					spawn: false
-				}
-			},
-			html: {
-				files: ['<%= globalConfig.path.builds.root %>/**/*.html', '<%= globalConfig.path.builds.dist.builds %>/*.html'],
-				tasks: ['clean', 'fileindex', 'regex-replace:fileindex', 'includereplacemore', 'regex-replace:currentpaths'],
+				files: ['<%= globalConfig.path.images.src %>/**/*.svg'],
+				tasks: ['newer:svgmin'],
 				options: {
 					spawn: false
 				}
@@ -325,10 +344,12 @@ module.exports = function (grunt) {
 	
 	});
 	
+	grunt.loadNpmTasks('grunt-newer');
 	grunt.loadNpmTasks('grunt-fileindex');
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-include-replace-more');
 	grunt.loadNpmTasks('grunt-regex-replace');
@@ -338,8 +359,9 @@ module.exports = function (grunt) {
 	grunt.renameTask('watch', 'watchdev');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	
-	grunt.registerTask('default', ['sass:dist', 'concat', 'uglify', 'clean', 'fileindex', 'regex-replace:fileindex', 'includereplacemore', 'regex-replace:currentpaths', 'regex-replace:cssimages', 'regex-replace:csslinebreaks', 'imagemin', 'svgmin', 'watch']);
-	grunt.registerTask('dev', ['sass:dev', 'concat', 'clean', 'fileindex', 'regex-replace:fileindex', 'includereplacemore', 'regex-replace:currentpaths', 'regex-replace:cssimages', 'imagemin', 'svgmin', 'watchdev']);
+	grunt.registerTask('default', ['sass:dist', 'regex-replace:cssimages', 'regex-replace:csslinebreaks', 'newer:concat', 'uglify', 'clean:html', 'fileindex', 'regex-replace:fileindex', 'includereplacemore', 'regex-replace:currentpaths', 'newer:imagemin', 'newer:svgmin', 'watch']);
+	grunt.registerTask('dev', ['sass:dev', 'regex-replace:cssimages', 'clean:js', 'concat', 'copy:js', 'clean:html', 'fileindex', 'regex-replace:fileindex', 'includereplacemore', 'regex-replace:currentpaths', 'newer:imagemin', 'newer:svgmin', 'watchdev']);
+	grunt.registerTask('sync', ['sass:dist', 'regex-replace:cssimages', 'regex-replace:csslinebreaks', 'clean:images', 'clean:js', 'concat', 'uglify', 'imagemin', 'svgmin']);
 	grunt.registerTask('bust', ['regex-replace:cachebustcss', 'regex-replace:cachebustjs']);
 	grunt.registerTask('version', ['regex-replace:version']);
 };

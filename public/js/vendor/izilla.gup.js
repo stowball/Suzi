@@ -1,0 +1,1 @@
+var izilla_gup=function(){for(var a,b=/(&|\?)(\w+)=true/gi,c=window.location.href,d="",e={};a=b.exec(c);)d+=" "+a[2],e[a[2]]=!0;return document.documentElement.className+=d,e}();

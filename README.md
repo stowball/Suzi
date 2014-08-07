@@ -19,9 +19,9 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 * Simple, accessible JavaScript tabs with cookie-based remembering of the open pane
 * Simple, accessible JavaScript accordions which transition to and from `height: auto`, and support multiple open panes
 * Simple, but powerful HTML templating using [grunt-includereplace-more](https://github.com/stowball/grunt-include-replace-more)
-* Concatenation and minification of CSS and JS files with [grunt-contrib-concat](https://github.com/gruntjs/grunt-contrib-concat) and [grunt-contrib-uglify](https://github.com/gruntjs/grunt-contrib-uglify)
+* Concatenation and minification of CSS and JS files with [grunt-contrib-concat](https://github.com/gruntjs/grunt-contrib-concat) and [grunt-contrib-uglify](https://github.com/gruntjs/grunt-contrib-uglify) (unless running `grunt dev`)
 * Cache busting of CSS and JS assets with a unique timestamp querystring
-* Optimising of images with [grunt-contrib-imagemin](https://github.com/gruntjs/grunt-contrib-imagemin)
+* Optimising of images and SVGs with [grunt-contrib-imagemin](https://github.com/gruntjs/grunt-contrib-imagemin)
 * Tabs instead of spaces :)
 
 ---
@@ -40,22 +40,57 @@ While some of its markup patterns and styles are directly related to our CMS, [C
 
 ### Usage
 
-In a shell window, run `grunt` or open gruntwatch.bat for quick access in Windows
+* Use `grunt` in a shell window to run Suzi in production mode
+* Use `grunt dev` to run in dev mode (un-minified CSS and JS)
+* Use `grunt sync` to make the /public/ css, images and js directories match the src directories (as src deletions aren't tracked)
+* Use `grunt bust` to manually bust the cache on CSS and JS files
 
-* Set up variables for colors, fonts, sizes, breakpoints, etc in /css/site/partials/_config.scss
-* Add @font-face declarations to /css/site/partials/_fonts.scss
-* Make simple customisations to links, headings, lists & tables in /css/site/partials/_simple.scss
-* Make simple customisations to form elements in /css/site/partials/_forms.scss
-* Modify the carousels in /css/site/partials/_carousel.scss
-* Create and add site specific partials to /css/site/partials/_site.scss
-* Add any LT IE9 overrides to /css/site/partials/_ltie9.scss
-* Add any print overrides to /css/site/partials/_print.scss
+#### Set up
 
-To use the Sass-only features of Suzi, run sassqwatch.bat *(on Windows)* or bash sassqwatch.sh *(on Mac)*
+* **Ensure you point your web server to run from the /public/ directory**
+* Customise `includereplacemore.options.globals.siteTitle` in Gruntfile.js to set the site name as the page `<title>` suffix
+
+#### HTML Builds
+
+* Create templates in /builds/
+* Create and customise template includes in /builds/includes/
+* Set the `$title` variable to customise the page's `<title>`
+* Set the `$currentPath` variable to the template's file name to allow for `.current` navigation states
+* You'll find common markup patterns in /builds/markup
+* Access a quick list of all builds by browsing to /builds/index.html
+
+#### Sass/CSS
+
+* Set up variables for colors, fonts, sizes, breakpoints, etc in /css/custom/_config.scss
+* Add @font-face declarations to /css/custom/_fonts.scss
+* Make simple customisations to links, headings, lists & tables in /css/custom/_simple.scss
+* Make simple customisations to form elements in /css/custom/_forms.scss
+* Modify the carousels in /css/custom/_carousel.scss
+* Create and add site specific partials in /css/custom and import them from /css/custom/_site.scss
+* Add any LT IE9 overrides to /css/custom/_ltie9.scss
+* Add any print overrides to /css/custom/_print.scss
+
+#### JavaScripts
+
+* Use /js/all.js for all custom methods
+* Customise `concat.all.src` in Gruntfile.js to add or remove scripts which are to be loaded at all times
+* Put any *un-minified* JavaScript plugins/libraries in /js/vendor
+* Lazy-load additional scripts using `window.suzi.jsVendorPath + 'plugin.name.js'`
+
+#### Images
+
+* Put CSS images, favicon and SVGs in /images/
+* Put content images which the site doesn't "rely" on in /images/content
+* Use `url('{{ imgPath }}image-name.ext')` when referencing images in CSS
+* Use `{{ imgContentPath }}image-name.ext` when referencing images in HTML
+
+#### Fonts
+
+* Put all web and icon fonts in /public/fonts/
 
 ---
 
-### Mixins and Functions
+### Sass Mixins and Functions
 
 #### Helper functions
 
