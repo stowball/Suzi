@@ -230,7 +230,7 @@ module.exports = function (grunt) {
 				files: [{
 					expand: true,
 					cwd: '<%= globalConfig.path.images.site %>',
-					src: ['**/*.{png,jpg,gif}'],
+					src: ['**/*.{png,jpg,gif,ico}'],
 					dest: '<%= globalConfig.path.images.site %>'
 				}]
 			}
