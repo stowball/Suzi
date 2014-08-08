@@ -238,21 +238,57 @@ $rem-with-px-fallback: true !default;
 	}
 }
 
-@mixin media-query-and($first-value, $second-value, $ltie9: $use-ltie9-mq-fallbacks, $first-operator: $min, $second-operator: $max, $px: false) {
-	@if ($px == false) {
-		@media (#{$first-operator} #{em($first-value)}) and (#{$second-operator} #{em($second-value)}) {
-			@content;
+@mixin media-query-and($mqs, $ltie9: $use-ltie9-mq-fallbacks, $first-operator: $min, $second-operator: $max, $px: false) {
+	@if (type-of($mqs) == 'list') {
+		$length: length($mqs);
+		
+		@if ($length == 2 and type-of(nth($mqs, 1)) == 'number') {
+			@for $i from 0 to $length - 1 {
+				$first-value: nth($mqs, $i + 1);
+				$second-value: nth($mqs, $i + 2);
+				
+				@if ($px == false) {
+					@media (#{$first-operator} #{em($first-value)}) and (#{$second-operator} #{em($second-value)}) {
+						@content;
+					}
+				}
+				@else {
+					@media (#{$first-operator} #{strip-units($first-value)}px) and (#{$second-operator} #{strip-units($second-value)}px) {
+						@content;
+					}
+				}
+				
+				@if ($ltie9 == true and $second-value >= $site-width and $first-operator == $min and $second-operator == $max) {
+					.ltie9 & {
+						@content;
+					}
+				}
+			}
 		}
-	}
-	@else {
-		@media (#{$first-operator} #{strip-units($first-value)}px) and (#{$second-operator} #{strip-units($second-value)}px) {
-			@content;
-		}
-	}
-	
-	@if ($ltie9 == true and $second-value >= $site-width and $first-operator == $min and $second-operator == $max) {
-		.ltie9 & {
-			@content;
+		@else if (type-of(nth($mqs, 1)) == 'list') {
+			@for $i from 0 to $length {
+				@if (length(nth($mqs, $i + 1)) == 2) {
+					$first-value: nth(nth($mqs, $i + 1), 1);
+					$second-value: nth(nth($mqs, $i + 1), 2);
+					
+					@if ($px == false) {
+						@media (#{$first-operator} #{em($first-value)}) and (#{$second-operator} #{em($second-value)}) {
+							@content;
+						}
+					}
+					@else {
+						@media (#{$first-operator} #{strip-units($first-value)}px) and (#{$second-operator} #{strip-units($second-value)}px) {
+							@content;
+						}
+					}
+					
+					@if ($ltie9 == true and $second-value >= $site-width and $first-operator == $min and $second-operator == $max) {
+						.ltie9 & {
+							@content;
+						}
+					}
+				}
+			}
 		}
 	}
 }
