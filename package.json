@@ -33,6 +33,7 @@
     "grunt-regex-replace": "~0.2.6",
     "grunt-contrib-imagemin": "~0.7.1",
     "grunt-svgmin": "~0.4.0",
-    "grunt-contrib-watch": "~0.6.1"
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-html": "~1.4.0"
   }
 }

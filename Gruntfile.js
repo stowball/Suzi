@@ -340,6 +340,27 @@ module.exports = function (grunt) {
 					spawn: false
 				}
 			}
+		},
+		
+		htmllint: {
+			options: {
+				ignore: [
+					'Bad value “X-UA-Compatible” for attribute “http-equiv” on XHTML element “meta”.',
+					'Bad value “HandheldFriendly” for attribute “name” on XHTML element “meta”: Keyword “handheldfriendly” is not registered.',
+					'Bad value “MobileOptimized” for attribute “name” on XHTML element “meta”: Keyword “mobileoptimized” is not registered.',
+					'Bad value “” for attribute “width” on XHTML element “img”: The empty string is not a valid non-negative integer.',
+					'Bad value “” for attribute “height” on XHTML element “img”: The empty string is not a valid non-negative integer.',
+					'Bad value “aside” for attribute “role” on XHTML element “div”.',
+					'Bad value “expiry” for attribute “name” on XHTML element “meta”: Keyword “expiry” is not registered.',
+					'Bad value “owner” for attribute “name” on XHTML element “meta”: Keyword “owner” is not registered.',
+					'The “language” attribute on the “script” element is obsolete. You can safely omit it.',
+					'The “frameborder” attribute on the “iframe” element is obsolete. Use CSS instead.',
+					'The “scrolling” attribute on the “iframe” element is obsolete. Use CSS instead.',
+					'The “allowtransparency” attribute on the “iframe” element is obsolete. Use CSS instead.',
+					'XHTML element “img” is missing required attribute “src”.'
+				]
+			},
+			src: ['<%= globalConfig.path.builds.dist.builds %>/*.html']
 		}
 	
 	});
@@ -358,10 +379,12 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.renameTask('watch', 'watchdev');
 	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-html');
 	
 	grunt.registerTask('default', ['sass:dist', 'regex-replace:cssimages', 'regex-replace:csslinebreaks', 'newer:concat', 'uglify', 'clean:html', 'fileindex', 'regex-replace:fileindex', 'includereplacemore', 'regex-replace:currentpaths', 'newer:imagemin', 'newer:svgmin', 'watch']);
 	grunt.registerTask('dev', ['sass:dev', 'regex-replace:cssimages', 'clean:js', 'concat', 'copy:js', 'clean:html', 'fileindex', 'regex-replace:fileindex', 'includereplacemore', 'regex-replace:currentpaths', 'newer:imagemin', 'newer:svgmin', 'watchdev']);
 	grunt.registerTask('sync', ['sass:dist', 'regex-replace:cssimages', 'regex-replace:csslinebreaks', 'clean:images', 'clean:js', 'concat', 'uglify', 'imagemin', 'svgmin']);
 	grunt.registerTask('bust', ['regex-replace:cachebustcss', 'regex-replace:cachebustjs']);
+	grunt.registerTask('validate', ['htmllint']);
 	grunt.registerTask('version', ['regex-replace:version']);
 };
