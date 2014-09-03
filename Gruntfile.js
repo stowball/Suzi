@@ -23,7 +23,6 @@ module.exports = function (grunt) {
 			js: {
 				src: 'js',
 				vendor: '<%= globalConfig.path.js.src %>/vendor',
-				lazy: '<%= globalConfig.path.js.vendor %>/lazy-loaded',
 				dist: '<%= globalConfig.path.dist %>/<%= globalConfig.path.js.src %>',
 				distvendor: '<%= globalConfig.path.js.dist %>/vendor'
 			},
