@@ -1,0 +1,18 @@
+/* --------------------------------------------
+	Constants
+----------------------------------------------- */
+
+.managed {
+	@extend .file_icon;
+}
+
+/* --------------------------------------------
+	Forms
+----------------------------------------------- */
+
+.btns > span.btn {
+	// Reset Cognition's div.btns > span.btn > span > input.submit form builder pattern
+	background: 0 !important;
+	border: 0 !important;
+	padding: 0 !important;
+}

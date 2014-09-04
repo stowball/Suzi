@@ -6,7 +6,7 @@
 
 Suzi is the starting point for all of our web projects and a culmination of 6+ years' experience in maintaining a front-end framework.
 
-While some of its markup patterns and styles are directly related to our CMS, [Cognition](http://www.cognitionecm.com), we hope Suzi is flexible enough for others to use, learn and cherry pick from.
+While some of its markup patterns and styles are related to our CMS, [Cognition](http://www.cognitionecm.com), we hope Suzi is flexible enough for others to use, learn and cherry pick from.
 
 ### Features
 

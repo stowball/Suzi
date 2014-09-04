@@ -129,64 +129,7 @@ a img, img[usemap] {
 	border: 0;
 }
 
-img {
-	-moz-force-broken-image-icon: 1;
-	-ms-interpolation-mode: bicubic;
-	vertical-align: bottom;
-	
-	@if ($is-responsive == true) {
-		height: auto;
-		max-width: 100%;
-	}
-	
-	&.fixed, .ltie9 & {
-		max-width: none;
-	}
-	
-	&.border {
-		border: 1px solid $std-color;
-	}
-	
-	&.float_left, &.float_right {
-		display: block;
-		float: none;
-		@include rem(margin, 0 auto $std-margin / 2);
-	}
-}
-
-@media ($min em($float-bp)) {
-	@import "bp-img-float";
-}
-
-.js {
-	.js_display_block {
-		display: block;
-	}
-	
-	.js_display_inline {
-		display: inline;
-	}
-	
-	.js_display_inline_block {
-		display: inline-block;
-	}
-}
-
-.jquery {
-	.jquery_display_block {
-		display: block;
-	}
-	
-	.jquery_display_inline {
-		display: inline;
-	}
-	
-	.jquery_display_inline_block {
-		display: inline-block;
-	}
-}
-
-.managed {
+.file_icon {
 	display: inline-block;
 	
 	&.alt {
@@ -263,6 +206,63 @@ img {
 	
 	&.rss:after, &.alt.rss:before {
 		background-position: 0 -176px;
+	}
+}
+
+img {
+	-moz-force-broken-image-icon: 1;
+	-ms-interpolation-mode: bicubic;
+	vertical-align: bottom;
+	
+	@if ($is-responsive == true) {
+		height: auto;
+		max-width: 100%;
+	}
+	
+	&.fixed, .ltie9 & {
+		max-width: none;
+	}
+	
+	&.border {
+		border: 1px solid $std-color;
+	}
+	
+	&.float_left, &.float_right {
+		display: block;
+		float: none;
+		@include rem(margin, 0 auto $std-margin / 2);
+	}
+}
+
+@media ($min em($float-bp)) {
+	@import "bp-img-float";
+}
+
+.js {
+	.js_display_block {
+		display: block;
+	}
+	
+	.js_display_inline {
+		display: inline;
+	}
+	
+	.js_display_inline_block {
+		display: inline-block;
+	}
+}
+
+.jquery {
+	.jquery_display_block {
+		display: block;
+	}
+	
+	.jquery_display_inline {
+		display: inline;
+	}
+	
+	.jquery_display_inline_block {
+		display: inline-block;
 	}
 }
 
