@@ -20,8 +20,10 @@ While some of its markup patterns and styles are related to our CMS, [Cognition]
 * Simple, accessible JavaScript accordions which transition to and from `height: auto`, and support multiple open panes
 * Simple, but powerful HTML templating using [grunt-includereplace-more](https://github.com/stowball/grunt-include-replace-more)
 * Concatenation and minification of CSS and JS files with [grunt-contrib-concat](https://github.com/gruntjs/grunt-contrib-concat) and [grunt-contrib-uglify](https://github.com/gruntjs/grunt-contrib-uglify) (unless running `grunt dev`)
+* BrowserSync for automatic live-reloading of changes & synchronised browser testing
 * Cache busting of CSS and JS assets with a unique timestamp querystring
 * Optimising of images and SVGs with [grunt-contrib-imagemin](https://github.com/gruntjs/grunt-contrib-imagemin)
+* HTML validation
 * Tabs instead of spaces :)
 
 ---
@@ -44,6 +46,7 @@ While some of its markup patterns and styles are related to our CMS, [Cognition]
 * Use `grunt dev` to run in dev mode (un-minified CSS and JS)
 * Use `grunt bust` to manually bust the cache on CSS and JS files
 * Use `grunt validate` to validate all of the HTML builds in /public/builds/
+* Use `grunt build` to build the project for release
 
 #### Set up
 

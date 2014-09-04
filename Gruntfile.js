@@ -133,16 +133,22 @@ module.exports = function (grunt) {
 				src: '*.{eot,svg,ttf,woff,woff2}',
 				dest: '<%= globalConfig.path.fonts.dist %>'
 			},
+			html: {
+				expand: true,
+				cwd: '<%= globalConfig.path.builds.dist.builds %>',
+				src: '*.html',
+				dest: '<%= globalConfig.path.dist %>'
+			},
 			js: {
 				expand: true,
 				cwd: '<%= globalConfig.path.js.vendor %>',
-				src: '*js',
+				src: '*.js',
 				dest: '<%= globalConfig.path.js.distvendor %>'
 			},
 			pie: {
 				src: '<%= globalConfig.path.css.src %>/PIE.htc',
 				dest: '<%= globalConfig.path.css.dist %>/PIE.htc'
-			},
+			}
 		},
 		
 		includereplacemore: {
@@ -273,6 +279,19 @@ module.exports = function (grunt) {
 			}
 		},
 		
+		browserSync: {
+			bsFiles: {
+				src: ['<%= globalConfig.path.css.dist %>/*.css', '<%= globalConfig.path.dist %>/*.html', '<%= globalConfig.path.js.dist %>/*.js']
+			},
+			options: {
+				notify: false,
+				watchTask: true,
+				server: {
+					baseDir: '<%= globalConfig.path.dist %>/'
+				},
+			}
+		},
+		
 		watch: {
 			css: {
 				files: ['<%= globalConfig.path.css.src %>/**/*.scss'],
@@ -290,7 +309,7 @@ module.exports = function (grunt) {
 			},
 			html: {
 				files: ['<%= globalConfig.path.builds.src %>/**/*.html', '<%= globalConfig.path.builds.dist.builds %>/*.html'],
-				tasks: ['fileindex', 'regex-replace:fileindex', 'includereplacemore', 'regex-replace:currentpaths'],
+				tasks: ['fileindex', 'regex-replace:fileindex', 'includereplacemore', 'regex-replace:currentpaths', 'newer:copy:html'],
 				options: {
 					spawn: false
 				}
@@ -328,7 +347,7 @@ module.exports = function (grunt) {
 			},
 			html: {
 				files: ['<%= globalConfig.path.builds.src %>/**/*.html', '<%= globalConfig.path.builds.dist.builds %>/*.html'],
-				tasks: ['fileindex', 'regex-replace:fileindex', 'includereplacemore', 'regex-replace:currentpaths'],
+				tasks: ['fileindex', 'regex-replace:fileindex', 'includereplacemore', 'regex-replace:currentpaths', 'newer:copy:html'],
 				options: {
 					spawn: false
 				}
@@ -391,11 +410,13 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-svgmin');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.renameTask('watch', 'watchdev');
+	grunt.loadNpmTasks('grunt-browser-sync');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-html');
 	
-	grunt.registerTask('default', ['sass:dist', 'regex-replace:cssimages', 'regex-replace:csslinebreaks', 'newer:concat', 'uglify', 'fileindex', 'regex-replace:fileindex', 'includereplacemore', 'regex-replace:currentpaths', 'newer:imagemin', 'newer:svgmin', 'newer:copy:pie', 'newer:copy:fonts', 'watch']);
-	grunt.registerTask('dev', ['sass:dev', 'regex-replace:cssimages', 'concat', 'copy:js', 'fileindex', 'regex-replace:fileindex', 'includereplacemore', 'regex-replace:currentpaths', 'newer:imagemin', 'newer:svgmin', 'newer:copy:pie', 'newer:copy:fonts', 'watchdev']);
+	grunt.registerTask('build', ['sass:dist', 'regex-replace:cssimages', 'regex-replace:csslinebreaks', 'newer:concat', 'uglify', 'fileindex', 'regex-replace:fileindex', 'includereplacemore', 'regex-replace:currentpaths', 'newer:imagemin', 'newer:svgmin', 'newer:copy:pie', 'newer:copy:fonts']);
+	grunt.registerTask('default', ['build', 'newer:copy:html', 'browserSync', 'watch']);
+	grunt.registerTask('dev', ['sass:dev', 'regex-replace:cssimages', 'concat', 'copy:js', 'fileindex', 'regex-replace:fileindex', 'includereplacemore', 'regex-replace:currentpaths', 'newer:copy:html', 'newer:imagemin', 'newer:svgmin', 'newer:copy:pie', 'newer:copy:fonts', 'browserSync', 'watchdev']);
 	grunt.registerTask('bust', ['regex-replace:cachebustcss', 'regex-replace:cachebustjs']);
 	grunt.registerTask('validate', ['htmllint']);
 	grunt.registerTask('version', ['regex-replace:version']);
