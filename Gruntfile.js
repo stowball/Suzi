@@ -20,6 +20,10 @@ module.exports = function (grunt) {
 				src: 'css',
 				dist: '<%= globalConfig.path.dist %>/css'
 			},
+			fonts: {
+				src: 'fonts',
+				dist: '<%= globalConfig.path.dist %>/fonts'
+			},
 			js: {
 				src: 'js',
 				vendor: '<%= globalConfig.path.js.src %>/vendor',
@@ -123,18 +127,22 @@ module.exports = function (grunt) {
 		},
 		
 		copy: {
+			fonts: {
+				expand: true,
+				cwd: '<%= globalConfig.path.fonts.src %>',
+				src: '*.{eot,svg,ttf,woff,woff2}',
+				dest: '<%= globalConfig.path.fonts.dist %>'
+			},
 			js: {
 				expand: true,
 				cwd: '<%= globalConfig.path.js.vendor %>',
 				src: '*js',
 				dest: '<%= globalConfig.path.js.distvendor %>'
-			}
-		},
-		
-		clean: {
-			html: '<%= globalConfig.path.builds.dist.builds %>/*',
-			images: '<%= globalConfig.path.images.dist %>/*',
-			js: '<%= globalConfig.path.js.dist %>/*'
+			},
+			pie: {
+				src: '<%= globalConfig.path.css.src %>/PIE.htc',
+				dest: '<%= globalConfig.path.css.dist %>/PIE.htc'
+			},
 		},
 		
 		includereplacemore: {
@@ -273,9 +281,16 @@ module.exports = function (grunt) {
 					spawn: false,
 				}
 			},
+			fonts: {
+				files: ['<%= globalConfig.path.fonts.src %>/*.{eot,svg,ttf,woff,woff2}'],
+				tasks: ['newer:copy:fonts'],
+				options: {
+					spawn: false,
+				}
+			},
 			html: {
 				files: ['<%= globalConfig.path.builds.src %>/**/*.html', '<%= globalConfig.path.builds.dist.builds %>/*.html'],
-				tasks: ['clean:html', 'fileindex', 'regex-replace:fileindex', 'includereplacemore', 'regex-replace:currentpaths'],
+				tasks: ['fileindex', 'regex-replace:fileindex', 'includereplacemore', 'regex-replace:currentpaths'],
 				options: {
 					spawn: false
 				}
@@ -313,7 +328,7 @@ module.exports = function (grunt) {
 			},
 			html: {
 				files: ['<%= globalConfig.path.builds.src %>/**/*.html', '<%= globalConfig.path.builds.dist.builds %>/*.html'],
-				tasks: ['clean:html', 'fileindex', 'regex-replace:fileindex', 'includereplacemore', 'regex-replace:currentpaths'],
+				tasks: ['fileindex', 'regex-replace:fileindex', 'includereplacemore', 'regex-replace:currentpaths'],
 				options: {
 					spawn: false
 				}
@@ -370,7 +385,6 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-copy');
-	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-include-replace-more');
 	grunt.loadNpmTasks('grunt-regex-replace');
 	grunt.loadNpmTasks('grunt-contrib-imagemin');
@@ -380,9 +394,8 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-html');
 	
-	grunt.registerTask('default', ['sass:dist', 'regex-replace:cssimages', 'regex-replace:csslinebreaks', 'newer:concat', 'uglify', 'clean:html', 'fileindex', 'regex-replace:fileindex', 'includereplacemore', 'regex-replace:currentpaths', 'newer:imagemin', 'newer:svgmin', 'watch']);
-	grunt.registerTask('dev', ['sass:dev', 'regex-replace:cssimages', 'clean:js', 'concat', 'copy:js', 'clean:html', 'fileindex', 'regex-replace:fileindex', 'includereplacemore', 'regex-replace:currentpaths', 'newer:imagemin', 'newer:svgmin', 'watchdev']);
-	grunt.registerTask('sync', ['sass:dist', 'regex-replace:cssimages', 'regex-replace:csslinebreaks', 'clean:images', 'clean:js', 'concat', 'uglify', 'imagemin', 'svgmin']);
+	grunt.registerTask('default', ['sass:dist', 'regex-replace:cssimages', 'regex-replace:csslinebreaks', 'newer:concat', 'uglify', 'fileindex', 'regex-replace:fileindex', 'includereplacemore', 'regex-replace:currentpaths', 'newer:imagemin', 'newer:svgmin', 'newer:copy:pie', 'newer:copy:fonts', 'watch']);
+	grunt.registerTask('dev', ['sass:dev', 'regex-replace:cssimages', 'concat', 'copy:js', 'fileindex', 'regex-replace:fileindex', 'includereplacemore', 'regex-replace:currentpaths', 'newer:imagemin', 'newer:svgmin', 'newer:copy:pie', 'newer:copy:fonts', 'watchdev']);
 	grunt.registerTask('bust', ['regex-replace:cachebustcss', 'regex-replace:cachebustjs']);
 	grunt.registerTask('validate', ['htmllint']);
 	grunt.registerTask('version', ['regex-replace:version']);

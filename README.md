@@ -42,7 +42,6 @@ While some of its markup patterns and styles are related to our CMS, [Cognition]
 
 * Use `grunt` in a shell window to run Suzi in production mode
 * Use `grunt dev` to run in dev mode (un-minified CSS and JS)
-* Use `grunt sync` to make the /public/ css, images and js directories match the src directories (as src deletions aren't tracked)
 * Use `grunt bust` to manually bust the cache on CSS and JS files
 * Use `grunt validate` to validate all of the HTML builds in /public/builds/
 
@@ -87,7 +86,7 @@ While some of its markup patterns and styles are related to our CMS, [Cognition]
 
 #### Fonts
 
-* Put all web and icon fonts in /public/fonts/
+* Put all web and icon fonts in /fonts/
 
 ---
 

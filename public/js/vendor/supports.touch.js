@@ -1,1 +1,0 @@
-var supports=function(){var a=document.documentElement,b="ontouchstart"in window||navigator.msMaxTouchPoints;return b?(a.className+=" touch",{touch:!0}):(a.className+=" no-touch",{touch:!1})}();
