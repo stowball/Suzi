@@ -285,10 +285,11 @@ module.exports = function (grunt) {
 			},
 			options: {
 				notify: false,
+				open: false,
 				watchTask: true,
 				server: {
 					baseDir: '<%= globalConfig.path.dist %>/'
-				},
+				}
 			}
 		},
 		
