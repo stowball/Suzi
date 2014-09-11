@@ -1,0 +1,13 @@
+{% import '_macros/nav.html' as nav %}
+
+<div id="nav_main" role="navigation" class="reset menu">
+	<h3 class="hidden">Main Navigation</h3>
+	<ul>
+		{{ nav.item('Home', 'base.html', currentPath) }}
+		{{ nav.item('Nav Item 2', '#', currentPath) }}
+		{{ nav.item('Nav Item 3', '#', currentPath) }}
+		{{ nav.item('Nav Item 4', '#', currentPath) }}
+		{{ nav.item('Nav Item 5', '#', currentPath) }}
+		{{ nav.item('Nav Item 6', '#', currentPath) }}
+	</ul>
+</div>

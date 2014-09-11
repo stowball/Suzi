@@ -1,23 +1,23 @@
-{{ var $title: "Page Title" }}
-{{ var $currentPath: "base.html" }}
-{{ var $currentSubPath: "" }}
+{% set title = 'Page Title' %}
+{% set currentPath = 'base.html' %}
+{% set currentSubPath = '' %}
 
-{{ include('_head.html', {"title": "$title", "bodyClass": ""}) }}
+{% include '_includes/head.html' %}
 
-{{ include('header.html') }}
+{% include '_includes/header.html' %}
 
-{{ include('nav-main.html', {"currentPath": "$currentPath"}) }}
+{% include '_includes/nav-main.html' %}
 
 <div id="content">
 	<div id="col_1">
 		
-		{{ include('nav-sub.html', {"currentPath": "$currentPath"}) }}
+		{% include '_includes/nav-sub.html' %}
 		
 	</div>
 	
 	<div id="col_2" role="main">
 		
-		{{ include('breadcrumbs.html', {"title": "$title", "parentTag": ""}) }}
+		{% include '_includes/breadcrumbs.html' %}
 		
 		<div class="content_area">
 		
@@ -34,6 +34,6 @@
 	</div>
 </div>
 
-{{ include('footer.html') }}
+{% include '_includes/footer.html' %}
 
-{{ include('_foot.html') }}
+{% include '_includes/foot.html' %}

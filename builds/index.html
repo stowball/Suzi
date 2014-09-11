@@ -1,10 +1,12 @@
-{{ include('_head.html', {"title": "Index"}) }}
+{% set title = 'Page Title' %}
+
+{% include '_includes/head.html' %}
 
 <div id="col_2" role="main">
 	<h1>{{ siteTitle }} HTML Builds</h1>
 	<ul>
-		{{ include('_index.html') }}
+		{% include '_includes/index.html' %}
 	</ul>
 </div>
 
-{{ include('_foot.html') }}
+{% include '_includes/foot.html' %}

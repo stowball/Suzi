@@ -4,7 +4,7 @@ module.exports = function (grunt) {
 			dist: 'public',
 			builds: {
 				src: 'builds',
-				includes: '<%= globalConfig.path.builds.src %>/includes',
+				includes: '<%= globalConfig.path.builds.src %>/_includes',
 				dist: {
 					root: '<%= globalConfig.path.dist %>',
 					builds: '<%= globalConfig.path.dist %>/<%= globalConfig.path.builds.src %>'
@@ -12,8 +12,8 @@ module.exports = function (grunt) {
 			},
 			// Add additional src dirs for the "developed" templates
 			cachebust: [
-				'<%= globalConfig.path.builds.includes %>/_foot.html',
-				'<%= globalConfig.path.builds.includes %>/_head.html',
+				'<%= globalConfig.path.builds.includes %>/foot.html',
+				'<%= globalConfig.path.builds.includes %>/head.html',
 				'<%= globalConfig.path.builds.dist.builds %>/*.html'
 			],
 			css: {
@@ -50,7 +50,7 @@ module.exports = function (grunt) {
 				},
 				files: [
 					{
-						dest: '<%= globalConfig.path.builds.includes %>/_index.html', src: ['<%= globalConfig.path.builds.src %>/*.html']
+						dest: '<%= globalConfig.path.builds.includes %>/index.html', src: ['<%= globalConfig.path.builds.src %>/*.html']
 					}
 				]
 			}
@@ -150,11 +150,23 @@ module.exports = function (grunt) {
 				dest: '<%= globalConfig.path.css.dist %>/PIE.htc'
 			}
 		},
-		
-		includereplacemore: {
+
+		twigRender: {
 			options: {
-				includesDir: '<%= globalConfig.path.builds.includes %>',
-				globals: {
+				extensions: [
+					function(Twig) {
+						Twig.cache = false;
+						var twig = Twig.exports.twig;
+						Twig.exports.twig = function(params) {
+							params.rethrow = true;
+							params.base = globalConfig.path.builds.src;
+							return twig(params);
+						};
+					}
+				]
+			},
+			templates: {
+				data: {
 					currentYear: grunt.template.today('yyyy'),
 					cssPath: '/<%= globalConfig.path.css.src %>/',
 					jsPath: '/<%= globalConfig.path.js.src %>/',
@@ -164,14 +176,14 @@ module.exports = function (grunt) {
 					
 					// Customise as appropriate
 					siteTitle: 'Project Name'
-				}
-			},
-			templates: {
-				src: '<%= globalConfig.path.builds.src %>/*.html',
-				dest: '<%= globalConfig.path.builds.dist.root %>/'
+				},
+				expand: true,
+				cwd: '<%= globalConfig.path.builds.src %>',
+				src: '*.html',
+				dest: '<%= globalConfig.path.builds.dist.builds %>/'
 			}
 		},
-		
+
 		'regex-replace': {
 			version: {
 				src: [
@@ -186,7 +198,7 @@ module.exports = function (grunt) {
 				]
 			},
 			fileindex: {
-				src: '<%= globalConfig.path.builds.includes %>/_index.html',
+				src: '<%= globalConfig.path.builds.includes %>/index.html',
 				actions: [
 					{
 						search: /.*(base|index).html(\n|\r)/g,
@@ -219,21 +231,6 @@ module.exports = function (grunt) {
 					{
 						search: /(.js\?v=)\d+?(")/g,
 						replace: '$1' + grunt.template.today('yymmddHHMMss') + '$2'
-					}
-				]
-			},
-			currentpaths: {
-				src: '<%= globalConfig.path.builds.dist.builds %>/*.html',
-				actions: [
-					{
-						search: / {(.*?\.html|#)}(.*(?:"|'))((.*?\.html|#))/gi,
-						replace: function(str, p1, p2, p3) {
-							return p1 == p3 ? ' class="current"' + p2 + p3 : p2 + p3;
-						}
-					},
-					{
-						search: /(<li.*?)\s?{.*?}(.*?>)/gi,
-						replace: '$1$2'
 					}
 				]
 			},
@@ -310,7 +307,7 @@ module.exports = function (grunt) {
 			},
 			html: {
 				files: ['<%= globalConfig.path.builds.src %>/**/*.html', '<%= globalConfig.path.builds.dist.builds %>/*.html'],
-				tasks: ['fileindex', 'regex-replace:fileindex', 'includereplacemore', 'regex-replace:currentpaths', 'newer:copy:html'],
+				tasks: ['fileindex', 'regex-replace:fileindex', 'twigRender', 'newer:copy:html'],
 				options: {
 					spawn: false
 				}
@@ -348,7 +345,7 @@ module.exports = function (grunt) {
 			},
 			html: {
 				files: ['<%= globalConfig.path.builds.src %>/**/*.html', '<%= globalConfig.path.builds.dist.builds %>/*.html'],
-				tasks: ['fileindex', 'regex-replace:fileindex', 'includereplacemore', 'regex-replace:currentpaths', 'newer:copy:html'],
+				tasks: ['fileindex', 'regex-replace:fileindex', 'twigRender', 'newer:copy:html'],
 				options: {
 					spawn: false
 				}
@@ -405,7 +402,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-copy');
-	grunt.loadNpmTasks('grunt-include-replace-more');
+	grunt.loadNpmTasks('grunt-twig-render');
 	grunt.loadNpmTasks('grunt-regex-replace');
 	grunt.loadNpmTasks('grunt-contrib-imagemin');
 	grunt.loadNpmTasks('grunt-svgmin');
@@ -415,9 +412,9 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-html');
 	
-	grunt.registerTask('build', ['sass:dist', 'regex-replace:cssimages', 'regex-replace:csslinebreaks', 'newer:concat', 'uglify', 'fileindex', 'regex-replace:fileindex', 'includereplacemore', 'regex-replace:currentpaths', 'newer:imagemin', 'newer:svgmin', 'newer:copy:pie', 'newer:copy:fonts']);
+	grunt.registerTask('build', ['sass:dist', 'regex-replace:cssimages', 'regex-replace:csslinebreaks', 'newer:concat', 'uglify', 'fileindex', 'regex-replace:fileindex', 'twigRender', 'newer:imagemin', 'newer:svgmin', 'newer:copy:pie', 'newer:copy:fonts']);
 	grunt.registerTask('default', ['build', 'newer:copy:html', 'browserSync', 'watch']);
-	grunt.registerTask('dev', ['sass:dev', 'regex-replace:cssimages', 'concat', 'copy:js', 'fileindex', 'regex-replace:fileindex', 'includereplacemore', 'regex-replace:currentpaths', 'newer:copy:html', 'newer:imagemin', 'newer:svgmin', 'newer:copy:pie', 'newer:copy:fonts', 'browserSync', 'watchdev']);
+	grunt.registerTask('dev', ['sass:dev', 'regex-replace:cssimages', 'concat', 'copy:js', 'fileindex', 'regex-replace:fileindex', 'twigRender', 'newer:copy:html', 'newer:imagemin', 'newer:svgmin', 'newer:copy:pie', 'newer:copy:fonts', 'browserSync', 'watchdev']);
 	grunt.registerTask('bust', ['regex-replace:cachebustcss', 'regex-replace:cachebustjs']);
 	grunt.registerTask('validate', ['htmllint']);
 	grunt.registerTask('version', ['regex-replace:version']);

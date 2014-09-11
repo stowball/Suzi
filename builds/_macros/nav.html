@@ -1,0 +1,5 @@
+{% macro item(title, path, currentPath) %}
+	<li class="{{ path == currentPath ? 'current' }}">
+		<a href="{{ path }}">{{ title }}</a>
+	</li>
+{% endmacro %}
