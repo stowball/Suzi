@@ -169,14 +169,13 @@ module.exports = function (grunt) {
 			templates: {
 				data: [
 					{
-						currentYear: grunt.template.today('yyyy'),
 						cssPath: '/<%= globalConfig.path.css.src %>/',
 						jsPath: '/<%= globalConfig.path.js.src %>/',
 						jsVendorPath: '/<%= globalConfig.path.js.vendor %>/',
 						imgPath: '/<%= globalConfig.path.images.src %>/',
 						imgContentPath: '/<%= globalConfig.path.images.src %>/content/',
 					},
-					'<%= globalConfig.path.builds.twig %>/data.yml'
+					'<%= globalConfig.path.builds.twig %>/data.js'
 				],
 				expand: true,
 				cwd: '<%= globalConfig.path.builds.src %>',
