@@ -5,6 +5,7 @@ module.exports = function (grunt) {
 			builds: {
 				src: 'builds',
 				includes: '<%= globalConfig.path.builds.src %>/_includes',
+				twig: '<%= globalConfig.path.builds.src %>/_twig',
 				dist: {
 					root: '<%= globalConfig.path.dist %>',
 					builds: '<%= globalConfig.path.dist %>/<%= globalConfig.path.builds.src %>'
@@ -166,17 +167,17 @@ module.exports = function (grunt) {
 				]
 			},
 			templates: {
-				data: {
-					currentYear: grunt.template.today('yyyy'),
-					cssPath: '/<%= globalConfig.path.css.src %>/',
-					jsPath: '/<%= globalConfig.path.js.src %>/',
-					jsVendorPath: '/<%= globalConfig.path.js.vendor %>/',
-					imgPath: '/<%= globalConfig.path.images.src %>/',
-					imgContentPath: '/<%= globalConfig.path.images.src %>/content/',
-					
-					// Customise as appropriate
-					siteTitle: 'Project Name'
-				},
+				data: [
+					{
+						currentYear: grunt.template.today('yyyy'),
+						cssPath: '/<%= globalConfig.path.css.src %>/',
+						jsPath: '/<%= globalConfig.path.js.src %>/',
+						jsVendorPath: '/<%= globalConfig.path.js.vendor %>/',
+						imgPath: '/<%= globalConfig.path.images.src %>/',
+						imgContentPath: '/<%= globalConfig.path.images.src %>/content/',
+					},
+					'<%= globalConfig.path.builds.twig %>/data.yml'
+				],
 				expand: true,
 				cwd: '<%= globalConfig.path.builds.src %>',
 				src: '*.html',
