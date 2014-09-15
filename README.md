@@ -401,7 +401,7 @@ Four variables are provided for media query operators: `$min`, `$max`, `$min-h` 
 
 	Outputs a media query with an 'and' condition and an optional .ltie9 fallback (unless max-width is less than $site-width)
 	
-	* `$mqs`: A list (or list of lists) of two pixel values for the first and second breakpoints
+	* `$mqs`: A list (or list of lists) of two pixel values for the first and second breakpoints. If the second value is omitted in a nested list, then it uses the standard `media-query()` mixin
 	* `$ltie9`: whether to output .ltie9 fallback (default: $use-ltie9-mq-fallbacks [true])
 	* `$first-operator`: operator for the first breakpoint, e.g. min-width, max-width, min-height, max-height (default: $min [min-width])
 	* `$second-operator`: operator for the second breakpoint

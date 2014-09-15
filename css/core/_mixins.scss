@@ -288,6 +288,11 @@ $rem-with-px-fallback: true !default;
 						}
 					}
 				}
+				@else if (length(nth($mqs, $i + 1)) == 1) {
+					@include media-query(nth($mqs, $i + 1), $ltie9, $first-operator, $px) {
+						@content;
+					}
+				}
 			}
 		}
 	}
