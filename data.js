@@ -1,4 +1,4 @@
-(function() {
+module.exports = (function() {
 
 	function item(name, path, children) {
 		return {
@@ -31,4 +31,4 @@
 
 	return data;
 
-})()
+})();
