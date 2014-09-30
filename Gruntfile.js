@@ -166,8 +166,8 @@ module.exports = function (grunt) {
 					},
 					require('./data.js')
 				],
-				preRender: function(data, twigOptions) {
-					data.currentPath = twigOptions.path.replace(/^builds\//, '');
+				preRender: function(params) {
+					params.data.currentPath = params.template.replace(/^builds\//, '');
 				}
 			},
 			templates: {
