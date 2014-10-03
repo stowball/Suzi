@@ -165,7 +165,7 @@ module.exports = function (grunt) {
 				},
 				data: [
 					{
-						currentYear: grunt.template.today('yyyy'),
+						now: new Date(),
 						cssPath: '/<%= globalConfig.path.css.src %>/',
 						jsPath: '/<%= globalConfig.path.js.src %>/',
 						jsVendorPath: '/<%= globalConfig.path.js.vendor %>/',
