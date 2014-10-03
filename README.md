@@ -51,7 +51,7 @@ While some of its markup patterns and styles are related to our CMS, [Cognition]
 #### Set up
 
 * **Ensure you point your web server to run from the /public/ directory**
-* Customise `includereplacemore.options.globals.siteTitle` in Gruntfile.js to set the site name as the page `<title>` suffix
+* Customise `includereplacemore.options.globals.siteName` in Gruntfile.js to set the site name as the page `<title>` suffix
 
 #### HTML Builds
 
