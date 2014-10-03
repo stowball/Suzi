@@ -289,7 +289,7 @@ module.exports = function (grunt) {
 		
 		browserSync: {
 			bsFiles: {
-				src: ['<%= globalConfig.path.css.dist %>/*.css', '<%= globalConfig.path.dist %>/*.html', '<%= globalConfig.path.js.dist %>/*.js']
+				src: ['<%= globalConfig.path.css.dist %>/*.css', '<%= globalConfig.path.dist %>/**/*.html', '<%= globalConfig.path.js.dist %>/*.js']
 			},
 			options: {
 				notify: false,
