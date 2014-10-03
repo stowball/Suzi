@@ -1,18 +1,15 @@
 module.exports = (function() {
 
-	function item(name, path, children) {
+	function item(title, path, children) {
 		return {
-			name: name,
+			title: title,
 			path: path || '#',
-			children: children || []
+			children: children || [],
+			current: false
 		};
 	}
 
-	var data = {
-		siteName: 'Project Name',
-		currentYear: new Date().getFullYear(),
-
-		hierarchy: [
+	var hierarchy = [
 			item('Home', 'base.html', [
 				item('Sub Nav Item 1'),
 				item('Sub Nav Item 2'),
@@ -26,9 +23,8 @@ module.exports = (function() {
 			item('Nav Item 4'),
 			item('Nav Item 5'),
 			item('Nav Item 6'),
-		],
-	};
+	];
 
-	return data;
+	return hierarchy;
 
 })();

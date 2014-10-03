@@ -2,8 +2,8 @@
 	<h3 class="hidden">Main Navigation</h3>
 	<ul>
 		{% for item in hierarchy %}
-			<li class="{{ item.path == currentPath ? 'current' : '' }}">
-				<a href="{{ item.path }}">{{ item.name }}</a>
+			<li class="{{ item.current ? 'current' : '' }}">
+				<a href="{{ item.path }}">{{ item.title }}</a>
 			</li>
 		{% endfor %}
 	</ul>
