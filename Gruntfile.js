@@ -128,6 +128,12 @@ module.exports = function (grunt) {
 				cwd: '<%= globalConfig.path.js.vendor %>',
 				src: '*js',
 				dest: '<%= globalConfig.path.js.distvendor %>'
+			},
+			bundles: {
+				expand: true,
+				cwd: '<%= globalConfig.path.js.distvendor %>',
+				src: '_bundle.*js',
+				dest: '<%= globalConfig.path.js.distvendor %>'
 			}
 		},
 		
