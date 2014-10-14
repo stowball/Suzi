@@ -18,11 +18,6 @@
 		}
 	}
 	
-	.tile {
-		height: 100%;
-		position: relative;
-	}
-	
 	.hidden {
 		-webkit-transform: translate3d(0,0,0); // Fixes invisible carousels on iOS <=6?
 	}
@@ -33,6 +28,11 @@
 }
 
 .carousel {
+	position: relative;
+}
+
+.carousel_tile {
+	height: 100%;
 	position: relative;
 }
 
