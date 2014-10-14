@@ -158,7 +158,6 @@ var forms = {
 
 var slider = {
 	swipejs: Modernizr.csstransforms3d || layoutEngine.vendor === 'opera',
-	$imagesLazy: [],
 	
 	init: function() {
 		var $sliderParent = $('.carousel');
@@ -171,6 +170,7 @@ var slider = {
 				$slider = $this.find('.slider'),
 				$slides = $slider.find('> li'),
 				slidesCount = $slides.length,
+				$imagesLazy,
 				globalPos = 0,
 				isComplete = false,
 				isVisible = false,
@@ -195,11 +195,11 @@ var slider = {
 			if (slider.swipejs && circular && globalPos === 0)
 				globalPos = 1;
 			
-			slider.$imagesLazy[index] = $slides.find('.rwdimage');
+			$imagesLazy = $slides.find('.rwdimage');
 			
 			if (slidesCount === 1) {
 				globalPos = 0;
-				slider.lazyLoad(slider.$imagesLazy[index].eq(globalPos));
+				slider.lazyLoad($imagesLazy, globalPos);
 				
 				var $feature = $this.find('.inner');
 				
@@ -214,42 +214,43 @@ var slider = {
 					speed = 300;
 				
 				var loadAdditional = function(pos, globalPos, slidesCount) {
-					slider.lazyLoad(slider.$imagesLazy[index].eq(pos));
+					slider.lazyLoad($imagesLazy, pos);
 					
 					if (pos > globalPos) {
 						if (pos < slidesCount - 1) {
-							slider.lazyLoad(slider.$imagesLazy[index].eq(pos + 1));
+							slider.lazyLoad($imagesLazy, pos + 1);
+							
 							if (circular && pos === slidesCount - 2 && globalPos === 1) {
-								slider.lazyLoad(slider.$imagesLazy[index].eq(pos - 1));
+								slider.lazyLoad($imagesLazy, pos - 1);
 							}
 						}
 						else if (pos === slidesCount - 1 && globalPos === 0) {
-							slider.lazyLoad(slider.$imagesLazy[index].eq(pos - 1));
+							slider.lazyLoad($imagesLazy, pos - 1);
 						}
 						else {
-							slider.lazyLoad(slider.$imagesLazy[index].eq(0));
+							slider.lazyLoad($imagesLazy, 0);
 						}
 					}
 					else if (pos < globalPos) {
 						if (pos === 0) {
 							if (globalPos > 1)
-								slider.lazyLoad(slider.$imagesLazy[index].eq(pos + 1));
+								slider.lazyLoad($imagesLazy, pos + 1);
 							else
-								slider.lazyLoad(slider.$imagesLazy[index].eq(pos - 1));
+								slider.lazyLoad($imagesLazy, pos - 1);
 						}
 						else if (circular && pos === 1) {
-							slider.lazyLoad(slider.$imagesLazy[index].eq(pos - 1));
+							slider.lazyLoad($imagesLazy, pos - 1);
 						}
 						else if (pos > 1) {
-							slider.lazyLoad(slider.$imagesLazy[index].eq(pos - 1));
+							slider.lazyLoad($imagesLazy, pos - 1);
 						}
 						else {
-							slider.lazyLoad(slider.$imagesLazy[index].eq(0));
+							slider.lazyLoad($imagesLazy, 0);
 						}
 					}
 				};
 				
-				slider.lazyLoad(slider.$imagesLazy[index].eq(globalPos), index, globalPos, slidesCount);
+				slider.lazyLoad($imagesLazy, globalPos, globalPos, slidesCount);
 				
 				if (parseInt($this.data('interval')))
 					interval = parseInt($this.data('interval') * 1000);
@@ -387,7 +388,7 @@ var slider = {
 							$this.on('click', function(e) {
 								e.preventDefault();
 								
-								slider.lazyLoad(slider.$imagesLazy[index].eq(idx));
+								slider.lazyLoad($imagesLazy, idx);
 								carousel.slide(idx);
 								
 								$navPagerLi.removeClass('current');
@@ -505,37 +506,34 @@ var slider = {
 		});
 	},
 	
-	lazyLoad: function(el, index, globalPos, slidesCount) {
-		if (el.length === 0)
-			return;
+	lazyLoad: function($imagesLazy, index, globalPos, slidesCount) {
+		var $this = $($imagesLazy[index]);
 		
-		var $this = $(el);
-		
-		if ($this.hasClass('lazy-loaded'))
+		if ($this.length === 0 || $this.hasClass('lazy-loaded'))
 			return;
 		
 		$this.addClass('lazy-loaded');
-		window.rwdImageChangeSrc($this[0]);
+		window.rwdImageChangeSrc($imagesLazy[index]);
 		
 		var loadAdditional = function() {
 			if (slidesCount) {
 				if (globalPos === 0) {
-					slider.lazyLoad(slider.$imagesLazy[index].eq(globalPos + 1));
-					slider.lazyLoad(slider.$imagesLazy[index].eq(slidesCount - 1));
+					slider.lazyLoad($imagesLazy, globalPos + 1);
+					slider.lazyLoad($imagesLazy, slidesCount - 1);
 				}
 				else if (globalPos === slidesCount - 1) {
-					slider.lazyLoad(slider.$imagesLazy[index].eq(0));
-					slider.lazyLoad(slider.$imagesLazy[index].eq(globalPos - 1));
+					slider.lazyLoad($imagesLazy, 0);
+					slider.lazyLoad($imagesLazy, globalPos - 1);
 				}
 				else {
-					slider.lazyLoad(slider.$imagesLazy[index].eq(globalPos + 1));
-					slider.lazyLoad(slider.$imagesLazy[index].eq(globalPos - 1));
+					slider.lazyLoad($imagesLazy, globalPos + 1);
+					slider.lazyLoad($imagesLazy, globalPos - 1);
 				}
 			}
 		};
 		
 		if (window.getComputedStyle) {
-			var src = window.getComputedStyle($this[0]).getPropertyValue('background-image').replace(/url\((?:\"?)(.*?)(?:\"?)\)/, '$1'),
+			var src = window.getComputedStyle($imagesLazy[index]).getPropertyValue('background-image').replace(/url\((?:\"?)(.*?)(?:\"?)\)/, '$1'),
 				img = new Image();
 			
 			if (src !== 'none') {
