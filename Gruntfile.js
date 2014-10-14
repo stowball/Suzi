@@ -99,7 +99,6 @@ module.exports = function (grunt) {
 					'<%= globalConfig.path.js.vendor %>/rwd.images.js',
 					'<%= globalConfig.path.js.vendor %>/class.query.js',
 					'<%= globalConfig.path.js.vendor %>/swipe.js',
-					'<%= globalConfig.path.js.vendor %>/firefox.hwa.js',
 					'<%= globalConfig.path.js.vendor %>/fastclick.js',
 					'<%= globalConfig.path.js.vendor %>/jquery.transit.js',
 					'<%= globalConfig.path.js.src %>/all.js'
