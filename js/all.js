@@ -471,7 +471,7 @@ var slider = {
 						.attr('style', widthOverride);
 					
 					yepnope({
-						load: [window.suzi.jsVendorPath + 'jquery.cycle.all.js', window.suzi.jsVendorPath + 'jquery.easing.1.3.js'],
+						load: [window.suzi.jsVendorPath + '_bundle.jquery.cycle.js'],
 						complete: function() {
 							$feature
 								.cycle(cycleOpts)

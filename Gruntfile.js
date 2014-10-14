@@ -104,6 +104,13 @@ module.exports = function (grunt) {
 					'<%= globalConfig.path.js.src %>/all.js'
 				],
 				dest: '<%= globalConfig.path.js.dist %>/all.js'
+			},
+			bundleCycle: {
+					src: [
+					'<%= globalConfig.path.js.vendor %>/jquery.cycle.all.js',
+					'<%= globalConfig.path.js.vendor %>/jquery.easing.1.3.js'
+				],
+				dest: '<%= globalConfig.path.js.distvendor %>/_bundle.jquery.cycle.js'
 			}
 		},
 		
