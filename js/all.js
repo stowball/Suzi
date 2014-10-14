@@ -275,8 +275,6 @@ var slider = {
 				if (parseInt($this.data('speed')))
 					speed = parseInt($this.data('speed'));
 				
-				$this.addClass('multiple');
-				
 				if (slider.swipejs) {
 					
 					var hasResizeClass = false,
@@ -354,8 +352,6 @@ var slider = {
 							cookie.set(carouselID, globalPos);
 						}
 					});
-					
-					$this.addClass('swipejs');
 					
 					var stopCarousel = function() {
 						if (interval) {
@@ -475,9 +471,7 @@ var slider = {
 						complete: function() {
 							$feature
 								.cycle(cycleOpts)
-								.css('visibility', 'visible')
-								.closest('.carousel')
-								.addClass('jqcycle');
+								.css('visibility', 'visible');
 							
 							$slides.css('visibility', 'visible');
 							
