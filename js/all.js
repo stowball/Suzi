@@ -382,15 +382,17 @@ var slider = {
 					
 					if (pager) {
 						$navPagerA.each(function(idx) {
-							var i = idx;
-							$(this).on('click', function(e) {
+							var $this = $(this),
+								$parent = $this.parent();
+							
+							$this.on('click', function(e) {
 								e.preventDefault();
 								
-								slider.lazyLoad(slider.$imagesLazy[index].eq(i));
-								carousel.slide(i);
+								slider.lazyLoad(slider.$imagesLazy[index].eq(idx));
+								carousel.slide(idx);
 								
 								$navPagerLi.removeClass('current');
-								$(this).parent().addClass('current');
+								$parent.addClass('current');
 								
 								stopCarousel();
 							});
