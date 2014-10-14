@@ -34,6 +34,9 @@
 }
 
 .carousel_nav {
+}
+
+.carousel_nav_item {
 	@include rgba-background((#000, #666), .57);
 	bottom: 0;
 	left: 0;
@@ -54,17 +57,17 @@
 		top: 50%;
 	}
 	
-	&.next {
-		left: auto;
-		right: 0;
-		
-		&.next:after {
-			@include triangle(right, 8px, 16px, #fff, false, true, false);
-		}
-	}
-	
 	span {
 		@include hide-text(block, 0)
+	}
+}
+
+.carousel_nav_item-next {
+	left: auto;
+	right: 0;
+	
+	&:after {
+		@include triangle(right, 8px, 16px, #fff, false, true, false);
 	}
 }
 
@@ -92,5 +95,5 @@
 	}
 }
 
-.carousel_nav_pager_thumbnails {
+.carousel_nav_pager-thumbnails {
 }

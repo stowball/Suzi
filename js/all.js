@@ -175,9 +175,9 @@ var slider = {
 				isComplete = false,
 				isVisible = false,
 				carouselID = 'carouselid-' + window.location.pathname + '-' + index,
-				carouselCookie = cookie.read(carouselID),
-				circular = $this.data('circular'),
-				thumbnails = $this.data('pager-thumbnails');
+				carouselHasCookie = $this.data('cookie'), 
+				carouselCookie = carouselHasCookie ? cookie.read(carouselID) : 0,
+				circular = $this.data('circular');
 			
 			if ($slider.length === 0 || $slides.length === 0)
 				return;
@@ -189,7 +189,7 @@ var slider = {
 				slidesCount = slidesCount + 2;
 			}
 			
-			if (carouselCookie)
+			if (carouselHasCookie)
 				globalPos = parseInt(carouselCookie);
 			
 			if (slider.swipejs && circular && globalPos === 0)
@@ -208,10 +208,11 @@ var slider = {
 			}
 			else {
 				var li = '',
-					interval = false,
-					nav = true,
-					pager = true,
-					speed = 300;
+					interval = parseInt($this.data('interval') * 1000) || 0,
+					pager = $this.data('pager'),
+					thumbnails = $this.data('pager-thumbnails'),
+					nav = $this.data('nav'),
+					speed = parseInt($this.data('speed')) || 500;
 				
 				var loadAdditional = function(pos, globalPos, slidesCount) {
 					slider.lazyLoad($imagesLazy, pos);
@@ -252,33 +253,21 @@ var slider = {
 				
 				slider.lazyLoad($imagesLazy, globalPos, globalPos, slidesCount);
 				
-				if (parseInt($this.data('interval')))
-					interval = parseInt($this.data('interval') * 1000);
-				
-				if ($this.data('nav') === false) {
-					nav = false;
-				}
-				else {
-					var $navPrev = $('<a href="#previous" class="carousel_nav prev"><span>Previous</span></a>'),
-						$navNext = $('<a href="#next" class="carousel_nav next"><span>Next</span></a>');
-				}
-				
-				if ($this.data('pager') === false)
-					pager = false;
-				else
-					var $navPager = $('<ul class="carousel_nav_pager' + (thumbnails ? ' carousel_nav_pager_thumbnails' : '') + ' reset menu" />');
-				
-				if (nav)
-					$this.append($navPrev).append($navNext);
-				
-				if (pager)
+				if (pager) {
+					var $navPager = $('<ul class="carousel_nav_pager' + (thumbnails ? ' carousel_nav_pager-thumbnails' : '') + ' reset menu" />');
 					$this.append($navPager);
+				}
 				
-				if (parseInt($this.data('speed')))
-					speed = parseInt($this.data('speed'));
+				if (nav) {
+					var $navContainer = $('<div class="carousel_nav" />'),
+						$navPrev = $('<a href="#previous" class="carousel_nav_item carousel_nav_item-prev"><span>Previous</span></a>'),
+						$navNext = $('<a href="#next" class="carousel_nav_item carousel_nav_item-next"><span>Next</span></a>');
+					
+					$navContainer.append($navPrev).append($navNext)
+					$this.append($navContainer);
+				}
 				
 				if (slider.swipejs) {
-					
 					var hasResizeClass = false,
 						resizeSwipe = function() {
 							$html.removeClass('resizing');
@@ -353,7 +342,9 @@ var slider = {
 								trackEvent('Website', 'Carousel', 'Slide ' + (pos + 1));
 							
 							globalPos = pos;
-							cookie.set(carouselID, globalPos);
+							
+							if (carouselHasCookie)
+								cookie.set(carouselID, globalPos);
 						}
 					});
 					
@@ -445,7 +436,9 @@ var slider = {
 								loadAdditional(pos, globalPos, slidesCount);
 								
 								globalPos = pos;
-								cookie.set(carouselID, globalPos);
+								
+								if (carouselHasCookie)
+									cookie.set(carouselID, globalPos);
 							}
 						};
 					
