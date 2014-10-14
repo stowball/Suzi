@@ -465,10 +465,8 @@ var slider = {
 						};
 					}
 					
-					$feature
-						.attr('style', widthOverride)
-						.find('li')
-						.attr('style', widthOverride);
+					$feature.attr('style', widthOverride);
+					$slides.attr('style', widthOverride);
 					
 					yepnope({
 						load: [window.suzi.jsVendorPath + '_bundle.jquery.cycle.js'],
