@@ -209,6 +209,7 @@ var slider = {
 			else {
 				var li = '',
 					interval = parseInt($this.data('interval') * 1000) || 0,
+					counter = $this.data('counter'),
 					pager = $this.data('pager'),
 					thumbnails = $this.data('pager-thumbnails'),
 					nav = $this.data('nav'),
@@ -252,6 +253,15 @@ var slider = {
 				};
 				
 				slider.lazyLoad($imagesLazy, globalPos, globalPos, slidesCount);
+				
+				if (counter) {
+					var $slideCounter = $('<div class="carousel_counter" />');
+					$this.append($slideCounter);
+					
+					var updateSlideCounter = function(slideIndex) {
+						$slideCounter[0].innerHTML = (slider.swipejs && circular ? slideIndex : slideIndex + 1) + '/' + (slider.swipejs && circular ? slidesCount - 2 : slidesCount);
+					}
+				}
 				
 				if (pager) {
 					var $navPager = $('<ul class="carousel_nav_pager' + (thumbnails ? ' carousel_nav_pager-thumbnails' : '') + ' reset menu" />');
@@ -337,6 +347,9 @@ var slider = {
 									.removeClass('current')
 									.eq(pos).addClass('current');
 							}
+							
+							if (counter)
+								updateSlideCounter(pos);
 							
 							if (!interval)
 								trackEvent('Website', 'Carousel', 'Slide ' + (pos + 1));
@@ -434,6 +447,9 @@ var slider = {
 									.attr('aria-hidden', false);
 								
 								loadAdditional(pos, globalPos, slidesCount);
+								
+								if (counter)
+									updateSlideCounter(pos);
 								
 								globalPos = pos;
 								
