@@ -85,7 +85,6 @@ module.exports = function (grunt) {
 					'<%= globalConfig.path.js.vendor %>/cssua.js',
 					'<%= globalConfig.path.js.vendor %>/modernizr.js',
 					'<%= globalConfig.path.js.vendor %>/supports.touch.js',
-					'<%= globalConfig.path.js.vendor %>/izilla.gup.js',
 					'<%= globalConfig.path.js.vendor %>/layout.engine.js',
 					'<%= globalConfig.path.js.vendor %>/mq.genie.js'
 				],
