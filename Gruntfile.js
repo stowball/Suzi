@@ -393,8 +393,6 @@ module.exports = function (grunt) {
 					'Bad value “X-UA-Compatible” for attribute “http-equiv” on XHTML element “meta”.',
 					'Bad value “HandheldFriendly” for attribute “name” on XHTML element “meta”: Keyword “handheldfriendly” is not registered.',
 					'Bad value “MobileOptimized” for attribute “name” on XHTML element “meta”: Keyword “mobileoptimized” is not registered.',
-					'Bad value “” for attribute “width” on XHTML element “img”: The empty string is not a valid non-negative integer.',
-					'Bad value “” for attribute “height” on XHTML element “img”: The empty string is not a valid non-negative integer.',
 					'Bad value “aside” for attribute “role” on XHTML element “div”.',
 					'Bad value “expiry” for attribute “name” on XHTML element “meta”: Keyword “expiry” is not registered.',
 					'Bad value “owner” for attribute “name” on XHTML element “meta”: Keyword “owner” is not registered.',
