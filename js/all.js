@@ -18,6 +18,7 @@ $(document).ready(function(e) {
 
 var html = document.documentElement,
 	$html = $(html),
+	$window = $(window),
 	actualFontSize = 16,
 	baseFontSize = 16,
 	multiplier;
@@ -283,12 +284,14 @@ var slider = {
 							hasResizeClass = false;
 						};
 					
-					$(window).resize(function() {
+					$window.resize(function() {
 						clearTimeout(window.resizeTimer);
+						
 						if (!hasResizeClass) {
 							$html.addClass('resizing');
 							hasResizeClass = true;
 						}
+						
 						window.resizeTimer = setTimeout(resizeSwipe, 250);
 					});
 					
