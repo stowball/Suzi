@@ -638,6 +638,11 @@ var accordion = {
 				accordionID = 'accordionid-' + window.location.pathname + '-' + index,
 				accordionCookie = cookie.read(accordionID);
 			
+			if ($accordionLinks.length === 0)
+				return;
+			else if ($accordionLinks.length === 1)
+				multiple = true;
+			
 			$accordionContent.each(function() {
 				transition.storeInitial($(this));
 			});
