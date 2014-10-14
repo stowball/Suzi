@@ -402,8 +402,8 @@ var slider = {
 					};
 					
 					if (interval) {
-						timer = window.setInterval(autoCarousel, interval);
-						var $tile = $this.find('.carousel_tile');
+						var timer = window.setInterval(autoCarousel, interval),
+							$tile = $this.find('.carousel_tile');
 						
 						$tile.hover(
 							function(e) {
