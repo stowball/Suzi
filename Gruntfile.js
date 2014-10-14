@@ -97,7 +97,6 @@ module.exports = function (grunt) {
 					'<%= globalConfig.path.js.vendor %>/matchMedia.addListener.js',
 					'<%= globalConfig.path.js.vendor %>/enquire.js',
 					'<%= globalConfig.path.js.vendor %>/rwd.images.js',
-					'<%= globalConfig.path.js.vendor %>/class.query.js',
 					'<%= globalConfig.path.js.vendor %>/swipe.js',
 					'<%= globalConfig.path.js.vendor %>/fastclick.js',
 					'<%= globalConfig.path.js.vendor %>/jquery.transit.js',
