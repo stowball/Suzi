@@ -78,7 +78,7 @@ var cookie = {
 var grid = {
 	init: function() {
 		if (window.location.search.match(/suzigrid=true/g))
-			Modernizr.load(window.suzi.jsVendorPath + 'suzi.grid.js');
+			yepnope(window.suzi.jsVendorPath + 'suzi.grid.js');
 	}
 };
 
@@ -470,7 +470,7 @@ var slider = {
 						.find('li')
 						.attr('style', widthOverride);
 					
-					Modernizr.load({
+					yepnope({
 						load: [window.suzi.jsVendorPath + 'jquery.cycle.all.js', window.suzi.jsVendorPath + 'jquery.easing.1.3.js'],
 						complete: function() {
 							$feature
