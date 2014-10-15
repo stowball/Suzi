@@ -530,7 +530,7 @@ $rem-with-px-fallback: true !default;
 		clear: none;
 	}
 	
-	.no_mb {
+	.no_mb.no_mb {
 		margin-bottom: 0;
 	}
 	
@@ -572,7 +572,7 @@ $rem-with-px-fallback: true !default;
 						}
 					}
 					
-					.no_mb_at_#{$bp} {
+					.no_mb_at_#{$bp}.no_mb_at_#{$bp} {
 						@include media-query($bp) {
 							margin-bottom: 0;
 						}
@@ -597,7 +597,7 @@ $rem-with-px-fallback: true !default;
 	}
 }
 
-@mixin grid-override($name, $gutter) {
+@mixin grid-override($name, $gutter, $media-query: false) {
 	$gutter-left: $gutter;
 	$gutter-bottom: $gutter;
 	
@@ -606,13 +606,29 @@ $rem-with-px-fallback: true !default;
 		$gutter-bottom: nth($gutter, 2);
 	}
 	
-	.#{$name}_grid_container {
-		margin-left: -$gutter-left;
-	}
+	@if ($media-query == false) {
+		.grid_container-#{$name} {
+			margin-left: -$gutter-left;
+		}
 
-	.#{$name}_grid_item {
-		margin-bottom: $gutter-bottom;
-		padding-left: $gutter-left;
+		.grid_item-#{$name} {
+			margin-bottom: $gutter-bottom;
+			padding-left: $gutter-left;
+		}
+	}
+	@else if (type-of($media-query) == 'number') {
+		.grid_container-#{$name} {
+			@include media-query($media-query) {
+				margin-left: -$gutter-left;
+			}
+		}
+
+		.grid_item-#{$name} {
+			@include media-query($media-query) {
+				margin-bottom: $gutter-bottom;
+				padding-left: $gutter-left;
+			}
+		}
 	}
 }
 
