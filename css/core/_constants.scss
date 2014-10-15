@@ -38,7 +38,7 @@ input[type="hidden"], .display_none, .js_display, .js .js_display_none, .no_col_
 	Standard Margin
 ----------------------------------------------- */
 
-blockquote, .cell, .centre_object, cite, .cols, .confirmation_panel, .content_area, dl, .flash, fieldset, .fieldset, hr, iframe, ol, p, .panes, table, ul {
+blockquote, .centre_object, cite, .confirmation_panel, .content_area, dl, .flash, fieldset, .fieldset, hr, iframe, ol, p, .panes, table, ul {
 	@include rem(margin-bottom, $std-margin);
 }
 
