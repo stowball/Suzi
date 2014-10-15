@@ -39,7 +39,7 @@ select {
 		@include rem(padding-top, $form-input-padding-vertical);
 	}
 	
-	.ua-desktop-macintosh.vendor-webkit & {
+	.ua-desktop-macintosh.vendor-webkit &, .ua-ios.vendor-webkit & {
 		// height of normal inputs in rems
 	}
 }
