@@ -546,7 +546,7 @@ $rem-with-px-fallback: true !default;
 	
 	@if ($is-responsive == true) {
 		@for $i from 0 to length($breakpoints) {
-			$bp: nth($breakpoints, $i + 1);
+			$bp: strip-units(nth($breakpoints, $i + 1));
 			
 			@for $j from 0 to length($percentages) {
 				$pc: nth($percentages, $j + 1);
