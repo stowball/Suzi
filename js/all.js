@@ -566,9 +566,10 @@ var tabs = {
 				$links = $this.find('> li a'),
 				$panes = $this.nextAll('.panes:first').find('> .pane'),
 				tabID = 'tabid-' + window.location.pathname + '-' + index,
-				tabCookie = cookie.read(tabID);
+				tabHasCookie = $this.data('cookie'), 
+				tabCookie = tabHasCookie ? cookie.read(tabID) : 0;
 			
-			if (tabCookie) {
+			if (tabHasCookie) {
 				$links.eq(tabCookie).addClass('current');
 				$panes.hide().attr('aria-hidden', true);
 				$panes.eq(tabCookie).show().attr('aria-hidden', false);
@@ -592,7 +593,9 @@ var tabs = {
 				$panes.hide().attr('aria-hidden', true);
 				$panes.eq(idx).show().attr('aria-hidden', false);
 				
-				cookie.set(tabID, idx);
+				if (tabHasCookie)
+					cookie.set(tabID, idx);
+				
 				trackEvent('Website', 'Tabs', tabID + '-' + idx);
 			});
 		});
