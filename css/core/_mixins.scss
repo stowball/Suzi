@@ -201,12 +201,6 @@ $rem-with-px-fallback: true !default;
 	}
 }
 
-@mixin no-fontface {
-	.no-fontface &, .ua-windows_phone-7 & {
-		@content;
-	}
-}
-
 // --------------------------------------------
 //	Media Query Mixins
 // --------------------------------------------

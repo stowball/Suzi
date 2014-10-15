@@ -239,10 +239,6 @@ While some of its markup patterns and styles are related to our CMS, [Cognition]
 
 	Generates `.icon-$name` selector for easy overriding of individual [icomoon](http://icomoon.io) icon font styles
 
-* `no-fontface`
-
-	Generates a `.no-fontface &, .ua-windows_phone-7 &` selector for making adjustments if `@fontface` isn't supported. Especially useful for icon fonts.
-
 #### CSS Property mixins
 
 * `animation($property: default 1s ease)`
