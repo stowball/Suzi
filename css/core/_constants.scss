@@ -704,11 +704,16 @@ fieldset .description {
 	display: -webkit-inline-flex;
 }
 
-button, [type="submit"], .text, textarea, select {
-	@include rem(font-size, $base-font-size);
+.text, textarea, select {
+	@include rem(font-size, $form-input-font-size);
 	
-	.no-touch & {
-		@include rem(font-size, $std-font-size);
+	.ua-ios & {
+		@if ($form-input-font-size < $base-font-size) {
+			@include rem(font-size, $base-font-size);
+		}
+		@else {
+			@include rem(font-size, $form-input-font-size);
+		}
 	}
 }
 
@@ -797,6 +802,10 @@ textarea {
 	@include hover {
 		color: $btn-hover-text-color;
 	}
+}
+
+button, [type="submit"] {
+	@include rem(font-size, $btn-font-size);
 }
 
 .btn_wrap {
