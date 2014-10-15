@@ -14,6 +14,16 @@
 	min-width: $site-width;
 }
 
+%ltie9-no-mt {
+	margin-top: 0;
+}
+
+@for $h from 1 to 7 {
+	h#{$h}.slvzr-first-child, .h#{$h}.slvzr-first-child {
+		@extend %ltie9-no-mt;
+	}
+}
+
 /* --------------------------------------------
 	Simple Customisations
 ----------------------------------------------- */
