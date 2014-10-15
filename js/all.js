@@ -636,7 +636,8 @@ var accordion = {
 				$accordionLinks = $this.find('> ul > li > .accordion_toggler'),
 				$accordionContent = $this.find('> ul > li > .accordion_content'),
 				accordionID = 'accordionid-' + window.location.pathname + '-' + index,
-				accordionCookie = cookie.read(accordionID);
+				accordionHasCookie = $this.data('cookie'), 
+				accordionCookie = accordionHasCookie ? cookie.read(accordionID) : 0;
 			
 			if ($accordionLinks.length === 0)
 				return;
@@ -651,8 +652,8 @@ var accordion = {
 				var $this = $(this),
 					$accordionContentIndex = $accordionContent.eq(idx);
 				
-				if (accordionCookie || !multiple) {
-					if (!accordionCookie) {
+				if (!multiple || accordionHasCookie) {
+					if (!accordionHasCookie) {
 						if ($this.hasClass('open'))
 							accordionCookie = idx;
 					}
@@ -670,7 +671,7 @@ var accordion = {
 						
 						$accordionContentIndex.attr('aria-hidden', false).css('height', 'auto');
 						
-						if (!multiple)
+						if (!multiple && accordionHasCookie)
 							cookie.set(accordionID, idx);
 					}
 				}
@@ -708,7 +709,7 @@ var accordion = {
 						$accordionContentSibling.attr('aria-hidden', ariaHidden).transition({height: transitionPropertyValue}, transitionDuration, transitionTimingFunction);
 					}
 					
-					if (!multiple) {
+					if (!multiple && accordionHasCookie) {
 						cookie.set(accordionID, idx);
 						trackEvent('Website', 'Accordions', accordionID + '-' + idx);
 					}
