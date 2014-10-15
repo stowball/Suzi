@@ -10,8 +10,12 @@
 	/* Better Font Rendering =========== */
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-font-smoothing: antialiased;
+}
+
+%icomoon-accessible {
+	@extend %icomoon;
 	
-	@include no-fontface {
+	.no-fontface & {
 		&:before {
 			content: '' !important;
 		}
@@ -30,7 +34,7 @@
 }
 
 @include icomoon {
-	@extend %icomoon;
+	@extend %icomoon-accessible;
 }
 
 // Add custom icomoon classes here
