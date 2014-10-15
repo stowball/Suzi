@@ -407,43 +407,46 @@ a {
 	Headings
 ----------------------------------------------- */
 
-h1, .h1 {
+h1 {
 	@include rem(font-size, $heading1-font-size);
 }
 
-h2, .h2 {
+h2 {
 	@include rem(font-size, $heading2-font-size);
 }
 
-h3, .h3 {
+h3 {
 	@include rem(font-size, $heading3-font-size);
 }
 
-h4, .h4 {
+h4 {
 	@include rem(font-size, $heading4-font-size);
 }
 
-h5, .h5 {
+h5 {
 	@include rem(font-size, $heading5-font-size);
 }
 
-h6, .h6 {
+h6 {
 	@include rem(font-size, $heading6-font-size);
 }
 
-h1, h2, h3, h4, h5, h6,
-.h1, .h2, .h3, .h4, .h5, .h6 {
+@for $h from 1 to 7 {
+	.h#{$h} {
+		@extend h#{$h};
+	}
+}
+
+h1, h2, h3, h4, h5, h6 {
 	color: $std-color;
 	
 	&:first-child,
-	& + h1, & + h2, & + h3, & + h4, & + h5, & + h6,
-	& + .h1, & + .h2, & + .h3, & + .h4, & + .h5, & + .h6 {
+	& + h1, & + h2, & + h3, & + h4, & + h5, & + h6 {
 		margin-top: 0;
 	}
 	
 	&.sub,
-	& + h1, & + h2, & + h3, & + h4, & + h5, & + h6,
-	& + .h1, & + .h2, & + .h3, & + .h4, & + .h5, & + .h6 {
+	& + h1, & + h2, & + h3, & + h4, & + h5, & + h6 {
 		color: $sub-color;
 	}
 	
