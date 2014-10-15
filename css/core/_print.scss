@@ -6,7 +6,7 @@
 	display: none !important;
 }
 
-#nav_main, .managed:after, .managed.alt:before {
+#nav_main, .file_icon:after, .file_icon.alt:before {
 	@extend .print_display_none;
 }
 
@@ -39,6 +39,6 @@ ul {
 	padding-left: 0;
 }
 
-.managed.alt {
+.file_icon.alt {
 	padding-left: 0;
 }
