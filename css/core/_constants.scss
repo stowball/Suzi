@@ -38,7 +38,7 @@ input[type="hidden"], .display_none, .js_display, .js .js_display_none, .no_col_
 	Standard Margin
 ----------------------------------------------- */
 
-blockquote, .cell, .centre_object, cite, .cols, .content_area, dl, .error, .flash, fieldset, .fieldset, hr, iframe, .ok, ol, p, .panes, table, ul {
+blockquote, .cell, .centre_object, cite, .cols, .confirmation_panel, .content_area, dl, .flash, fieldset, .fieldset, hr, iframe, ol, p, .panes, table, ul {
 	@include rem(margin-bottom, $std-margin);
 }
 
@@ -828,24 +828,33 @@ textarea {
 	Error & .ok Styling
 -----------------------------------------------*/
 
-.error {
+.confirmation_panel {
 	border: 1px solid $error-border-color;
 	@include border-radius(8px);
 	@include rem(padding, 15px);
 	
-	h3 {
-		@include rem(font-size, 16px);
-		margin-bottom: 0;
-		padding-left: 24px;
-		position: relative;
+	& ul {
+		margin: 14px 0 0 23px;
+		@include rem(margin-top, 14px, false);
 	}
 	
-	.ltie8 & h3 {
+	& li:last-child {
+		margin-bottom: 0;
+	}
+}
+
+.confirmation_heading {
+	@include rem(font-size, 16px);
+	margin-bottom: 0;
+	padding-left: 24px;
+	position: relative;
+	
+	.ltie8 & {
 		color: #b00;
 		padding-left: 0;
 	}
 	
-	& h3:before {
+	&:before {
 		background: url('{{ imgPath }}std_icons.png') 0 -192px;
 		content: '';
 		height: 16px;
@@ -858,34 +867,17 @@ textarea {
 		@include media-query-retina {
 			background-image: url('{{ imgPath }}std_icons@2x.png');
 			background-size: 16px auto;
-			background-position: 0 -192px;
 		}
-	}
-	
-	& ul {
-		margin: 14px 0 0 23px;
-		@include rem(margin-top, 14px, false);
-	}
-	
-	& li:last-child {
-		margin-bottom: 0;
 	}
 }
 
-.ok {
-	@extend .error;
-	
-	.ltie8 & h3 {
+.confirmation_heading-ok {
+	.ltie8 & {
 		color: #060;
 	}
 	
-	h3:before {
+	&:before {
 		background-position: 0 -208px;
-		color: #417b2a;
-		
-		@include media-query-retina {
-			background-position: 0 -208px;
-		}
 	}
 }
 
