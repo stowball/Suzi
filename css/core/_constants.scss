@@ -16,6 +16,10 @@
 	padding: 0;
 }
 
+.reset li, .reset_lazy > li {
+	position: static;
+}
+
 .content_area >, th >, td > {
 	& :last-child, & ul:last-child > li:last-child, & ol:last-child > li:last-child {
 		margin-bottom: 0;
@@ -260,8 +264,6 @@ img {
 
 .menu {
 	li {
-		position: static;
-		
 		& > a {
 			display: inline-block; // Fixes IE7's whitespace bug
 		}
