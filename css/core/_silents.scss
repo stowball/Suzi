@@ -22,6 +22,10 @@
 	Constants
 ----------------------------------------------- */
 
+%display_none {
+	display: none;
+}
+
 %horizontal {
 	@include horizontal;
 }

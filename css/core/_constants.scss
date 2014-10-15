@@ -30,8 +30,8 @@
 	List Bullet Removal & Display None
 ----------------------------------------------- */
 
-input[type="hidden"], .display_none, .js_display, .js .js_display_none, .no_col_1 #col_1, .no_col_3 #col_3, .grid_container > li.grid_item:before, .list_style_none > li:before, .rc li:before, .reset li:before, .reset_lazy > li:before {
-	display: none;
+input[type="hidden"], .no_col_1 #col_1, .no_col_3 #col_3, .grid_container > li.grid_item:before, .list_style_none > li:before, .rc li:before, .reset li:before, .reset_lazy > li:before {
+	@extend %display_none;
 }
 
 /* --------------------------------------------
@@ -157,7 +157,7 @@ a img, img[usemap] {
 	}
 	
 	&.alt:after {
-		display: none;
+		@extend %display_none;
 	}
 	
 	&.link:after, &.alt.link:before {
@@ -248,7 +248,7 @@ img {
 	}
 	
 	.js_display_none {
-		display: none;
+		@extend %display_none;
 	}
 }
 
@@ -266,7 +266,7 @@ img {
 	}
 	
 	.jquery_display_none {
-		display: none;
+		@extend %display_none;
 	}
 }
 
@@ -299,7 +299,7 @@ object:focus {
 
 .pane {
 	.js & {
-		display: none;
+		@extend %display_none;
 	}
 	
 	.js &:first-child {
@@ -312,7 +312,7 @@ pre {
 }
 
 .slider > li {
-	display: none;
+	@extend %display_none;
 
 	&:first-child {
 		display: block;
