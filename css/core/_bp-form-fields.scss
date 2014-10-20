@@ -66,11 +66,15 @@
 	.f_row.block {
 		label, .label, .text, textarea, select {
 			display: block;
-			margin-bottom: $form-label-margin;
+			margin-bottom: $form-margin;
 			margin-left: 0;
 			margin-right: 0;
 			text-align: left;
 			width: 100%;
+		}
+		
+		label, .label {
+			margin-bottom: $form-margin / 2;
 		}
 	}
 	
