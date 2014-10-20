@@ -4,10 +4,12 @@
 	}
 }
 
-// Styles for turning an accordion to tabs. Customise breakpoint as required */
 /*
-.accordion_to_tabs {
-	@include media-query(680px) {
+// Styles for turning an accordion to tabs. Customise breakpoint as required
+$accordion-to-tabs-bp: 680px;
+
+.accordion--to_tabs {
+	@include media-query($accordion-to-tabs-bp) {
 		> ul > li {
 			display: inline;
 		}
@@ -17,15 +19,16 @@
 			width: 100%;
 		}
 		
-		.open + .accordion_content {
+		.accordion_toggler--is_open + .accordion_content {
 			height: auto !important;
 		}
 	}
 }
 
+
 .accordion_toggler {
-	.accordion_to_tabs & {
-		@include media-query(680px) {
+	.accordion--to_tabs & {
+		@include media-query($accordion-to-tabs-bp) {
 			display: inline-block;
 		}
 	}

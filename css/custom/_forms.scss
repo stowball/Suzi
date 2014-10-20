@@ -9,11 +9,11 @@ fieldset .description {
 	@include rem(margin-top, 3px);
 }
 
-label, .label, p.legend {
+label, .label, .radio_checkbox_group_legend {
 	@include rem(margin-bottom, $form-margin / 2);
 }
 
-.text, textarea {
+.input-text, textarea {
 	@include rem(padding, $form-input-padding-vertical $form-input-padding-horizontal);
 	
 	.vendor-mozilla & {
@@ -44,11 +44,11 @@ select {
 	}
 }
 
-.ltie8 .rc ul label {
+.ltie8 .radio_checkbox_group ul label {
 	margin-top: -18px;
 }
 
-.rc input {
+.radio_checkbox_group input {
 	@include rem(margin, 1px 0 0 2px);
 	
 	.ie &, .vendor-ie & {

@@ -2,18 +2,28 @@
 	Constants
 ----------------------------------------------- */
 
-.std_width {
-	min-width: $site-width;
+.file_icon--reversed {
+	.ltie8 & {
+		padding-left: 0;
+	}
 }
 
-%ltie9-no-mt {
+img {
+	max-width: none;
+}
+
+%ltie9-mt-no {
 	margin-top: 0;
 }
 
 @for $h from 1 to 7 {
 	h#{$h}.slvzr-first-child, .h#{$h}.slvzr-first-child {
-		@extend %ltie9-no-mt;
+		@extend %ltie9-mt-no;
 	}
+}
+
+.std_width {
+	min-width: $site-width;
 }
 
 /* --------------------------------------------
@@ -29,13 +39,13 @@
 @import "bp-form-fields";
 
 @if ($form-bp > 0) {
-	.f_row label, .f_row .label, p.legend {
+	.form_row label, .form_row .label, .radio_checkbox_group_legend {
 		.ltie8 & {
 			width: $form-label-width - $form-label-margin;
 		}
 	}
 	
-	.btns, .f_comment, .rc ul, .required {
+	.btns, .form_comment, .radio_checkbox_group ul, .required {
 		.ltie8 & {
 			margin-left: ($form-label-margin + $form-label-width) - $form-label-margin;
 		}

@@ -2,55 +2,55 @@
 	Consistent Margins
 ----------------------------------------------- */
 
-.std_m, .standard_m, %std_m, %standard_m {
+.m-std, .m-standard, %m-std, %m-standard {
 	@include rem(margin-bottom, $std-margin);
 	@include rem(margin-top, $std-margin);
 }
 
-.std_mb, .standard_mb, %std_mb, %standard_mb {
+.mb-std, .mb-standard, %mb-std, %mb-standard {
 	@include rem(margin-bottom, $std-margin);
 }
 
-.std_mt, .standard_mt, %std_mt, %standard_mt {
+.mt-std, .mt-standard, %mt-std, %mt-standard {
 	@include rem(margin-top, $std-margin);
 }
 
-.dbl_m, .double_m, %dbl_m, %double_m {
+.m-dbl, .m-double, %m-dbl, %m-double {
 	@include rem(margin-bottom, $std-margin * 2);
 	@include rem(margin-top, $std-margin * 2);
 }
 
-.dbl_mb, .double_mb, %dbl_mb, %double_mb {
+.mb-dbl, .mb-double, %mb-dbl, %mb-double {
 	@include rem(margin-bottom, $std-margin * 2);
 }
 
-.dbl_mt, .double_mt, %dbl_mt, %double_mt {
+.mt-dbl, .mt-double, %mt-dbl, %mt-double {
 	@include rem(margin-top, $std-margin * 2);
 }
 
-.hlf_m, .half_m, %hlf_m, %half_m {
+.m-hlf, .m-half, %m-hlf, %m-half {
 	@include rem(margin-bottom, $std-margin / 2);
 	@include rem(margin-top, $std-margin / 2);
 }
 
-.hlf_mb, .half_mb, %hlf_mb, %half_mb {
+.mb-hlf, .mb-half, %mb-hlf, %mb-half {
 	@include rem(margin-bottom, $std-margin / 2);
 }
 
-.hlf_mt, .half_mb, %hlf_mt, %half_mb {
+.mt-hlf, .mt-half, %mt-hlf, %mt-half {
 	@include rem(margin-top, $std-margin / 2);
 }
 
-.no_m, %no_m {
+.m-no, %m-no {
 	margin-bottom: 0;
 	margin-top: 0;
 }
 
-.no_mb, %no_mb {
+.mb-no, %mb-no {
 	margin-bottom: 0;
 }
 
-.no_mt, %no_mt {
+.mt-no, %mt-no {
 	margin-top: 0;
 }
 
@@ -58,20 +58,36 @@
 	Helper Classes
 ----------------------------------------------- */
 
-.align_left {
+.align-left {
 	text-align: left;
 }
 
-.align_center, .align_centre {
+.align-center, .align-centre {
 	text-align: center;
 }
 
-.align_right {
+.align-right {
 	text-align: right;
 }
 
-.align_justify {
+.align-justify {
 	text-align: justify;
+}
+
+.case-lower {
+	text-transform: lowercase;
+}
+
+.case-normal {
+	text-transform: none;
+}
+
+.case-title {
+	text-transform: capitalize;
+}
+
+.case-upper {
+	text-transform: uppercase;
 }
 
 .center_object, .centre_object {
@@ -84,27 +100,39 @@ table.center_object, table.centre_object {
 	display: table;
 }
 
-.clear {
+.clear-both {
 	clear: both;
 }
 
-.display_block {
+.clear-left {
+	clear: left;
+}
+
+.clear-none {
+	clear: none;
+}
+
+.clear-right {
+	clear: right;
+}
+
+.display-block {
 	display: block;
 }
 
-.display_none {
-	@extend %display_none;
-}
-
-.display_inline {
+.display-inline {
 	display: inline;
 }
 
-.display_inline_block {
+.display-inline_block {
 	display: inline-block;
 }
 
-.float_left {
+.display-none {
+	@extend %display-none;
+}
+
+.float-left {
 	float: left;
 	
 	+ .content_area {
@@ -112,7 +140,7 @@ table.center_object, table.centre_object {
 	}
 }
 
-.float_right {
+.float-right {
 	float: right;
 }
 
@@ -124,94 +152,78 @@ table.center_object, table.centre_object {
 	@extend %horizontal;
 }
 
-.horizontal_auto {
-	@extend %horizontal_auto;
-}
-
-.invisible {
-	visibility: hidden;
-}
-
-.lowercase {
-	text-transform: lowercase;
+.horizontal-auto {
+	@extend %horizontal-auto;
 }
 
 .no_wrap {
 	white-space: nowrap;
 }
 
-.normalcase {
-	text-transform: none;
-}
-
-.overflow_x_auto {
+.overflow_x-auto {
 	overflow-x: auto;
 }
 
-.overflow_x_hidden {
+.overflow_x-hidden {
 	overflow-x: hidden;
 }
 
-.overflow_x_visible {
+.overflow_x-visible {
 	overflow-x: visible;
 }
 
-.overflow_y_auto {
+.overflow_y-auto {
 	overflow-y: auto;
 }
 
-.overflow_y_hidden {
+.overflow_y-hidden {
 	overflow-y: hidden;
 }
 
-.overflow_y_visible {
+.overflow_y-visible {
 	overflow-y: visible;
 }
 
-.pos_absolute {
+.position-absolute {
 	position: absolute;
 }
 
-.pos_fixed {
+.position-fixed {
 	position: fixed;
 }
 
-.pos_relative {
+.position-relative {
 	position: relative;
-}
-
-.titlecase {
-	text-transform: capitalize;
 }
 
 .unclear {
 	clear: none;
 }
 
-.uppercase {
-	text-transform: uppercase;
-}
-
-.valign_bottom {
+.valign-bottom {
 	vertical-align: bottom;
 }
 
-.valign_middle {
+.valign-middle {
 	vertical-align: middle;
 }
 
-.valign_top {
+.valign-top {
 	vertical-align: top;
 }
 
-.visible {
+.visibility-invisible {
+	visibility: hidden;
+}
+
+.visibility-visible {
 	visibility: visible;
 }
 
-.weight_bold {
+.weight-bold {
 	font-weight: bold;
 }
 
-.weight_normal {
+.weight-normal {
 	font-weight: normal;
 }

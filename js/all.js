@@ -264,14 +264,14 @@ var slider = {
 				}
 				
 				if (pager) {
-					var $navPager = $('<ul class="carousel_nav_pager' + (thumbnails ? ' carousel_nav_pager-thumbnails' : '') + ' reset menu" />');
+					var $navPager = $('<ul class="carousel_nav_pager' + (thumbnails ? ' carousel_nav_pager--thumbnails' : '') + ' reset-all menu" />');
 					$this.append($navPager);
 				}
 				
 				if (nav) {
 					var $navContainer = $('<div class="carousel_nav" />'),
-						$navPrev = $('<a href="#previous" class="carousel_nav_item carousel_nav_item-prev"><span>Previous</span></a>'),
-						$navNext = $('<a href="#next" class="carousel_nav_item carousel_nav_item-next"><span>Next</span></a>');
+						$navPrev = $('<a href="#previous" class="carousel_nav_item carousel_nav_item--prev"><span>Previous</span></a>'),
+						$navNext = $('<a href="#next" class="carousel_nav_item carousel_nav_item--next"><span>Next</span></a>');
 					
 					$navContainer.append($navPrev).append($navNext)
 					$this.append($navContainer);
@@ -570,12 +570,12 @@ var tabs = {
 				tabCookie = tabHasCookie ? cookie.read(tabID) : 0;
 			
 			if (tabHasCookie) {
-				$links.eq(tabCookie).addClass('current');
+				$links.eq(tabCookie).addClass('tab--is_current');
 				$panes.hide().attr('aria-hidden', true);
 				$panes.eq(tabCookie).show().attr('aria-hidden', false);
 			}
 			else {
-				$links.eq(0).addClass('current');
+				$links.eq(0).addClass('tab--is_current');
 				$panes.not(':first').attr('aria-hidden', true);
 			}
 			
@@ -585,9 +585,9 @@ var tabs = {
 				var $this = $(this),
 					idx = $this.parent().index();
 				
-				if (!$this.hasClass('current')) {
-					$links.removeClass('current');
-					$this.addClass('current');
+				if (!$this.hasClass('tab--is_current')) {
+					$links.removeClass('tab--is_current');
+					$this.addClass('tab--is_current');
 				}
 				
 				$panes.hide().attr('aria-hidden', true);
@@ -635,11 +635,11 @@ var accordion = {
 		
 		$accordion.each(function(index) {
 			var $this = $(this),
-				multiple = $this.data('multiple'),
 				$accordionLinks = $this.find('> ul > li > .accordion_toggler'),
 				$accordionContent = $this.find('> ul > li > .accordion_content'),
+				multiple = $this.data('multiple'),
 				accordionID = 'accordionid-' + window.location.pathname + '-' + index,
-				accordionHasCookie = $this.data('cookie'), 
+				accordionHasCookie = multiple ? false : $this.data('cookie'), 
 				accordionCookie = accordionHasCookie ? cookie.read(accordionID) : 0;
 			
 			if ($accordionLinks.length === 0)
@@ -657,20 +657,22 @@ var accordion = {
 				
 				if (!multiple || accordionHasCookie) {
 					if (!accordionHasCookie) {
-						if ($this.hasClass('open'))
+						if ($this.hasClass('accordion_toggler--to_open'))
 							accordionCookie = idx;
 					}
 					
 					if (parseInt(accordionCookie) === idx) {
-						$accordionLinks.removeClass('open');
-						$this.addClass('open is_open');
+						$accordionLinks.removeClass('accordion_toggler--is_open');
+						$accordionContent.attr('aria-hidden', true).css('height', '0');
+						
+						$this.addClass('accordion_toggler--is_open');
 						
 						$accordionContentIndex.attr('aria-hidden', false).css('height', 'auto');
 					}
 				}
 				else {
-					if ($this.hasClass('open')) {
-						$this.addClass('is_open');
+					if ($this.hasClass('accordion_toggler--to_open')) {
+						$this.removeClass('accordion_toggler--to_open').addClass('accordion_toggler--is_open');
 						
 						$accordionContentIndex.attr('aria-hidden', false).css('height', 'auto');
 						
@@ -690,7 +692,7 @@ var accordion = {
 						ariaHidden = false;
 					
 					if (!multiple) {
-						$accordionLinks.removeClass('open is_open');
+						$accordionLinks.removeClass('accordion_toggler--to_open accordion_toggler--is_open');
 						
 						$accordionContent.each(function(index) {
 							if (index === idx)
@@ -699,10 +701,10 @@ var accordion = {
 								$(this).attr('aria-hidden', true).transition({height: 0}, transitionDuration, transitionTimingFunction);
 						});
 						
-						$this.addClass('open is_open');
+						$this.addClass('accordion_toggler--is_open');
 					}
 					else {
-						$this.removeClass('open').toggleClass('is_open');
+						$this.toggleClass('accordion_toggler--is_open');
 						
 						if ($accordionContentSibling.attr('aria-hidden') == 'false') {
 							ariaHidden = true;

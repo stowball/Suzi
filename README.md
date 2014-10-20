@@ -24,6 +24,7 @@ While some of its markup patterns and styles are related to our CMS, [Cognition]
 * Cache busting of CSS and JS assets with a unique timestamp querystring
 * Optimising of images and SVGs with [grunt-contrib-imagemin](https://github.com/gruntjs/grunt-contrib-imagemin)
 * HTML validation
+* OOCSS naming convention: .component_name--modifier & .feature_name-variant
 * Tabs instead of spaces :)
 
 ---

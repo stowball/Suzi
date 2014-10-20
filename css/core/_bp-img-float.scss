@@ -1,10 +1,10 @@
 img {
-	&.float_left {
+	&.float-left {
 		float: left;
 		@include rem(margin, $line-height-margin $std-margin $std-margin 0);
 	}
 	
-	&.float_right {
+	&.float-right {
 		float: right;
 		@include rem(margin, $line-height-margin 0 $std-margin $std-margin);
 	}
