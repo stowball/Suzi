@@ -34,31 +34,31 @@
 	}
 	
 	.form_row, .btns {
-		.w_bp-auto {
+		.width_at_bp-auto {
 			width: auto;
 		}
 		
-		.w_bp-smaller {
+		.width_at_bp-smaller {
 			width: ((100% - ($form-label-margin + $form-label-width) + $form-input-width-adjuster) * strip-units($form-smaller-input-width / 100));
 		}
 		
-		.w_bp-small {
+		.width_at_bp-small {
 			width: ((100% - ($form-label-margin + $form-label-width) + $form-input-width-adjuster) * strip-units($form-small-input-width / 100));
 		}
 		
-		.w_bp-medium {
+		.width_at_bp-medium {
 			width: ((100% - ($form-label-margin + $form-label-width) + $form-input-width-adjuster) * strip-units($form-medium-input-width / 100));
 		}
 		
-		.w_bp-large {
+		.width_at_bp-large {
 			width: ((100% - ($form-label-margin + $form-label-width) + $form-input-width-adjuster) * strip-units($form-large-input-width / 100));
 		}
 		
-		.w_bp-larger {
+		.width_at_bp-larger {
 			width: ((100% - ($form-label-margin + $form-label-width) + $form-input-width-adjuster) * strip-units($form-larger-input-width / 100));
 		}
 		
-		.w_bp-max {
+		.width_at_bp-max {
 			width: (100% - ($form-label-margin + $form-label-width) + $form-input-width-adjuster);
 		}
 	}
