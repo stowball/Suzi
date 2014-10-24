@@ -677,7 +677,7 @@ input {
 	cursor: pointer;
 }
 
-.btn, .btn_wrap, button, [type="submit"], .input-text, label, .label, .radio_checkbox_group_legend, select, textarea {
+.btn, button, [type="submit"], .input-text, label, .label, .radio_checkbox_group_legend, select, textarea {
 	@include box-sizing;
 	display: block;
 	font-family: $std-font-family;
@@ -797,11 +797,11 @@ textarea {
 	@import "bp-form-fields";
 }
 
-.btn, .btn_wrap {
+.btn {
 	width: auto;
 }
 
-.btn, .btn_wrap, button, [type="submit"] {
+.btn, button, [type="submit"] {
 	-webkit-appearance: none;
 	@include border-radius($btn-border-radius);
 	color: $btn-text-color;
@@ -823,31 +823,6 @@ textarea {
 
 button, [type="submit"] {
 	@include rem(font-size, $btn-font-size);
-}
-
-.btn_wrap {
-	position: relative;
-	
-	input {
-		opacity: 0;
-		position: relative;
-		z-index: 2;
-	}
-	
-	&[data-label] {
-		&:before {
-			content: attr(data-label);
-		}
-		
-		input {
-			border: 0;
-			left: 0;
-			height: 100%;
-			position: absolute;
-			top: 0;
-			width: 100%;
-		}
-	}
 }
 
 /* --------------------------------------------
