@@ -2,7 +2,7 @@
 
 ## A responsive, Sass and Grunt UI Framework by [Izilla](http://izilla.com.au)
 
-### v2.0.0 (2014-08-08)
+### v2.1.0 (2014-10-26)
 
 Suzi is the starting point for all of our web projects and a culmination of 6+ years' experience in maintaining a front-end framework.
 
