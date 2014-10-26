@@ -2,12 +2,12 @@
 	Hiddens
 ----------------------------------------------- */
 
-.print_display_none {
+.print_display-none {
 	display: none !important;
 }
 
-#nav_main, .file_icon:after, .file_icon.alt:before {
-	@extend .print_display_none;
+#nav_main, .file_icon:after, .file_icon--reversed:before {
+	@extend .print_display-none;
 }
 
 /* --------------------------------------------
@@ -34,6 +34,6 @@ ul {
 	width: 100% !important;
 }
 
-.confirmation_heading, .file_icon.alt {
+.confirmation_heading, .file_icon--reversed {
 	padding-left: 0;
 }

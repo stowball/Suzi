@@ -515,31 +515,31 @@ $rem-with-px-fallback: true !default;
 	@for $j from 0 to length($percentages) {
 		$pc: nth($percentages, $j + 1);
 		
-		.w#{floor($pc)} {
+		.width-#{floor($pc)} {
 			width: percentage($pc / 100);
 			
 			@include _grid-clearing($pc);
 		}
 	}
 	
-	.clear:nth-child(n) {
+	.clear-both:nth-child(n) {
 		clear: both;
 	}
 	
-	.unclear:nth-child(n) {
+	.clear-none:nth-child(n) {
 		clear: none;
 	}
 	
-	.no_mb.no_mb {
+	.mb-no.mb-no {
 		margin-bottom: 0;
 	}
 	
 	@if ($float-classes == true) {
-		.float_left {
+		.float-left {
 			float: left;
 		}
 		
-		.float_right {
+		.float-right {
 			float: right;
 		}
 	}
@@ -551,7 +551,7 @@ $rem-with-px-fallback: true !default;
 			@for $j from 0 to length($percentages) {
 				$pc: nth($percentages, $j + 1);
 				
-				.w#{floor($pc)}_at_#{$bp} {
+				.at_#{$bp}-width-#{floor($pc)} {
 					@include media-query($bp) {
 						width: percentage($pc / 100);
 						
@@ -560,32 +560,32 @@ $rem-with-px-fallback: true !default;
 				}
 				
 				@if ($j == length($percentages) - 1) {
-					.clear_at_#{$bp}:nth-child(n) {
+					.at_#{$bp}-clear-both:nth-child(n) {
 						@include media-query($bp) {
 							clear: both;
 						}
 					}
 					
-					.unclear_at_#{$bp}:nth-child(n) {
+					.at_#{$bp}-clear-none:nth-child(n) {
 						@include media-query($bp) {
 							clear: none;
 						}
 					}
 					
-					.no_mb_at_#{$bp}.no_mb_at_#{$bp} {
+					.at_#{$bp}-mb-no.at_#{$bp}-mb-no {
 						@include media-query($bp) {
 							margin-bottom: 0;
 						}
 					}
 					
 					@if ($float-classes == true) {
-						.float_left_at_#{$bp} {
+						.at_#{$bp}-float-left {
 							@include media-query($bp) {
 								float: left;
 							}
 						}
 						
-						.float_right_at_#{$bp} {
+						.at_#{$bp}-float-right {
 							@include media-query($bp) {
 								float: right;
 							}
@@ -607,23 +607,23 @@ $rem-with-px-fallback: true !default;
 	}
 	
 	@if ($media-query == false) {
-		.grid_container-#{$name} {
+		.grid_container--#{$name} {
 			margin-left: -$gutter-left;
 		}
 
-		.grid_item-#{$name} {
+		.grid_item--#{$name} {
 			margin-bottom: $gutter-bottom;
 			padding-left: $gutter-left;
 		}
 	}
 	@else if (type-of($media-query) == 'number') {
-		.grid_container-#{$name} {
+		.grid_container--#{$name} {
 			@include media-query($media-query) {
 				margin-left: -$gutter-left;
 			}
 		}
 
-		.grid_item-#{$name} {
+		.grid_item--#{$name} {
 			@include media-query($media-query) {
 				margin-bottom: $gutter-bottom;
 				padding-left: $gutter-left;

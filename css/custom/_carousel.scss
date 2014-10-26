@@ -5,7 +5,7 @@
 .slider {
 	@include transition-timing-function($ease-in-out-quint);
 	
-	.resizing & {
+	.window_is_resizing & {
 		@include transition-duration(0s !important);
 	}
 	
@@ -62,7 +62,7 @@
 	}
 }
 
-.carousel_nav_item-next {
+.carousel_nav_item--next {
 	left: auto;
 	right: 0;
 	
@@ -78,22 +78,24 @@
 	position: absolute;
 	right: 0;
 	text-align: center;
-	
-	li {
-		display: inline-block;
-		@include rem(margin, 0 5px);
-	}
+}
 
+ .carousel_nav_pager_item {
+	display: inline-block;
+	@include rem(margin, 0 5px);
+	 
 	a {
 		border: 1px solid #fff;
 		@include border-radius(50%);
 		@include hide-text(false, 14px, 14px);
 	}
+ }
 
-	.current a {
+.carousel_nav_pager_item--is_current {
+	a {
 		background: #fff;
 	}
 }
 
-.carousel_nav_pager-thumbnails {
+.carousel_nav_pager--thumbnails {
 }

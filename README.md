@@ -6,8 +6,6 @@
 
 Suzi is the starting point for all of our web projects and a culmination of 6+ years' experience in maintaining a front-end framework.
 
-While some of its markup patterns and styles are related to our CMS, [Cognition](http://www.cognitionecm.com), we hope Suzi is flexible enough for others to use, learn and cherry pick from.
-
 ### Features
 
 * Built in a mobile-first, responsive philosophy *(but can easily be used for fixed sites as well)*
@@ -24,6 +22,7 @@ While some of its markup patterns and styles are related to our CMS, [Cognition]
 * Cache busting of CSS and JS assets with a unique timestamp querystring
 * Optimising of images and SVGs with [grunt-contrib-imagemin](https://github.com/gruntjs/grunt-contrib-imagemin)
 * HTML validation
+* OOCSS naming convention: .component_name--modifier & .function_or_feature_name-variant
 * Tabs instead of spaces :)
 
 ---

@@ -2,31 +2,31 @@
 	<div id="form">
 		<fieldset>
 			<legend>Form legend</legend>
-			<div class="legend_h"><h2>Form legend</h2></div>
+			<div class="legend_alternative"><h2>Form legend</h2></div>
 			
 			<p class="required"><em>*</em> Denotes a required field</p>
 			
-			<div class="f_row">
+			<div class="form_row">
 				<label for="question1">First Name&nbsp;<em>*</em></label>
-				<input type="text" aria-required="true" data-val-required="You must make an entry for First Name" data-val="true" required class="text" id="question1" name="question1">
+				<input type="text" aria-required="true" data-val-required="You must make an entry for First Name" data-val="true" required class="input-text" id="question1" name="question1">
 			</div>
 			
-			<div class="f_row">
+			<div class="form_row">
 				<label for="question2">Last Name&nbsp;<em>*</em></label>
-				<input type="text" aria-required="true" data-val-required="You must make an entry for Last Name" data-val="true" required class="text" id="question2" name="question2">
+				<input type="text" aria-required="true" data-val-required="You must make an entry for Last Name" data-val="true" required class="input-text" id="question2" name="question2">
 			</div>
 			
-			<div class="f_row">
+			<div class="form_row">
 				<label for="question3">Email&nbsp;<em>*</em></label>
-				<input type="text" aria-required="true" data-val-required="You must make an entry for Email" data-val="true" required class="text" id="question3" name="question3">
+				<input type="text" aria-required="true" data-val-required="You must make an entry for Email" data-val="true" required class="input-text" id="question3" name="question3">
 			</div>
 			
-			<div class="f_row">
+			<div class="form_row">
 				<label for="question4">Phone</label>
-				<input type="text" class="text" id="question4" name="question4">
+				<input type="text" class="input-text" id="question4" name="question4">
 			</div>
 			
-			<div class="f_row">
+			<div class="form_row">
 				<label for="questionSelect">Select</label>
 				<select id="questionSelect" name="questionSelect">
 					<option>Please select</option>
@@ -35,14 +35,14 @@
 				</select>
 			</div>
 			
-			<div class="f_row">
+			<div class="form_row">
 				<label for="question5">Comment</label>
-				<textarea class="text" id="question5" cols="20" rows="2" name="question5"></textarea>
+				<textarea class="input-text" id="question5" cols="20" rows="2" name="question5"></textarea>
 			</div>
 			
-			<fieldset class="rc legend">
+			<fieldset class="radio_checkbox_group radio_checkbox_group--has_legend">
 				<legend>Checkbox legend</legend>
-				<p class="legend">Here's my legend</p>
+				<p class="radio_checkbox_group_legend">Here's my legend</p>
 				<ul>
 					<li>
 						<input type="checkbox" value="1" name="question6" id="question6_1">
@@ -59,7 +59,7 @@
 				</ul>
 			</fieldset>
 			
-			<fieldset class="rc">
+			<fieldset class="radio_checkbox_group">
 				<ul>
 					<li>
 						<input type="checkbox" value="1" name="question7" id="question7_1">
@@ -76,9 +76,9 @@
 				</ul>
 			</fieldset>
 			
-			<fieldset class="rc legend">
+			<fieldset class="radio_checkbox_group radio_checkbox_group--has_legend">
 				<legend>Radio button legend</legend>
-				<p class="legend">Radio button legend</p>
+				<p class="radio_checkbox_group_legend">Radio button legend</p>
 				<ul>
 					<li>
 						<input type="radio" value="1" name="question8" id="question8_1">
@@ -95,7 +95,7 @@
 				</ul>
 			</fieldset>
 			
-			<fieldset class="rc">
+			<fieldset class="radio_checkbox_group">
 				<ul>
 					<li>
 						<input type="radio" value="1" name="question9" id="question9_1">
@@ -113,7 +113,7 @@
 			</fieldset>
 			
 			<div class="btns">
-				<input type="submit" class="submit" id="btnSubmit" value="Submit Enquiry" name="btnSubmit">
+				<input type="submit" id="btnSubmit" value="Submit Enquiry" name="btnSubmit">
 			</div>
 			
 		</fieldset>

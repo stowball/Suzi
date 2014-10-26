@@ -10,13 +10,13 @@
 	Reset
 ----------------------------------------------- */
 
-.reset, .reset_lazy, .reset ul, .reset_lazy > ul, .reset ol, .reset_lazy > ol, .reset li, .reset_lazy > li, .rc ul {
+.reset-all, .reset-lazy, .reset-all ul, .reset-lazy > ul, .reset-all ol, .reset-lazy > ol, .reset-all li, .reset-lazy > li, .radio_checkbox_group ul {
 	list-style: none !important;
 	margin: 0;
 	padding: 0;
 }
 
-.reset li, .reset_lazy > li {
+.reset-all li, .reset-lazy > li {
 	position: static;
 }
 
@@ -30,8 +30,8 @@
 	List Bullet Removal & Display None
 ----------------------------------------------- */
 
-input[type="hidden"], .no_col_1 #col_1, .no_col_3 #col_3, .grid_container > li.grid_item:before, .list_style_none > li:before, .rc li:before, .reset li:before, .reset_lazy > li:before {
-	@extend %display_none;
+input[type="hidden"], .no_col-1 #col_1, .no_col-3 #col_3, .grid_container > li.grid_item:before, .list_style-none > li:before, .radio_checkbox_group li:before, .reset-all li:before, .reset-lazy > li:before {
+	@extend %display-none;
 }
 
 /* --------------------------------------------
@@ -127,80 +127,98 @@ a img, img[usemap] {
 
 .file_icon {
 	display: inline-block;
-	
-	&.alt {
-		padding-left: 21px;
+}
+
+.file_icon:after, .file_icon--reversed:before {
+	background: url('{{ imgPath }}std_icons.png');
+	content: '';
+	display: inline-block;
+	@include rem(margin-left, 5px);
+	height: 16px;
+	vertical-align: middle;
+	width: 16px;
+
+	@include media-query-retina {
+		background-image: url('{{ imgPath }}std_icons@2x.png');
+		background-size: 16px auto;
 	}
+}
+
+.file_icon--reversed {
+	padding-left: 21px;
 	
-	.ltie8 &.alt {
-		padding-left: 0;
-	}
-	
-	&:after, &.alt:before {
-		background: url('{{ imgPath }}std_icons.png');
-		content: '';
-		display: inline-block;
-		@include rem(margin-left, 5px);
-		height: 16px;
-		vertical-align: middle;
-		width: 16px;
-		
-		@include media-query-retina {
-			background-image: url('{{ imgPath }}std_icons@2x.png');
-			background-size: 16px auto;
-		}
-	}
-	
-	&.alt:before {
+	&:before {
 		margin-left: -21px;
 		@include rem(margin-right, 5px);
 	}
 	
-	&.alt:after {
-		@extend %display_none;
+	&:after {
+		display: none;
 	}
-	
-	&.link:after, &.alt.link:before {
+}
+
+.file_icon--link {
+	&:after, &.file_icon--reversed:before {
 		background-position: 0 -16px;
 	}
-	
-	&.pdf:after, &.alt.pdf:before {
+}
+
+.file_icon--pdf {
+	&:after, &.file_icon--reversed:before {
 		background-position: 0 -32px;
 	}
-	
-	&.zip:after, &.alt.zip:before {
+}
+
+.file_icon--zip {
+	&:after, &.file_icon--reversed:before {
 		background-position: 0 -48px;
 	}
-	
-	&.audio:after, &.alt.audio:before {
+}
+
+.file_icon--audio {
+	&:after, &.file_icon--reversed:before {
 		background-position: 0 -64px;
 	}
-	
-	&.video:after, &.alt.video:before {
+}
+
+.file_icon--video {
+	&:after, &.file_icon--reversed:before {
 		background-position: 0 -80px;
 	}
-	
-	&.doc:after, &.alt.doc:before {
+}
+
+.file_icon--doc {
+	&:after, &.file_icon--reversed:before {
 		background-position: 0 -96px;
 	}
-	
-	&.image:after, &.alt.image:before {
+}
+
+.file_icon--image {
+	&:after, &.file_icon--reversed:before {
 		background-position: 0 -112px;
 	}
-	
-	&.excel:after, &.alt.excel:before {
+}
+
+.file_icon--excel {
+	&:after, &.file_icon--reversed:before {
 		background-position: 0 -128px;
 	}
-	
-	&.file:after, &.alt.file:before {
+}
+
+.file_icon--file {
+	&:after, &.file_icon--reversed:before {
 		background-position: 0 -144px;
 	}
-	
-	&.page:after, &.alt.page:before {
+}
+
+.file_icon--page {
+	&:after, &.file_icon--reversed:before {
 		background-position: 0 -160px;
 	}
-	
-	&.rss:after, &.alt.rss:before {
+}
+
+.file_icon--rss {
+	&:after, &.file_icon--reversed:before {
 		background-position: 0 -176px;
 	}
 }
@@ -215,19 +233,20 @@ img {
 		max-width: 100%;
 	}
 	
-	&.fixed, .ltie9 & {
-		max-width: none;
-	}
 	
-	&.border {
-		border: 1px solid $std-color;
-	}
-	
-	&.float_left, &.float_right {
+	&.float-left, &.float-right {
 		display: block;
 		float: none;
 		@include rem(margin, 0 auto $std-margin / 2);
 	}
+}
+
+.image-bordered {
+	border: 1px solid $std-color;
+}
+
+.image-not_responsive {
+	max-width: none;
 }
 
 @media ($min em($float-bp)) {
@@ -235,38 +254,38 @@ img {
 }
 
 .js {
-	.js_display_block {
+	.js_display-block {
 		display: block;
 	}
 	
-	.js_display_inline {
+	.js_display-inline {
 		display: inline;
 	}
 	
-	.js_display_inline_block {
+	.js_display-inline_block {
 		display: inline-block;
 	}
 	
-	.js_display_none {
-		@extend %display_none;
+	.js_display-none {
+		@extend %display-none;
 	}
 }
 
 .jquery {
-	.jquery_display_block {
+	.jquery_display-block {
 		display: block;
 	}
 	
-	.jquery_display_inline {
+	.jquery_display-inline {
 		display: inline;
 	}
 	
-	.jquery_display_inline_block {
+	.jquery_display-inline_block {
 		display: inline-block;
 	}
 	
-	.jquery_display_none {
-		@extend %display_none;
+	.jquery_display-none {
+		@extend %display-none;
 	}
 }
 
@@ -281,14 +300,12 @@ img {
 			text-decoration: none;
 		}
 	}
-	
-	&.hover {
-		li {
-			& > a {
-				@include hover {
-					text-decoration: underline;
-				}
-			}
+}
+
+.menu--text_hover {
+	li > a {
+		@include hover {
+			text-decoration: underline;
 		}
 	}
 }
@@ -299,7 +316,7 @@ object:focus {
 
 .pane {
 	.js & {
-		@extend %display_none;
+		@extend %display-none;
 	}
 	
 	.js &:first-child {
@@ -312,7 +329,7 @@ pre {
 }
 
 .slider > li {
-	@extend %display_none;
+	@extend %display-none;
 
 	&:first-child {
 		display: block;
@@ -445,18 +462,22 @@ h1, h2, h3, h4, h5, h6 {
 		margin-top: 0;
 	}
 	
-	&.sub,
 	& + h1, & + h2, & + h3, & + h4, & + h5, & + h6 {
 		color: $sub-color;
 	}
 	
-	&.alt {
-		color: $alt-color;
-	}
-	
-	&.std {
-		color: $std-color;
-	}
+}
+
+.heading_color-sub {
+	color: $sub-color;
+}
+
+.heading_color-alt {
+	color: $alt-color;
+}
+
+.heading_color-std {
+	color: $std-color;
 }
 
 /* --------------------------------------------
@@ -466,32 +487,32 @@ h1, h2, h3, h4, h5, h6 {
 ol, ul {
 	list-style: none;
 	@include rem(margin-left, $list-margin-left);
-	
-	&.list_style_none {
-		list-style: none !important;
-		margin-left: 0 !important;
-		padding-left: 0 !important;
-	}
 }
 
 ol {
 	list-style-type: decimal;
-	
-	&.lower_alpha {
-		list-style-type: lower-alpha;
-	}
-	
-	&.upper_alpha {
-		list-style-type: upper-alpha;
-	}
-	
-	&.lower_roman {
-		list-style-type: lower-roman;
-	}
-	
-	&.upper_roman {
-		list-style-type: upper-roman;
-	}
+}
+
+.list_style-none {
+	list-style: none !important;
+	margin-left: 0 !important;
+	padding-left: 0 !important;
+}
+
+.list_style-lower_alpha {
+	list-style-type: lower-alpha;
+}
+
+.list_style-upper_alpha {
+	list-style-type: upper-alpha;
+}
+
+.list_style-lower_roman {
+	list-style-type: lower-roman;
+}
+
+.list_style-upper_roman {
+	list-style-type: upper-roman;
 }
 
 .ltie8 ul {
@@ -517,7 +538,7 @@ li {
 	}
 }
 
-.list_next_to_float, .float_left + ul, .float_right + ul, .float_left + ol, .float_right + ol {
+.list_next_to_float, .float-left + ul, .float-right + ul, .float-left + ol, .float-right + ol {
 	overflow: hidden;
 	@include rem(padding-left, $list-margin-left);
 	
@@ -559,7 +580,7 @@ td, th {
 	vertical-align: top;
 }
 
-.unstyled {
+.table-unstyled {
 	@include box-shadow(none);
 	width: auto;
 	
@@ -614,7 +635,7 @@ input[type="search"] {
 
 @include placeholder;
 
-.text, textarea, select {
+.input-text, textarea, select {
 	color: $form-input-color;
 	margin: 0;
 	
@@ -656,7 +677,7 @@ input {
 	cursor: pointer;
 }
 
-.btn, button, [type="submit"], .text, label, .label, p.legend, select, textarea {
+.btn, button, [type="submit"], .input-text, label, .label, .radio_checkbox_group_legend, select, textarea {
 	@include box-sizing;
 	display: block;
 	font-family: $std-font-family;
@@ -664,47 +685,43 @@ input {
 	width: 100%;
 }
 
-.text, label, .label, p.legend, select, textarea {
+.input-text, label, .label, .radio_checkbox_group_legend, select, textarea {
 	vertical-align: top;
 }
 
 em {
-	.required &, label & , .label &, p.legend & {
+	.required &, label & , .label &, .radio_checkbox_group_legend & {
 		color: $form-input-error-color;
 		font-style: normal;
 	}
 }
 
-.f_comment, .f_margin, .f_row, .required, .rc {
+.form_comment, .form_mb, .form_row, .required, .radio_checkbox_group {
 	@include rem(margin-bottom, $form-margin);
 }
 
-.f_row > div {
+.form_row > div {
 	@include rem(margin-top, $form-margin);
 }
 
-fieldset .description {
-	display: block;
-}
-
-.text, textarea, html:not(.browser-android) select {
+.input-text, textarea, html:not(.browser-android) select {
 	background-color: $form-input-background-color;
 	border: $form-input-border-width solid $form-input-border-color;
 }
 
-.text, textarea {
+.input-text, textarea {
 	@include border-radius($form-input-border-radius);
 }
 
-.text:not(.date_time) {
+.input-text:not(.date_time) {
 	-webkit-appearance: none;
 }
 
-.text.date_time {
+.input-text.date_time {
 	display: -webkit-inline-flex;
 }
 
-.text, textarea, select {
+.input-text, textarea, select {
 	@include rem(font-size, $form-input-font-size);
 	
 	.ua-ios & {
@@ -730,7 +747,7 @@ textarea {
 	overflow: auto;
 }
 
-.rc {
+.radio_checkbox_group {
 	li {
 		@include rem(margin-bottom, $form-margin / 2);
 	}
@@ -746,32 +763,32 @@ textarea {
 	}
 }
 
-.f_row, .btns {
-	.w_auto {
+.form_row, .btns {
+	.width-auto {
 		width: auto;
 	}
 	
-	.w_smaller {
+	.width-smaller {
 		width: $form-smaller-input-width;
 	}
 
-	.w_small {
+	.width-small {
 		width: $form-small-input-width;
 	}
 
-	.w_medium {
+	.width-medium {
 		width: $form-medium-input-width;
 	}
 
-	.w_large {
+	.width-large {
 		width: $form-large-input-width;
 	}
 
-	.w_larger {
+	.width-larger {
 		width: $form-larger-input-width;
 	}
 	
-	.w_max {
+	.width-max {
 		width: 100%;
 	}
 }
@@ -809,7 +826,7 @@ button, [type="submit"] {
 }
 
 /* --------------------------------------------
-	Error & .ok Styling
+	Confirmation Error/OK Modules
 -----------------------------------------------*/
 
 .confirmation_panel {
@@ -855,7 +872,7 @@ button, [type="submit"] {
 	}
 }
 
-.confirmation_heading-ok {
+.confirmation_heading--ok {
 	.ltie8 & {
 		color: #060;
 	}
@@ -894,11 +911,11 @@ button, [type="submit"] {
 		height: auto;
 	}
 	
-	.js .accordion_to_tabs .open + & {
+	.js .accordion--to_tabs .open + & {
 		height: auto !important;
 	}
 	
-	.accordion_to_tabs & {
+	.accordion--to_tabs & {
 		@include transition(none !important);
 	}
 }
@@ -907,7 +924,7 @@ button, [type="submit"] {
 	Site
 ----------------------------------------------- */
 
-.no_col_1.no_col_3 #col_2 {
+.no_col-1.no_col-3 #col_2 {
 	width: 100%;
 }
 

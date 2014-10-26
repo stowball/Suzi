@@ -1,6 +1,6 @@
 @if ($form-bp > 0) {
 	label, .label {
-		.f_row & {
+		.form_row & {
 			@include rem(margin-top, $form-input-padding-vertical + $form-input-border-width);
 			
 			.ie &, .vendor-ie & {
@@ -16,7 +16,7 @@
 		}
 	}
 	
-	.f_row label, .f_row .label, p.legend {
+	.form_row label, .form_row .label, .radio_checkbox_group_legend {
 		display: inline-block;
 		margin-right: $form-label-margin;
 		width: $form-label-width;
@@ -27,44 +27,44 @@
 		}
 	}
 	
-	.f_row .text, .f_row textarea, .f_row select, .rc.legend ul {
+	.form_row .input-text, .form_row textarea, .form_row select, .radio_checkbox_group--has_legend ul {
 		display: inline-block;
 		@include rem(margin-left, $std-whitespace-margin);
 		width: (100% - ($form-label-margin + $form-label-width) + $form-input-width-adjuster);
 	}
 	
-	.f_row, .btns {
-		.w_bp_auto {
+	.form_row, .btns {
+		.width_at_bp-auto {
 			width: auto;
 		}
 		
-		.w_bp_smaller {
+		.width_at_bp-smaller {
 			width: ((100% - ($form-label-margin + $form-label-width) + $form-input-width-adjuster) * strip-units($form-smaller-input-width / 100));
 		}
 		
-		.w_bp_small {
+		.width_at_bp-small {
 			width: ((100% - ($form-label-margin + $form-label-width) + $form-input-width-adjuster) * strip-units($form-small-input-width / 100));
 		}
 		
-		.w_bp_medium {
+		.width_at_bp-medium {
 			width: ((100% - ($form-label-margin + $form-label-width) + $form-input-width-adjuster) * strip-units($form-medium-input-width / 100));
 		}
 		
-		.w_bp_large {
+		.width_at_bp-large {
 			width: ((100% - ($form-label-margin + $form-label-width) + $form-input-width-adjuster) * strip-units($form-large-input-width / 100));
 		}
 		
-		.w_bp_larger {
+		.width_at_bp-larger {
 			width: ((100% - ($form-label-margin + $form-label-width) + $form-input-width-adjuster) * strip-units($form-larger-input-width / 100));
 		}
 		
-		.w_bp_max {
+		.width_at_bp-max {
 			width: (100% - ($form-label-margin + $form-label-width) + $form-input-width-adjuster);
 		}
 	}
 	
-	.f_row.block {
-		label, .label, .text, textarea, select {
+	.form_row--block_inputs {
+		label, .label, .input-text, textarea, select {
 			display: block;
 			margin-bottom: $form-margin;
 			margin-left: 0;
@@ -78,15 +78,15 @@
 		}
 	}
 	
-	.rc.legend ul {
+	.radio_checkbox_group--has_legend ul {
 		@include rem(margin-left, $std-whitespace-margin * 2);
 	}
 	
-	.rc:not(.legend) ul {
+	.radio_checkbox_group:not(.radio_checkbox_group--has_legend) ul {
 		@include rem(margin-left, $std-whitespace-margin);
 	}
 	
-	.f_comment, .rc:not(.legend) ul, .required {
+	.form_comment, .radio_checkbox_group:not(.radio_checkbox_group--has_legend) ul, .required {
 		padding-left: $form-label-margin + $form-label-width;
 	}
 	

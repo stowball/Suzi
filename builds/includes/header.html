@@ -1,12 +1,12 @@
 <div id="header" role="banner">
 	<h3 class="hidden"><a href="/">{{ siteTitle }}</a></h3>
-	<p id="logo" class="reset"><a href="/"><img src="{{ imgPath }}logo.svg" width="" height="" alt="{{ siteTitle }}" onerror="this.src='{{ imgPath }}logo.png'" /></a></p>
+	<p id="logo" class="reset-all"><a href="/"><img src="{{ imgPath }}logo.svg" width="" height="" alt="{{ siteTitle }}" onerror="this.src='{{ imgPath }}logo.png'" /></a></p>
 	
 	<form action="#" method="get" role="search">
 		<fieldset>
 			<legend>Search {{ siteTitle }}</legend>
 			<label for="q">Search</label>
-			<input type="search" id="q" name="q" class="text" placeholder="Search" />
+			<input type="search" id="site_search" name="site_search" class="input-text" placeholder="Search" />
 			<input type="submit" class="submit" value="Search" />
 		</fieldset>
 	</form>

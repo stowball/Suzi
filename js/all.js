@@ -264,14 +264,14 @@ var slider = {
 				}
 				
 				if (pager) {
-					var $navPager = $('<ul class="carousel_nav_pager' + (thumbnails ? ' carousel_nav_pager-thumbnails' : '') + ' reset menu" />');
+					var $navPager = $('<ul class="carousel_nav_pager' + (thumbnails ? ' carousel_nav_pager--thumbnails' : '') + ' reset-all menu" />');
 					$this.append($navPager);
 				}
 				
 				if (nav) {
 					var $navContainer = $('<div class="carousel_nav" />'),
-						$navPrev = $('<a href="#previous" class="carousel_nav_item carousel_nav_item-prev"><span>Previous</span></a>'),
-						$navNext = $('<a href="#next" class="carousel_nav_item carousel_nav_item-next"><span>Next</span></a>');
+						$navPrev = $('<a href="#previous" class="carousel_nav_item carousel_nav_item--prev"><span>Previous</span></a>'),
+						$navNext = $('<a href="#next" class="carousel_nav_item carousel_nav_item--next"><span>Next</span></a>');
 					
 					$navContainer.append($navPrev).append($navNext)
 					$this.append($navContainer);
@@ -280,7 +280,7 @@ var slider = {
 				if (slider.swipejs) {
 					var hasResizeClass = false,
 						resizeSwipe = function() {
-							$html.removeClass('resizing');
+							$html.removeClass('window_is_resizing');
 							hasResizeClass = false;
 						};
 					
@@ -288,7 +288,7 @@ var slider = {
 						clearTimeout(window.resizeTimer);
 						
 						if (!hasResizeClass) {
-							$html.addClass('resizing');
+							$html.addClass('window_is_resizing');
 							hasResizeClass = true;
 						}
 						
@@ -298,9 +298,9 @@ var slider = {
 					if (pager) {
 						for (var i = 1; i <= slidesCount; i++) {
 							if (thumbnails)
-								li += '<li><a href="#slide-' + i + '">' + ($slides.eq(i - 1).data('pager-thumbnail') ? '<img src="' + $slides.eq(i - 1).data('pager-thumbnail') + '" alt="Slide ' + i + '" />' : 'Slide ' + i) + '</a></li>';
+								li += '<li class="carousel_nav_pager_item"><a href="#slide-' + i + '">' + ($slides.eq(i - 1).data('pager-thumbnail') ? '<img src="' + $slides.eq(i - 1).data('pager-thumbnail') + '" alt="Slide ' + i + '" />' : 'Slide ' + i) + '</a></li>';
 							else
-								li += '<li><a href="#slide-' + i + '">Slide ' + i + '</a></li>';
+								li += '<li class="carousel_nav_pager_item"><a href="#slide-' + i + '">Slide ' + i + '</a></li>';
 						}
 						
 						$navPager.append(li);
@@ -344,8 +344,8 @@ var slider = {
 							
 							if (pager) {
 								$navPagerLi
-									.removeClass('current')
-									.eq(pos).addClass('current');
+									.removeClass('carousel_nav_pager_item--is_current')
+									.eq(pos).addClass('carousel_nav_pager_item--is_current');
 							}
 							
 							if (counter)
@@ -395,8 +395,8 @@ var slider = {
 								slider.lazyLoad($imagesLazy, idx);
 								carousel.slide(idx);
 								
-								$navPagerLi.removeClass('current');
-								$parent.addClass('current');
+								$navPagerLi.removeClass('carousel_nav_pager_item--is_current');
+								$parent.addClass('carousel_nav_pager_item--is_current');
 								
 								stopCarousel();
 							});
@@ -430,7 +430,7 @@ var slider = {
 						widthOverride = 'width: 100% !important',
 						
 						cycleOpts = {
-							activePagerClass: 'current',
+							activePagerClass: 'carousel_nav_pager_item--is_current',
 							cleartypeNoBg: true,
 							easing: 'easeInOutQuint',
 							fx: 'scrollHorz',
@@ -570,12 +570,12 @@ var tabs = {
 				tabCookie = tabHasCookie ? cookie.read(tabID) : 0;
 			
 			if (tabHasCookie) {
-				$links.eq(tabCookie).addClass('current');
+				$links.eq(tabCookie).addClass('tab--is_current');
 				$panes.hide().attr('aria-hidden', true);
 				$panes.eq(tabCookie).show().attr('aria-hidden', false);
 			}
 			else {
-				$links.eq(0).addClass('current');
+				$links.eq(0).addClass('tab--is_current');
 				$panes.not(':first').attr('aria-hidden', true);
 			}
 			
@@ -585,9 +585,9 @@ var tabs = {
 				var $this = $(this),
 					idx = $this.parent().index();
 				
-				if (!$this.hasClass('current')) {
-					$links.removeClass('current');
-					$this.addClass('current');
+				if (!$this.hasClass('tab--is_current')) {
+					$links.removeClass('tab--is_current');
+					$this.addClass('tab--is_current');
 				}
 				
 				$panes.hide().attr('aria-hidden', true);
@@ -657,22 +657,22 @@ var accordion = {
 				
 				if (!multiple || accordionHasCookie) {
 					if (!accordionHasCookie) {
-						if ($this.hasClass('open'))
+						if ($this.hasClass('accordion_toggler--to_open'))
 							accordionCookie = idx;
 					}
 					
 					if (parseInt(accordionCookie) === idx) {
-						$accordionLinks.removeClass('is_open');
+						$accordionLinks.removeClass('accordion_toggler--is_open');
 						$accordionContent.attr('aria-hidden', true).css('height', '0');
 						
-						$this.addClass('is_open');
+						$this.addClass('accordion_toggler--is_open');
 						
 						$accordionContentIndex.attr('aria-hidden', false).css('height', 'auto');
 					}
 				}
 				else {
-					if ($this.hasClass('open')) {
-						$this.removeClass('open').addClass('is_open');
+					if ($this.hasClass('accordion_toggler--to_open')) {
+						$this.removeClass('accordion_toggler--to_open').addClass('accordion_toggler--is_open');
 						
 						$accordionContentIndex.attr('aria-hidden', false).css('height', 'auto');
 						
@@ -692,7 +692,7 @@ var accordion = {
 						ariaHidden = false;
 					
 					if (!multiple) {
-						$accordionLinks.removeClass('open is_open');
+						$accordionLinks.removeClass('accordion_toggler--to_open accordion_toggler--is_open');
 						
 						$accordionContent.each(function(index) {
 							if (index === idx)
@@ -701,10 +701,10 @@ var accordion = {
 								$(this).attr('aria-hidden', true).transition({height: 0}, transitionDuration, transitionTimingFunction);
 						});
 						
-						$this.addClass('is_open');
+						$this.addClass('accordion_toggler--is_open');
 					}
 					else {
-						$this.toggleClass('is_open');
+						$this.toggleClass('accordion_toggler--is_open');
 						
 						if ($accordionContentSibling.attr('aria-hidden') == 'false') {
 							ariaHidden = true;

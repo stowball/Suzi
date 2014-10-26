@@ -210,7 +210,7 @@ module.exports = function (grunt) {
 								return a.toUpperCase();
 							});
 							
-							return '<li><a class="feature" href="' + p1 + p2 + '">' + pageName + '</a></li>' + p3; 
+							return '<li><a class="link-feature" href="' + p1 + p2 + '">' + pageName + '</a></li>' + p3; 
 						}
 					}
 				]
@@ -239,7 +239,7 @@ module.exports = function (grunt) {
 					{
 						search: / {(.*?\.html|#)}(.*(?:"|'))((.*?\.html|#))/gi,
 						replace: function(str, p1, p2, p3) {
-							return p1 == p3 ? ' class="current"' + p2 + p3 : p2 + p3;
+							return p1 == p3 ? ' class="nav_item--is_current"' + p2 + p3 : p2 + p3;
 						}
 					},
 					{

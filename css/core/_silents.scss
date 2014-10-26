@@ -14,7 +14,7 @@
 	@include pie;
 }
 
-%pie_abs {
+%pie-abs {
 	@include pie(absolute);
 }
 
@@ -22,7 +22,7 @@
 	Constants
 ----------------------------------------------- */
 
-%display_none {
+%display-none {
 	display: none;
 }
 
@@ -30,6 +30,6 @@
 	@include horizontal;
 }
 
-%horizontal_auto {
+%horizontal-auto {
 	@include horizontal(top, auto);
 }
