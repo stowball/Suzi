@@ -635,11 +635,11 @@ var accordion = {
 		
 		$accordion.each(function(index) {
 			var $this = $(this),
-				multiple = $this.data('multiple'),
 				$accordionLinks = $this.find('> ul > li > .accordion_toggler'),
 				$accordionContent = $this.find('> ul > li > .accordion_content'),
+				multiple = $this.data('multiple'),
 				accordionID = 'accordionid-' + window.location.pathname + '-' + index,
-				accordionHasCookie = $this.data('cookie'), 
+				accordionHasCookie = multiple ? false : $this.data('cookie'), 
 				accordionCookie = accordionHasCookie ? cookie.read(accordionID) : 0;
 			
 			if ($accordionLinks.length === 0)
@@ -662,15 +662,17 @@ var accordion = {
 					}
 					
 					if (parseInt(accordionCookie) === idx) {
-						$accordionLinks.removeClass('open');
-						$this.addClass('open is_open');
+						$accordionLinks.removeClass('is_open');
+						$accordionContent.attr('aria-hidden', true).css('height', '0');
+						
+						$this.addClass('is_open');
 						
 						$accordionContentIndex.attr('aria-hidden', false).css('height', 'auto');
 					}
 				}
 				else {
 					if ($this.hasClass('open')) {
-						$this.addClass('is_open');
+						$this.removeClass('open').addClass('is_open');
 						
 						$accordionContentIndex.attr('aria-hidden', false).css('height', 'auto');
 						
@@ -699,10 +701,10 @@ var accordion = {
 								$(this).attr('aria-hidden', true).transition({height: 0}, transitionDuration, transitionTimingFunction);
 						});
 						
-						$this.addClass('open is_open');
+						$this.addClass('is_open');
 					}
 					else {
-						$this.removeClass('open').toggleClass('is_open');
+						$this.toggleClass('is_open');
 						
 						if ($accordionContentSibling.attr('aria-hidden') == 'false') {
 							ariaHidden = true;

@@ -4,10 +4,12 @@
 	}
 }
 
-// Styles for turning an accordion to tabs. Customise breakpoint as required */
 /*
+// Styles for turning an accordion to tabs. Customise breakpoint as required
+$accordion-to-tabs-bp: 680px;
+
 .accordion_to_tabs {
-	@include media-query(680px) {
+	@include media-query($accordion-to-tabs-bp) {
 		> ul > li {
 			display: inline;
 		}
@@ -25,7 +27,7 @@
 
 .accordion_toggler {
 	.accordion_to_tabs & {
-		@include media-query(680px) {
+		@include media-query($accordion-to-tabs-bp) {
 			display: inline-block;
 		}
 	}
