@@ -55,12 +55,12 @@ While some of its markup patterns and styles are related to our CMS, [Cognition]
 
 #### HTML Builds
 
-* Create templates in /builds/
-* Create and customise template includes in /builds/includes/
+* Create templates in /html/_builds/
+* Create and customise template includes in /html/_includes/
 * Set the `title` variable to customise the page's `<title>`
 * Build your navigation hierarchy by modifying /content/hierarchy.js 
-* You'll find common markup patterns in /builds/markup
-* Access a quick list of all builds by browsing to /builds/index.html
+* You'll find common markup patterns in /html/_markup
+* Access a quick list of all builds by browsing to http://localhost:3000/builds/index.html
 
 #### Sass/CSS
 
@@ -140,7 +140,7 @@ While some of its markup patterns and styles are related to our CMS, [Cognition]
 
 * `grid($breakpoints: (480, 600, 768, 960), $percentages: (10, 20, 25, 30, 33.3333, 40, 50, 60, 66.6666, 70, 75, 80, 90, 100), $float-classes: false)`
 
-	Outputs relevant media queries and helper classes for [Suzi's flexible, customisable and responsive grid system](https://github.com/izilla/Suzi/blob/master/builds/markup/grid.html)
+	Outputs relevant media queries and helper classes for [Suzi's flexible, customisable and responsive grid system](https://github.com/izilla/Suzi/blob/master/html/_markup/grid.html)
 	
 	* `$breakpoints`: A list of the breakpoints (in pixels) that media queries and classes should be generated for (default: 480, 600, 768, 960))
 	* `$percentages`: A list of the class name percentages to be output for each breakpoint and as simple default overrides (default: 10, 20, 25, 30, 33.3333, 40, 50, 60, 66.6666, 70, 75, 80, 90, 100)
