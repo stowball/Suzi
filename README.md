@@ -18,7 +18,7 @@ While some of its markup patterns and styles are related to our CMS, [Cognition]
 * Responsive, lazy-loaded, touch-friendly carousels with optional navigation & pagination, analytics tracking & cookie-based remembering of last visible slide
 * Simple, accessible JavaScript tabs with cookie-based remembering of the open pane
 * Simple, accessible JavaScript accordions which transition to and from `height: auto`, and support multiple open panes
-* Simple, but powerful HTML templating using [grunt-includereplace-more](https://github.com/stowball/grunt-include-replace-more)
+* HTML templating using [grunt-twigger](https://github.com/noisysocks/grunt-twigger)
 * Concatenation and minification of CSS and JS files with [grunt-contrib-concat](https://github.com/gruntjs/grunt-contrib-concat) and [grunt-contrib-uglify](https://github.com/gruntjs/grunt-contrib-uglify) (unless running `grunt dev`)
 * BrowserSync for automatic live-reloading of changes & synchronised browser testing
 * Cache busting of CSS and JS assets with a unique timestamp querystring
@@ -57,8 +57,8 @@ While some of its markup patterns and styles are related to our CMS, [Cognition]
 
 * Create templates in /builds/
 * Create and customise template includes in /builds/includes/
-* Set the `$title` variable to customise the page's `<title>`
-* Set the `$currentPath` variable to the template's file name to allow for `.current` navigation states
+* Set the `title` variable to customise the page's `<title>`
+* Build your navigation hierarchy by modifying /content/hierarchy.js 
 * You'll find common markup patterns in /builds/markup
 * Access a quick list of all builds by browsing to /builds/index.html
 
