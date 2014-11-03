@@ -16,7 +16,7 @@ Suzi is the starting point for all of our web projects and a culmination of 6+ y
 * Responsive, lazy-loaded, touch-friendly carousels with optional navigation & pagination, analytics tracking & cookie-based remembering of last visible slide
 * Simple, accessible JavaScript tabs with cookie-based remembering of the open pane
 * Simple, accessible JavaScript accordions which transition to and from `height: auto`, and support multiple open panes
-* Simple, but powerful HTML templating using [grunt-includereplace-more](https://github.com/stowball/grunt-include-replace-more)
+* HTML templating using [grunt-twigger](https://github.com/noisysocks/grunt-twigger)
 * Concatenation and minification of CSS and JS files with [grunt-contrib-concat](https://github.com/gruntjs/grunt-contrib-concat) and [grunt-contrib-uglify](https://github.com/gruntjs/grunt-contrib-uglify) (unless running `grunt dev`)
 * BrowserSync for automatic live-reloading of changes & synchronised browser testing
 * Cache busting of CSS and JS assets with a unique timestamp querystring
@@ -50,16 +50,16 @@ Suzi is the starting point for all of our web projects and a culmination of 6+ y
 #### Set up
 
 * **Ensure you point your web server to run from the /public/ directory**
-* Customise `includereplacemore.options.globals.siteTitle` in Gruntfile.js to set the site name as the page `<title>` suffix
+* Customise `includereplacemore.options.globals.siteName` in Gruntfile.js to set the site name as the page `<title>` suffix
 
 #### HTML Builds
 
-* Create templates in /builds/
-* Create and customise template includes in /builds/includes/
-* Set the `$title` variable to customise the page's `<title>`
-* Set the `$currentPath` variable to the template's file name to allow for `.current` navigation states
-* You'll find common markup patterns in /builds/markup
-* Access a quick list of all builds by browsing to /builds/index.html
+* Create templates in /html/_builds/
+* Create and customise template includes in /html/_includes/
+* Set the `title` variable to customise the page's `<title>`
+* Build your navigation hierarchy by modifying /content/hierarchy.js 
+* You'll find common markup patterns in /html/_markup
+* Access a quick list of all builds by browsing to http://localhost:3000/builds/index.html
 
 #### Sass/CSS
 
@@ -139,7 +139,7 @@ Suzi is the starting point for all of our web projects and a culmination of 6+ y
 
 * `grid($breakpoints: (480, 600, 768, 960), $percentages: (10, 20, 25, 30, 33.3333, 40, 50, 60, 66.6666, 70, 75, 80, 90, 100), $float-classes: false)`
 
-	Outputs relevant media queries and helper classes for [Suzi's flexible, customisable and responsive grid system](https://github.com/izilla/Suzi/blob/master/builds/markup/grid.html)
+	Outputs relevant media queries and helper classes for [Suzi's flexible, customisable and responsive grid system](https://github.com/izilla/Suzi/blob/master/html/_markup/grid.html)
 	
 	* `$breakpoints`: A list of the breakpoints (in pixels) that media queries and classes should be generated for (default: 480, 600, 768, 960))
 	* `$percentages`: A list of the class name percentages to be output for each breakpoint and as simple default overrides (default: 10, 20, 25, 30, 33.3333, 40, 50, 60, 66.6666, 70, 75, 80, 90, 100)
