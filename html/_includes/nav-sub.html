@@ -1,0 +1,12 @@
+<div id="nav_sub" role="navigation" class="reset menu">
+	<h3 class="hidden">Sub Navigation</h3>
+	<ul>
+		{% for item in hierarchy if item.current %}
+			{% for item in item.children %}
+				<li class="{{ item.current ? 'current' : '' }}">
+					<a href="{{ item.path }}">{{ item.title }}</a>
+				</li>
+			{% endfor %}
+		{% endfor %}
+	</ul>
+</div>
