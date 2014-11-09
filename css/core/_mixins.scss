@@ -729,11 +729,13 @@ $rem-with-px-fallback: true !default;
 @mixin placeholder($color: $form-placeholder-color, $text-transform: $form-placeholder-text-transform) {
 	:-moz-placeholder {
 		color: $color;
+		opacity: 1;
 		text-transform: $text-transform;
 	}
 	
 	::-moz-placeholder {
 		color: $color;
+		opacity: 1;
 		text-transform: $text-transform;
 	}
 	
