@@ -1,18 +1,18 @@
 {
   "name": "Suzi",
   "version": "2.1.0",
-  "description": "A responsive, Sass and Grunt UI Framework by Izilla",
-  "homepage": "https://github.com/izilla/Suzi",
+  "description": "A responsive, Sass and Grunt UI Framework by Matt Stow",
+  "homepage": "https://github.com/stowball/Suzi",
   "author": {
     "name": "Matt Stow",
     "url": "http://mattstow.com"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/izilla/Suzi.git"
+    "url": "git://github.com/stowball/Suzi.git"
   },
   "bugs": {
-    "url": "https://github.com/izilla/Suzi/issues"
+    "url": "https://github.com/stowball/Suzi/issues"
   },
   "licenses": [
     {

@@ -1,6 +1,6 @@
 # Suzi
 
-## A responsive, Sass and Grunt UI Framework by [Izilla](http://izilla.com.au)
+## A responsive, Sass and Grunt UI Framework by [Matt Stow](http://mattstow.com)
 
 ### v2.1.0 (2014-10-26)
 
@@ -33,7 +33,7 @@ Suzi is the starting point for all of our web projects and a culmination of 6+ y
 2. Install [Sass](http://sass-lang.com)
 3. Install [node.js](http://nodejs.org) *(and add it to your Path Environment Variable on Windows)*
 4. Open a shell window and install the Grunt CLI with `npm install -g grunt-cli`
-5. [Download](https://github.com/izilla/Suzi/archive/master.zip) or [clone](https://github.com/izilla/Suzi.git) Suzi
+5. [Download](https://github.com/stowball/Suzi/archive/master.zip) or [clone](https://github.com/stowball/Suzi.git) Suzi
 6. Open a shell window in the Suzi root directory
 7. Run `npm install` to install Suzi's Grunt dependencies
 
@@ -139,7 +139,7 @@ Suzi is the starting point for all of our web projects and a culmination of 6+ y
 
 * `grid($breakpoints: (480, 600, 768, 960), $percentages: (10, 20, 25, 30, 33.3333, 40, 50, 60, 66.6666, 70, 75, 80, 90, 100), $float-classes: false)`
 
-	Outputs relevant media queries and helper classes for [Suzi's flexible, customisable and responsive grid system](https://github.com/izilla/Suzi/blob/master/builds/markup/grid.html)
+	Outputs relevant media queries and helper classes for [Suzi's flexible, customisable and responsive grid system](https://github.com/stowball/Suzi/blob/master/builds/markup/grid.html)
 	
 	* `$breakpoints`: A list of the breakpoints (in pixels) that media queries and classes should be generated for (default: 480, 600, 768, 960))
 	* `$percentages`: A list of the class name percentages to be output for each breakpoint and as simple default overrides (default: 10, 20, 25, 30, 33.3333, 40, 50, 60, 66.6666, 70, 75, 80, 90, 100)
@@ -409,5 +409,5 @@ Four variables are provided for media query operators: `$min`, `$max`, `$min-h` 
 
 ---
 
-Copyright (c) 2014 [Izilla Partners Pty Ltd](http://www.izilla.com.au)  
-Licensed under the MIT license *(see [LICENSE](https://github.com/izilla/Suzi/blob/master/LICENSE) for details)*
+Copyright (c) 2014 [Matt Stow](http://mattstow.com)  
+Licensed under the MIT license *(see [LICENSE](https://github.com/stowball/Suzi/blob/master/LICENSE) for details)*
