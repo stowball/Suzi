@@ -525,6 +525,8 @@ var slider = {
 		window.rwdImageChangeSrc($imagesLazy[index]);
 		
 		var loadAdditional = function() {
+			$this.addClass('has-lazy-loaded');
+			
 			if (slidesCount) {
 				if (globalPos === 0) {
 					slider.lazyLoad($imagesLazy, globalPos + 1);
@@ -541,18 +543,15 @@ var slider = {
 			}
 		};
 		
-		if (window.getComputedStyle) {
-			var src = window.getComputedStyle($imagesLazy[index]).getPropertyValue('background-image').replace(/url\((?:\"?)(.*?)(?:\"?)\)/, '$1'),
-				img = new Image();
+		var src = !!window.getComputedStyle ? window.getComputedStyle($this[0]).getPropertyValue('background-image') : $this[0].currentStyle.backgroundImage,
+			img = new Image();
+		
+		src = src.replace(/url\((?:\"?)(.*?)(?:\"?)\)/, '$1');
+		
+		if (src !== 'none') {
+			img.onload = loadAdditional;
 			
-			if (src !== 'none') {
-				img.onload = loadAdditional;
-			
-				img.src = src;
-			}
-		}
-		else {
-			loadAdditional();
+			img.src = src;
 		}
 	}
 };
