@@ -10,13 +10,13 @@
 	Reset
 ----------------------------------------------- */
 
-.reset-all, .reset-lazy, .reset-all ul, .reset-lazy > ul, .reset-all ol, .reset-lazy > ol, .reset-all li, .reset-lazy > li, .radio_checkbox_group ul {
+.reset, .reset--all ul, .reset--all ol, .reset--all li, .reset--immediate > ul, .reset--immediate > ol, .reset--immediate > li, .radio_checkbox_group ul {
 	list-style: none !important;
 	margin: 0;
 	padding: 0;
 }
 
-.reset-all li, .reset-lazy > li {
+.reset--all li, .reset--immediate > li {
 	position: static;
 }
 
@@ -30,7 +30,7 @@
 	List Bullet Removal & Display None
 ----------------------------------------------- */
 
-input[type="hidden"], .no_col-1 #col_1, .no_col-3 #col_3, .grid_container > li.grid_item:before, .list_style-none > li:before, .radio_checkbox_group li:before, .reset-all li:before, .reset-lazy > li:before {
+input[type="hidden"], .no_col-1 #col_1, .no_col-3 #col_3, .grid_container > li.grid_item:before, .list_style-none > li:before, .radio_checkbox_group li:before, .reset:before, .reset--all li:before, .reset--immediate > li:before {
 	@extend %display-none;
 }
 

@@ -264,7 +264,7 @@ var slider = {
 				}
 				
 				if (pager) {
-					var $navPager = $('<ul class="carousel_nav_pager' + (thumbnails ? ' carousel_nav_pager--thumbnails' : '') + ' reset-all menu" />');
+					var $navPager = $('<ul class="carousel_nav_pager' + (thumbnails ? ' carousel_nav_pager--thumbnails' : '') + ' reset menu" />');
 					$this.append($navPager);
 				}
 				
@@ -298,9 +298,9 @@ var slider = {
 					if (pager) {
 						for (var i = 1; i <= slidesCount; i++) {
 							if (thumbnails)
-								li += '<li class="carousel_nav_pager_item"><a href="#slide-' + i + '">' + ($slides.eq(i - 1).data('pager-thumbnail') ? '<img src="' + $slides.eq(i - 1).data('pager-thumbnail') + '" alt="Slide ' + i + '" />' : 'Slide ' + i) + '</a></li>';
+								li += '<li class="reset carousel_nav_pager_item"><a href="#slide-' + i + '">' + ($slides.eq(i - 1).data('pager-thumbnail') ? '<img src="' + $slides.eq(i - 1).data('pager-thumbnail') + '" alt="Slide ' + i + '" />' : 'Slide ' + i) + '</a></li>';
 							else
-								li += '<li class="carousel_nav_pager_item"><a href="#slide-' + i + '">Slide ' + i + '</a></li>';
+								li += '<li class="reset carousel_nav_pager_item"><a href="#slide-' + i + '">Slide ' + i + '</a></li>';
 						}
 						
 						$navPager.append(li);
