@@ -1,19 +1,26 @@
 /*!
-* mqGenie v0.4.1
+* mqGenie v0.5.0
 *
 * Adjusts CSS media queries in browsers that include the scrollbar's width in the viewport width so they fire at the intended size
 *
 * Returns the mqGenie object containing .adjusted, .width & fontSize for use in re-calculating media queries in JavaScript with mqAdjust(string)
 *
-* Copyright (c) 2013 Matt Stow
+* Copyright (c) 2014 Matt Stow
 *
 * http://mattstow.com
 *
 * Licensed under the MIT license
 */
 ;(function(window, document) {
-	if (!document.addEventListener)
+	if (!document.addEventListener) {
+		window.mqGenie = {
+			adjustMediaQuery: function(mediaQuery) {
+				return mediaQuery;
+			}
+		}
+		
 		return;
+	}
 	
 	function processRules(stylesheet, processor) {
 		var rules = stylesheet.cssRules ? stylesheet.cssRules : stylesheet.media,
@@ -82,7 +89,21 @@
 				props = {
 					adjusted: width > 0,
 					fontSize: parseFloat(window.getComputedStyle(html).getPropertyValue('font-size')),
-					width: width
+					width: width,
+					adjustMediaQuery: function(mediaQuery) {
+						if (!mqGenie.adjusted)
+							return mediaQuery;
+
+						var mq = mediaQuery.replace(/\d+px/gi, function(c) {
+							return parseInt(c, 10) + mqGenie.width + 'px';
+						});
+
+						mq = mq.replace(/\d.+?em/gi, function(c) {
+							return ((parseFloat(c) * mqGenie.fontSize) + mqGenie.width) / mqGenie.fontSize + 'em';
+						});
+
+						return mq;
+					}
 				};
 			
 			if (props.adjusted) {
@@ -144,20 +165,5 @@
 			
 			return props;
 		})();
-		
-		window.mqAdjust = function(mediaQuery) {
-			if (!mqGenie.adjusted)
-				return mediaQuery;
-			
-			var mq = mediaQuery.replace(/\d+px/gi, function(c) {
-				return parseInt(c, 10) + mqGenie.width + 'px';
-			});
-			
-			mq = mq.replace(/\d.+?em/gi, function(c) {
-				return ((parseFloat(c) * mqGenie.fontSize) + mqGenie.width) / mqGenie.fontSize + 'em';
-			});
-			
-			return mq;
-		};
 	});
 })(window, document);
