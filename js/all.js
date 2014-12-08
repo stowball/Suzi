@@ -322,6 +322,14 @@ var slider = {
 						complete: function() {
 							this.slide(globalPos);
 							isComplete = true;
+							
+							if (layoutEngine.vendor === 'webkit' && cssua.ua.safari) {
+								window.setTimeout(function() {
+									isVisible = true;
+									$slides.css('visibility', 'visible');
+									$feature.css('visibility', 'visible');
+								}, speed + 1);
+							}
 						},
 						
 						touchCallback: function() {
