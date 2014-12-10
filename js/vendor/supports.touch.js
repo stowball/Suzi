@@ -1,9 +1,9 @@
 /*
-* Supports Touch v0.1.0
+* Supports Touch v0.1.1
 *
 * Detects touch support and adds appropriate classes to html and returns a JS object
 *
-* Copyright (c) 2013 Izilla Partners Pty Ltd
+* Copyright (c) 2014 Izilla Partners Pty Ltd
 *
 * http://www.izilla.com.au
 *
@@ -14,7 +14,7 @@
 		touch = 'ontouchstart' in window || navigator.msMaxTouchPoints;
 	
 	if (touch) {
-		html.className += ' touch';
+		html.className += ' has-touch';
 		return {
 			touch: true
 		}

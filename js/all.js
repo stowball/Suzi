@@ -85,7 +85,7 @@ var grid = {
 
 var placeholder = {
 	init: function() {
-		if (!Modernizr.input.placeholder) {
+		if (!Modernizr.placeholder) {
 			var $placeholder = $('[placeholder]');
 			
 			$placeholder.focus(function() {
@@ -105,9 +105,9 @@ var placeholder = {
 						$input.val('');
 				});
 			});
+			
+			$html.addClass('placeholder');
 		}
-		
-		$html.addClass('placeholder');
 	}
 };
 
