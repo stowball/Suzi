@@ -1,5 +1,5 @@
 /*!
-* Layout Engine v0.8.2
+* Layout Engine v0.8.3
 *
 * Adds the rendering engine and browser names as a class on the html tag and returns a JavaScript object containing the vendor, version and browser name (where appropriate)
 *
@@ -9,7 +9,7 @@
 *
 * Possible browsers: '.browser-' + 'android', 'chrome', 'wiiu'
 *
-* Copyright (c) 2013 Matt Stow
+* Copyright (c) 2014 Matt Stow
 *
 * http://mattstow.com
 *
@@ -30,48 +30,9 @@
 		wiiu = 'wiiu',
 		cssClass = vendor,
 		jsObject;
-		
-	// WebKit
-	if ('WebkitAppearance' in style) {
-		cssClass += webkit;
-		var ua = navigator.userAgent;
-
-		if (ua.indexOf('Android') >= 0 && ua.indexOf('Chrome') === -1) {
-			cssClass += browser + android;
-			jsObject = {
-				vendor: webkit,
-				browser: android
-			}
-		}
-		else if (!!window.chrome || ua.indexOf('OPR') >= 0) {
-			cssClass += browser + chrome;
-			jsObject = {
-				vendor: webkit,
-				browser: chrome
-			}
-		}
-		else if (!!window.wiiu) {
-			cssClass += browser + wiiu;
-			jsObject = {
-				vendor: webkit,
-				browser: wiiu
-			}
-		}
-		else {
-			jsObject = {
-				vendor: webkit
-			}
-		}
-	}
-	// Mozilla
-	else if ('MozAppearance' in style) {
-		cssClass += mozilla;
-		jsObject = {
-			vendor: mozilla
-		}
-	}
+	
 	// IE
-	else if ('-ms-scroll-limit' in style || 'behavior' in style) {
+	if ('-ms-scroll-limit' in style || 'behavior' in style) {
 		cssClass += ie + vendor + ie;
 		if ('-ms-ime-align' in style) {
 			cssClass += '-11'
@@ -107,6 +68,45 @@
 				vendor: ie,
 				version: 7
 			}
+		}
+	}
+	// WebKit
+	else if ('WebkitAppearance' in style) {
+		cssClass += webkit;
+		var ua = navigator.userAgent;
+
+		if (ua.indexOf('Android') >= 0 && ua.indexOf('Chrome') === -1) {
+			cssClass += browser + android;
+			jsObject = {
+				vendor: webkit,
+				browser: android
+			}
+		}
+		else if (!!window.chrome || ua.indexOf('OPR') >= 0) {
+			cssClass += browser + chrome;
+			jsObject = {
+				vendor: webkit,
+				browser: chrome
+			}
+		}
+		else if (!!window.wiiu) {
+			cssClass += browser + wiiu;
+			jsObject = {
+				vendor: webkit,
+				browser: wiiu
+			}
+		}
+		else {
+			jsObject = {
+				vendor: webkit
+			}
+		}
+	}
+	// Mozilla
+	else if ('MozAppearance' in style) {
+		cssClass += mozilla;
+		jsObject = {
+			vendor: mozilla
 		}
 	}
 	// Opera
