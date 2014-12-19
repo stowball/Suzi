@@ -1,0 +1,19 @@
+/*
+	Safari on desktop changes the font anti-aliasing to all unconnected elements further down in the DOM when an element's 3D transform is transitioned or animated.
+	
+	The fix is to make the element positioned, and to give it a z-index
+	See: http://stackoverflow.com/questions/9733011/safari-changing-font-weights-when-unrelated-animations-are-running
+	
+	A default z-index of 10 is used so you have 9 further layers to use elsewhere in the page
+	For elements that aren't already positioned, also uncomment and add their selector
+*/
+
+.vendor-webkit.ua-safari.ua-desktop {
+	.carousel {
+		z-index: 10;
+	}
+	
+	/*selectors {
+		position: relative;
+	}*/
+}
