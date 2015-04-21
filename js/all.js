@@ -510,9 +510,9 @@ var slider = {
 							}
 							
 							if (pager) {
-								$navPager.css('z-index', slidesCount + 1).find('a').each(function(i) {
+								$navPager.css('z-index', slidesCount + 1).find('a').each(function(idx) {
 									$(this).on('click', function(e) {
-										slider.lazyLoad(slider.$imagesLazy[index].eq(i));
+										slider.lazyLoad($imagesLazy, idx);
 										$feature.cycle('pause');
 									});
 								});
